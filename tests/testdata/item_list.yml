@@ -1,0 +1,99 @@
+# Copyright (c) 2012-2013, Geert Bergman (geert@scrivo.nl)
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+# 3. Neither the name of "Scrivo" nor the names of its contributors may be
+#    used to endorse or promote products derived from this software without
+#    specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+#
+# $Id: item_list.yml 866 2013-08-25 16:22:35Z geert $
+
+# last two database error
+item_list:
+  -
+    instance_id: 0
+    page_id: 200001
+    version: 0
+    page_definition_tab_id: 70300
+    folder_id: 0
+    item_list_id: 300001
+  -
+    instance_id: 0
+    page_id: 200001
+    version: 0
+    page_definition_tab_id: 70400
+    folder_id: 0
+    item_list_id: 300002
+  -
+    instance_id: 0
+    page_id: 200001
+    version: 0
+    page_definition_tab_id: 70400
+    folder_id: 0
+    item_list_id: 300003
+
+page_definition_tab:
+  -
+    instance_id: 0
+    page_definition_tab_id: 70400
+    page_definition_id: 70001
+    sequence_no: 1
+    title: "Invalid list"
+    php_key: ""
+    css_selector: ""
+    page_css: ""
+    stylesheet: ""
+    application_definition_id: 60000
+    css_id: ""
+
+list_item:
+  -
+    instance_id: 0
+    list_item_id: 300100
+    version: 0
+    parent_id: 0
+    link_id: 0
+    sequence_no: 0
+    list_item_definition_id: 120000
+    item_list_id: 300001
+    title: "First topic"
+    date_created: 2012-01-01 00:00:00 
+    date_offline: null
+    date_online: 2012-01-01 00:00:00
+    date_modified: 2012-01-01 00:00:00
+    page_id: 200000
+  -
+    instance_id: 0
+    list_item_id: 300101
+    version: 0
+    parent_id: 300100
+    link_id: 0
+    sequence_no: 0
+    list_item_definition_id: 120001
+    item_list_id: 300001
+    title: "First reply"
+    date_created: 2012-01-01 00:00:00 
+    date_offline: null
+    date_online: 2012-01-01 00:00:00
+    date_modified: 2012-01-01 00:00:00
+    page_id: 200000
+    

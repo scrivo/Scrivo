@@ -1,0 +1,111 @@
+# Copyright (c) 2012-2013, Geert Bergman (geert@scrivo.nl)
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+# 3. Neither the name of "Scrivo" nor the names of its contributors may be
+#    used to endorse or promote products derived from this software without
+#    specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+#
+# $Id: users_and_roles.yml 866 2013-08-25 16:22:35Z geert $
+
+# The user types that can be defined in Scrivo other than the system users
+# anonymous and admin: editors, editor-publishers, additional admins
+# and public users.
+user:
+  -
+    instance_id: 0
+    user_id: 40000
+    status: 2
+    user_code: "editor"
+    password: "$1$Zu5.Cn1.$cFtzPxvIksOQ6tb/4TKeI0"
+    given_name: ""
+    family_name_prefix: ""
+    family_name: ""
+    email_address: ""
+    custom_data: "" 
+  -
+    instance_id: 0
+    user_id: 40001
+    status: 2
+    user_code: "publisher"
+    password: "$1$Zu5.Cn1.$cFtzPxvIksOQ6tb/4TKeI0"
+    given_name: ""
+    family_name_prefix: ""
+    family_name: ""
+    email_address: ""
+    custom_data: "" 
+  -
+    instance_id: 0
+    user_id: 40002
+    status: 1
+    user_code: "admin-test"
+    password: "$1$Zu5.Cn1.$cFtzPxvIksOQ6tb/4TKeI0"
+    given_name: ""
+    family_name_prefix: ""
+    family_name: ""
+    email_address: ""
+    custom_data: "" 
+  -
+    instance_id: 0
+    user_id: 40003
+    status: 3
+    user_code: "public-user"
+    password: "$1$Zu5.Cn1.$cFtzPxvIksOQ6tb/4TKeI0"
+    given_name: ""
+    family_name_prefix: ""
+    family_name: ""
+    email_address: ""
+    custom_data: "" 
+
+# An additional public role for the forum page
+role:
+  -
+    instance_id: 0
+    role_id: 50000
+    type: 3
+    title: "Forum"
+    description: ""
+
+# The editor user is a member of the editor role, the publisher too but
+# has the publishing field set too. The public user is a member of the
+# public "Forum" role and the general public role as well. 
+user_role:
+  -
+    instance_id: 0
+    role_id: 2
+    user_id: 40000
+    is_publisher: 0
+  -
+    instance_id: 0
+    role_id: 2
+    user_id: 40001
+    is_publisher: 1
+  -
+    instance_id: 0
+    role_id: 50000
+    user_id: 40003
+    is_publisher: 0
+  -
+    instance_id: 0
+    role_id: 1
+    user_id: 40003
+    is_publisher: 0

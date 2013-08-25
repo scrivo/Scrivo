@@ -1,0 +1,402 @@
+/*******************************************************
+ * Author: Geert Bergman (geert@scrivo.nl)
+ * Version: $Id: admin.css 858 2013-08-22 13:03:03Z geert $
+ *
+ * Copyright 2002-2010 Bergman IT-Advies
+ * All Rights Reserved
+ */
+.scrivologo {
+	font-family: Arial;
+	color: black;
+	position: relative;
+	top: -.2em;
+}
+
+.scrivologo .it {
+	font-weight: bold;
+	font-size: 80%;
+	left: -0.06em;
+	padding: 0.03em;
+	color: #b00000;
+	font-style: italic;
+	font-family: Times New Roman;
+	position: relative;
+}
+
+.scrivologo sup {
+	font-weight: bold;
+	font-size: 20%;
+	left: -0.15em;
+	top: -.65em;
+	position: relative;
+}
+
+body {
+	background-color: white;
+	margin: 0px;
+	padding: 0px;
+	font-size: 80%;
+	font-family: Verdana, Arial, sans-serif;
+}
+
+td,th {
+	vertical-align: top;
+	text-align: left;
+}
+
+table {
+	font-size: 100%;
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.sys_language {
+		background-color: #FCC;
+}
+
+.sys_abbr {
+		background-color: #CCF;
+}
+
+#header {
+	width: 100%;
+}
+
+#header div {
+	border-top: solid #dedec9 1px;
+	height: 4em;
+	padding-left: 80px;
+	background: transparent no-repeat bottom left;
+}
+
+#headerlogo {
+	font-size: 3em;
+	float: right;
+	margin-right: .3em;
+}
+
+#loginout {
+	float: right;
+	font-size: 80%;
+	margin-right: .8em;
+}
+#menu #loginout:hover {
+	color: #ffffff;
+	background: transparent;
+}
+
+#menu {
+	width: 100%;
+	display: block;
+	margin: 0;
+	color: #fff;
+	font-weight: bold;
+}
+
+#menu a,#menu span {
+	color: #fff;
+	text-decoration: none;
+	padding: .4em 1em;
+	display: block;
+}
+
+#menu span:hover,#menu a:hover {
+	color: #660000;
+	background: #fff;
+}
+
+#menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: auto;
+	z-index: 100;
+}
+
+#menu ul ul {
+	padding: 1em;
+	position: absolute;
+}
+
+#menu ul ul ul {
+	top: 0;
+	left: 100%;
+}
+
+#menu li {
+	position: relative;
+	padding: .4em 1em;
+	list-style: none outside none;
+	float: left;
+	white-space: nowrap;
+}
+
+#menu li li {
+	float: none;
+	padding: 0;
+}
+
+#menu li li hr {
+	border: none;
+	color: white;
+	background-color: white;
+	height: 1px;
+}
+
+div#menu ul ul,div#menu ul li:hover ul ul,div#menu ul ul li:hover ul ul	{
+	display: none;
+}
+
+div#menu ul li:hover ul,div#menu ul ul li:hover ul,div#menu ul ul ul li:hover ul {
+	display: block;
+}
+
+/* clearfix */
+#menu:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+
+#maindiv {
+	margin: 0px;
+	padding: 1em;
+	padding-top: 3em;
+}
+
+/*
+#content {
+	margin: auto;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	display: table;
+}
+*/
+#centercontent {
+	margin: auto;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	display: table;
+}
+
+#error {
+	border: solid #9d1f1f 2px;
+	background: #FFAAAA url(../../img/admin/error_64.png) no-repeat -10px -10px;
+	margin: 0 auto 2em auto;
+	padding: 1.2em;
+	padding-left: 70px;
+	font-weight: bold;
+	font-size: 110%;
+	max-width: 30em;
+}
+
+#alert {
+	border: solid #eb7e25 2px;
+	background: #ffeba9 url(../../img/admin/alert_64.png) no-repeat -10px -10px;
+	margin: 0 auto 2em auto;
+	padding: 1.2em;
+	padding-left: 70px;
+	font-weight: bold;
+	font-size: 110%;
+	max-width: 30em;
+}
+
+.form {
+	border: solid black 2px;
+	padding-bottom: 0.5em;
+	margin-bottom: 1.5em;
+}
+
+.form th {
+	color: #fff;
+	font-weight: bold;
+	padding: .5em 1em;
+}
+
+.form td th {
+	background: transparent;
+	color: black;
+	filter: none;
+	padding: 0;
+}
+
+.form td {
+	padding: 0.6em 1em 0;
+}
+
+.form td.label {
+	font-weight: bold;
+	white-space: nowrap;
+	padding-top: .8em;
+}
+
+button {
+	margin-bottom: 2em;
+	margin-right: 2em;
+	padding: .2em 1em;
+	border: solid #336 2px;
+	color: white;
+	font-weight: bold;
+}
+
+.list button {
+	margin: 0em;
+}
+
+.list {
+	border: solid black 2px;
+	margin-bottom: 1em;
+}
+
+.list th {
+	color: #fff;
+	font-weight: bold;
+	padding: .5em 1em;
+}
+.list td {
+	padding: .2em 1em;
+}
+.list td.img {
+	padding: .2em .2em;
+	text-align: center;
+}
+
+
+.form img,
+.list img {
+	vertical-align: text-bottom;
+	border: none;
+}
+.treeimg {
+	margin-right:3px;
+}
+h1 {
+	margin: .6em 0; font-weight : bold;
+	font-size: 150%;
+	color: #333366;
+	font-weight: bold;
+}
+
+a {
+	color: #333366;
+}
+
+a:visited {
+	color: #660000;
+}
+
+pre {
+	font-size: 11px;
+	color: #330033;
+	font-family: Courier New, Courier;
+}
+
+blockquote {
+	font-size: 10px;
+}
+
+h2 {
+	font-weight: bold;
+	font-size: 14px;
+	color: #333366;
+}
+
+.heading {
+	font-weight: bold;
+	color: #333366;
+	font-family: Verdana, Arial, Helvetica;
+}
+
+.table-heading {
+	font-weight: bold;
+	color: #ffffff;
+	background-color: #333366;
+	text-align: left;
+}
+
+.table-heading-big {
+	font-weight: bold;
+	color: #ffffff;
+	background-color: #333366;
+}
+
+.row-color {
+	background-color: #eeeee0;
+}
+
+.list tr:nth-child(odd) {
+	background-color: #eeeee0;
+}
+
+.list .limitcell {
+	overflow: hidden;
+	width: 40em;
+	max-width: 40em;
+	white-space: nowrap;
+
+}
+
+.address {
+	color: #000066;
+}
+
+.hot {
+	font-weight: normal;
+	color: #770000;
+}
+
+.not {
+	color: #ff3300;
+}
+
+.info {
+	color: white;
+	background-color: #333366;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.info:visited {
+	color: white;
+}
+
+.right {
+	text-align: right;
+}
+
+#access_selector {
+	text-align: right;
+	margin-bottom: .5em;
+}
+
+.imgrep {
+	border-bottom: solid black 1px;
+	border-right: solid black 1px;
+}
+
+.imgrep td {
+	border: none;
+	border-bottom: solid black 1px;
+	border-right: solid black 1px;
+}
+
+.imgrep .tab td {
+	background-color:#dedec9;
+}
+
+.imgrep .document td {
+	background-color:#333366;
+}
+.imgrep .document td a {
+	color:white;
+	font-weight: bold;
+}
+.imgrep .document td em {
+	color:white;
+}

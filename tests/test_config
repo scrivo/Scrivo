@@ -1,0 +1,7 @@
+DB_SERVER=localhost
+DB_NAME=scrivo_test
+DB_USERCODE=scrivo_test
+DB_PASSWORD=scrivo_test
+INSTANCE_ID=1
+WWW_ROOT=dunno
+A_FLOAT=6.7

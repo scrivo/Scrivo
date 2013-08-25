@@ -1,0 +1,142 @@
+# Copyright (c) 2012-2013, Geert Bergman (geert@scrivo.nl)
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+# 3. Neither the name of "Scrivo" nor the names of its contributors may be
+#    used to endorse or promote products derived from this software without
+#    specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+#
+# $Id: page_definition.yml 866 2013-08-25 16:22:35Z geert $
+
+# Clear template hints table 
+page_definition_hints:
+
+page_definition:
+  -
+    instance_id: 0
+    page_definition_id: 70000
+    title: "A template"
+    description: "A template description"
+    action: "templates/home.php"
+    search_index_rule: ""
+    config_only: 0
+    type_set: "1;2"
+    default_tab_id: 70200
+  -
+    instance_id: 0
+    page_definition_id: 70001
+    title: "A config only template"
+    description: "A template description"
+    action: "templates/forum.php"
+    search_index_rule: ""
+    config_only: 1
+    type_set: "1;2"
+    default_tab_id: 0
+
+# Tree template tabs: one for properties, one for a HTML text panel and one
+# for an application.
+page_definition_tab:
+  -
+    instance_id: 0
+    page_definition_tab_id: 70100
+    page_definition_id: 70001
+    sequence_no: 1
+    title: "Settings"
+    php_key: ""
+    css_selector: ""
+    page_css: ""
+    stylesheet: ""
+    application_definition_id: -1
+    css_id: ""
+  -
+    instance_id: 0
+    page_definition_tab_id: 70200
+    page_definition_id: 70001
+    sequence_no: 2
+    title: "Content"
+    php_key: "CONTENT"
+    css_selector: "content"
+    page_css: "body { background-color: green }"
+    stylesheet: "scrivo.css"
+    application_definition_id: 0
+    css_id: "content"
+  -
+    instance_id: 0
+    page_definition_tab_id: 70300
+    page_definition_id: 70001
+    sequence_no: 3
+    title: "Application"
+    php_key: "application_definition"
+    css_selector: ""
+    page_css: ""
+    stylesheet: ""
+    application_definition_id: 60000
+    css_id: ""
+    
+# Create some properties, put 1 on the default tab, put another three on
+# the "Settings" tab.
+page_property_definition:
+  -
+    instance_id: 0
+    page_property_definition_id: 70500
+    page_definition_id: 70001
+    sequence_no: 1
+    type: "img"
+    type_data: ""
+    php_key: "IMAGE"
+    title: "An image"
+    in_list: 0
+    page_definition_tab_id: 0
+  -
+    instance_id: 0
+    page_property_definition_id: 70600
+    page_definition_id: 70001
+    sequence_no: 1
+    type: "html_text"
+    type_data: ""
+    php_key: "HTML_TEXT"
+    title: "Text"
+    in_list: 0
+    page_definition_tab_id: 70100
+  -
+    instance_id: 0
+    page_property_definition_id: 70700
+    page_definition_id: 70001
+    sequence_no: 2
+    type: "checkbox"
+    type_data: ""
+    php_key: "CHECKBOX"
+    title: "A checkbox"
+    in_list: 0
+    page_definition_tab_id: 70100
+  -
+    instance_id: 0
+    page_property_definition_id: 70800
+    page_definition_id: 70001
+    sequence_no: 3
+    type: "url"
+    type_data: ""
+    php_key: "LINK"
+    title: "A link"
+    in_list: 0
+    page_definition_tab_id: 70100
+

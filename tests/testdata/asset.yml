@@ -1,0 +1,14 @@
+asset:
+  -
+    instance_id: 0 
+    asset_id: 20000 
+    parent_id: 2 
+    sequence_no: 0 
+    type: 0 
+    size: 0 
+    date_created: 2012-01-01 00:00:00    
+    date_modified: 2012-01-01 00:00:00 
+    title: "Subfolder" 
+    location: ""    
+    mime_type: ""
+

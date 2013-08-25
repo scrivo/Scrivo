@@ -1,0 +1,210 @@
+# Copyright (c) 2012-2013, Geert Bergman (geert@scrivo.nl)
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+# 3. Neither the name of "Scrivo" nor the names of its contributors may be
+#    used to endorse or promote products derived from this software without
+#    specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+#
+# $Id$
+
+# Definition for something like a forum: Subjects with replies posted as
+# as children of subject and replies. 
+list_item_definition:
+  -
+    instance_id: 0
+    list_item_definition_id: 120000
+    sequence_no: 1
+    application_definition_id: 60000
+    page_definition_id: 70000
+    title: "Subject"
+    icon: "subject.png"
+    php_key: "SUBJECT"
+    title_width: 250
+    title_label: ""
+  -
+    instance_id: 0
+    list_item_definition_id: 120001
+    sequence_no: 2
+    application_definition_id: 60000
+    page_definition_id: 0
+    title: "Reply"
+    icon: "reply.png"
+    php_key: "REPLY"
+    title_width: 250
+    title_label: ""
+  -
+    instance_id: 0
+    list_item_definition_id: 120002
+    sequence_no: 2
+    application_definition_id: 60000
+    page_definition_id: 0
+    title: "Dummy-sort-1"
+    icon: "xyz.png"
+    php_key: "DUMMY_SORT_1"
+    title_width: 250
+    title_label: ""
+
+parent_list_item_definitions:
+  -
+    instance_id: 0
+    list_item_definition_id: 120001
+    parent_list_item_definition_id: 120000
+  -
+    instance_id: 0
+    list_item_definition_id: 120001
+    parent_list_item_definition_id: 120001
+
+list_item_property_definition:
+  -
+    instance_id: 0
+    list_item_property_definition_id: 130100
+    application_definition_id: 60000
+    list_item_definition_id: 120001
+    sequence_no: 1
+    type: "text"
+    type_data: "HEIGHT=30"
+    php_key: "REPLY_TEXT"
+    title: "Reply"
+    in_list: 0
+  -
+    instance_id: 0
+    list_item_property_definition_id: 130000
+    application_definition_id: 60000
+    list_item_definition_id: 120000
+    sequence_no: 1
+    type: "html_text"
+    type_data: "HEIGHT=100"
+    php_key: "SUBJECT_HTML_TEXT"
+    title: "Subject"
+    in_list: 0
+  -
+    instance_id: 0
+    list_item_property_definition_id: 130001
+    application_definition_id: 60000
+    list_item_definition_id: 120000
+    sequence_no: 2
+    type: "img"
+    type_data: "TEMPLATE_WIDTH=120\nTEMPLATE_HEIGHT=120\nWIDTH=20\nHEIGHT=20"
+    php_key: "SUBJECT_IMG"
+    title: "Image"
+    in_list: 0
+  -
+    instance_id: 0
+    list_item_property_definition_id: 130002
+    application_definition_id: 60000
+    list_item_definition_id: 120000
+    sequence_no: 3
+    type: "input"
+    type_data: "WIDTH=1000\nMAXLENGTH=1000"
+    php_key: "SUBJECT_INPUT"
+    title: "Subject input"
+    in_list: 0
+  -
+    instance_id: 0
+    list_item_property_definition_id: 130003
+    application_definition_id: 60000
+    list_item_definition_id: 120000
+    sequence_no: 4
+    type: "select"
+    type_data: "type=multiple\nDATA=0:zero;1:one;2:two\nSIZE=5"
+    php_key: "SUBJECT_SELECT"
+    title: "Subject select"
+    in_list: 0
+  -
+    instance_id: 0
+    list_item_property_definition_id: 130004
+    application_definition_id: 60000
+    list_item_definition_id: 120000
+    sequence_no: 5
+    type: "color"
+    type_data: ""
+    php_key: "SUBJECT_COLOR"
+    title: "Subject color"
+    in_list: 0
+  -
+    instance_id: 0
+    list_item_property_definition_id: 130005
+    application_definition_id: 60000
+    list_item_definition_id: 120000
+    sequence_no: 6
+    type: "url"
+    type_data: ""
+    php_key: "SUBJECT_URL"
+    title: "Subject url"
+    in_list: 0
+  -
+    instance_id: 0
+    list_item_property_definition_id: 130006
+    application_definition_id: 60000
+    list_item_definition_id: 120000
+    sequence_no: 7
+    type: "checkbox"
+    type_data: ""
+    php_key: "SUBJECT_CHECKBOX"
+    title: "Subject checkbox"
+    in_list: 0
+  -
+    instance_id: 0
+    list_item_property_definition_id: 130007
+    application_definition_id: 60000
+    list_item_definition_id: 120000
+    sequence_no: 8
+    type: "text"
+    type_data: "ROWS=4"
+    php_key: "SUBJECT_TEXT"
+    title: "Subject text"
+    in_list: 0
+  -
+    instance_id: 0
+    list_item_property_definition_id: 130008
+    application_definition_id: 60000
+    list_item_definition_id: 120000
+    sequence_no: 9
+    type: "datetime"
+    type_data: "DEFAULT_VALUE=-2 days"
+    php_key: "SUBJECT_DATE"
+    title: "Subject date"
+    in_list: 0
+  -
+    instance_id: 0
+    list_item_property_definition_id: 130009
+    application_definition_id: 60000
+    list_item_definition_id: 120000
+    sequence_no: 10
+    type: "tab"
+    type_data: ""
+    php_key: "SUBJECT_TAB"
+    title: "Subject tab"
+    in_list: 0
+  -
+    instance_id: 0
+    list_item_property_definition_id: 130010
+    application_definition_id: 60000
+    list_item_definition_id: 120000
+    sequence_no: 11
+    type: "info"
+    type_data: ""
+    php_key: "SUBJECT_INFO"
+    title: "Subject info"
+    in_list: 0
+    

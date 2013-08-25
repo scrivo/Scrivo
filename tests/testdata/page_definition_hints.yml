@@ -1,0 +1,247 @@
+# Copyright (c) 2012-2013, Geert Bergman (geert@scrivo.nl)
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+# 3. Neither the name of "Scrivo" nor the names of its contributors may be
+#    used to endorse or promote products derived from this software without
+#    specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+#
+# $Id: page_definition_hints.yml 866 2013-08-25 16:22:35Z geert $
+
+# Sample template hints
+# - a site with 1 home page, not allowed under any other type of page
+# - at max 3 main menus under the home
+# - any amount of content pages under a menu
+# - at max 1 forum page under a menu.
+# Sample content
+# - one home page
+# - two menu pages and one forum page under home (latter voilates the hints)
+# - a content and forum page under the first menu 
+
+#
+# Together with page.yml:
+#
+# Page id 1: Home (role id 1: public, 2: editors)
+#	Page id 20501: Menu1 (role id -)
+#		Page id 20503: Content (role id -)
+#		Page id 20504: Forum2 (role id -)
+#	Page id 20001: Forum (role id 5000: forum_public)
+#	Page id 20502: Menu2 (role id -)
+#
+page_definition:
+  -
+    instance_id: 0
+    page_definition_id: 70501
+    title: "A menu template"
+    description: "A template description"
+    action: "templates/menu.php"
+    search_index_rule: ""
+    config_only: 0
+    type_set: "0"
+    default_tab_id: 0
+  -
+    instance_id: 0
+    page_definition_id: 70502
+    title: "A content template"
+    description: "A template description"
+    action: "templates/content.php"
+    search_index_rule: ""
+    config_only: 0
+    type_set: "1;2"
+    default_tab_id: 0
+
+page_definition_hints:
+  -
+    # home not allowed under home 
+    instance_id: 0
+    parent_page_definition_id: 70000
+    page_definition_id: 70000
+    max_no_of_children: 0
+  -
+    # menu three times allowed under home 
+    instance_id: 0
+    parent_page_definition_id: 70000
+    page_definition_id: 70501
+    max_no_of_children: 3
+  -
+    instance_id: 0
+    # content not allowed under home 
+    parent_page_definition_id: 70000
+    page_definition_id: 70502
+    max_no_of_children: 0
+  -
+    # forum not allowed under home 
+    instance_id: 0
+    parent_page_definition_id: 70000
+    page_definition_id: 70001
+    max_no_of_children: 0
+  -
+    # home not allowed under menu 
+    instance_id: 0
+    parent_page_definition_id: 70501
+    page_definition_id: 70000
+    max_no_of_children: 0
+  -
+    # menu not allowed under menu 
+    instance_id: 0
+    parent_page_definition_id: 70501
+    page_definition_id: 70501
+    max_no_of_children: 0
+#  -
+#    # content allowed under menu 
+#    instance_id: 0
+#    parent_page_definition_id: 70501
+#    page_definition_id: 70502
+#    max_no_of_children: NULL
+  -
+    # forum one time allowed under menu 
+    instance_id: 0
+    parent_page_definition_id: 70501
+    page_definition_id: 70001
+    max_no_of_children: 1
+  -
+    # home not allowed under content 
+    instance_id: 0
+    parent_page_definition_id: 70502
+    page_definition_id: 70000
+    max_no_of_children: 0
+  -
+    # menu not allowed under content 
+    instance_id: 0
+    parent_page_definition_id: 70502
+    page_definition_id: 70501
+    max_no_of_children: 0
+  -
+    # content not allowed under content 
+    instance_id: 0
+    parent_page_definition_id: 70502
+    page_definition_id: 70502
+    max_no_of_children: 0
+  -
+    # forum not allowed under content 
+    instance_id: 0
+    parent_page_definition_id: 70502
+    page_definition_id: 70001
+    max_no_of_children: 0
+  -
+    # home not allowed under forum 
+    instance_id: 0
+    parent_page_definition_id: 70001
+    page_definition_id: 70000
+    max_no_of_children: 0
+  -
+    # menu not allowed under forum 
+    instance_id: 0
+    parent_page_definition_id: 70001
+    page_definition_id: 70501
+    max_no_of_children: 0
+  -
+    # content not allowed under forum 
+    instance_id: 0
+    parent_page_definition_id: 70001
+    page_definition_id: 70502
+    max_no_of_children: 0
+  -
+    # forum not allowed under forum 
+    instance_id: 0
+    parent_page_definition_id: 70001
+    page_definition_id: 70001
+    max_no_of_children: 0
+
+page:    
+  -
+    instance_id: 0
+    page_id: 200501
+    version: 0
+    parent_id: 1
+    sequence_no: 0
+    type: 1
+    page_definition_id: 70501
+    language_id: 85
+    date_created: 2012-01-01 00:00:00
+    date_modified: 2012-01-01 00:00:00
+    title: "Menu1"
+    description: ""
+    keywords: ""
+    javascript: ""
+    stylesheet: ""
+    date_online: 2012-01-01 00:00:00
+    date_offline: null
+    has_staging: 0
+  -
+    instance_id: 0
+    page_id: 200502
+    version: 0
+    parent_id: 1
+    sequence_no: 2
+    type: 1
+    page_definition_id: 70501
+    language_id: 85
+    date_created: 2012-01-01 00:00:00
+    date_modified: 2012-01-01 00:00:00
+    title: "Menu2"
+    description: ""
+    keywords: ""
+    javascript: ""
+    stylesheet: ""
+    date_online: 2012-01-01 00:00:00
+    date_offline: null
+    has_staging: 0
+  -
+    instance_id: 0
+    page_id: 200503
+    version: 0
+    parent_id: 200501
+    sequence_no: 0
+    type: 1
+    page_definition_id: 70502
+    language_id: 85
+    date_created: 2012-01-01 00:00:00
+    date_modified: 2012-01-01 00:00:00
+    title: "Content"
+    description: ""
+    keywords: ""
+    javascript: ""
+    stylesheet: ""
+    date_online: 2012-01-01 00:00:00
+    date_offline: null
+    has_staging: 0
+  -
+    instance_id: 0
+    page_id: 200504
+    version: 0
+    parent_id: 200501
+    sequence_no: 0
+    type: 1
+    page_definition_id: 70001
+    language_id: 85
+    date_created: 2012-01-01 00:00:00
+    date_modified: 2012-01-01 00:00:00
+    title: "Forum 2"
+    description: ""
+    keywords: ""
+    javascript: ""
+    stylesheet: ""
+    date_online: 2012-01-01 00:00:00
+    date_offline: null
+    has_staging: 0
+

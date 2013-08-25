@@ -1,0 +1,113 @@
+/* Copyright (c) 2011, Geert Bergman (geert@scrivo.nl)
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ * 3. Neither the name of "Scrivo" nor the names of its contributors may be
+ *    used to endorse or promote products derived from this software without
+ *    specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ *
+ * $Id: editor.css 840 2013-08-19 22:17:25Z geert $
+ */
+
+.header {
+	width: 100%;
+}
+
+.header div {
+	border-top: solid #dedec9 1px;
+	height: 51px;
+	padding-left: 80px;
+	overflow: hidden;
+	background: transparent url(../img/admin/purple_tulips.png) no-repeat bottom left;
+}
+
+.header {
+	background-color:#efefe4;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e0e0ca', endColorstr='#ffffff');
+	background: -webkit-gradient(linear, left top, left bottom, from(#e0e0ca), to(#ffffff));
+	background: -moz-linear-gradient(top,#e0e0ca,#ffffff);
+}
+
+.headerlogo {
+	font-size: 3em;
+	float: right;
+	margin-right: .3em;
+}
+
+.header h1 {
+	margin: .6em 0; font-weight : bold;
+	font-size: 150%;
+	color: #333366;
+	font-weight: bold;
+}
+
+.scrivologo {
+	font-family: Arial;
+	color: black;
+	position: relative;
+	top: -.2em;
+}
+
+.scrivologo .it {
+	font-weight: bold;
+	font-size: 80%;
+	left: -0.06em;
+	padding: 0.03em;
+	color: #b00000;
+	font-style: italic;
+	font-family: Times New Roman;
+	position: relative;
+}
+
+.scrivologo sub {
+	font-weight: bold;
+	font-size: 25%;
+	left: -0.15em;
+	position: relative;
+}
+
+.menu {
+	background-color:#323c64;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#46548c', endColorstr='#1e243c');
+	background: -webkit-gradient(linear, left top, left bottom, from(#46548c), to(#1e243c));
+	background: -moz-linear-gradient(top,#46548c,#1e243c);
+}
+
+.menu .sui-tb-button-highlight {
+	background-color: #f8f8f4;
+	border-color: #c1c196 !important;
+	background-color: white;
+	border-color: #770000 !important;
+	background-color:#5f72be;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6478c8', endColorstr='#5a6cb4');
+	background: -webkit-gradient(linear, left top, left bottom, from(#6478c8), to(#5a6cb4));
+	background: -moz-linear-gradient(top,#6478c8,#5a6cb4);
+	border-color: #7890f0 !important;
+}
+
+.menu .sui-tb-button-pressed {
+	background-color:#485690;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5566aa', endColorstr='#3c4878');
+	background: -webkit-gradient(linear, left top, left bottom, from(#5566aa), to(#3c4878));
+	background: -moz-linear-gradient(top,#5566aa,#3c4878);
+	border-color: #7890f0 !important;
+}

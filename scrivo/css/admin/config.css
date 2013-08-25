@@ -1,0 +1,48 @@
+
+#header div {
+	background-image: url(../../img/admin/purple_tulips.png);
+}
+
+/*
+
+button {
+	border-color:#4b0048;
+	border-color:#360034;
+}
+
+h1,
+a,
+h2,
+.heading {
+	color: #4b0048;
+	color: #360034;
+}
+
+.table-heading,
+.table-heading-big,
+.info,
+.imgrep .document td {
+	background-color:#4b0048;
+}
+
+
+#menu,
+#menu ul ul,
+.form th,
+.list th,
+button {
+	background: #4b0048;
+	background: -webkit-gradient(linear, left top, left bottom, from(#5e005a), to(#360034));
+	background: -moz-linear-gradient(top, #5e005a, #360034);
+}
+
+#menu,
+.form th,
+button {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5e005a', endColorstr='#360034');
+}
+
+*/
+/*
+	background: -moz-linear-gradient(top,  #7e7c00,  #373600);
+*/

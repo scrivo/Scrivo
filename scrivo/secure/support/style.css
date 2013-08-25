@@ -1,0 +1,178 @@
+.scrivologo {
+	font-family: Arial;
+	color: black;
+}
+.scrivologo .it {
+	font-weight: bold;
+	font-size: 80%;
+
+	left: -0.06em;
+	padding:0.03em;
+	color: #b00000;
+	font-style: italic;
+	font-family: Times New Roman;
+	position: relative;
+}
+.scrivologo sub {
+	font-weight: bold;
+	font-size: 25%;
+	left: -0.15em;
+	position: relative;
+}
+
+body {
+	background-color: #f3f3f3;
+	background-image: url(./background.gif);
+	background-repeat: repeat-y;
+	margin: 0px;
+	padding:0px;
+	font-size: 1em;
+	font-size: 80%;
+	font-family: Arial, Helvetica, sans-serif;
+}
+td {
+	vertical-align: top;
+}
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+.menu {
+	position: absolute;
+	top:50px;
+	left:0px;
+	width: 138px;
+}
+.menu .item {
+	text-align: right;
+	margin: 0;
+	color: white;
+	padding-top: .6em;
+	padding-bottom: .6em;
+	border-right: solid white 1px;
+}
+.menu .active {
+	background-color:#118dbf;
+	border-right: solid #118dbf 1px;
+	border-bottom: solid white 1px;
+	border-top: solid white 1px;
+}
+.menu a:visited,
+.menu a {
+	text-decoration: none;
+	font-weight: bold;
+	padding: 0.4em 1em 0.4em 1em ;
+	color: #ffffff;
+}
+
+#bg1 {
+	position: absolute;
+	left:138px;
+	top:-600px;
+	height: 522px;
+	width: 120px;
+	background-position: bottom;
+		background-repeat: no-repeat;
+}
+.bg1red {	background-image: url(./background_red.jpg);	}
+.bg1yellow {	background-image: url(./background_yellow.jpg);	}
+.bg1purple {	background-image: url(./background_purple.jpg);	}
+.bg1orange {	background-image: url(./background_orange.jpg);	}
+
+#bg2 {
+	position: absolute;
+	left:258px;
+	top:-600px;
+	height: 522px;
+	width: 52px;
+		background-image: url(./background_white.jpg);
+	background-position: left bottom;
+		background-repeat: no-repeat;
+}
+
+div.content_top
+{
+	position: absolute;
+	top: 0px;
+	left: 330px;
+	height: 102px;
+	width: 670px;
+	border-bottom: 1px solid #0E2E61;
+	background-image: url(./asset_scrivo.png);
+	background-repeat: no-repeat;
+	background-position: 490px 5px;
+	z-index: -1;
+}
+
+#maindiv {
+	margin:0px;
+	margin-left: 310px;
+	width: 470px;
+	padding-left: 20px;
+	padding-right: 18px;
+	height: 100%;
+}
+#content {
+	margin-top: 0px;
+	padding-top: 103px;
+	margin-bottom: 0px;
+}
+#cpyright {
+	position: absolute;
+	color:#686868;
+	text-align: left;
+	font-size: 0.7em;
+	margin-top: 20px;
+	height: 20px;
+}
+
+.form td.label {
+	font-weight: bold;
+}
+
+.form td {
+	padding: 0.3em;
+	padding-left: 0em;
+	vertical-align: middle;
+}
+
+.form td.top {
+	vertical-align: top;
+}
+
+h1 {
+	color:#006EB2;
+	font-size:1.4em;
+	font-weight:normal;
+	font-weight: bold;
+	background-color: white;
+	display: inline;
+	padding-right: 1em;
+	position: relative;
+	top: -1.5ex;
+}
+
+a {
+	color: #A41800;
+	text-decoration:none;
+}
+a:hover{
+	color: #A41800;
+	text-decoration:underline;
+}
+
+h2 {
+	font-size:1.2em;
+	color:#144A66;
+	font-weight:bold;
+}
+
+table td {
+	vertical-align: top;
+}
+
+.error {
+	color: #A41800;
+	font-weight: bold;
+	font-style: italic;
+}
