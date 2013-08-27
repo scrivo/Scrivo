@@ -42,8 +42,6 @@ use \Scrivo\Action;
 use \Scrivo\Request;
 use \ScrivoUi\Config\Lib\PageListUtil;
 
-include "functions/PageList.php";
-
 /**
  * The PageList XHR action class retrieves a list of child pages in XHR
  * format.
