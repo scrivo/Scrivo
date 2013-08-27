@@ -43,10 +43,6 @@ namespace Scrivo;
  * Convention (but not mandatory) is to use email addresses for user codes.
  * Both the user id and user code can be used to retrieve a user.
  *
- * The user class also holds an entry for the user's password, which is
- * stored legacy wise using DES, currently as SHA1 (and preferably using
- * blowfish) encryption.
- *
  * The User class defines some descriptive members for the user's name and
  * and email address. For additional user data to store along with a user
  * you can use the multipurose 'customData' field.
@@ -415,20 +411,13 @@ class User {
 	/**
 	 * Encrypt a password.
 	 *
-	 * TODO The method is currently md5, blowfish or better is preferred but
-	 * that requires a database change. Note that PHP stores the encryption
-	 * method and salt as part of the generated password string.
-	 *
 	 * @param \Scrivo\String $password
 	 *
 	 * @return string
 	 */
 	private function encrypt(\Scrivo\String $password) {
 		$salt = base_convert(md5(mt_rand(0, 1000000)), 16, 36);
-		/* blowfish generates key of at least 60 chars => DB update
-			$c =  crypt($password', "\$2a\$07\$".$salt."\$");
-		*/
-		$c = crypt($password, "\$1\$".$salt."\$");
+		$c =  crypt($password, "\$2a\$07\$".$salt."\$");
 		return $c;
 	}
 
