@@ -72,7 +72,6 @@ class ExportInstance extends Action {
 			while ($row_data = $sth->fetch(\PDO::FETCH_ASSOC)) {
 
 				list($k, $table) = each($row_data);
-				$table  = strtoupper($table);
 
 				Util::dumpTable($this->context->connection, $out, $table,
 					$this->context->config->INSTANCE_ID,

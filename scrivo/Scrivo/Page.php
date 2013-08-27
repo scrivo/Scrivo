@@ -68,6 +68,8 @@ namespace Scrivo;
  *    PHP object in which the members correspond with the PHP selector names.
  * @property-read \Scrivo\RoleSet $roles The attached roles.
  * @property-read \Scrivo\PageSet $children The child pages of this page.
+ * @property-read \Scrivo\PageSet $navigableChildren The navigable child 
+ *    pages of this page.
  * @property-read \Scrivo\PageSet $path The parent pages of this page.
  * @property-read \DateTime $dateCreated The date/time that this page was
  *    created.
@@ -317,6 +319,7 @@ class Page {
 			case "properties": return $this->getProperties();
 			case "roles": return $this->roles;
 			case "children": return $this->getChildren();
+			case "navigableChildren": return $this->getNavigableChildren();
 			case "path": return $this->getPath();
 			case "context": return $this->context;
 		}
@@ -406,6 +409,22 @@ class Page {
 		return $this->children;
 	}
 
+	/**
+	 * Get the navigable child pages of this page.
+	 *
+	 * @return \Scrivo\PageSet The navigable child pages of the page.
+	 */
+	private function getNavigableChildren() {
+		$res = array();
+		foreach ($this->getChildren() as $chld) {
+			if ($chld->type === self::TYPE_NAVIGABLE_PAGE
+					|| $chld->type === self::TYPE_NAVIGATION_ITEM) {
+				$res[] = $chld;
+			}
+		}
+		return $res;
+	}
+	
 	/**
 	 * Get the child pages of this page.
 	 *
@@ -1192,6 +1211,7 @@ class Page {
 		try {
 
 			$res = new \Scrivo\PageSet($page);
+			$res->prepend($page);
 			$target = $page->parentId;
 
 			$i = 0;
@@ -1212,8 +1232,8 @@ class Page {
 							D.parent_id,	D.sequence_no, D.type,
 							D.page_definition_id, D.language_id,
 							D.title, D.description, D.keywords, D.javascript,
-							D.stylesheet, D.date_created, D.date_modified, D.date_online,
-							D.date_offline, R.role_id
+							D.stylesheet, D.date_created, D.date_modified, 
+							D.date_online, D.date_offline, R.role_id
 						FROM page D LEFT JOIN object_role R ON
 							(D.instance_id = R.instance_id AND
 								D.page_id = R.page_id)

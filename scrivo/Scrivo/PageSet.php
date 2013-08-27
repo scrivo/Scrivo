@@ -112,7 +112,7 @@ class PageSet implements \ArrayAccess, \Iterator, \Countable {
 	public function prepend($page) {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null));
 
-		$this->items = array($page->id => $page) + $this->items;
+		array_unshift($this->items, $page);
 	}
 
 	/**

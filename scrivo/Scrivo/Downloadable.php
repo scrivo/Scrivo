@@ -61,7 +61,7 @@ class Downloadable {
 	 * The file name to use in the download.
 	 * @var \Scrivo\String
 	 */
-	private $fileName;
+	private $action;
 
 	/**
 	 * The binary data to pass in case of type_data or the physical location
@@ -78,7 +78,7 @@ class Downloadable {
 	 * and pass the file name (TYPE_FILE).
 	 *
 	 * @param \Scrivo\Context $context A valid Scrivo context.
-	 * @param \Scrivo\String $fileName The file name to use in the
+	 * @param \Scrivo\String $action The file name to use in the
 	 *   download headers, this will be prepended with a string representation
 	 *   of the WWW_ROOT variabele.
 	 * @param int $type the type of data to download, either type_data or
@@ -87,7 +87,7 @@ class Downloadable {
 	 *   file name (TYPE_FILE).
 	 */
 	public function __construct(\Scrivo\Context $context,
-			\Scrivo\String $fileName, $type, $data) {
+			\Scrivo\String $action, $type, $data) {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(
 			null,
 			null,
@@ -109,7 +109,7 @@ class Downloadable {
 			new \Scrivo\String(""))->replace(
 				new \Scrivo\String("/"), new \Scrivo\String("_"));
 
-		$this->fileName = new \Scrivo\String($wr . "_" . $fileName);
+		$this->action = new \Scrivo\String($wr . "_" . $action);
 		$this->type = $type;
 		$this->data = $data;
 	}
@@ -131,7 +131,7 @@ class Downloadable {
 	 * Get the file name to use in the download headers.
 	 */
 	public function getFileName() {
-		return $this->fileName;
+		return $this->action;
 
 	}
 

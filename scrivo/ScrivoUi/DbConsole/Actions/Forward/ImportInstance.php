@@ -101,10 +101,9 @@ class ImportInstance extends Action {
 			$result1 = $conn->query("SHOW TABLES");
 			while ($row_data = $result1->fetch(\PDO::FETCH_ASSOC)) {
 				list($k, $table) = each($row_data);
-				$table = strtoupper($table);
 				try {
 					$rc = $conn->query(
-						"SELECT MAX({$table}_ID) MAXID FROM {$table}");
+						"SELECT MAX({$table}_id) MAXID FROM {$table}");
 					$c = $rc->fetch(\PDO::FETCH_ASSOC);
 					$mx = $c["MAXID"];
 					if ($mx > $mx_id) {

@@ -59,6 +59,6 @@ define("PAGE_ID",
 
 $page = Page::fetch($ctx, PAGE_ID);
 
-include $page->definition->fileName;
+include $page->definition->action;
 
 ?>

@@ -70,7 +70,7 @@ namespace Scrivo;
  *   page definition for editing.
  * @property \Scrivo\String $description An additional description for the
  *   page definition.
- * @property \Scrivo\String $fileName The location of the PHP script to
+ * @property \Scrivo\String $action The location of the PHP script to
  *   execute when rendering pages using this page definition.
  * @property \Scrivo\String $title A descriptive title for the page definition.
  * @property int[] $typeSet The set of page types that the user can select
@@ -102,7 +102,7 @@ class PageDefinition {
 	 * this page definition.
 	 * @var \Scrivo\String
 	 */
-	private $fileName = null;
+	private $action = null;
 
 	/**
 	 * Setting to suppress this page definition in the user interface.
@@ -155,7 +155,7 @@ class PageDefinition {
 		if ($context) {
 			$this->title = new \Scrivo\String();
 			$this->description = new \Scrivo\String();
-			$this->fileName = new \Scrivo\String();
+			$this->action = new \Scrivo\String();
 
 			$this->context = $context;
 		}
@@ -174,7 +174,7 @@ class PageDefinition {
 			case "id": return $this->id;
 			case "title": return $this->title;
 			case "description": return $this->description;
-			case "fileName": return $this->fileName;
+			case "action": return $this->action;
 			case "configOnly": return $this->configOnly;
 			case "typeSet": return $this->typeSet;
 			case "defaultTabId": return $this->defaultTabId;
@@ -195,7 +195,7 @@ class PageDefinition {
 		switch($name) {
 			case "title": $this->setTitle($value); return;
 			case "description": $this->setDescription($value); return;
-			case "fileName": $this->setFileName($value); return;
+			case "action": $this->setFileName($value); return;
 			case "configOnly": $this->setConfigOnly($value); return;
 			case "typeSet": $this->setTypeSet($value); return;
 			case "defaultTabId": $this->setDefaultTabId($value); return;
@@ -216,7 +216,7 @@ class PageDefinition {
 		$this->id = intval($rd["page_definition_id"]);
 		$this->title = new \Scrivo\String($rd["title"]);
 		$this->description = new \Scrivo\String($rd["description"]);
-		$this->fileName = new \Scrivo\String($rd["action"]);
+		$this->action = new \Scrivo\String($rd["action"]);
 		$this->configOnly = intval($rd["config_only"]) == 1 ? true : false;
 		$this->typeSet =
 			$this->convertTypeSet(new \Scrivo\String($rd["type_set"]));
@@ -275,11 +275,11 @@ class PageDefinition {
 	 * Set the location of the PHP script to execute when rendering pages
 	 * using this page definition.
 	 *
-	 * @param \Scrivo\String $fileName The location of the PHP script to
+	 * @param \Scrivo\String $action The location of the PHP script to
 	 *    execute when rendering pages using this page definition.
 	 */
-	private function setFileName(\Scrivo\String $fileName) {
-		$this->fileName = $fileName;
+	private function setFileName(\Scrivo\String $action) {
+		$this->action = $action;
 	}
 
 	/**
@@ -373,7 +373,7 @@ class PageDefinition {
 					instance_id, page_definition_id, title, description, action,
 					config_only, type_set, default_tab_id
 				) VALUES (
-					:instId, :id, :title, :description, :fileName,
+					:instId, :id, :title, :description, :action,
 					:configOnly, :typeSet, :defaultTabId
 				)");
 
@@ -382,7 +382,7 @@ class PageDefinition {
 			$sth->bindValue(":title", $this->title, \PDO::PARAM_STR);
 			$sth->bindValue(
 				":description", $this->description, \PDO::PARAM_STR);
-			$sth->bindValue(":fileName", $this->fileName, \PDO::PARAM_STR);
+			$sth->bindValue(":action", $this->action, \PDO::PARAM_STR);
 			$sth->bindValue(":configOnly",
 				$this->configOnly ? 1 : 0, \PDO::PARAM_INT);
 			$sth->bindValue(":typeSet", new \Scrivo\String(
@@ -423,7 +423,7 @@ class PageDefinition {
 			$sth = $this->context->connection->prepare(
 				"UPDATE page_definition SET
 					title = :title, description = :description,
-					action = :fileName, config_only = :configOnly,
+					action = :action, config_only = :configOnly,
 					type_set = :typeSet, default_tab_id = :defaultTabId
 				WHERE instance_id = :instId AND page_definition_id = :id");
 
@@ -433,7 +433,7 @@ class PageDefinition {
 			$sth->bindValue(":title", $this->title, \PDO::PARAM_STR);
 			$sth->bindValue(
 				":description", $this->description, \PDO::PARAM_STR);
-			$sth->bindValue(":fileName", $this->fileName, \PDO::PARAM_STR);
+			$sth->bindValue(":action", $this->action, \PDO::PARAM_STR);
 			$sth->bindValue(":configOnly",
 				$this->configOnly ? 1 : 0, \PDO::PARAM_INT);
 			$sth->bindValue(":typeSet", new \Scrivo\String(

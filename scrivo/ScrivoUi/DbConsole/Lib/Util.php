@@ -80,8 +80,6 @@ class Util {
 
 		$res = true;
 
-		$table = strtoupper($table);
-
 		$sth = $conn->prepare(
 			"SELECT * FROM {$table} where instance_id = :instId");
 

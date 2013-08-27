@@ -59,7 +59,7 @@ foreach(PageDefinition::select($this->context) as $key=>$value) {
 			<?php echo $value->description ?>
 		</td>
 		<td>
-			<?php echo $value->fileName; ?>
+			<?php echo $value->action; ?>
 		</td>
 		<td class="img">
 			<a href="?a=page_definition_form&page_definition_id=<?php

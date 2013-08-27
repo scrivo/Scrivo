@@ -273,6 +273,7 @@ class ItemList {
 		if (isset($context->cache[$cId])) {
 			// Get the list from cache and set the context.
 			$obj = $context->cache[$cId];
+			$obj->context = $context;
 		} else {
 			// Load the list and set it in the cache.
 			$obj = new \Scrivo\ItemList($context, $pageId, $defintionId);

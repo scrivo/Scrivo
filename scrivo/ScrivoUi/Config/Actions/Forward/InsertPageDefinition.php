@@ -70,7 +70,7 @@ class InsertPageDefinition extends Action {
 				Request::TYPE_STRING, $i18n["New page definition"]);
 			$pageDefinition->description = Request::post("description",
 				Request::TYPE_STRING, new String(""));
-			$pageDefinition->fileName = Request::post("file_name",
+			$pageDefinition->action = Request::post("action",
 				Request::TYPE_STRING, new String(""));
 			$pageDefinition->configOnly = Request::post("admin_only",
 				Request::TYPE_BOOLEAN);

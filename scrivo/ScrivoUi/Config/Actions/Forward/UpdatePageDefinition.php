@@ -66,8 +66,8 @@ class UpdatePageDefinition extends Action {
 				"label", Request::TYPE_STRING, new String(""));
 			$pageDefinition->description = Request::post(
 				"description", Request::TYPE_STRING, new String(""));
-			$pageDefinition->fileName = Request::post(
-				"file_name", Request::TYPE_STRING, new String(""));
+			$pageDefinition->action = Request::post(
+				"action", Request::TYPE_STRING, new String(""));
 			$pageDefinition->configOnly = Request::post(
 				"admin_only", Request::TYPE_BOOLEAN);
 			$pageDefinition->typeSet = Request::post(

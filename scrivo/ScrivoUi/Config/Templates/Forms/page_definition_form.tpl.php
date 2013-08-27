@@ -98,11 +98,11 @@ if ($pageDefinition->id) {
 				?></textarea></td>
 		</tr>
 		<tr>
-			<td class="label"><label for="file_name"><?php
+			<td class="label"><label for="action"><?php
 				echo $i18n["PHP template file:"]?></label></td>
-			<td><input type="text" id="file_name" name="file_name"
+			<td><input type="text" id="action" name="action"
 				size="50" maxlength="255" value="<?php
-					echo(htmlspecialchars($pageDefinition->fileName))?>"></td>
+					echo(htmlspecialchars($pageDefinition->action))?>"></td>
 		</tr>
 		<tr>
 			<td class="label"><label for="admin_only"><?php
@@ -112,7 +112,7 @@ if ($pageDefinition->id) {
 					if ($pageDefinition->configOnly) echo(" checked")?>></td>
 		</tr>
 		<tr>
-			<td class="label"><label for="file_name"><?php
+			<td class="label"><label for="action"><?php
 				echo $i18n["Page types:"]?></label></td>
 			<td>
 <?php

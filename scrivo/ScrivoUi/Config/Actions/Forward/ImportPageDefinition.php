@@ -79,7 +79,7 @@ class ImportPageDefinition extends Action {
 
 			$templ->title = new String($data["title"]);
 			$templ->description = new String($data["description"]);
-			$templ->fileName = new String($data["fileName"]);
+			$templ->action = new String($data["action"]);
 			$templ->configOnly = $data["configOnly"];
 			$templ->typeSet = $data["typeSet"];
 			$templ->defaultTabId = $data["defaultTabId"];

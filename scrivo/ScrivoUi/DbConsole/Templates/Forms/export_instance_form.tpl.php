@@ -47,7 +47,7 @@ if ($data) {
 ?>
 			<tr>
 				<td class="label"><?php echo $i18n["Title"]?></td>
-				<td><?php echo $data["title"]?></td>
+				<td><?php echo $data["www_root"]?></td>
 			</tr>
 			<tr>
 				<td class="label"><?php echo $i18n["Root folder"]?></td>

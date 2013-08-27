@@ -58,7 +58,7 @@ foreach ($mtList as $value) {
 			?></td>
 			<td><?php echo
 				@$templates[$value->idTouched]->title . ": " .
-				@$templates[$value->idTouched]->fileName
+				@$templates[$value->idTouched]->action
 			?></td>
 			<td>
 				<a onclick="return confirm('<?php echo
@@ -90,7 +90,7 @@ foreach ($idLabel as $label => $id) {
 				<select name="touch_id">
 <?php
 foreach ($templates as $id => $t) {
-	echo "<option value=\"$id\">{$t->title}: {$t->fileName}</option>";
+	echo "<option value=\"$id\">{$t->title}: {$t->action}</option>";
 }
 ?>
 				</select>

@@ -117,20 +117,15 @@ class CreateInstance extends Action {
 		$tmp1 = str_replace("\\", "\\\\", $cfgPth);
 		$tmp2 = str_replace("\\", "\\\\", $cfgUpload);
 		$str = <<<EOD
-;=================================================================
-; Description: Scrivo configuration file
-;
+; Scrivo configuration file
 ; Copyright 2002-2013 Scrivo
 ; All Rights Reserved
-;
 
 ; database constants
-DB_ENGINE    = MySQL
-DB_DRIVER    = PDO_mysql
-DB_SERVER    = {$dbHost}
-DB_USERCODE  = {$dbUser}
-DB_PASSWORD  = {$dbPwd}
-DB_NAME      = {$dbName}
+DB_HOST = {$dbHost}
+DB_USER = {$dbUser}
+DB_PASSWORD = {$dbPwd}
+DB_NAME = {$dbName}
 
 ; instance identifier database
 INSTANCE_ID = {$cfgInstId}
@@ -176,8 +171,8 @@ EOD;
 
 		/*[init data]*/
 
-		$adminww = crypt($cfgPwd, "\$1\$".
-				base_convert(md5(mt_rand(0, 1000000)), 16, 36)."\$");
+		$salt = base_convert(md5(mt_rand(0, 1000000)), 16, 36);
+		$adminww = crypt($cfgPwd, "\$2a\$07\${$salt}\$");
 		$init = init_sql($cfgInstId, $adminww);
 		foreach ($init as $l) {
 			$pdo->exec($l);

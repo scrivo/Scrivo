@@ -54,7 +54,7 @@ class HtmlContent extends \Scrivo\PageProperty {
 	public function __get($name) {
 		switch($name) {
 			case "rawHtml": return $this->extData;
-			case "html": return $this->data;
+			case "html": return $this->extData;
 		}
 		return parent::__get($name);
 	}
