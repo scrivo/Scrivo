@@ -123,24 +123,23 @@ class Context {
 	/**
 	 * Construct a Scrivo context using a configuration file and a user id.
 	 *
-	 * @param Config $config A Scrivo configuration object.
-	 * @param int $userId A Scrivo user id.
+	 * @param \Scrivo\Config $config A Scrivo configuration object.
+	 * @param \Scrivo\User|int $user A Scrivo user.
 	 */
-	public function __construct(Config $config, $userId) {
+	public function __construct(\Scrivo\Config $config, $user) {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(
 			null,
-			array(\Scrivo\ArgumentCheck::TYPE_INTEGER)
+			//array(array("\Scrivo\User", \Scrivo\ArgumentCheck::TYPE_INTEGER))
+			null // TODO multiple type check in ArgumentCheck
 		));
 
 		$this->config = $config;
 		$this->conn = new \Scrivo\PdoConnection($config);
-		$this->cache = new \Scrivo\LocalCache(
-//			new \Scrivo\Cache\FileCache()
-		);
+		$this->cache = new \Scrivo\LocalCache();
 		$this->idLabel = \Scrivo\IdLabel::select($this);
-		$this->principal = \Scrivo\User::fetch($this, $userId);
+		$this->principal = $user instanceof \Scrivo\User 
+			? $user : \Scrivo\User::fetch($this, $user);
 	}
-
 
 	/**
 	 * Implementation of the readable properties using the PHP magic
