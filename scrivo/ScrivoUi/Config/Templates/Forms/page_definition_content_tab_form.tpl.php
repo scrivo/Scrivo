@@ -32,7 +32,7 @@
 $this->beginSection("content", true);
 
 ?>
-<form action="?" method="post">
+<form action="index.php" method="post">
 <?php
 if ($property->id) {
 ?>
@@ -108,7 +108,7 @@ if (!$property->id) {
 
 	<button type="submit"><?php echo "Save"?></button>
 	<button type="button" onclick=
-		"document.location='?a=page_definition_form&page_definition_id=<?php
+		"document.location='index.php?a=page_definition_form&page_definition_id=<?php
 		echo $templateId?>';return false;"><?php
 			echo "Cancel"?></button>
 

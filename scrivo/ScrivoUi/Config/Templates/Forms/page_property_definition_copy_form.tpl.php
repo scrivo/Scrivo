@@ -34,7 +34,7 @@ use \Scrivo\PageDefinitionTab;
 $this->beginSection("content", true);
 
 ?>
-<form action="?" method="post">
+<form action="index.php" method="post">
 
 <table cellspacing="0"><tr><td style="vertical-align: top">
 
@@ -74,7 +74,7 @@ foreach ($tabs as $k => $tab) {
 
 	<button type="submit"><?php echo $i18n["Copy"]?></button>
 	<button type="button" onclick=
-		"document.location='?a=page_definition_form&page_definition_id=<?php
+		"document.location='index.php?a=page_definition_form&page_definition_id=<?php
 		echo $prop->pageDefinitionId?>';"><?php echo $i18n["Cancel"]?></button>
 
 </td><td style="padding-left: 2em">

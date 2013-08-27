@@ -66,7 +66,7 @@ foreach ($rows as $d) {
 				echo $i18n["inaccessible"]?>">
 			<?php } ?>
 			<?php if ($d->type == Asset::TYPE_FOLDER) {  ?>
-			<a href="?a=asset_access_form&asset_id=<?php echo $d->assetId; ?>">
+			<a href="index.php?a=asset_access_form&asset_id=<?php echo $d->assetId; ?>">
 				<img src="../img/admin/properties.png" alt="<?php
 					echo $i18n["edit properties"]?>" title="<?php
 					echo $i18n["edit properties"]?>">
@@ -117,7 +117,7 @@ function createRow(d) {
 	}
 <?php } ?>
 	if (d.type == <?php echo Asset::TYPE_FOLDER?>) {
-		res += "	<a href=\"?a=asset_access_form&asset_id="+d.assetId+"\">";
+		res += "	<a href=\"index.php?a=asset_access_form&asset_id="+d.assetId+"\">";
 		res += "		<img src=\"../img/admin/properties.png\" alt=\"<?php
 			echo $i18n["edit properties"]?>\" title=\"<?php
 			echo $i18n["edit properties"]?>\">";
@@ -153,7 +153,7 @@ function openNode(id) {
 
 </script>
 
-	<form id="access_selector" action="?" method="get">
+	<form id="access_selector" action="index.php" method="get">
 		<input type="hidden" name="a" value="asset_list">
 		<select onchange="this.parentNode.submit()" name="role_id">
 			<option value=""><?php echo $i18n["Show access"] ?></option>

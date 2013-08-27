@@ -97,28 +97,28 @@ $this->beginSection("menu", true);
 if ($this->session->authenticated) {
 
 ?>
-	<a id="loginout" href="?a=logout"><?php
+	<a id="loginout" href="index.php?a=logout"><?php
 		echo $i18n["Log out"]?></a>
 	<ul>
 		<li>
 			<span><?php
 				echo $i18n["Users"]?></span>
 			<ul>
-				<li><a href="?a=editor_list"><?php
+				<li><a href="index.php?a=editor_list"><?php
 					echo $i18n["Editors"]?></a></li>
-				<li><a href="?a=member_list"><?php
+				<li><a href="index.php?a=member_list"><?php
 					echo $i18n["Members"]?></a></li>
-				<li><a href="?a=admin_list"><?php
+				<li><a href="index.php?a=admin_list"><?php
 					echo $i18n["Super-users"]?></a></li>
-				<li><a href="?a=requests_list"><?php
+				<li><a href="index.php?a=requests_list"><?php
 					echo $i18n["Requests"]?></a></li>
-				<li><a href="?a=role_list"><?php
+				<li><a href="index.php?a=role_list"><?php
 					echo $i18n["Roles"]?></a></li>
 			</ul>
 		</li>
-		<li><a href="?a=page_list"><?php
+		<li><a href="index.php?a=page_list"><?php
 			echo $i18n["Pages"]?></a></li>
-		<li><a href="?a=asset_list"><?php
+		<li><a href="index.php?a=asset_list"><?php
 			echo $i18n["Files"]?></a></li>
 	</ul>
 <?php
@@ -128,11 +128,11 @@ if ($this->session->authenticated) {
 		$base1 = String::create(
 			str_replace(array("http://", "https://"), "",
 			$this->context->config->WWW_ROOT))->split(new String("/"));
-		$login_url = "{$this->context->config->WWW_ROOT}/scrivo/secure/admin";
+		$login_url = "{$this->context->config->WWW_ROOT}/scrivo/secure/admin/index.php";
 		$use_secure = false;
 		if (defined("SECURE_LOGIN")) {
 			$use_secure = true;
-			$login_url = SECURE_LOGIN."/".implode("_", $base1)."/scrivo/admin";
+			$login_url = SECURE_LOGIN."/".implode("_", $base1)."/scrivo/admin/index.php";
 		}
 
 ?>

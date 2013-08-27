@@ -35,7 +35,7 @@ use \Scrivo\ListItemPropertyDefinition;
 $this->beginSection("content", true);
 
 ?>
-<form action="?" method="post">
+<form action="index.php" method="post">
 
 <table cellspacing="0"><tr><td style="vertical-align: top">
 
@@ -102,11 +102,11 @@ foreach ($types as $k => $v) {
 if ($application->id) {
 ?>
 	<button type="button" onclick="
-document.location='?a=list_item_definition_form&application_definition_id=<?php
+document.location='index.php?a=list_item_definition_form&application_definition_id=<?php
 		echo $application->id?>'"><?php
 			echo $i18n["New list item definition"]?></button>
 	<button type="button" onclick=
-"document.location='?a=list_item_property_form&application_definition_id=<?php
+"document.location='index.php?a=list_item_property_form&application_definition_id=<?php
 		echo $application->id?>'"><?php
 			echo $i18n["New list item property"]?></button>
 	<br>
@@ -115,7 +115,7 @@ document.location='?a=list_item_definition_form&application_definition_id=<?php
 ?>
 	<button type="submit"><?php echo $i18n["Save"]?></button>
 	<button type="button"
-		onclick="document.location='?a=application_definition_list';"><?php
+		onclick="document.location='index.php?a=application_definition_list';"><?php
 			echo $i18n["Cancel"]?></button>
 </p>
 
@@ -147,7 +147,7 @@ if ($application->id) {
 		<td><?php echo $def->title; ?></td>
 		<td><?php echo $def->phpSelector; ?></td>
 		<td class="img">
-			<a href="?a=list_item_definition_move&list_item_definition_id=<?php
+			<a href="index.php?a=list_item_definition_move&list_item_definition_id=<?php
 				echo $def->id ?>&dir=-1">
 				<img src="../img/admin/arrow_up_blue.png" alt="<?php
 					echo $i18n["Move list item type up"]?>" title="<?php
@@ -155,7 +155,7 @@ if ($application->id) {
 			</a>
 		</td>
 		<td class="img">
-			<a href="?a=list_item_definition_move&list_item_definition_id=<?php
+			<a href="index.php?a=list_item_definition_move&list_item_definition_id=<?php
 				echo $def->id ?>&dir=1">
 				<img src="../img/admin/arrow_down_blue.png" alt="<?php
 					echo $i18n["Move list item type down"]?>" title="<?php
@@ -163,7 +163,7 @@ if ($application->id) {
 			</a>
 		</td>
 		<td class="img">
-			<a href="?a=list_item_definition_form&list_item_definition_id=<?php
+			<a href="index.php?a=list_item_definition_form&list_item_definition_id=<?php
 				echo $def->id; ?>">
 				<img src="../img/admin/properties.png" alt="<?php
 					echo $i18n["Edit list item type"]?>" title="<?php
@@ -173,7 +173,7 @@ if ($application->id) {
 		<td class="img">
 			<a onclick="return confirm('<?php
 				echo $i18n["Delete list item type?"]?>')"
-			href="?a=list_item_definition_delete&list_item_definition_id=<?php
+			href="index.php?a=list_item_definition_delete&list_item_definition_id=<?php
 				echo $def->id ?>">
 				<img src="../img/admin/delete.png" alt="<?php
 					echo $i18n["Delete list item type"]?>" title="<?php
@@ -189,7 +189,7 @@ if ($application->id) {
 		<td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $value2->title; ?></td>
 		<td><?php echo $value2->phpSelector; ?></td>
 		<td class="img">
-			<a href="?a=list_item_property_move&list_item_definition_id=<?php
+			<a href="index.php?a=list_item_property_move&list_item_definition_id=<?php
 				echo $def->id ?>&list_item_property_id=<?php
 					echo $value2->id?>&dir=-1">
 				<img src="../img/admin/arrow_up_yellow.png" alt="<?php
@@ -198,7 +198,7 @@ if ($application->id) {
 			</a>
 		</td>
 		<td class="img">
-			<a href="?a=list_item_property_move&list_item_definition_id=<?php
+			<a href="index.php?a=list_item_property_move&list_item_definition_id=<?php
 				echo $def->id ?>&list_item_property_id=<?php
 				echo $value2->id?>&dir=1">
 				<img src="../img/admin/arrow_down_yellow.png" alt="<?php
@@ -207,7 +207,7 @@ if ($application->id) {
 			</a>
 		</td>
 		<td class="img">
-			<a href="?a=list_item_property_form&list_item_property_id=<?php
+			<a href="index.php?a=list_item_property_form&list_item_property_id=<?php
 				echo $value2->id?>">
 				<img src="../img/admin/properties.png" alt="<?php
 					echo $i18n["Edit list item property"]?>" title="<?php
@@ -217,7 +217,7 @@ if ($application->id) {
 		<td class="img">
 			<a onclick="return confirm('<?php
 				echo $i18n["Delete list item property?"]?>')"
-				href="?a=list_item_property_delete&list_item_property_id=<?php
+				href="index.php?a=list_item_property_delete&list_item_property_id=<?php
 				echo $value2->id?>">
 				<img src="../img/admin/delete.png" alt="<?php
 					echo $i18n["Delete list item property"]?>" title="<?php

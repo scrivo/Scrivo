@@ -44,7 +44,7 @@ foreach ($items as $user) {
 <?php
 	if ($this->session->userStatus == User::STATUS_ADMIN) {
 ?>
-			<td class="img"><a href="?a=request_activate&user_id=<?php
+			<td class="img"><a href="index.php?a=request_activate&user_id=<?php
 					echo $user->id?>">
 				<img src="../img/admin/properties.png" alt="<?php echo
 					$i18n["Activate user"]?>" title="<?php echo
@@ -52,7 +52,7 @@ foreach ($items as $user) {
 			<td class="img">
 				<a onclick="return confirm('<?php echo
 					$i18n["Delete user?"]?>')"
-					href="?a=request_delete&user_id=<?php echo $user->id?>">
+					href="index.php?a=request_delete&user_id=<?php echo $user->id?>">
 				<img src="../img/admin/delete.png" alt="<?php echo
 					$i18n["Delete user"]?>" title="<?php echo
 					$i18n["Delete user"]?>"></a>

@@ -37,7 +37,7 @@ $this->beginSection("content", true);
 
 ?>
 
-<form action="?" method="post">
+<form action="index.php" method="post">
 
 <?php if ($listItemDefinition->id) { ?>
 	<input type="hidden" name="a" value="list_item_definition_update">
@@ -156,7 +156,7 @@ foreach ($defs as $k => $def) {
 
 	<button type="submit"><?php echo $i18n["Save"]?></button>
 	<button type="button" onclick="document.location=
-		'?a=application_definition_form&application_definition_id=<?php
+		'index.php?a=application_definition_form&application_definition_id=<?php
 		echo $applicationId?>'"><?php echo $i18n["Cancel"]?></button>
 
 </form>

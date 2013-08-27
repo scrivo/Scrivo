@@ -32,7 +32,7 @@
 $this->beginSection("content", true);
 
 ?>
-<form action="?" method="post">
+<form action="index.php" method="post">
 <input type="hidden" name="a" value="sync_switch">
 <table class="form" cellspacing="0">
 	<tr>

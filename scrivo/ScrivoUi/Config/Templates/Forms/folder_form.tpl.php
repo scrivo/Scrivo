@@ -35,7 +35,7 @@ $this->beginSection("content", true);
 
 ?>
 
-<form action="?" method="post">
+<form action="index.php" method="post">
 
 	<?php
 	if ($folder->id) {
@@ -124,7 +124,7 @@ function selectFolder(e) {
 	<button type="submit">
 		<?php echo $i18n["Save"]?>
 	</button>
-	<button type="button" onclick="document.location='?a=asset_list';">
+	<button type="button" onclick="document.location='index.php?a=asset_list';">
 		<?php echo $i18n["Cancel"]?>
 	</button>
 

@@ -34,7 +34,7 @@ use \Scrivo\Language;
 $this->beginSection("content", true);
 
 ?>
-	<form method="post" action="?">
+	<form method="post" action="index.php">
 		<input type="hidden" name="a" value="language_update">
 		<input type="hidden" name="page_id" value="<?php echo $page->id?>">
 
@@ -74,7 +74,7 @@ foreach (Language::select($this->context) as $lang) {
 		<button type="submit">
 			<?php echo $i18n["Save"]?>
 		</button>
-		<button type="button" onclick="document.location='?a=page_list'">
+		<button type="button" onclick="document.location='index.php?a=page_list'">
 			<?php echo $i18n["Cancel"]?>
 		</button>
 

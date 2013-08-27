@@ -63,7 +63,7 @@ foreach ($rows as $d) {
 				echo $i18n["inaccessible"]?>" title="<?php
 				echo $i18n["inaccessible"]?>">
 			<?php } ?>
-			<a href="?a=page_access_form&page_id=<?php echo $d->pageId; ?>">
+			<a href="index.php?a=page_access_form&page_id=<?php echo $d->pageId; ?>">
 				<img src="../img/admin/properties.png" alt="<?php
 					echo $i18n["edit properties"]?>" title="<?php
 					echo $i18n["edit properties"]?>">
@@ -111,7 +111,7 @@ function createRow(d) {
 			echo $i18n["inaccessible"]?>\" src=\"../img/admin/no_access.png\">";
 	}
 <?php } ?>
-	res += "	<a href=\"?a=page_access_form&page_id="+d.pageId+"\">";
+	res += "	<a href=\"index.php?a=page_access_form&page_id="+d.pageId+"\">";
 	res += "		<img src=\"../img/admin/properties.png\" alt=\"<?php
 		echo $i18n["edit properties"]?>\" title=\"<?php
 		echo $i18n["edit properties"]?>\">";
@@ -146,7 +146,7 @@ function openNode(id) {
 
 </script>
 
-	<form id="access_selector" action="?" method="get">
+	<form id="access_selector" action="index.php" method="get">
 		<input type="hidden" name="a" value="page_list">
 		<select onchange="this.parentNode.submit()" name="role_id">
 			<option value=""><?php echo $i18n["Show access"] ?></option>

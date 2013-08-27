@@ -34,7 +34,7 @@ use \Scrivo\ModifiedTouched;
 $this->beginSection("content", true);
 
 ?>
-<form action="?" method="post">
+<form action="index.php" method="post">
 	<input type="hidden" name="modified_type" value="<?php
 		echo ModifiedTouched::TYPE_DOCUMENT_ID?>">
 	<input type="hidden" name="touch_type" value="<?php
@@ -63,7 +63,7 @@ foreach ($mtList as $value) {
 			<td>
 				<a onclick="return confirm('<?php echo
 						$i18n["delete item?"]?>')"
-					href="?a=modified_touched_delete&modified_id=<?php
+					href="index.php?a=modified_touched_delete&modified_id=<?php
 						echo $value->idModified?>&touch_id=<?php
 						echo $value->idTouched?>">
 					<img src="../img/admin/delete.png"

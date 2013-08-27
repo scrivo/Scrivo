@@ -37,7 +37,7 @@ $this->beginSection("content", true);
 
 ?>
 
-<form action="?" method="post">
+<form action="index.php" method="post">
 
 	<input type="hidden" name="page_id" value="<?php echo $page->id?>">
 	<input type="hidden" name="php_selector" value="<?php echo $phpSelector?>">
@@ -69,7 +69,7 @@ $this->beginSection("content", true);
 		<?php echo $i18n["Save"]?>
 	</button>
 	<button type="button"
-		onclick="document.location='?a=page_html_tab_list&page_id=<?php
+		onclick="document.location='index.php?a=page_html_tab_list&page_id=<?php
 			echo $page->id?>';">
 		<?php echo $i18n["Cancel"]?>
 	</button>

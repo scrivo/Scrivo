@@ -38,7 +38,7 @@ $this->beginSection("content", true);
 		String::create(
 			$i18n["Enter a new [L]User interface language[/L]"])->replace(
 				String::create(array("[L]", "[/L]")),
-				String::create(array("<a href=\"?a=ui_language_form\">", "</a>"
+				String::create(array("<a href=\"index.php?a=ui_language_form\">", "</a>"
 			))
 		);
 	?></p>
@@ -60,7 +60,7 @@ foreach($languages as $language) {
 			<td><?php echo $language->isoCode ?></td>
 			<td><?php echo $language->description ?></td>
 			<td class="img">
-				<a href="?a=ui_language_form&lang=<?php echo
+				<a href="index.php?a=ui_language_form&lang=<?php echo
 					$language->isoCode ?>">
 					<img src="../img/admin/properties.png"
 						alt="<?php echo
@@ -72,7 +72,7 @@ foreach($languages as $language) {
 			<td class="img">
 				<a onclick="return confirm('<?php echo
 						$i18n["Delete user interface language?"]?>')"
-					href="?a=ui_language_delete&lang=<?php echo
+					href="index.php?a=ui_language_delete&lang=<?php echo
 						$language->isoCode?>">
 					<img src="../img/admin/delete.png"
 						alt="<?php echo

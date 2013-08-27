@@ -33,7 +33,7 @@ $this->beginSection("content", true);
 
 ?>
 
-	<form action="?" method="post">
+	<form action="index.php" method="post">
 <?php
 if ($pageDefinitionTab->id) {
 ?>
@@ -65,7 +65,7 @@ if ($pageDefinitionTab->id) {
 
 		<button type="submit"><?php echo $i18n["Save"]?></button>
 		<button type="button" onclick=
-		"document.location='?a=page_definition_form&page_definition_id=<?php
+		"document.location='index.php?a=page_definition_form&page_definition_id=<?php
 			echo $pageDefinitionId?>';return false;"><?php
 				echo $i18n["Cancel"]?></button>
 

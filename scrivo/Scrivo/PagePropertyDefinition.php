@@ -598,7 +598,7 @@ class PagePropertyDefinition {
 				$sth = $this->context->connection->prepare(
 					"UPDATE page_property_definition SET
 						page_definition_id = :pageDefinitionId,
-						sequence_no = 0, title = :title,
+						title = :title,
 						php_key = :phpSelector, type = :type,
 						type_data = :typeData, page_definition_tab_id = :pageDefinitionTabId
 					WHERE instance_id = :instId AND page_property_definition_id = :id");

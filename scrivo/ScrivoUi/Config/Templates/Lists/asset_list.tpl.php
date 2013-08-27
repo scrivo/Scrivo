@@ -54,7 +54,7 @@ foreach ($rows as $d) {
 		<td><?php echo $d->label ?></td>
 		<td><?php echo $d->assetId; ?></td>
 		<td class="img">
-			<a href="?a=<?php
+			<a href="index.php?a=<?php
 				echo $d->type ? "file" : "folder"; ?>_form&asset_id=<?php
 				echo $d->assetId; ?>">
 				<img src="../img/admin/properties.png" alt="<?php
@@ -67,7 +67,7 @@ foreach ($rows as $d) {
 	if ($d->deletable) {
 ?>
 			<a onclick="return confirm('<?php echo $i18n["delete asset?"]?>')"
-				href="?a=<?php
+				href="index.php?a=<?php
 					echo $d->type ? "file" : "folder"; ?>_delete&asset_id=<?php
 					echo $d->assetId ?>">
 				<img src="../img/admin/delete.png" alt="<?php
@@ -110,7 +110,7 @@ function createRow(d) {
 	res += "<td>"+d.label+"</td>";
 	res += "<td>"+d.assetId+"</td>";
 	res += "<td class=\"img\">";
-	res += "	<a href=\"?a="+(d.type ? "file" : "folder")+"_form&asset_id="+
+	res += "	<a href=\"index.php?a="+(d.type ? "file" : "folder")+"_form&asset_id="+
 		d.assetId+"\">";
 	res += "		<img src=\"../img/admin/properties.png\" alt=\"<?php
 		echo $i18n["edit properties"]?>\" title=\"<?php
@@ -121,7 +121,7 @@ function createRow(d) {
 	if (d.deletable) {
 		res += "	<a onclick=\"return confirm('<?php
 			echo $i18n["delete asset?"]?>')\"";
-		res += "			href=\"?a="+(d.type ? "file" : "folder")+
+		res += "			href=\"index.php?a="+(d.type ? "file" : "folder")+
 			"_delete&asset_id="+d.assetId+"\">";
 		res += "			<img src=\"../img/admin/delete.png\" alt=\"<?php
 			echo $i18n["delete"]?>\" title=\"<?php
@@ -162,8 +162,8 @@ function openNode(id) {
 			$i18n["Create a new [L1]folder[/L1] or [L2]file[/L2]"])->replace(
 				String::create(array("[L1]","[/L1]","[L2]","[/L2]")),
 				String::create(array(
-					"<a href=\"?a=folder_form\">", "</a>",
-					"<a href=\"?a=file_form\">", "</a>"
+					"<a href=\"index.php?a=folder_form\">", "</a>",
+					"<a href=\"index.php?a=file_form\">", "</a>"
 				))
 			);
 	?></p>

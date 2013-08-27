@@ -50,7 +50,7 @@ me.style.display=e.value==<?php
 }
 	</script>
 
-	<form method="post" action="?">
+	<form method="post" action="index.php">
 
 <?php
 if ($user->id) {
@@ -214,7 +214,7 @@ foreach (Role::select(
 		<button type="submit">
 			<?php echo $i18n["Save"]?>
 		</button>
-		<button type="button" onclick="document.location='?a=<?php
+		<button type="button" onclick="document.location='index.php?a=<?php
 				echo $type?>_list'">
 			<?php echo $i18n["Cancel"]?>
 		</button>
@@ -225,7 +225,7 @@ foreach (Role::select(
 if ($user->id) {
 ?>
 
-	<form action="?" method="post">
+	<form action="index.php" method="post">
 
 		<input type="hidden" name="a" value="<?php echo
 			$type?>_password_update">
@@ -253,7 +253,7 @@ if ($user->id) {
 		<button type="submit">
 			<?php echo $i18n["Save"]?>
 		</button>
-		<button type="button" onclick="document.location='?a=<?php
+		<button type="button" onclick="document.location='index.php?a=<?php
 			echo $type?>_list'"><?php echo $i18n["Cancel"]?>
 		</button>
 

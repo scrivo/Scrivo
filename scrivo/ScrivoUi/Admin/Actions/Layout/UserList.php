@@ -81,7 +81,7 @@ class UserList extends LayoutAction {
 
 		$items1 = User::select($this->context);
 
-		$form_action = "?a={$type}_form";
+		$form_action = "index.php?a={$type}_form";
 
 		$items = array();
 

@@ -50,21 +50,21 @@ foreach ($rows as $d) {
 		</td>
 		<td><?php echo $d->label ?></td>
 		<td>
-			<a href="?a=page_definition_form&page_definition_id=<?php
+			<a href="index.php?a=page_definition_form&page_definition_id=<?php
 				echo $d->pageDefinitionId ?>">
 				<?php echo $d->pageDefinitionTitle ?>
 			</a>
 		</td>
 		<td><?php echo $d->pageId; ?></td>
 		<td class="img">
-			<a href="?a=page_html_tab_list&page_id=<?php echo $d->pageId; ?>">
+			<a href="index.php?a=page_html_tab_list&page_id=<?php echo $d->pageId; ?>">
 				<img src="../img/admin/page_pencil.png" alt="<?php
 					echo $i18n["edit content"]?>" title="<?php
 					echo $i18n["edit content"]?>">
 			</a>
 		</td>
 		<td class="img">
-			<a href="?a=page_form&page_id=<?php echo $d->pageId; ?>">
+			<a href="index.php?a=page_form&page_id=<?php echo $d->pageId; ?>">
 				<img src="../img/admin/properties.png" alt="<?php
 					echo $i18n["edit properties"]?>" title="<?php
 					echo $i18n["edit properties"]?>">
@@ -75,7 +75,7 @@ foreach ($rows as $d) {
 	if ($d->deletable) {
 ?>
 			<a onclick="return confirm('<?php echo $i18n["delete page?"]?>')"
-				href="?a=page_delete&page_id=<?php echo $d->pageId ?>">
+				href="index.php?a=page_delete&page_id=<?php echo $d->pageId ?>">
 				<img src="../img/admin/delete.png" alt="<?php
 					echo $i18n["delete"]?>" title="<?php
 					echo $i18n["delete"]?>">
@@ -112,21 +112,21 @@ function createRow(d) {
 	res += "</td>";
 	res += "<td>"+d.label+"</td>";
 	res += "<td>";
-	res += "	<a href=\"?a=page_definition_form&page_definition_id="+
+	res += "	<a href=\"index.php?a=page_definition_form&page_definition_id="+
 		d.pageDefinitionId+"\">";
 	res += "		"+d.pageDefinitionTitle;
 	res += "	</a>";
 	res += "</td>";
 	res += "<td>"+d.pageId+"</td>";
 	res += "<td class=\"img\">";
-	res += "	<a href=\"?a=page_html_tab_list&page_id="+d.pageId+"\">";
+	res += "	<a href=\"index.php?a=page_html_tab_list&page_id="+d.pageId+"\">";
 	res += "		<img src=\"../img/admin/page_pencil.png\" alt=\"<?php
 		echo $i18n["edit content"]?>\" title=\"<?php
 		echo $i18n["edit content"]?>\">";
 	res += "	</a>";
 	res += "</td>";
 	res += "<td class=\"img\">";
-	res += "	<a href=\"?a=page_form&page_id="+d.pageId+"\">";
+	res += "	<a href=\"index.php?a=page_form&page_id="+d.pageId+"\">";
 	res += "		<img src=\"../img/admin/properties.png\" alt=\"<?php
 		echo $i18n["edit properties"]?>\" title=\"<?php
 		echo $i18n["edit properties"]?>\">";
@@ -136,7 +136,7 @@ function createRow(d) {
 	if (d.deletable) {
 		res += "	<a onclick=\"return confirm('<?php
 			echo $i18n["delete page?"]?>')\"";
-		res += "			href=\"?a=page_delete&page_id="+d.pageId+"\">";
+		res += "			href=\"index.php?a=page_delete&page_id="+d.pageId+"\">";
 		res += "			<img src=\"../img/admin/delete.png\" alt=\"<?php
 			echo $i18n["delete"]?>\" title=\"<?php
 			echo $i18n["delete"]?>>\">";
@@ -175,7 +175,7 @@ function openNode(id) {
 		String::create(
 			$i18n["Create a new [L]page[/L]"])->replace(
 				String::create(array("[L]", "[/L]")),
-				String::create(array("<a href=\"?a=page_form\">", "</a>"))
+				String::create(array("<a href=\"index.php?a=page_form\">", "</a>"))
 			);
 	?></p>
 

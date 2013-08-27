@@ -62,7 +62,7 @@ foreach(PageDefinition::select($this->context) as $key=>$value) {
 			<?php echo $value->action; ?>
 		</td>
 		<td class="img">
-			<a href="?a=page_definition_form&page_definition_id=<?php
+			<a href="index.php?a=page_definition_form&page_definition_id=<?php
 					echo $value->id?>">
 				<img src="../img/admin/properties.png" alt="<?php
 					echo $i18n["Edit template"]?>" title="<?php
@@ -70,7 +70,7 @@ foreach(PageDefinition::select($this->context) as $key=>$value) {
 			</a>
 		</td>
 		<td class="img">
-			<a href="?a=page_definition_export&page_definition_id=<?php
+			<a href="index.php?a=page_definition_export&page_definition_id=<?php
 					echo $value->id?>">
 				<img src="../img/admin/database_export.png" alt="<?php
 					echo $i18n["Export template"]?>" title="<?php
@@ -80,7 +80,7 @@ foreach(PageDefinition::select($this->context) as $key=>$value) {
 		<td class="img">
 			<a onclick="return confirm('<?php
 					echo $i18n["Delete template ?"]?>')"
-				href="?a=page_definition_delete&page_definition_id=<?php
+				href="index.php?a=page_definition_delete&page_definition_id=<?php
 					echo $value->id?>">
 				<img src="../img/admin/delete.png" alt="<?php
 					echo $i18n["Delete template"]?>" title="<?php
@@ -95,12 +95,12 @@ foreach(PageDefinition::select($this->context) as $key=>$value) {
 
 </td><td style="vertical-align: top; padding-left: 2em">
 
-	<form method="get" action="?">
+	<form method="get" action="index.php">
 		<input type="hidden" name="a" value="page_definition_form">
 		<button><?php echo $i18n["New template"]?></button>
 	</form>
 
-	<form enctype="multipart/form-data" action="?" method="post">
+	<form enctype="multipart/form-data" action="index.php" method="post">
 		<input type="hidden" name="a" value="page_definition_import">
 		<table class="form" cellspacing="0">
 			<tr>

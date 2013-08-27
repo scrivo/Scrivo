@@ -47,7 +47,7 @@ foreach ($page->definition->properties as $prop) {
 		<tr<?php if (++$cnt%2==1) echo ' class="row-color"'?>>
 			<td><?php echo $prop->title; ?></td>
 			<td align="right">
-				<a href="?a=page_html_tab_form&page_id=<?php echo
+				<a href="index.php?a=page_html_tab_form&page_id=<?php echo
 					$page->id?>&php_selector=<?php echo
 					$prop->phpSelector; ?>">
 					<img src="../img/admin/properties.png" alt="<?php echo

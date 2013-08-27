@@ -58,7 +58,7 @@ function sectionSelect(el) {
 if (count($difft["add"]) + count($difft["rem"]) + count($difft["mod"])) {
 ?>
 
-<form action="?" method="post">
+<form action="index.php" method="post">
 
 	<input type="hidden" name="a" value="page_definition_sync">
 	<input type="hidden" name="site" value="<?php echo $remoteSite?>">

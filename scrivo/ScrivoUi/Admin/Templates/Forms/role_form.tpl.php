@@ -35,7 +35,7 @@ $this->beginSection("content", true);
 
 ?>
 
-	<form method="post" action="?">
+	<form method="post" action="index.php">
 <?php
 if ($role->id) {
 ?>
@@ -76,7 +76,7 @@ if ($role->id) {
 		<button type="submit">
 			<?php echo $i18n["Save"]?>
 		</button>
-		<button type="button" onclick="document.location='?a=role_list'">
+		<button type="button" onclick="document.location='index.php?a=role_list'">
 			<?php echo $i18n["Cancel"]?>
 		</button>
 

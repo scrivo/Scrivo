@@ -39,7 +39,7 @@ $this->beginSection("content", true);
 		String::create(
 			$i18n["Enter a new [L]language[/L]"])->replace(
 				String::create(array("[L]", "[/L]")),
-				String::create(array("<a href=\"?a=language_form\">","</a>"
+				String::create(array("<a href=\"index.php?a=language_form\">","</a>"
 			))
 		);
 	?></p>
@@ -69,7 +69,7 @@ foreach($languages as $language) {
 					: $language->nameEn;
 			?></td>
 			<td class="img">
-				<a href="?a=language_form&language_id=<?php echo
+				<a href="index.php?a=language_form&language_id=<?php echo
 						$language->id;	?>">
 					<img src="../img/admin/properties.png"
 						alt="<?php echo
@@ -81,7 +81,7 @@ foreach($languages as $language) {
 			<td class="img">
 				<a onclick="return confirm('<?php echo
 						$i18n["Delete language?"]?>')"
-					href="?a=language_delete&language_id=<?php echo
+					href="index.php?a=language_delete&language_id=<?php echo
 						$language->id ?>">
 					<img src="../img/admin/delete.png"
 						alt="<?php echo

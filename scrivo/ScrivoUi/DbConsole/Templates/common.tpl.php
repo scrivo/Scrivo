@@ -126,11 +126,11 @@ if ($this->session->authenticated) {
 		$base1 = String::create(
 			str_replace(array("http://", "https://"), "",
 			$this->context->config->WWW_ROOT))->split(new String("/"));
-		$login_url = "{$this->context->config->WWW_ROOT}/scrivo/secure/dbc";
+		$login_url = "{$this->context->config->WWW_ROOT}/scrivo/secure/dbc/index.php";
 		$use_secure = false;
 		if (defined("SECURE_LOGIN")) {
 			$use_secure = true;
-			$login_url = SECURE_LOGIN."/".implode("_", $base1)."/scrivo/dbc";
+			$login_url = SECURE_LOGIN."/".implode("_", $base1)."/scrivo/dbc/index.php";
 		}
 
 ?>

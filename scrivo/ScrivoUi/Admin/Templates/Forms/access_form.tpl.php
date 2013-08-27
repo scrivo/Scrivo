@@ -34,7 +34,7 @@ use \Scrivo\Role;
 $this->beginSection("content", true);
 
 ?>
-	<form method="post" action="?">
+	<form method="post" action="index.php">
 		<input type="hidden" name="a" value="<?php echo $type?>_access_update">
 		<input type="hidden" name="<?php echo $type?>_id" value="<?php
 			echo $obj->id?>">
@@ -103,7 +103,7 @@ foreach (Role::select(
 		<button type="submit">
 			<?php echo $i18n["Save"]?>
 		</button>
-		<button type="button" onclick="document.location='?a=page_list'">
+		<button type="button" onclick="document.location='index.php?a=page_list'">
 			<?php echo $i18n["Cancel"]?>
 		</button>
 

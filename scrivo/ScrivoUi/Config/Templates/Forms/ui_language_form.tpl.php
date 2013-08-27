@@ -34,7 +34,7 @@ use \Scrivo\String;
 $this->beginSection("content", true);
 
 ?>
-<form action="?" method="post">
+<form action="index.php" method="post">
 <?php
 if (!$languageId->equals(new String(""))) {
 ?>
@@ -81,7 +81,7 @@ if (!$languageId->equals(new String(""))) {
 	</table>
 	<button type="submit"><?php echo
 		$i18n["Save"]?></button>
-	<button onclick="document.location='?a=ui_language_list';"
+	<button onclick="document.location='index.php?a=ui_language_list';"
 		type="button"><?php echo
 		$i18n["Cancel"]?></button>
 </form>

@@ -57,7 +57,7 @@ foreach ($items as $user) {
 ?>
 				<a onclick="return confirm('<?php echo
 					$i18n["Delete user?"]?>')"
-					href="?a=<?php echo $type?>_delete&user_id=<?php echo
+					href="index.php?a=<?php echo $type?>_delete&user_id=<?php echo
 						$user->id?>">
 				<img src="../img/admin/delete.png" alt="<?php echo
 					$i18n["Delete user"]?>" title="<?php echo
@@ -82,7 +82,7 @@ if ($this->session->userStatus == User::STATUS_ADMIN && $type != "requests") {
 	<p><?php echo
 		String::create($userData[$type]->title3)->replace(
 			String::create(array("[L]", "[/L]")),
-			String::create(array("<a href=\"?a={$type}_form\">", "</a>"))
+			String::create(array("<a href=\"index.php?a={$type}_form\">", "</a>"))
 		);
 	?></p>
 

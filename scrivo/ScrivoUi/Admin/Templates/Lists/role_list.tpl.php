@@ -44,7 +44,7 @@ foreach (Role::select($this->context, Role::EDITOR_ROLE) as $role) {
 	if ($this->session->userStatus == User::STATUS_ADMIN) {
 ?>
 			<td class="img">
-				<a href="?a=role_form&role_id=<?php echo $role->id ?>">
+				<a href="index.php?a=role_form&role_id=<?php echo $role->id ?>">
 					<img src="../img/admin/properties.png" alt="<?php echo
 						$i18n["Edit role"]?>" title="<?php echo
 						$i18n["Edit role"]?>">
@@ -53,7 +53,7 @@ foreach (Role::select($this->context, Role::EDITOR_ROLE) as $role) {
 			<td class="img">
 				<a onclick="return confirm('<?php echo
 						$i18n["Delete role?"]?>')"
-					href="?a=role_delete&role_id=<?php echo $role->id ?>">
+					href="index.php?a=role_delete&role_id=<?php echo $role->id ?>">
 					<img src="../img/admin/delete.png" alt="<?php echo
 						$i18n["Delete role"]?>" border="<?php echo
 						$i18n["Delete role"]?>">
@@ -79,7 +79,7 @@ foreach (Role::select($this->context, Role::PUBLIC_ROLE) as $role) {
 	if ($this->session->userStatus == User::STATUS_ADMIN) {
 ?>
 			<td class="img">
-				<a href="?a=role_form&role_id=<?php echo $role->id ?>">
+				<a href="index.php?a=role_form&role_id=<?php echo $role->id ?>">
 					<img src="../img/admin/properties.png" alt="<?php echo
 						$i18n["Edit role"]?>" title="<?php echo
 						$i18n["Edit role"]?>">
@@ -88,7 +88,7 @@ foreach (Role::select($this->context, Role::PUBLIC_ROLE) as $role) {
 			<td class="img">
 				<a onclick="return confirm('<?php echo
 						$i18n["Delete role?"]?>')"
-					href="?a=role_delete&role_id=<?php echo $role->id ?>">
+					href="index.php?a=role_delete&role_id=<?php echo $role->id ?>">
 					<img src="../img/admin/delete.png" alt="<?php echo
 						$i18n["Delete role"]?>" border="<?php echo
 						$i18n["Delete role"]?>">
@@ -112,7 +112,7 @@ if ($this->session->userStatus == User::STATUS_ADMIN) {
 				$i18n["Create a new [L]editor role[/L]"])->replace(
 			String::create(array("[L]", "[/L]")),
 			String::create(array(
-				"<a href=\"?a=role_form&type=".Role::EDITOR_ROLE."\">", "</a>"))
+				"<a href=\"index.php?a=role_form&type=".Role::EDITOR_ROLE."\">", "</a>"))
 		);
 	?></p>
 
@@ -142,7 +142,7 @@ if ($this->session->userStatus == User::STATUS_ADMIN) {
 				$i18n["Create a new [L]public role[/L]"])->replace(
 			String::create(array("[L]", "[/L]")),
 			String::create(array(
-				"<a href=\"?a=role_form&type=".Role::PUBLIC_ROLE."\">", "</a>"))
+				"<a href=\"index.php?a=role_form&type=".Role::PUBLIC_ROLE."\">", "</a>"))
 		);
 	?></p>
 

@@ -95,28 +95,28 @@ $this->beginSection("menu", true);
 if ($this->session->authenticated) {
 
 ?>
-	<a id="loginout" href="?a=logout"><?php
+	<a id="loginout" href="index.php?a=logout"><?php
 		echo $i18n["Log out"]?></a>
 	<ul>
 		<li>
 			<span><?php
 				echo $i18n["Configuration"]?></span>
 			<ul>
-				<li><a href="?a=page_definition_list"><?php
+				<li><a href="index.php?a=page_definition_list"><?php
 					echo $i18n["Page definitions"]?></a></li>
-				<li><a href="?a=application_definition_list"><?php
+				<li><a href="index.php?a=application_definition_list"><?php
 					echo $i18n["Application/Item list definitions"]?></a></li>
-				<li><a href="?a=sync_form"><?php
+				<li><a href="index.php?a=sync_form"><?php
 					echo $i18n["Configuration synchronization"]?></a></li>
-				<li><a href="?a=modified_touched_form"><?php
+				<li><a href="index.php?a=modified_touched_form"><?php
 					echo $i18n["Modification date dependencies"]?></a></li>
 				<li>
 					<span><?php
 						echo $i18n["Languages"]?></span>
 					<ul>
-						<li><a href="?a=language_list"><?php
+						<li><a href="index.php?a=language_list"><?php
 							echo $i18n["Page languages"]?></a></li>
-						<li><a href="?a=ui_language_list"><?php
+						<li><a href="index.php?a=ui_language_list"><?php
 							echo $i18n["User interface languages"]?></a></li>
 					</ul>
 				</li>
@@ -126,9 +126,9 @@ if ($this->session->authenticated) {
 			<span><?php
 				echo $i18n["Content"]?></span>
 			<ul>
-				<li><a href="?a=page_list"><?php
+				<li><a href="index.php?a=page_list"><?php
 					echo $i18n["Pages"]?></a></li>
-				<li><a href="?a=asset_list"><?php
+				<li><a href="index.php?a=asset_list"><?php
 					echo $i18n["Files"]?></a></li>
 			</ul>
 		</li>
@@ -140,11 +140,11 @@ if ($this->session->authenticated) {
 		$base1 = String::create(
 			str_replace(array("http://", "https://"), "",
 			$this->context->config->WWW_ROOT))->split(new String("/"));
-		$login_url = "{$this->context->config->WWW_ROOT}/scrivo/secure/config";
+		$login_url = "{$this->context->config->WWW_ROOT}/scrivo/secure/config/index.php";
 		$use_secure = false;
 		if (defined("SECURE_LOGIN")) {
 			$use_secure = true;
-			$login_url = SECURE_LOGIN."/".implode("_", $base1)."/scrivo/config";
+			$login_url = SECURE_LOGIN."/".implode("_", $base1)."/scrivo/config/index.php";
 		}
 
 ?>

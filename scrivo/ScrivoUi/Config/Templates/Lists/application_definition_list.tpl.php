@@ -58,7 +58,7 @@ foreach($items as $item) {
 		<td><?php echo $item->location; ?></td>
 		<td class="img">
 			<a
-	href="?a=application_definition_form&application_definition_id=<?php
+	href="index.php?a=application_definition_form&application_definition_id=<?php
 				echo $item->id; ?>">
 				<img src="../img/admin/properties.png" alt="<?php
 					echo $i18n["Edit list or application"]?>" title="<?php
@@ -67,7 +67,7 @@ foreach($items as $item) {
 		</td>
 		<td class="img">
 			<a
-	href="?a=application_definition_export&application_definition_id=<?php
+	href="index.php?a=application_definition_export&application_definition_id=<?php
 				echo $item->id; ?>">
 				<img src="../img/admin/database_export.png" alt="<?php
 					echo $i18n["Export list or application"]?>" title="<?php
@@ -77,7 +77,7 @@ foreach($items as $item) {
 		<td class="img">
 			<a onclick="return confirm('<?php
 				echo $i18n["Delete list or application?"]?>')"
-	href="?a=application_definition_delete&application_definition_id=<?php
+	href="index.php?a=application_definition_delete&application_definition_id=<?php
 				echo $item->id ?>">
 				<img src="../img/admin/delete.png" alt="<?php
 					echo $i18n["Delete list or application"]?>" title="<?php
@@ -92,12 +92,12 @@ foreach($items as $item) {
 
 </td><td style="vertical-align: top; padding-left: 2em">
 
-	<form method="get" action="?">
+	<form method="get" action="index.php">
 		<input type="hidden" name="a" value="application_definition_form">
 		<button><?php echo $i18n["New list or application"]?></button>
 	</form>
 
-	<form enctype="multipart/form-data" action="?" method="post">
+	<form enctype="multipart/form-data" action="index.php" method="post">
 		<input type="hidden" name="a" value="application_definition_import">
 		<table class="form" cellspacing="0">
 			<tr>

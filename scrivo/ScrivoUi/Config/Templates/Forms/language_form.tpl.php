@@ -32,7 +32,7 @@
 $this->beginSection("content", true);
 
 ?>
-<form action="?" method="post">
+<form action="index.php" method="post">
 <?php
 if ($language->id) {
 ?>
@@ -113,7 +113,7 @@ if ($language->id) {
 	</table>
 	<button type="submit"><?php echo
 		$i18n["Save"]?></button>
-	<button onclick="document.location='?a=language_list';"
+	<button onclick="document.location='index.php?a=language_list';"
 		type="button"><?php echo
 		$i18n["Cancel"]?></button>
 </form>

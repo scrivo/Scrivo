@@ -76,7 +76,7 @@ class PageListUtil {
 
 		$r->language = $p->language->isoCode;
 		if ($session->userStatus == User::STATUS_ADMIN) {
-			$r->language = "<a href=\"?a=language_form&page_id={$p->id}\">".
+			$r->language = "<a href=\"index.php?a=language_form&page_id={$p->id}\">".
 					"{$p->language->isoCode}</a>";
 		}
 

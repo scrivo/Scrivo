@@ -50,7 +50,7 @@ class RedirectToLogin extends \Scrivo\Action {
 		$this->session->destroy();
 
 		$loginUrl = new \Scrivo\String(
-			"{$this->context->config->WWW_ROOT}/scrivo/secure");
+			"{$this->context->config->WWW_ROOT}/scrivo/secure/index.php");
 
 		if (defined("SECURE_LOGIN")) {
 			$loginUrl->replace(array(

@@ -37,7 +37,7 @@ $this->beginSection("content", true);
 
 ?>
 
-<form action="?" method="post">
+<form action="index.php" method="post">
 
 <table cellspacing="0">
 
@@ -52,19 +52,19 @@ if ($pageDefinition->id) {
 			echo $pageDefinition->id?>">
 
 		<button type="button" onclick="document.location=
-			'?a=page_definition_tab_form&page_definition_id=<?php
+			'index.php?a=page_definition_tab_form&page_definition_id=<?php
 			echo $pageDefinition->id?>'"><?php
 				echo $i18n["New property tab"]?></button>
 		<button type="button" onclick="document.location=
-			'?a=page_property_definition_form&page_definition_id=<?php
+			'index.php?a=page_property_definition_form&page_definition_id=<?php
 			echo $pageDefinition->id?>'"><?php
 				echo $i18n["New property"]?></button>
 		<button type="button" onclick="document.location=
-			'?a=page_definition_content_tab_form&page_definition_id=<?php
+			'index.php?a=page_definition_content_tab_form&page_definition_id=<?php
 			echo $pageDefinition->id?>'"><?php
 				echo $i18n["New content tab"]?></button>
 		<button type="button" onclick="document.location=
-			'?a=page_definition_application_tab_form&page_definition_id=<?php
+			'index.php?a=page_definition_application_tab_form&page_definition_id=<?php
 			echo $pageDefinition->id?>'"><?php
 				echo $i18n["New application tab"]?></button>
 	</td></tr>
@@ -150,7 +150,7 @@ $tmp = array_flip($pageDefinition->typeSet);
 if (!$pageDefinition->id) {
 ?>
 	<button type="submit"><?php echo $i18n["Save"]?></button>
-	<button onclick="document.location='?a=page_definition_list';return false;"
+	<button onclick="document.location='index.php?a=page_definition_list';return false;"
 		type="button"><?php echo $i18n["Cancel"]?></button>
 
 <?php
@@ -205,7 +205,7 @@ if (!$pageDefinition->id) {
 			</td>
 			<td class="img">
 				<a href=
-					"?a=page_definition_tab_copy_form&page_definition_id=<?php
+					"index.php?a=page_definition_tab_copy_form&page_definition_id=<?php
 					echo $pageDefinition->id?>&page_definition_tab_id=<?php
 					echo $tab->id; ?>">
 					<img src="../img/admin/copy.png" alt="<?php
@@ -214,7 +214,7 @@ if (!$pageDefinition->id) {
 				</a>
 			</td>
 			<td class="img">
-				<a href="?a=page_definition_tab_move&page_definition_id=<?php
+				<a href="index.php?a=page_definition_tab_move&page_definition_id=<?php
 					echo $pageDefinition->id?>&page_definition_tab_id=<?php
 					echo $tab->id; ?>&dir=-1">
 					<img src="../img/admin/arrow_up_blue.png" alt="<?php
@@ -223,7 +223,7 @@ if (!$pageDefinition->id) {
 				</a>
 			</td>
 			<td class="img">
-				<a href="?a=page_definition_tab_move&page_definition_id=<?php
+				<a href="index.php?a=page_definition_tab_move&page_definition_id=<?php
 					echo $pageDefinition->id?>&page_definition_tab_id=<?php
 					echo $tab->id; ?>&dir=1">
 					<img src="../img/admin/arrow_down_blue.png" alt="<?php
@@ -233,7 +233,7 @@ if (!$pageDefinition->id) {
 			</td>
 			<td class="img">
 				<a href=
-					"?a=page_definition_tab_form&page_definition_tab_id=<?php
+					"index.php?a=page_definition_tab_form&page_definition_tab_id=<?php
 					echo $tab->id?>">
 					<img src="../img/admin/properties.png" alt="<?php
 						echo $i18n["Edit tab"]?>" title="<?php
@@ -243,7 +243,7 @@ if (!$pageDefinition->id) {
 			<td class="img">
 				<a onclick="return confirm('<?php
 					echo $i18n["Delete tab?"]?>');"
-				href="?a=page_definition_tab_delete&page_definition_tab_id=<?php
+				href="index.php?a=page_definition_tab_delete&page_definition_tab_id=<?php
 					echo $tab->id ?>">
 					<img src="../img/admin/delete.png" alt="<?php
 						echo $i18n["Delete tab"]?>" title="<?php
@@ -278,7 +278,7 @@ foreach ($pageDefinition->properties as $prop) {
 			<td class="img">
 <?php if ($isprop) { ?>
 				<a href=
-				"?a=page_property_definition_copy_form&page_definition_id=<?php
+				"index.php?a=page_property_definition_copy_form&page_definition_id=<?php
 					echo $pageDefinition->id?>&page_property_definition_id=<?php
 					echo $prop->id; ?>">
 					<img src="../img/admin/copy.png" alt="<?php
@@ -290,7 +290,7 @@ foreach ($pageDefinition->properties as $prop) {
 			<td class="img">
 <?php if ($isprop) { ?>
 				<a href=
-			"?a=page_property_definition_move&page_property_definition_id=<?php
+			"index.php?a=page_property_definition_move&page_property_definition_id=<?php
 					echo $prop->id?>&tab_id=<?php
 					echo $prop->pageDefinitionTabId?>&dir=-1">
 					<img src="../img/admin/arrow_up_yellow.png" alt="<?php
@@ -302,7 +302,7 @@ foreach ($pageDefinition->properties as $prop) {
 			<td class="img">
 <?php if ($isprop) { ?>
 				<a href=
-			"?a=page_property_definition_move&page_property_definition_id=<?php
+			"index.php?a=page_property_definition_move&page_property_definition_id=<?php
 					echo $prop->id?>&tab_id=<?php
 					echo $prop->pageDefinitionTabId?>&dir=1">
 					<img src="../img/admin/arrow_down_yellow.png" alt="<?php
@@ -314,7 +314,7 @@ foreach ($pageDefinition->properties as $prop) {
 			<td class="img">
 <?php if ($prop->type == PagePropertyDefinition::TYPE_HTML_TEXT_TAB) { ?>
 				<a href=
-		"?a=page_definition_content_tab_form&page_property_definition_id=<?php
+		"index.php?a=page_definition_content_tab_form&page_property_definition_id=<?php
 					echo $prop->id?>">
 					<img src="../img/admin/properties.png" alt="<?php
 						echo $i18n["Edit property"]?>" title="<?php
@@ -322,7 +322,7 @@ foreach ($pageDefinition->properties as $prop) {
 				</a>
 <?php } else if ($prop->type==PagePropertyDefinition::TYPE_APPLICATION_TAB) { ?>
 				<a href=
-	"?a=page_definition_application_tab_form&page_property_definition_id=<?php
+	"index.php?a=page_definition_application_tab_form&page_property_definition_id=<?php
 					echo $prop->id?>">
 					<img src="../img/admin/properties.png" alt="<?php
 						echo $i18n["Edit property"]?>" title="<?php
@@ -330,7 +330,7 @@ foreach ($pageDefinition->properties as $prop) {
 				</a>
 <?php } else { ?>
 				<a href=
-			"?a=page_property_definition_form&page_property_definition_id=<?php
+			"index.php?a=page_property_definition_form&page_property_definition_id=<?php
 					echo $prop->id?>">
 					<img src="../img/admin/properties.png" alt="<?php
 						echo $i18n["Edit property"]?>" title="<?php
@@ -342,7 +342,7 @@ foreach ($pageDefinition->properties as $prop) {
 <?php if ($isprop) { ?>
 				<a onclick="return confirm('<?php
 					echo $i18n["Delete property?"]?>')" href=
-		"?a=page_property_definition_delete&page_property_definition_id=<?php
+		"index.php?a=page_property_definition_delete&page_property_definition_id=<?php
 					echo $prop->id?>">
 					<img src="../img/admin/delete.png" alt="<?php
 						echo $i18n["Delete property"]?>" title="<?php
@@ -362,7 +362,7 @@ foreach ($pageDefinition->properties as $prop) {
 	<p>
 	<button type="submit"><?php echo $i18n["Save"]?></button>
 	<button type="button" onclick=
-		"document.location='?a=page_definition_list';return false;"><?php
+		"document.location='index.php?a=page_definition_list';return false;"><?php
 		echo $i18n["Cancel"]?></button>
 	</p>
 
