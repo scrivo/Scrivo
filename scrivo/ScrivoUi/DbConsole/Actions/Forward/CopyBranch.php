@@ -221,7 +221,6 @@ class CopyBranch extends Action {
 	private function dumpRec(
 			$out, $table, $inst_id, $old_base, $old_adir, $keys, $id) {
 
-		$table = strtoupper($table);
 		$sql = "";
 		list($k) = each($keys);
 

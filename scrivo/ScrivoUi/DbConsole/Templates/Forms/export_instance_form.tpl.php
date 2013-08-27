@@ -46,7 +46,7 @@ $this->beginSection("content", true);
 if ($data) {
 ?>
 			<tr>
-				<td class="label"><?php echo $i18n["Title"]?></td>
+				<td class="label"><?php echo $i18n["Web root"]?></td>
 				<td><?php echo $data["www_root"]?></td>
 			</tr>
 			<tr>
@@ -56,10 +56,6 @@ if ($data) {
 <?php
 }
 ?>
-			<tr>
-				<td class="label"><?php echo $i18n["Web root"]?></td>
-				<td><?php echo $this->context->config->WWW_ROOT?></td>
-			</tr>
 			<tr>
 				<td class="label"><?php echo $i18n["Folder for uploads"]?></td>
 				<td><?php echo $this->context->config->UPLOAD_DIR?></td>
