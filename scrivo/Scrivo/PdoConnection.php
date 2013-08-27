@@ -79,7 +79,7 @@ class PdoConnection extends \PDO {
 		parent::__construct(
 			"mysql:host={$config->DB_HOST};dbname={$config->DB_NAME}",
 			$config->DB_USER, $config->DB_PASSWORD,
-			array(\PDO::ATTR_PERSISTENT => false));
+			array(\PDO::ATTR_PERSISTENT => true));
 		$this->setAttribute(
 			\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 		$this->exec("SET NAMES utf8");
