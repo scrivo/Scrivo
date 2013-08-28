@@ -69,8 +69,7 @@ class GetListItemDefinitions extends Action {
 				"listItemDefinitionId" => $liDef->id,
 				"listItemDefinitionTitle" =>
 					$i18n["Create a new item of type:"]." {$liDef->title}",
-				"icon" => (string)$liDef->icon->replace(
-					new String("buttons/"),	new String("buttons16/"))
+				"icon" => "scrivo/{$liDef->icon}"
 			);
 		}
 
