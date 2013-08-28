@@ -163,11 +163,11 @@ SUI.editor.filedialog.UploadDialog = SUI.defineClass(
 		if (this.assetId) {
 		 // ... then we need a field for the assetId of the asset to
 		 // overwrite.
-			this.assetId = new SUI.form.Input({});
-			this.assetId.el().type  = "hidden";
-			this.assetId.el().name = "assetId";
-			this.assetId.el().value = this.assetId;
-			this.form.add(this.assetId);
+			var assetFld = new SUI.form.Input({});
+			assetFld.el().type  = "hidden";
+			assetFld.el().name = "assetId";
+			assetFld.el().value = this.assetId;
+			this.form.add(assetFld);
 		} else {
 		 // ... else we add an extra button for more file upload fields.
 			this.addExtraButton(

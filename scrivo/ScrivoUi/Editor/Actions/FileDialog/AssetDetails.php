@@ -46,7 +46,7 @@ use \Scrivo\File;
  */
 class AssetDetails extends Action {
 
-	const BUT_IMG_PATH = "../ca.php?i=img/fdlg/";
+	const BUT_IMG_PATH = "img/ca.php?i=editor/";
 
 	private $i18n = null;
 
@@ -70,7 +70,7 @@ class AssetDetails extends Action {
 
 			// Create a linl to the asset.
 			$link = "{$this->context->config->WWW_ROOT}/scrivo/asset.php?id=".
-				$asset ->id;
+				$asset->id;
 
 			if ($asset instanceof Folder) {
 
@@ -134,8 +134,8 @@ class AssetDetails extends Action {
 			"<p><a href=\"{$link}\" target=\"_blank\">
 			<b>{$asset->title}</b></a>
 			<br>{$this->i18n["Mime-type"]}: {$asset->mimeType}</p>
-			<p id=\"scrivo_filedialog_img\" class=\"img\">
-			<img src=\"{self::BUT_IMG_PATH}loading.gif\"></p>";
+			<p id=\"scrivo_filedialog_img\" class=\"img\"><img 
+				src=\"".self::BUT_IMG_PATH."fdlg_loading.gif\"></p>";
 
 		$html .=
 			"<p>{$this->i18n["Uploaded on"]}: ".

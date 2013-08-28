@@ -403,7 +403,7 @@ SUI.editor.filedialog.FileDialog = SUI.defineClass({
 				this.onload=null;
 				var tmp = document.getElementById("scrivo_filedialog_img");
 				if (tmp && tmp.firstChild) {
-				 tmp.replaceChild(pop, tmp.firstChild);
+					tmp.replaceChild(pop, tmp.firstChild);
 				}
 			};
 			  pop.src = img || "";

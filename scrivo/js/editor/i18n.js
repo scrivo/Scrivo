@@ -726,9 +726,10 @@ SUI.editor.resource.contenttabs = {
 
 /** @namespace */
 SUI.editor.resource.filedialog = {
-	uploadURL: SCRIVO_BASE_DIR  + SUI_DIR + "/misc/filedialog_upload.php",
-	cropperBackgroundImg: SCRIVO_BASE_DIR  + SUI_DIR +
-		"/misc/cropper_backgroundimage.php",
+	uploadURL: SCRIVO_BASE_DIR + 
+		"/scrivo/ScrivoUi/Editor/Misc/filedialog_upload.php",
+	cropperBackgroundImg: SCRIVO_BASE_DIR + 
+		"/scrivo/ScrivoUi/Editor/Misc/cropper_backgroundimage.php",
 
 	icnCrop: "crop.png",
 	icnCut: "cut.png",

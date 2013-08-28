@@ -197,6 +197,54 @@ class File extends Asset {
 	}
 
 	/**
+	 * Get a unique filename within the scope of the selected directory.
+	 */
+	private function getUniqueName() {
+	
+		$base = $this->title;
+		$ext = "";
+		$pos = $this->title->lastIndexOf(new String("."));
+		
+		if ($pos !== -1) {
+			$base = $this->title->substr(0, $pos);
+			if (!$base[$base->length - 1]->equals(new String("_"))) {
+				$base = "{$base}_";
+			}
+			$ext = $this->title->substr($pos);
+		}
+		
+		$index = 1;
+		while (!$this->checkUnique()) {
+			$this->title = new String($base.$index.$ext);
+			$index++;
+		}
+		
+	}	
+
+	/**
+	 * Test if the asset title is unique within the scope of the directory.
+	 * @return boolean
+	 */
+	private function checkUnique() {
+	
+		$sth = $this->context->connection->prepare(
+			"SELECT COUNT(*) cnt FROM asset WHERE
+				instance_id = :instId AND
+				parent_id = :parentId AND title = :title");
+		
+		$this->context->connection->bindInstance($sth);
+		$sth->bindValue(":parentId", $this->parentId, \PDO::PARAM_INT);
+		$sth->bindValue(":title", $this->title, \PDO::PARAM_STR);
+		
+		$sth->execute();
+		
+		if (intval($sth->fetchColumn(0)) == 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * Check if the asset data can be inserted into the database.
 	 *
 	 * @throws \Scrivo\ApplicationException If the data is not accessible,
@@ -212,9 +260,10 @@ class File extends Asset {
 
 		$this->context->checkPermission(
 			\Scrivo\AccessController::WRITE_ACCESS, $this->parentId);
-
+		
+		$this->getUniqueName();
 	}
-
+	
 	/**
 	 * Insert a new asset into the database.
 	 *
@@ -285,6 +334,7 @@ class File extends Asset {
 				"Can't move a asset underneath itself");
 		}
 
+		$this->getUniqueName();
 	}
 
 	/**

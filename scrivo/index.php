@@ -95,10 +95,6 @@ $act = \Scrivo\Action::create(new \Scrivo\Context($cfg, $session->userId),
 	$actions[$actionId], isset($session->userStatus)?$session->userStatus: 0,
 	$session);
 
-//var_dump($actionId, $act->type);
-
-error_log($actionId);
-
 if ($act->type == \Scrivo\Action::VIEW) {
 
 	// ... if it's a view, show the view.

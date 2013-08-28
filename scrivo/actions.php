@@ -229,7 +229,7 @@ $actions = array(
 		Action::AUTH => User::STATUS_EDITOR,
 		Action::type => Action::XHR,
 		Action::ACTION => __NAMESPACE__."\FileDialog\Paste"),
-
+		
 	"apps.list.getListView" => array(
 		Action::AUTH => User::STATUS_EDITOR,
 		Action::type => Action::XHR,
