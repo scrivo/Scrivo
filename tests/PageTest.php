@@ -302,7 +302,7 @@ class PageTest extends ScrivoDatabaseTestCase {
 		$this->setPageProperties($o2, $d2);
 		$o2->insert();
 
-		$this->assertTrue(isset($o2->path[self::PAGE_FORUM_ID]));
+		$this->assertTrue(isset($o2->path[1]));
 
 		// A possible exception when loading a path.
 		$o3 = new \Scrivo\Page(self::$context);

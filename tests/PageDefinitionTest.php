@@ -46,7 +46,7 @@ class PageDefinitionTest extends ScrivoDatabaseTestCase {
 				"argument 1" => (object) array(
 					"title" => new \Scrivo\String("A template"),
 					"description" => new \Scrivo\String("Blah 1"),
-					"fileName" => new \Scrivo\String("templates/a.php"),
+					"action" => new \Scrivo\String("templates/a.php"),
 					"configOnly" => true,
 					"typeSet" => array(3),
 					"defaultTabId" => 0,
@@ -56,7 +56,7 @@ class PageDefinitionTest extends ScrivoDatabaseTestCase {
 				"argument 1" => (object) array(
 					"title" => new \Scrivo\String("Another template"),
 					"description" => new \Scrivo\String("Blah 2"),
-					"fileName" => new \Scrivo\String("templates/b.php"),
+					"action" => new \Scrivo\String("templates/b.php"),
 					"configOnly" => false,
 					"typeSet" => array(1,2),
 					"defaultTabId" => 0,
@@ -75,7 +75,7 @@ class PageDefinitionTest extends ScrivoDatabaseTestCase {
 				"argument 1" => (object) array(
 					"title" => new \Scrivo\String("A template"),
 					"description" => new \Scrivo\String("Blah 1"),
-					"fileName" => new \Scrivo\String("templates/a.php"),
+					"action" => new \Scrivo\String("templates/a.php"),
 					"configOnly" => true,
 					"typeSet" => array(3),
 					"defaultTabId" => 0,
@@ -83,7 +83,7 @@ class PageDefinitionTest extends ScrivoDatabaseTestCase {
 				"argument 2" => (object) array(
 					"title" => new \Scrivo\String("Another template"),
 					"description" => new \Scrivo\String("Blah 2"),
-					"fileName" => new \Scrivo\String("templates/b.php"),
+					"action" => new \Scrivo\String("templates/b.php"),
 					"configOnly" => false,
 					"typeSet" => array(1, 2),
 					"defaultTabId" => 0,
@@ -113,7 +113,7 @@ class PageDefinitionTest extends ScrivoDatabaseTestCase {
 
 		$o->title = $d->title;
 		$o->description = $d->description;
-		$o->fileName = $d->fileName;
+		$o->action = $d->action;
 		$o->configOnly = $d->configOnly;
 		$o->typeSet = $d->typeSet;
 		$o->defaultTabId = $d->defaultTabId;
@@ -131,7 +131,7 @@ class PageDefinitionTest extends ScrivoDatabaseTestCase {
 
 		$this->assertTrue($o->title->equals($d->title));
 		$this->assertTrue($o->description->equals($d->description));
-		$this->assertTrue($o->fileName->equals($d->fileName));
+		$this->assertTrue($o->action->equals($d->action));
 		$this->assertEquals($o->configOnly, $d->configOnly);
 		$this->assertEquals($o->typeSet, $d->typeSet);
 		$this->assertEquals($o->defaultTabId, $d->defaultTabId);

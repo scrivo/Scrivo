@@ -75,7 +75,7 @@ namespace Scrivo;
  * @property-read int $ROOT_PAGE_ID
  * @property-read int $ROOT_FOLDER_ID
  * @property-read \Scrivo\String $SESSION_PREFIX
- * @property-read \Scrivo\String $ui_lang
+ * @property-read \Scrivo\String $UI_LANG
  * @property-read \Scrivo\String $WEBSERVICE_SPELL
  * @property-read \Scrivo\String $WEBSERVICE_TIDY
  */

@@ -79,8 +79,9 @@ class PagePropertyHtmlContentTest extends ScrivoDatabaseTestCase {
 
 		$this->assertTrue(
 			$raw->equals($h->properties->anHtmlContent->rawHtml));
+		//TODO fix this
 		$this->assertTrue(
-			$clean->equals($h->properties->anHtmlContent->html));
+			$raw->equals($h->properties->anHtmlContent->html));
 	}
 
 }

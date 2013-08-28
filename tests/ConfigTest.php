@@ -105,7 +105,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue($cfg->KEY_PREFIX->equals(
 			new \Scrivo\String("_")));
 		$this->assertTrue($cfg->JS_DEBUG === 0);
-		$this->assertTrue($cfg->ui_lang->equals(
+		$this->assertTrue($cfg->UI_LANG->equals(
 			new \Scrivo\String("en_US")));
 		$this->assertTrue($cfg->DB_API->equals(
 			new \Scrivo\String("mysql")));

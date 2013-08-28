@@ -38,7 +38,7 @@ $title = $cfg->WWW_ROOT->replace(
 		\Scrivo\String::create(array("http://", "https://")),
 		new \Scrivo\String(""));
 
-$i18n = new \Scrivo\I18n($cfg->ui_lang);
+$i18n = new \Scrivo\I18n($cfg->UI_LANG);
 
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//name_en">
 <html>

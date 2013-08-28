@@ -453,7 +453,7 @@ class User {
 			$sth = $this->context->connection->prepare(
 				"INSERT INTO user (
 					instance_id, user_id, status, user_code, password, 
-					given_name, f amily_name_prefix, family_name, email_address,
+					given_name, family_name_prefix, family_name, email_address,
 					custom_data
 				) VALUES (
 					:instId, :id, :status, :userCode, :password, 
