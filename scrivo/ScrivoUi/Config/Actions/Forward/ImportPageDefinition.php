@@ -143,7 +143,6 @@ class ImportPageDefinition extends Action {
 			$this->setResult(self::SUCCESS);
 
 		} catch(ApplicationException $e) {
-var_dump($e); die;
 
 			$this->setResult(self::FAIL, $e);
 

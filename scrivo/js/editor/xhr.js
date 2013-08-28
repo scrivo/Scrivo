@@ -77,7 +77,7 @@ SUI.editor.xhr = {
 			});
 		} catch (e) {
 			this.xhrErrorDlg("XHR:Error", e.message);
-							}
+		}
 	},
 
 	/**
@@ -116,7 +116,7 @@ SUI.editor.xhr = {
 	xhrErrorDlg: function (caption, message) {
 		new SUI.dialog.Alert({
 			icon: "error", width: 500, caption: caption, text: message
-						}).show();
+		}).show();
 	},
 
 	/**
@@ -130,9 +130,9 @@ SUI.editor.xhr = {
 				var a = this.requests[i];
 				if (this.requests[i].get) {
 					this.doGet(a.url, a.data, a.callback);
-					} else {
+				} else {
 					this.doPost(a.url, a.data, a.callback);
-					}
+				}
 			} catch (e) {
 				this.xhrErrorDlg("XHR:Error", e.message);
 				}
@@ -164,7 +164,7 @@ SUI.editor.xhr = {
 			callback(res);
 		} else {
 			// ... else check if it was an authentication error: ...
-					if (res.result == "NO_AUTH") {
+			if (res.result == "NO_AUTH") {
 				// ... yes: is it the first unauthenticated request? ...
 				if (this.requests.length == 0) {
 					// ... then show a login dialog
@@ -187,8 +187,8 @@ SUI.editor.xhr = {
 				// ... no: show the error message that the server send in
 				// the response
 				this.xhrErrorDlg(res.result, res.data);
-					}
-				}
 			}
+		}
+	}
 
 };

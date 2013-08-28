@@ -29,7 +29,7 @@
  * $Id: ajax_login.php 841 2013-08-19 22:19:47Z geert $
  */
 
-require_once("../lib/Autoloader.php");
+require_once("../Scrivo/Autoloader.php");
 spl_autoload_register("\\Scrivo\\Autoloader::load");
 
 $usercode = \Scrivo\Request::post("usercode", \Scrivo\Request::TYPE_STRING);
@@ -44,7 +44,7 @@ $loginKey = new \Scrivo\LoginKey($context);
 
 if ($loginKey instanceof \Scrivo\LoginKey) {
 
-	$key = $loginKey->generate($usercode, $password);
+	$key = (string)$loginKey->generate($usercode, $password);
 	if ($key) {
 		$res = array("result" => "OK", "data" => array("key" => $key));
 	}

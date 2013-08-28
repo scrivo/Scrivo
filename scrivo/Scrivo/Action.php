@@ -39,7 +39,7 @@ class Action {
 
 	const VIEW = 1;
 	const FORWARD = 2;
-	const type = 3;
+	const TYPE = 3;
 	const FILE = 4;
 	const SUCCESS = 5;
 	const FAIL = 6;
@@ -82,7 +82,7 @@ class Action {
 
 		$this->context = $context;
 		$this->session = $session;
-		$this->type = $action[self::type];
+		$this->type = $action[self::TYPE];
 
 		if (isset($action[self::FILE])) {
 			$this->file = $action[self::FILE];

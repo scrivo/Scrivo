@@ -51,7 +51,8 @@ SUI.editor.LoginDialog = SUI.defineClass({
 					SUI.editor.resource.getLoginKeyURL, res,
 					function(res) {
 						SUI.editor.xhr.doGet(
-							SUI.editor.resource.loginWithKeyURL,{
+							SUI.editor.resource.ajaxURL,{
+								a: "loginXhr",
 								key: res.data.key
 							},
 							function(res) {

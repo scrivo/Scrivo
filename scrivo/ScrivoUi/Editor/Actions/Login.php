@@ -64,6 +64,11 @@ class Login extends \Scrivo\Action {
 			$this->session->userId = $user->id;
 
 			$this->setResult(self::SUCCESS);
+
+		} else {
+		
+			$this->setResult(self::FAIL, "Invalid usercode or password");
+			
 		}
 	}
 }

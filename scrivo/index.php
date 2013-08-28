@@ -35,11 +35,11 @@
 
 namespace Scrivo\Editor;
 
+session_start();
+
 error_reporting(E_ALL);
 
 $timer_start = microtime();
-
-session_start();
 
 require_once("Scrivo/Autoloader.php");
 spl_autoload_register("\\Scrivo\\Autoloader::load");
@@ -68,25 +68,35 @@ if ($session->userId == \Scrivo\User::PRIMARY_ADMIN_ID) {
 	// ... check if the request came from one of the whitelisted IP adresses.
 	if (!$cfg->ADMIN_IP_ADDRESSES->equals(new \Scrivo\String("*"))
 			&& !$cfg->ADMIN_IP_ADDRESSES->contains(
-					new \Scrivo\String($_SERVER["REMOTE_ADDR"]))
+				new \Scrivo\String($_SERVER["REMOTE_ADDR"]))
 			&& !$cfg->ADMIN_IP_ADDRESSES->contains(new \Scrivo\String(
-					// replace last digit with an * in remote_address
-					preg_replace("/(\d+)$/i", "*", $_SERVER["REMOTE_ADDR"])))) {
-				die("Authorization Error");
-			}
+				// replace last digit with an * in remote_address
+				preg_replace("/(\d+)$/i", "*", $_SERVER["REMOTE_ADDR"])))) {
+		die("Authorization Error");
+	}
 }
 
 // Get the action from the GET or POST variables, default to home ...
 $actionId = (string)\Scrivo\Request::request(
 	"a", \Scrivo\Request::TYPE_STRING, new \Scrivo\String("home"));
 
+if (!isset($actions[$actionId])) {
+	die("Authorization Error");
+}
+
 // ... but reset it to login actions if not authenticated yet.
-if (!$session->authenticated) {
-	if (isset($_GET["key"])) {
-		$actionId = "login_check";
-	}
-	if ($actionId != "login_check") {
-		$actionId = "login";
+if (!$session->authenticated && $actionId !== "loginXhr") {
+	if ($actions[$actionId][\Scrivo\Action::TYPE] == \Scrivo\Action::XHR) {
+		echo json_encode(
+			array("result" => "NO_AUTH", "data" => "Authentication error"));
+		die;
+	} else {
+		if (isset($_GET["key"])) {
+			$actionId = "login_check";
+		}
+		if ($actionId != "login_check") {
+			$actionId = "login";
+		}
 	}
 }
 

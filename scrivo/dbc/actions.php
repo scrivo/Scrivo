@@ -42,18 +42,18 @@ $actions = array(
 
 	"home" => array(
 		Action::AUTH => User::STATUS_EDITOR,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\Home",
 	),
 
 	"login" => array(
 		Action::AUTH => User::STATUS_MEMBER,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\Home",
 	),
 	"login_check" => array(
 		Action::AUTH => User::STATUS_MEMBER,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\Login",
 		Action::FORWARD => array(
 			Action::SUCCESS => "home",
@@ -62,7 +62,7 @@ $actions = array(
 	),
 	"logout" => array(
 		Action::AUTH => User::STATUS_EDITOR,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\Logout",
 		Action::FORWARD => array(
 			Action::SUCCESS => "login",
@@ -71,12 +71,12 @@ $actions = array(
 
 	"export_instance_form" => array(
 		Action::AUTH => 1,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\ExportInstanceForm",
 	),
 	"export_instance" => array(
 		Action::AUTH => 1,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\ExportInstance",
 		Action::FORWARD => array(
 			Action::SUCCESS => "export_instance_download_link",
@@ -85,25 +85,25 @@ $actions = array(
 	),
 	"export_instance_download_link" => array(
 		Action::AUTH => 1,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::PARAMS => array("a" => "export_instance_download"),
 		Action::ACTION => __NAMESPACE__."\Layout\DownloadLink",
 	),
 	"export_instance_download" => array(
 		Action::AUTH => 1,
-		Action::type => Action::DOWNLOAD,
+		Action::TYPE => Action::DOWNLOAD,
 		Action::PARAMS => array("a" => "export_instance_download"),
 		Action::ACTION => __NAMESPACE__."\Download\Download",
 	),
 
 	"export_assets_form" => array(
 		Action::AUTH => 1,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\AssetExportForm",
 	),
 	"export_assets" => array(
 		Action::AUTH => 1,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\ExportAssets",
 		Action::FORWARD => array(
 			Action::SUCCESS => "export_assets_download_link",
@@ -112,25 +112,25 @@ $actions = array(
 	),
 	"export_assets_download_link" => array(
 		Action::AUTH => 1,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::PARAMS => array("a" => "export_assets_download"),
 		Action::ACTION => __NAMESPACE__."\Layout\DownloadLink",
 	),
 	"export_assets_download" => array(
 		Action::AUTH => 1,
-		Action::type => Action::DOWNLOAD,
+		Action::TYPE => Action::DOWNLOAD,
 		Action::PARAMS => array("a" => "export_assets_download"),
 		Action::ACTION => __NAMESPACE__."\Download\Download",
 	),
 
 	"delete_instance_form" => array(
 		Action::AUTH => 1,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\DeleteInstanceForm",
 	),
 	"delete_instance" => array(
 		Action::AUTH => 1,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\DeleteInstance",
 		Action::FORWARD => array(
 			Action::SUCCESS => "export_instance_download_link",
@@ -140,12 +140,12 @@ $actions = array(
 
 	"copy_branch_form" => array(
 		Action::AUTH => 1,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\CopyBranchForm",
 	),
 	"copy_branch" => array(
 		Action::AUTH => 1,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\CopyBranch",
 		Action::FORWARD => array(
 			Action::SUCCESS => "copy_branch_download_link",
@@ -154,25 +154,25 @@ $actions = array(
 	),
 	"copy_branch_download_link" => array(
 			Action::AUTH => 1,
-			Action::type => Action::VIEW,
+			Action::TYPE => Action::VIEW,
 			Action::PARAMS => array("a" => "copy_branch_download"),
 			Action::ACTION => __NAMESPACE__."\Layout\DownloadLink",
 	),
 	"copy_branch_download" => array(
 			Action::AUTH => 1,
-			Action::type => Action::DOWNLOAD,
+			Action::TYPE => Action::DOWNLOAD,
 			Action::PARAMS => array("a" => "copy_branch_download"),
 			Action::ACTION => __NAMESPACE__."\Download\Download",
 	),
 
 	"paste_branch_form" => array(
 		Action::AUTH => 1,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\PasteBranchForm",
 	),
 	"paste_branch" => array(
 		Action::AUTH => 1,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\PasteBranch",
 		Action::FORWARD => array(
 			Action::SUCCESS => "home",
@@ -182,22 +182,22 @@ $actions = array(
 
 	"initialize.systemCheck" => array(
 		Action::AUTH => 3,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\SystemCheck",
 	),
 	"initialize.installationOptions" => array(
 		Action::AUTH => 3,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\InstallationOptions",
 	),
 	"initialize.createDatabaseForm" => array(
 		Action::AUTH => 3,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\CreateDatabaseForm",
 	),
 	"initialize.createDatabase" => array(
 		Action::AUTH => 3,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\CreateDatabase",
 		Action::FORWARD => array(
 			Action::SUCCESS => "initialize.createInstanceForm",
@@ -206,13 +206,13 @@ $actions = array(
 	),
 	"initialize.initializeDatabaseForm" => array(
 		Action::AUTH => 3,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::PARAMS => array("action" => "initializeDatabaseForm"),
 		Action::ACTION => __NAMESPACE__."\Layout\DatabaseParametersForm",
 	),
 	"initialize.initializeDatabase" => array(
 		Action::AUTH => 3,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\InitializeDatabase",
 		Action::FORWARD => array(
 			Action::SUCCESS => "initialize.createInstanceForm",
@@ -221,18 +221,18 @@ $actions = array(
 	),
 	"initialize.downloadDatabaseModel" => array(
 		Action::AUTH => 3,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\DownloadDatabaseModel",
 	),
 	"initialize.selectDatabaseForm" => array(
 		Action::AUTH => 3,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::PARAMS => array("action" => "selectDatabaseForm"),
 		Action::ACTION => __NAMESPACE__."\Layout\DatabaseParametersForm",
 	),
 	"initialize.selectDatabase" => array(
 		Action::AUTH => 3,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\SelectDatabase",
 		Action::FORWARD => array(
 			Action::SUCCESS => "initialize.createInstanceForm",
@@ -241,12 +241,12 @@ $actions = array(
 	),
 	"initialize.createInstanceForm" => array(
 		Action::AUTH => 3,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\CreateInstanceForm",
 	),
 	"initialize.createInstance" => array(
 		Action::AUTH => 3,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\CreateInstance",
 		Action::FORWARD => array(
 			Action::SUCCESS => "home",
@@ -256,12 +256,12 @@ $actions = array(
 
 	"import.importInstanceForm" => array(
 		Action::AUTH => 3,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\ImportForm",
 	),
 	"import.importInstance" => array(
 		Action::AUTH => 3,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\ImportInstance",
 		Action::FORWARD => array(
 			Action::SUCCESS => "home",

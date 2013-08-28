@@ -42,18 +42,18 @@ $actions = array(
 
 	"home" => array(
 		Action::AUTH => User::STATUS_EDITOR,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\Home",
 	),
 
 	"login" => array(
 		Action::AUTH => User::STATUS_MEMBER,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\Home",
 	),
 	"login_check" => array(
 		Action::AUTH => User::STATUS_MEMBER,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\Login",
 		Action::FORWARD => array(
 			Action::SUCCESS => "home",
@@ -62,7 +62,7 @@ $actions = array(
 	),
 	"logout" => array(
 		Action::AUTH => User::STATUS_EDITOR,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\Logout",
 		Action::FORWARD => array(
 			Action::SUCCESS => "login",
@@ -73,19 +73,19 @@ $actions = array(
 
 	"editor_list" => array(
 		Action::AUTH => User::STATUS_EDITOR,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\UserList",
 		Action::PARAMS => array("type" => "editor"),
 	),
 	"editor_form" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\UserForm",
 		Action::PARAMS => array("type" => "editor"),
 	),
 	"editor_update" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\UpdateUser",
 		Action::FILE => "actions/user_update.php",
 		Action::PARAMS => array("type" => "editor"),
@@ -96,7 +96,7 @@ $actions = array(
 	),
 	"editor_insert" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\InsertUser",
 		Action::PARAMS => array("type" => "editor"),
 		Action::FORWARD => array(
@@ -106,7 +106,7 @@ $actions = array(
 	),
 	"editor_delete" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\DeleteUser",
 		Action::PARAMS => array("type" => "editor"),
 		Action::FORWARD => array(
@@ -116,7 +116,7 @@ $actions = array(
 	),
 	"editor_password_update" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\UpdateUserPassword",
 		Action::PARAMS => array("type" => "editor"),
 		Action::FORWARD => array(
@@ -129,19 +129,19 @@ $actions = array(
 
 	"member_list" => array(
 		Action::AUTH => User::STATUS_EDITOR,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\UserList",
 		Action::PARAMS => array("type" => "member"),
 	),
 	"member_form" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\UserForm",
 		Action::PARAMS => array("type" => "member"),
 	),
 	"member_update" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\UpdateUser",
 		Action::PARAMS => array("type" => "member"),
 		Action::FORWARD => array(
@@ -151,7 +151,7 @@ $actions = array(
 	),
 	"member_insert" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\InsertUser",
 		Action::PARAMS => array("type" => "member"),
 		Action::FORWARD => array(
@@ -161,7 +161,7 @@ $actions = array(
 	),
 	"member_delete" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\DeleteUser",
 		Action::PARAMS => array("type" => "member"),
 		Action::FORWARD => array(
@@ -171,7 +171,7 @@ $actions = array(
 	),
 	"member_password_update" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\UpdateUserPassword",
 		Action::PARAMS => array("type" => "member"),
 		Action::FORWARD => array(
@@ -184,19 +184,19 @@ $actions = array(
 
 	"admin_list" => array(
 		Action::AUTH => User::STATUS_EDITOR,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\UserList",
 		Action::PARAMS => array("type" => "admin"),
 	),
 	"admin_form" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\UserForm",
 		Action::PARAMS => array("type" => "admin"),
 	),
 	"admin_update" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\UpdateUser",
 		Action::PARAMS => array("type" => "admin"),
 		Action::FORWARD => array(
@@ -206,7 +206,7 @@ $actions = array(
 	),
 	"admin_insert" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\InsertUser",
 		Action::PARAMS => array("type" => "admin"),
 		Action::FORWARD => array(
@@ -216,7 +216,7 @@ $actions = array(
 	),
 	"admin_delete" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\DeleteUser",
 		Action::PARAMS => array("type" => "admin"),
 		Action::FORWARD => array(
@@ -226,7 +226,7 @@ $actions = array(
 	),
 	"admin_password_update" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\UpdateUserPassword",
 		Action::PARAMS => array("type" => "admin"),
 		Action::FORWARD => array(
@@ -239,12 +239,12 @@ $actions = array(
 
 	"requests_list" => array(
 		Action::AUTH => User::STATUS_EDITOR,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\RequestsList",
 	),
 	"request_activate" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\ActivateEditor",
 		Action::FORWARD => array(
 			Action::SUCCESS => "editor_form",
@@ -253,7 +253,7 @@ $actions = array(
 	),
 	"request_delete" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\DeleteUser",
 		Action::PARAMS => array("type" => "request"),
 		Action::FORWARD => array(
@@ -267,17 +267,17 @@ $actions = array(
 
 	"role_list" => array(
 		Action::AUTH => User::STATUS_EDITOR,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\RoleList",
 	),
 	"role_form" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\RoleForm",
 	),
 	"role_update" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\UpdateRole",
 		Action::FORWARD => array(
 			Action::SUCCESS => "role_list",
@@ -286,7 +286,7 @@ $actions = array(
 	),
 	"role_insert" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\InsertRole",
 		Action::FORWARD => array(
 			Action::SUCCESS => "role_list",
@@ -295,7 +295,7 @@ $actions = array(
 	),
 	"role_delete" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\DeleteRole",
 		Action::FORWARD => array(
 			Action::SUCCESS => "role_list",
@@ -305,22 +305,22 @@ $actions = array(
 
 	"page_list" => array(
 		Action::AUTH => User::STATUS_EDITOR,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\PageList",
 	),
 	"page_list_ajax" => array(
 		Action::AUTH => User::STATUS_EDITOR,
-		Action::type => Action::XHR,
+		Action::TYPE => Action::XHR,
 		Action::ACTION => __NAMESPACE__."\Xhr\PageList",
 	),
 	"language_form" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\LanguageForm",
 	),
 	"language_update" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::ACTION => __NAMESPACE__."\Forward\UpdateLanguage",
 		Action::FORWARD => array(
 				Action::SUCCESS => "page_list",
@@ -329,13 +329,13 @@ $actions = array(
 	),
 	"page_access_form" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::PARAMS => array("type" => "page"),
 		Action::ACTION => __NAMESPACE__."\Layout\AccessForm",
 	),
 	"page_access_update" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::PARAMS => array("type" => "page"),
 		Action::ACTION => __NAMESPACE__."\Forward\UpdateAccess",
 		Action::FORWARD => array(
@@ -346,23 +346,23 @@ $actions = array(
 
 	"asset_list" => array(
 		Action::AUTH => User::STATUS_EDITOR,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::ACTION => __NAMESPACE__."\Layout\AssetList",
 	),
 	"asset_list_ajax" => array(
 		Action::AUTH => User::STATUS_EDITOR,
-		Action::type => Action::XHR,
+		Action::TYPE => Action::XHR,
 		Action::ACTION => __NAMESPACE__."\Xhr\AssetList",
 	),
 	"asset_access_form" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::VIEW,
+		Action::TYPE => Action::VIEW,
 		Action::PARAMS => array("type" => "asset"),
 		Action::ACTION => __NAMESPACE__."\Layout\AccessForm",
 	),
 	"asset_access_update" => array(
 		Action::AUTH => User::STATUS_ADMIN,
-		Action::type => Action::FORWARD,
+		Action::TYPE => Action::FORWARD,
 		Action::PARAMS => array("type" => "asset"),
 		Action::ACTION => __NAMESPACE__."\Forward\UpdateAccess",
 		Action::FORWARD => array(

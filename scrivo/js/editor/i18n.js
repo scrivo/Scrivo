@@ -699,7 +699,6 @@ SUI.editor.i18n.apps.form = {
 /** @namespace */
 SUI.editor.resource = {
 	getLoginKeyURL: SCRIVO_BASE_DIR + "/scrivo/secure/ajax_login.php",
-	loginWithKeyURL: SCRIVO_BASE_DIR + SUI_DIR +"/login.php",
 	ajaxURL: SCRIVO_BASE_DIR + "/scrivo/index.php",
 
 	internalLink: SCRIVO_BASE_DIR + "/index.php?p=",

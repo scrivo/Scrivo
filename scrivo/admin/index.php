@@ -154,6 +154,6 @@ if ($act->type == \Scrivo\Action::VIEW) {
 
 }
 
-error_log("Script time ".(microtime()-$start));
+//error_log("Script time ".(microtime()-$start));
 
 ?>
