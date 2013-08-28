@@ -58,7 +58,7 @@ class InsertListItemPropertyDefinition extends Action {
 
 		try {
 
-			$i18n = new I18n($this->context->config->ui_lang);
+			$i18n = new I18n($this->context->config->UI_LANG);
 
 			$appDefId = Request::post(
 				"application_definition_id", Request::TYPE_INTEGER);

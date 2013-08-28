@@ -50,7 +50,7 @@ class FolderUpdate extends Action {
 	 */
 	function doAction() {
 
-		$i18n = new I18n($this->context->config->ui_lang);
+		$i18n = new I18n($this->context->config->UI_LANG);
 
 		$assetId = Request::post("assetId", Request::TYPE_INTEGER, 0);
 

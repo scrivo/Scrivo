@@ -69,7 +69,7 @@ if ($this->context->config->JS_DEBUG) {
 
 }
 
-if ($this->context->config->ui_lang == "nl_NL") {
+if ($this->context->config->UI_LANG == "nl_NL") {
 
 ?>
 		<script type="text/javascript" src="i18n/nl_NL/js/sui.js"></script>

@@ -52,7 +52,7 @@ class AssetList extends Action {
 	 */
 	function doAction() {
 
-		$i18n = new I18n($this->context->config->ui_lang);
+		$i18n = new I18n($this->context->config->UI_LANG);
 
 		$roleId =
 			Request::get("role_id", Request::TYPE_INTEGER, 0);

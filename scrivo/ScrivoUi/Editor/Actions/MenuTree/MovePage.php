@@ -60,7 +60,7 @@ class MovePage extends Action {
 			PageDefinition::selectSelectable($this->context, $newParentId);
 
 		if (!isset($selectable[$page->definition->id])) {
-			$i18n = new I18n($this->context->config->ui_lang);
+			$i18n = new I18n($this->context->config->UI_LANG);
 			throw new ApplicationException(
 				$i18n["This page is not allowed underneath the selected page"]);
 		}

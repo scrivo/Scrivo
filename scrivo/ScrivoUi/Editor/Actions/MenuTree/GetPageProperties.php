@@ -53,7 +53,7 @@ class GetPageProperties extends Action {
 
 		$res = array();
 
-		$i18n = new I18n($this->context->config->ui_lang);
+		$i18n = new I18n($this->context->config->UI_LANG);
 
 		// Create an arrary of page types where the editor can select from
 		$res["pageTypes"] = array(

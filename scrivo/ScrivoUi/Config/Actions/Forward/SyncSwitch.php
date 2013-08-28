@@ -46,7 +46,7 @@ class SyncSwitch extends Action {
 	function doAction() {
 
 		try {
-			$i18n = new I18n($this->context->config->ui_lang);
+			$i18n = new I18n($this->context->config->UI_LANG);
 
 			$site = Request::post("site", Request::TYPE_STRING);
 			if (!$site) {

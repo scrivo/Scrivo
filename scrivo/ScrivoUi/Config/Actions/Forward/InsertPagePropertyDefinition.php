@@ -57,7 +57,7 @@ class InsertPagePropertyDefinition extends Action {
 
 		try {
 
-			$i18n = new I18n($this->context->config->ui_lang);
+			$i18n = new I18n($this->context->config->UI_LANG);
 
 			$pageDefinitionId = Request::post(
 				"page_definition_id", Request::TYPE_INTEGER);

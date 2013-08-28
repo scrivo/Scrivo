@@ -52,7 +52,7 @@ class RequestsList extends LayoutAction {
 	 */
 	function doAction() {
 
-		$i18n = new I18n($this->context->config->ui_lang);
+		$i18n = new I18n($this->context->config->UI_LANG);
 
 		$items1 = User::select($this->context);
 

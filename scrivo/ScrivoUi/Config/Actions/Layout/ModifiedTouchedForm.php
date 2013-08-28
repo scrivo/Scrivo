@@ -54,7 +54,7 @@ class ModifiedTouchedForm extends LayoutAction {
 	 */
 	function doAction() {
 
-		$i18n = new I18n($this->context->config->ui_lang);
+		$i18n = new I18n($this->context->config->UI_LANG);
 
 		$mtList = ModifiedTouched::select($this->context);
 		$idLabel = IdLabel::select($this->context);

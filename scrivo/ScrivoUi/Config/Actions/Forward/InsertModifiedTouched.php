@@ -56,7 +56,7 @@ class InsertModifiedTouched extends Action {
 
 		try {
 
-			$i18n = new I18n($this->context->config->ui_lang);
+			$i18n = new I18n($this->context->config->UI_LANG);
 
 			// Create a new modifiedTouched relation entry ...
 			$modifiedTouched = new ModifiedTouched($this->context);

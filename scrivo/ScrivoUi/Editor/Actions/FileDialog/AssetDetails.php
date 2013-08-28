@@ -56,7 +56,7 @@ class AssetDetails extends Action {
 	 */
 	function doAction() {
 
-		$this->i18n = new I18n($this->context->config->ui_lang);
+		$this->i18n = new I18n($this->context->config->UI_LANG);
 
 		$ids = Request::get("assetIds", Request::TYPE_INTEGER);
 

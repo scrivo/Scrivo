@@ -64,7 +64,7 @@ class CopyBranch extends Action {
 		$out = gzopen($outFile, "w9");
 		if (!$out) {
 
-			$i18n = new I18n($this->context->config->ui_lang);
+			$i18n = new I18n($this->context->config->UI_LANG);
 			$res = $i18n["Could not open export file!"];
 			$this->setResult(self::FAIL, $res);
 

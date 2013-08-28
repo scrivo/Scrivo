@@ -51,7 +51,7 @@ class PageDefinitionExport extends LayoutAction {
 	 */
 	function doAction() {
 
-		$i18n = new I18n($this->context->config->ui_lang);
+		$i18n = new I18n($this->context->config->UI_LANG);
 
 		$title = $i18n["Download page definition"];
 

@@ -178,7 +178,7 @@ class Config {
 				(isset($this->ini["DB_NAME"])?$this->ini["DB_NAME"]:"")."_".
 				(isset($this->ini["INSTANCE_ID"])?$this->ini["INSTANCE_ID"]:"").
 				"_",
-			"ui_lang" => "en_US",
+			"UI_LANG" => "en_US",
 			"WEBSERVICE_SPELL" => "http://www.scrivo.nl/spell/spell.php",
 			"WEBSERVICE_TIDY" => "http://www.scrivo.nl/tidy/tidy.php",
 		);

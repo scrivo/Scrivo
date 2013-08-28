@@ -51,7 +51,7 @@ class AssetList extends LayoutAction {
 	 */
 	function doAction() {
 
-		$i18n = new I18n($this->context->config->ui_lang);
+		$i18n = new I18n($this->context->config->UI_LANG);
 
 		$root = Asset::fetch(
 			$this->context, $this->context->config->ROOT_FOLDER_ID);
