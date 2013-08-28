@@ -32,6 +32,8 @@
 
 namespace ScrivoUi\Editor\Actions\ContentTabs;
 
+use Scrivo\PagePropertyDefinition;
+
 use \Scrivo\String;
 use \Scrivo\Action;
 use \Scrivo\Page;
@@ -58,12 +60,21 @@ class GetProperties extends Action {
 		$prps = array();
 		foreach ($page->properties as $prp) {
 			if ($prp->definition->pageDefinitionTabId == $pageDefinitionTabId) {
-				$prps[] = $prp;
+				$prps[$prp->definition->id] = $prp;
 			}
 		}
+		
+		// Should use the order as defined in this list:
+		$list = PagePropertyDefinition::select(
+			$this->context, $page->definition->id);
 
 		$res = array();
-		foreach ($prps as $prp) {
+		foreach ($list as $prpDef) {
+			
+			if (!isset($prps[$prpDef->id])) {
+				continue;
+			}
+			$prp = $prps[$prpDef->id];
 
 			// convert type data to plain strings and camelcase.
 			$typeData = array();
