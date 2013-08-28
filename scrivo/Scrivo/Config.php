@@ -35,17 +35,6 @@
 
 namespace Scrivo;
 
-///**
-// * The name of the Scrivo configuration file which is assumed to be located in
-// * the root of a Scrivo project.
-// */
-//define("SCRIVO_CFG", ".htscrivo");
-
-///**
-// * Just a globally unique identifier for general usage.
-// */
-//define("GUID", "C3D873A6_E040_4B2E_93AA_9215460169A0");
-
 /**
  * Class to hold Scrivo configuration data.
  *
