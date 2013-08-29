@@ -52,7 +52,7 @@ $i18n = new \Scrivo\I18n($cfg->UI_LANG);
 <?php echo file_get_contents("../../css/admin/admin.css")?>
 <?php echo file_get_contents("../../css/admin/fancy.css")?>
 #header div {
-	background-image: url(red_tulips.png);
+	background-image: url(purple_tulips.png);
 }
 		</style>
 	</head>
