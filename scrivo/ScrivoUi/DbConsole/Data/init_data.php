@@ -23,15 +23,15 @@ $init_data = array(
   )
 ),
 "page_property_html" => array(
-  "instance_id,page_id,version,page_definition_tab_id,raw_html,html,STRIPPED",
+  "instance_id,page_id,version,page_definition_tab_id,raw_html,html",
   array(
-	"#INSTID#,1,0,5,'<P>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt sagittis elit, eu tincidunt ante ultricies sit amet. Aliquam faucibus suscipit nunc egestas aliquam. Donec pretium tincidunt dolor, ut pellentesque velit scelerisque et. Nam vitae sem at justo mattis aliquet. Aliquam scelerisque, sem eget venenatis consequat, urna urna imperdiet velit, ut lobortis purus augue sit amet neque. Ut a nulla at tortor ultricies pellentesque. Sed interdum, lectus quis tincidunt interdum, est dolor ornare ligula, id auctor metus neque sed felis. Aliquam vel velit arcu. Phasellus eu cursus est. Curabitur id sapien felis, vel placerat risus. Praesent a purus at odio tempor scelerisque gravida eu orci.</P>','',''"
+	"#INSTID#,1,0,5,'<P>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt sagittis elit, eu tincidunt ante ultricies sit amet. Aliquam faucibus suscipit nunc egestas aliquam. Donec pretium tincidunt dolor, ut pellentesque velit scelerisque et. Nam vitae sem at justo mattis aliquet. Aliquam scelerisque, sem eget venenatis consequat, urna urna imperdiet velit, ut lobortis purus augue sit amet neque. Ut a nulla at tortor ultricies pellentesque. Sed interdum, lectus quis tincidunt interdum, est dolor ornare ligula, id auctor metus neque sed felis. Aliquam vel velit arcu. Phasellus eu cursus est. Curabitur id sapien felis, vel placerat risus. Praesent a purus at odio tempor scelerisque gravida eu orci.</P>',''"
   )
 ),
 "page" => array(
-  "instance_id,page_id, parent_id, sequence_no, type, page_definition_id, language_id, READ_ONLY, AUTHOR_ID, date_created, date_modified, title, description, keywords, javascript, stylesheet, DATE_STAGING",
+  "instance_id,page_id, parent_id, sequence_no, type, page_definition_id, language_id, date_created, date_modified, title, description, keywords, javascript, stylesheet",
   array(
-	"#INSTID#,1,0,0,1,4,85,0,1,NOW(),NOW(),'Home','','','','', NOW()"
+	"#INSTID#,1,0,0,1,4,85,NOW(),NOW(),'Home','','','',''"
   )
 ),
 "pretty_url" => array(
@@ -67,15 +67,6 @@ $init_data = array(
 	"#INSTID#, 2, 1",
 	"#INSTID#, 1, 2",
 	"#INSTID#, 2, 2"
-  )
-),
-"USER_VAR" => array(
-  "instance_id,VARIABLE_ID,VARIABLE,DEFAULT_VAL",
-  array(
-	"#INSTID#,1,'language','nl'",
-	"#INSTID#,2,'default_language_id','85'",
-	"#INSTID#,3,'style','win'",
-	"#INSTID#,4,'editor_zoom','100%'"
   )
 ),
 "ui_lang" => array(

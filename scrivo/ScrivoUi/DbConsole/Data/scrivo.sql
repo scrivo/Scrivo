@@ -34,7 +34,6 @@ CREATE TABLE page_property_html (
   page_definition_tab_id INT(11) NOT NULL DEFAULT '0',
   raw_html MEDIUMTEXT NOT NULL,
   html MEDIUMTEXT NOT NULL,
-  stripped_html MEDIUMTEXT NOT NULL,
   PRIMARY KEY  (instance_id,page_id,page_definition_tab_id,version)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -55,8 +54,6 @@ CREATE TABLE page (
   type INT(11) NOT NULL DEFAULT '0',
   page_definition_id INT(11) NOT NULL DEFAULT '0',
   language_id INT(11) NOT NULL DEFAULT '0',
-  read_only INT(11) NOT NULL DEFAULT '0',
-  author_id INT(11) NOT NULL DEFAULT '0',
   date_created DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
   date_modified DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
   title VARCHAR(255) DEFAULT NULL,
@@ -67,7 +64,6 @@ CREATE TABLE page (
   date_online DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
   date_offline DATETIME DEFAULT NULL,
   has_staging INT(1) DEFAULT '0',
-  date_staging DATETIME NOT NULL,
   PRIMARY KEY  (instance_id,page_id,version)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -276,6 +272,7 @@ CREATE TABLE page_definition_tab (
   stylesheet TEXT NOT NULL,
   application_definition_id INT(11) DEFAULT NULL,
   css_id VARCHAR(25) NOT NULL DEFAULT '',
+  initial_content MEDIUMTEXT NOT NULL,
   PRIMARY KEY  (instance_id,page_definition_tab_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

@@ -100,7 +100,7 @@ class CreateInstance extends Action {
 			$this->setResult(self::SUCCESS, null, $fd);
 
 		} catch (\Exception $e) {
-
+			
 			$this->setResult(self::FAIL, $e, $fd);
 
 		}
@@ -160,7 +160,7 @@ EOD;
 		include "$dataDir/init_data.php";
 
 		$sth = $pdo->prepare("INSERT INTO instance ".
-			"(instance_id, title, document_root, description) VALUES ".
+			"(instance_id, www_root, document_root, description) VALUES ".
 			"(:instId, '', :docRoot, '')");
 		$sth->bindParam(":instId", $cfgInstId, \PDO::PARAM_INT);
 		$sth->bindParam(":docRoot", $cfgPth, \PDO::PARAM_STR);
