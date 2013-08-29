@@ -112,9 +112,9 @@ class GetListView extends Action {
 
 		$headers = array();
 		$headers[] = array(
-			"title" => ($def && $def->titleLabel)
+			"LABEL" => ($def && $def->titleLabel)
 				? $def->titleLabel : $this->i18n["Titel"],
-			"type" => "input",
+			"TYPE" => "input",
 			"COL_TYPE" => "_SCRIVO_TITLE",
 			"COL_WIDTH" => ($def && $def->titleWidth) ? $def->titleWidth : 150,
 			"COL_ALIGN" => "left"
@@ -127,7 +127,7 @@ class GetListView extends Action {
 				if ($v->inList
 						&& $v->type != ListItemPropertyDefinition::TYPE_INFO
 						&& $v->type != ListItemPropertyDefinition::TYPE_TAB) {
-					$resDefs = $v;
+					$resDefs[] = $v;
 					switch($v->type) {
 						case ListItemPropertyDefinition::TYPE_INPUT:
 						case ListItemPropertyDefinition::TYPE_SELECT:
@@ -148,8 +148,8 @@ class GetListView extends Action {
 							*/
 							$def = $this->defParms($v->type);
 							$headers[] = array(
-								"title" => $v->title,
-								"type" => $v->type,
+								"LABEL" => $v->title,
+								"TYPE" => $v->type,
 								"COL_TYPE" => $v->phpSelector,
 								"COL_WIDTH" => isset($v->typeData->COL_WIDTH)
 									? intval($v->typeData->COL_WIDTH) : $def[0],
@@ -171,7 +171,7 @@ class GetListView extends Action {
 		$type = -1;
 
 		foreach ($theList as $k=>$v) {
-
+				
 			$row = array();
 
 			$row["_SCRIVO_ID"] = $v->id;
@@ -193,7 +193,7 @@ class GetListView extends Action {
 			}
 
 			foreach ($pDefs as $pDef) {
-
+				
 				$row[(string)$pDef->phpSelector] =
 					$this->getValue($v->properties->{$pDef->phpSelector},
 					$pDef);
