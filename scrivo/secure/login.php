@@ -49,20 +49,8 @@ if ($loginKey instanceof \Scrivo\LoginKey) {
 
 	if ($key) {
 
-		if ($usercode == "admin") {
-			header("Location: ".
-				"{$context->config->WWW_ROOT}/scrivo/index.php?key={$key}");
-			die;
-		}
-
-		if (!preg_match($emailExpr, $usercode)) {
-			header("Location: {$context->config->WWW_ROOT}".
-				"/scrivo/extra/ask_email.php?usercode={$usercode}&key={$key}");
-		} else {
-			header("Location: ".
-				"{$context->config->WWW_ROOT}/scrivo/index.php?key={$key}");
-		}
-
+		header("Location: ".
+			"{$context->config->WWW_ROOT}/scrivo/index.php?key={$key}");
 		die;
 	}
 }

@@ -130,7 +130,7 @@ SUI.editor.Scrivo = SUI.defineClass({
 				}).show();
 			}
 		});
-		this.headerPanelBottom.add(this.notesButton);
+		//this.headerPanelBottom.add(this.notesButton);
 
 		this.splitHeader.add(this.headerPanelBottom, "south");
 

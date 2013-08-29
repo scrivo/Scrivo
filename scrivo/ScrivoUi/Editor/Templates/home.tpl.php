@@ -131,6 +131,11 @@ SUI.onStart = function() {
 };
 
 		</script>
+		<style type="text/css">
+.header div {
+	background-image: url(img/header/purple_tulips.png);
+}
+		</style>
 	</head>
 	<body>
 	</body>
