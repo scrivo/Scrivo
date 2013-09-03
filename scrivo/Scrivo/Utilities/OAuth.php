@@ -48,11 +48,11 @@ namespace Scrivo\Utilities;
  *   "LswwdoUaIvS8ltyTt5jkRh4J50vUPVVHtR2YPi5kE" //< access token secret
  * );
  * 
- * // Get the data to use for an authorized request.
+ * // Get the data to use in an authorized request.
  * $oAuthData = $oAuth->getAuthorizationData($requestMethod,
  *    "https://api.twitter.com/1.1/statuses/user_timeline.json?count=2");
  *
- * // This is the autorization header to use in your request:
+ * // This is the autorization header value to use in your request:
  * echo $oAuthData->authorisationHeader;
  *
  */
@@ -64,6 +64,12 @@ class OAuth {
 	 */
 	private $version = "1.0";
 
+	/**
+	 * The OAuth signature method (currently we're only supporting HMAC-SHA1);
+	 * @var string
+	 */
+	private $signatureMethod = "HMAC-SHA1";
+	
 	/**
 	 * The identifier portion of the client credentials (equivalent to
 	 * a username). The parameter name reflects a deprecated term
@@ -98,19 +104,36 @@ class OAuth {
 	/**
 	 * Construct an OAuth object: an object that is able to do 
 	 * authenticated requests.
-	 * @param string $consumerKey The identifier portion of the client 
-	 *   credentials (equivalent to a username).
-	 * @param string $consumerSecret The client shared-secret.
-	 * @param string $token The token value used to associate the request 
-	 *   with the resource owner.
-	 * @param string $tokenSecret The token shared-secret.
+	 * 
+	 * @param string $consumerKey 
+	 *   The identifier portion of the client credentials (equivalent to a 
+	 *   username).
+	 * @param string $consumerSecret 
+	 *   The client shared-secret.
+	 * @param string $token 
+	 *   The token value used to associate the request with the resource owner.
+	 * @param string $tokenSecret 
+	 *   The token shared-secret.
 	 */
 	public function __construct(
-			$consumerKey, $consumerSecret, $token, $tokenSecret) {
+			$consumerKey, $consumerSecret, $token=null, $tokenSecret=null) {
 		$this->consumerKey = $consumerKey;
 		$this->consumerSecret = $consumerSecret;
-		$this->token = $token;
-		$this->tokenSecret = $tokenSecret;
+		$this->token = $token ? $token : "";
+		$this->tokenSecret = $tokenSecret ? $tokenSecret : "";
+	}
+	
+	/**
+	 * Implementation of the property set methods.
+	 */
+	public function __set($name, $value) {
+		if ($name === "token") {
+			$this->token = $value;
+		} else if ($name === "tokenSecret") {
+			$this->tokenSecret = $value;
+		} else {
+			throw \Exception("No such set property '$name'");
+		}
 	}
 	
 	/**
@@ -120,7 +143,9 @@ class OAuth {
 	 * channel.  The nonce value MUST be unique across all requests with the
 	 * same timestamp, client credentials, and token combinations.
 	 * @link http://tools.ietf.org/html/rfc5849#section-3.3 reference
-	 * @return string A unique token to send with the request.
+	 * 
+	 * @return string 
+	 *   A unique token to send with the request.
 	 */
 	private function nonce() {
 		// Not really unique using an md5 hash, but good enough hopefully.
@@ -130,8 +155,11 @@ class OAuth {
 	/**
 	 * Return a percent encoded string.
 	 * @link http://tools.ietf.org/html/rfc5849#section-3.6 reference
-	 * @param string $toEncode The data to percent encode.
-	 * @return string The percent encoded data.
+	 * 
+	 * @param string 
+	 *   $toEncode The data to percent encode.
+	 * @return string
+	 *   The percent encoded data.
 	 */
 	private function encode($toEncode) {
 		return rawurlencode($toEncode);
@@ -143,11 +171,16 @@ class OAuth {
 	 * (apmerand and comma for example). It is also possible to supply a 
 	 * quotation mark for the values in the result string.
 	 * @link http://tools.ietf.org/html/rfc5849#section-3.6 reference
-	 * @param string[] $toEncode An array with key/value pairs.
-	 * @param string[] $glue The glue to bind the key/value pairs.
-	 * @param string $qoute An optional quotation sign for the value.
-	 * @return string A string containing the percent encoded key/value pairs 
-	 *   seperated by an '=' sign and glued together using the $glue parameter.
+	 * 
+	 * @param string[] $toEncode 
+	 *   An array with key/value pairs.
+	 * @param string[] $glue 
+	 *   The glue to bind the key/value pairs.
+	 * @param string $qoute 
+	 *   An optional quotation sign for the value.
+	 * @return string 
+	 *   A string containing the percent encoded key/value pairs seperated 
+	 *   by an '=' sign and glued together using the $glue parameter.
 	 */
 	private function encodeKeyValuePairs(array $toEncode, $glue, $quote="") {
 		$res = array();
@@ -160,10 +193,14 @@ class OAuth {
 	/**
 	 * Normalize the collected parameters into a single string.
 	 * @link http://tools.ietf.org/html/rfc5849#section-3.4.1.3.2 reference
-	 * @param string[] $oauthParam An array of OAuth key/value pairs.
-	 * @param string[] $param An array of request parameter key/value pairs.
-	 * @return string A string of percent encoded key/value pairs each 
-	 *   seperated by an '=' sign and each pair seperated by an ampersand.
+	 * 
+	 * @param string[] $oauthParam 
+	 *   An array of OAuth key/value pairs.
+	 * @param string[] $param 
+	 *   An array of request parameter key/value pairs.
+	 * @return string 
+	 *   A string of percent encoded key/value pairs each seperated by an '=' 
+	 *   sign and each pair seperated by an ampersand.
 	 */
 	private function normalizeParam($oauthParam, $param) {
 		$param += $oauthParam;
@@ -177,13 +214,18 @@ class OAuth {
 	 * string is used as an input to the "HMAC-SHA1" and "RSA-SHA1"
 	 * signature methods.
 	 * @link http://tools.ietf.org/html/rfc5849#section-3.4.1 reference
-	 * @param string $requestMethod The HTTP request method to use in the
-	 *   request.
-	 * @param string $baseUrl The base URL of the request (= the request URL 
-	 *   including the protocol, host and path but excluding the parameters).
-	 * @param string[] $oauthParam An array of OAuth key/value pairs.
-	 * @param string[] $param An array of request parameter key/value pairs.
-	 * @return string The OAuth signature base string.
+	 * 
+	 * @param string $requestMethod 
+	 *   The HTTP request method to use in the request.
+	 * @param string $baseUrl 
+	 *   The base URL of the request (= the request URL including the protocol, 
+	 *   host and path but excluding the parameters).
+	 * @param string[] $oauthParam 
+	 *   An array of OAuth key/value pairs.
+	 * @param string[] $param 
+	 *   An array of request parameter key/value pairs.
+	 * @return string 
+	 *   The OAuth signature base string.
 	 */
 	private function signatureBaseString(
 			$requestMethod, $baseUrl, $oauthParam, $requestParam) {
@@ -195,15 +237,18 @@ class OAuth {
 	/**
 	 * Create the OAuth signature for a request.
 	 * @link http://tools.ietf.org/html/rfc5849#section-3.4.2 reference
-	 * @param string $requestMethod The HTTP request method to use in this 
-	 *   Twitter API request.
-	 * @param string $baseUrl The base URL of the Twitter API request (= the
-	 *   request URL including the protocol, host and path but excluding the
-	 *   parameters).
-	 * @param string[] $oauthParam An array of OAuth key/value pairs.
-	 * @param string[] $requestParam An array of request parameter key/value 
-	 *   pairs.
-	 * @return string The OAuth signature. 
+	 * 
+	 * @param string $requestMethod 
+	 *   The HTTP request method to use in this request.
+	 * @param string $baseUrl 
+	 *   The base URL of the request (= the request URL including 
+	 *   the protocol, host and path but excluding the parameters).
+	 * @param string[] $oauthParam 
+	 *   An array of OAuth key/value pairs.
+	 * @param string[] $requestParam 
+	 *   An array of request parameter key/value pairs.
+	 * @return string 
+	 *   The OAuth signature. 
 	 */
 	private function sign(
 			$requestMethod, $baseUrl, $oauthParam, $requestParam) {
@@ -214,56 +259,44 @@ class OAuth {
 	}
 	
 	/**
-	 * Get the authorization request data for an OAuth reqeuest.
-	 * @see https://dev.twitter.com/docs/auth/authorizing-request
-	 * @param string $requestMethod The HTTP request method to use in the
-	 *   request.
-	 * @param string $baseUrl The base URL of the Twitter API request (= the
-	 *   request URL including the protocol, host and path but excluding the
-	 *   parameters).
-	 * @param string[] $param An array of request parameter key/value 
-	 *   pairs.
+	 * Get the authorization request header value for an OAuth signed reqeuest.
+	 * @link http://tools.ietf.org/html/rfc5849#section-3.1 reference 
+	 * 
+	 * @param StdClass $d
+	 *   An object containing a requestMethod, baseUrl and parameters
+	 *   field.
+	 * @param array $oathParam 
+	 *   A array with additional oath parameters.
+	 * @return string  
+	 *   An oath authorization request header value.
 	 */
-	private function authorisationHeader($requestMethod, $baseUrl, $param) {
-		$o = array(
+	private function authorisationHeader($d, $oathParam) {
+		$o = $oathParam + array(
 			"oauth_consumer_key" => $this->consumerKey,
-			"oauth_token" => $this->token,
 			"oauth_version" => $this->version,
 			"oauth_timestamp" => time(),
 			"oauth_nonce" => $this->nonce(),
-			"oauth_signature_method" => "HMAC-SHA1");
+			"oauth_signature_method" => $this->signatureMethod);
 		$o["oauth_signature"] = 
-			$this->sign($requestMethod, $baseUrl, $o, $param);
-		return "Authorization: OAuth " . 
-			$this->encodeKeyValuePairs($o, ", ", "\"")."\r\n";
+			$this->sign($d->requestMethod, $d->baseUrl, $o, $d->parameters);
+		return "OAuth " . $this->encodeKeyValuePairs($o, ", ", "\"");
 	}
 
 	/**
-	 * Get the data for an OAuth 1.0 authorized request.
-	 * @param string $requestMethod The HTTP request method to use in this 
-	 *   request (GET or POST).
-	 * @param string $url The URL for the request. Request parameters 
-	 *   can be included in the URL.
-	 *   Note: this is an unescaped URL: ampersands should be "&" (not "&amp;") 
-	 *   and spaces should be " " (not "%20" or "+"), and this is not limited
-	 *   to ampersands and spaces.
-	 * @param string[] $param Optional extra request parameters given as a set
-	 *   of name/value pairs. These parameters will get preceedence when 
-	 *   name conflicts occur with parameters given in the $url parameter 
-	 *   itself.
-	 * @return object Object containting the following fields: 
-	 *   authorisationHeader (string): The OAuth authorization header 
-	 *      (including \r\n)
-	 *   parameterString (string): The request parameters in an (percent 
-	 *      encoded) application/x-www-form-urlencoded format.
-	 *   baseUrl (string): The request URL without the parameters.
-	 *   requestMethod (string): The request method (capitalized).
-	 *   scheme (string): The request scheme.
-	 *   hostname (string): The name of the host to send the request to.
+	 * Prepare the request data before signing.
+	 *
+	 * @param string $requestMethod
+	 *   The HTTP request method to use in the request.
+	 * @param string $url
+	 *   The request URL. 
+	 * @param array $param
+	 *   An array of (additional) request parameter key/value pairs.
+	 * @return StdClass
+	 *   An object containing a requestMethod, baseUrl and parameters
+	 *   field.
 	 */
-	public function getAuthorizationData(
-			$requestMethod, $url, array $param=array()) {
-			
+	private function prepareData($requestMethod, $url, $param) {
+	
 		$requestMethod = strtoupper($requestMethod);
 		$ud = parse_url($url);
 		$baseUrl = $ud["scheme"]."://".$ud["host"].$ud["path"];
@@ -271,19 +304,98 @@ class OAuth {
 			parse_str($ud["query"], $param2);
 			$param += $param2;
 		}
-
-		return (object)array(
-			"authorisationHeader" => 
-				$this->authorisationHeader($requestMethod, $baseUrl, $param),
-			"parameterString" => 
-				count($param) ? $this->encodeKeyValuePairs($param, "&") : "",
-			"baseUrl" => $baseUrl,
-			"requestMethod" => $requestMethod,
-			"scheme" => $ud["scheme"],
-			"hostname" => $ud["host"]
-		);			
-			
+	
+		return (object)array("requestMethod" => $requestMethod,
+			"baseUrl" => $baseUrl, "parameters" => $param);
+	
 	}
+	
+	/**
+	 * Get the data for an OAuth 1.0 authorized request.
+	 * 
+	 * @param string $requestMethod 
+	 *   The HTTP request method to use in this request (GET or POST).
+	 * @param string $url 
+	 *   The URL for the request. Request parameters can be included in the URL.
+	 *   Note: this is an unescaped URL: ampersands should be "&" (not "&amp;") 
+	 *   and spaces should be " " (not "%20" or "+"), and this is not limited
+	 *   to ampersands and spaces.
+	 * @param string[] $param 
+	 *   Optional extra request parameters given as a set of name/value pairs. 
+	 *   These parameters will get preceedence when name conflicts occur with 
+	 *   parameters given in the $url parameter itself.
+	 * @return \stdClass Object containing the following fields: 
+	 *   authorisationHeader (string): The OAuth authorization header value. 
+	 *   parameters (array): The request parameters.
+	 *   baseUrl (string): The request URL without the parameters.
+	 */
+	public function getAuthorizationData(
+			$requestMethod, $url, array $param=array()) {
+		$d = $this->prepareData($requestMethod, $url, $param);
+		$d->authorisationHeader = $this->authorisationHeader($d,
+			array("oauth_token" => $this->token));
+		return $d;
+	}
+	
+	/**
+	 * Get the data for an OAuth 1.0 temporary credential request.
+	 * 
+	 * @param string $requestMethod 
+	 *   The HTTP request method to use in this request (GET or POST).
+	 * @param string $url 
+	 *   The URL for the request. Request parameters can be included in the URL.
+	 *   Note: this is an unescaped URL: ampersands should be "&" (not "&amp;") 
+	 *   and spaces should be " " (not "%20" or "+"), and this is not limited
+	 *   to ampersands and spaces.
+	 * @param string $callbackUrl
+	 *   The callback URL to use, use "oob" if an out of bound configuration
+	 *   is used.
+	 * @param string[] $param 
+	 *   Optional extra request parameters given as a set of name/value pairs. 
+	 *   These parameters will get preceedence when name conflicts occur with 
+	 *   parameters given in the $url parameter itself.
+	 * @return \stdClass Object containing the following fields: 
+	 *   authorisationHeader (string): The OAuth authorization header value. 
+	 *   parameters (array): The request parameters.
+	 *   baseUrl (string): The request URL without the parameters.
+	 */
+	public function getTemporaryCredentialRequestData(
+			$requestMethod, $url, $callbackUrl, $param) {
+		$d = $this->prepareData($requestMethod, $url, $param);
+		$d->authorisationHeader = $this->authorisationHeader($d, 
+			array("oauth_callback" => $callbackUrl));
+		return $d;
+	}
+
+	/**
+	 * Get the data for an OAuth 1.0 token credentials request.
+	 * 
+	 * @param string $requestMethod 
+	 *   The HTTP request method to use in this request (GET or POST).
+	 * @param string $url 
+	 *   The URL for the request. Request parameters can be included in the URL.
+	 *   Note: this is an unescaped URL: ampersands should be "&" (not "&amp;") 
+	 *   and spaces should be " " (not "%20" or "+"), and this is not limited
+	 *   to ampersands and spaces.
+	 * @param string $verifier
+	 *   A verification code received from the OAuth server.
+	 * @param string[] $param 
+	 *   Optional extra request parameters given as a set of name/value pairs. 
+	 *   These parameters will get preceedence when name conflicts occur with 
+	 *   parameters given in the $url parameter itself.
+	 * @return \stdClass Object containing the following fields: 
+	 *   authorisationHeader (string): The OAuth authorization header value. 
+	 *   parameters (array): The request parameters.
+	 *   baseUrl (string): The request URL without the parameters.
+	 */
+	public function getAccessTokenRequestData(
+			$requestMethod, $url, $verifier, $param) {
+		$d = $this->prepareData($requestMethod, $url, $param);
+		$d->authorisationHeader = $this->authorisationHeader($d, array(
+			"oauth_verifier" => $verifier, "oauth_token" => $this->token));
+		return $d;
+	}
+	
 }
 
 ?>

@@ -81,10 +81,14 @@ class RawRequest {
 	/**
 	 * Create a RawRequest object that can be used for multiple requests
 	 * to the same host.
-	 * @param string $scheme The scheme to use (http or https).
-	 * @param string $host The name of the host to send the reqeusts to.
-	 * @param int $port Optional: a specific port to send the request to,
-	 *    defaults to 80 (http) or 443 (https).
+	 * 
+	 * @param string $scheme 
+	 *    The scheme to use (http or https).
+	 * @param string $host 
+	 *    The name of the host to send the reqeusts to.
+	 * @param int $port 
+	 *    Optional: a specific port to send the request to, defaults to 80 
+	 *    (http) or 443 (https).
 	 */
 	public function __construct($scheme, $host, $port=null) {
 		$this->scheme = $scheme;
@@ -95,13 +99,14 @@ class RawRequest {
 			$this->host = $host;
 			$this->port = !$port ? 80 : $port;
 		} else {
-			throw new Exception("Only http and https are currently allowed.");
+			throw new \Exception("Only http and https are currently allowed.");
 		}
 	}
 
 	/**
 	 * Send raw header data to the specified host and get the raw response
 	 * back.
+	 * 
 	 * @param string $requestHeaders All header data (and content when posting)
 	 *   in raw format.
 	 * @return object The response, an object containting the fields:
@@ -110,16 +115,16 @@ class RawRequest {
 	 * @throws Exception If there was a problem with opening, reading from or 
 	 *   writing to the connection.
 	 */
-	public function getResponse($requstHeaders) {
+	public function getResponse($requestHeaders) {
 		
 		$socket = @fsockopen($this->host, $this->port, $errno, $errstr, 10);
 		if (!$socket) {
 			if (!$errno) {
 				$errstr = "Could not connect to socket ({$this->host}).";
 			}
-			throw new Exception("$errstr", $errno);
+			throw new \Exception("$errstr", $errno);
 		}
-		if (!@fwrite($socket, $requstHeaders)) {
+		if (!@fwrite($socket, $requestHeaders)) {
 			@fclose($socket);
 			throw new Exception("Could not write to socket ({$this->host}).");
 		}
@@ -131,6 +136,32 @@ class RawRequest {
 
 		$r = explode("\r\n\r\n", $result, 2);
 		return (object)array("header"=>$r[0], "data"=>isset($r[1])?$r[1]:"");
+	}
+	
+	/**
+	 * Function to unchunk chunked encoded data.
+	 *  
+	 * @param string $data 
+	 *   Data to unchunk.
+	 * @return string 
+	 *   Unchunked data.
+	 */
+	public function decodeChunked($data) {
+		$pos = 0;
+		$res = "";
+		
+		do {
+			$nl = strpos($data, "\n", $pos)+1;
+			$lenHex = trim(substr($data, $pos, $nl-$pos));
+			$len = hexdec($lenHex);
+			if (strtolower($lenHex) != dechex($len)) {
+				throw new \Exception("Invalid chunked data");
+			}
+			$res .= substr($data, $nl, $len);
+			$pos = strpos($data, "\n", $nl+$len)+1;
+		} while ($len);
+		
+		return $res;
 	}
 
 }

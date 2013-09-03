@@ -32,11 +32,11 @@
 namespace Scrivo\Utilities;
 
 /**
- * Class to send autorized reqeuests to a server using the OAuth 1.0 protocol. 
+ * Class to send autorized requests to a server using the OAuth 1.0 protocol. 
  * 
  * Example (using bogus values):
  * 
- * $oAuth = new OAuth_1_0(
+ * $oAuth = new OAuthRequest(
  *   "xvz1evFS4wEEPTGEFPHBog", //< consumer key
  *   "kAcSOqF21Fu85e7zjz7ZN2U4ZRhfV3WpwPAoE3Z7kBw", //< consumer secret
  *   "370773112-GmHxMAgYyLbNEtIKZeRNFsMKPR9EyMZeS9weJAEb", //< access token
@@ -44,63 +44,102 @@ namespace Scrivo\Utilities;
  * );
  * 
  * // Send an authorized reqeuest to a Twitter service.
- * echo $oAuth->sendRequest("get", 
+ * echo $oAuth->request("get", 
  *    "https://api.twitter.com/1.1/statuses/user_timeline.json?count=2");
  */
 class OAuthRequest extends OAuth {
 
 	/**
-	 * Get OAuth autorized data.
-	 * @param string $requestMethod The HTTP request method to use in this 
-	 *   request (GET or POST).
-	 * @param string $url The URL of the service. Request parameters 
-	 *   should be included in the URL.
+	 * Perform an OAuth request to get temporary credentials.
+	 * 
+	 * @param string $requestMethod 
+	 *   The HTTP request method to use in this request (GET or POST).
+	 * @param string $url 
+	 * 	 The URL of the service. Request parameters can be included in the URL.
 	 *   Note: this is an unescaped URL: ampersands should be "&" (not "&amp;") 
 	 *   and spaces should be " " (not "%20" or "+"), and this is not limited
 	 *   to ampersands and spaces.
-	 * @param string[] $param Optional extra request parameters given as a set
-	 *   of name/value pairs. These parameters will get preceedence when 
-	 *   name conflicts occur with parameters given in the $url parameter 
-	 *   itself.
-	 * @return string The response data.
-	 * @throws Exception If there was a problem with retrieving data from 
-	 *   the $url.
+	 * @param string $callback
+	 *   The callback URL to use, use "oob" if an out of bound configuration
+	 *   is used.
+	 * @param string[] $param 
+	 *   Optional extra request parameters given as a set of name/value pairs. 
+	 *   These parameters will get preceedence when name conflicts occur with 
+	 *   parameters given in the $url parameter itself.
+	 * @return \stdClass
+	 *   An object containing the following members: statusCode (int) - 
+	 *   the HTTP status code of the request (0 if it was hopeless), headers 
+	 *   (array) - the response headers, data (string) - the response data.  
 	 */
-	public function sendRequest($requestMethod, $url, array $param=array()) {
+	public function requestTemporaryCredentials(
+			$requestMethod, $url, $callback, array $param=array()) {
+		
+		$r = new Request();
+		$od = $this->getTemporaryCredentialRequestData(
+			$requestMethod, $url, $callback, $param);
+		
+		return $r->request($od->baseUrl, $od->requestMethod, $od->parameters,
+			array("Authorization" => $od->authorisationHeader));
+	}
 	
+	/**
+	 * Get an OAuth access token.
+	 * 
+	 * @param string $requestMethod 
+	 *   The HTTP request method to use in this request (GET or POST).
+	 * @param string $url 
+	 * 	 The URL of the service. Request parameters can be included in the URL.
+	 *   Note: this is an unescaped URL: ampersands should be "&" (not "&amp;") 
+	 *   and spaces should be " " (not "%20" or "+"), and this is not limited
+	 *   to ampersands and spaces.
+	 * @param string $verifier
+	 *   A verification code received from the OAuth server.
+	 * @param string[] $param 
+	 *   Optional extra request parameters given as a set of name/value pairs. 
+	 *   These parameters will get preceedence when name conflicts occur with 
+	 *   parameters given in the $url parameter itself.
+	 * @return \stdClass
+	 *   An object containing the following members: statusCode (int) - 
+	 *   the HTTP status code of the request (0 if it was hopeless), headers 
+	 *   (array) - the response headers, data (string) - the response data.  
+	 */
+	public function requestAccessToken(
+			$requestMethod, $url, $verfier, array $param=array()) {
+
+		$r = new Request();
+		$od = $this->getAccessTokenRequestData(
+			$requestMethod, $url, $verfier, $param);
+
+		return $r->request($od->baseUrl, $od->requestMethod, $od->parameters,
+			array("Authorization" => $od->authorisationHeader));
+	}
+
+	/**
+	 * Execute an OAuth autorized request.
+	 * 
+	 * @param string $requestMethod 
+	 *   The HTTP request method to use in this request (GET or POST).
+	 * @param string $url 
+	 * 	 The URL of the service. Request parameters can be included in the URL.
+	 *   Note: this is an unescaped URL: ampersands should be "&" (not "&amp;") 
+	 *   and spaces should be " " (not "%20" or "+"), and this is not limited
+	 *   to ampersands and spaces.
+	 * @param string[] $param 
+	 *   Optional extra request parameters given as a set of name/value pairs. 
+	 *   These parameters will get preceedence when name conflicts occur with 
+	 *   parameters given in the $url parameter itself.
+	 * @return \stdClass
+	 *   An object containing the following members: statusCode (int) - 
+	 *   the HTTP status code of the request (0 if it was hopeless), headers 
+	 *   (array) - the response headers, data (string) - the response data.  
+	 */
+	public function request($requestMethod, $url, array $param=array()) {
+		
+		$r = new Request();
 		$od = $this->getAuthorizationData($requestMethod, $url, $param);
 		
-		$rr = new RawRequest($od->scheme, $od->hostname);
-
-		if ($od->requestMethod === "POST") {
-
-			$result = $rr->getResponse(
-				"POST {$od->baseUrl} HTTP/1.1\r\n".
-				"Accept: */*\r\n".
-				"Connection: close\r\n".
-				"User-Agent: Scrivo PHP OAuth\r\n".
-				$od->authorisationHeader.
-				"Content-Type: application/x-www-form-urlencoded\r\n".
-				"Content-Length: ".strlen($od->parameterString)."\r\n".
-				"Host: {$od->hostname}\r\n".
-				"\r\n{$od->parameterString}");
-
-		} else if ($od->requestMethod === "GET") {
-
-			$result = $rr->getResponse(
-				"GET {$od->baseUrl}?{$od->parameterString} HTTP/1.1\r\n".
-				"Accept: */*\r\n".
-				"Connection: close\r\n".
-				"User-Agent: Scrivo PHP OAuth\r\n".
-				$od->authorisationHeader.
-				"Host: {$od->hostname}\r\n".
-				"\r\n");
-
-		} else {
-			throw new Exception("Only GET and POST are supported.");
-		}
-		
-		return $result->data;
+		return $r->request($od->baseUrl, $od->requestMethod, $od->parameters,
+			array("Authorization" => $od->authorisationHeader));
 	}
 	
 }
