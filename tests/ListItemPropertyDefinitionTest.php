@@ -53,8 +53,8 @@ class ListItemPropertyDefinitionTest extends ScrivoDatabaseTestCase {
 						"FLOAT" => 6.5,
 						"INT" => 6
 					),
-					"phpSelector" => new \Scrivo\String("IMAGE"),
-					"title" => new \Scrivo\String("an image"),
+					"phpSelector" => new \Scrivo\Str("IMAGE"),
+					"title" => new \Scrivo\Str("an image"),
 					"inList" => true,
 				)
 			),
@@ -68,8 +68,8 @@ class ListItemPropertyDefinitionTest extends ScrivoDatabaseTestCase {
 					"typeData" => (object)array(
 						"location" => "0:yes;1:no"
 					),
-					"phpSelector" => new \Scrivo\String("COLOR"),
-					"title" => new \Scrivo\String("a color"),
+					"phpSelector" => new \Scrivo\Str("COLOR"),
+					"title" => new \Scrivo\Str("a color"),
 					"inList" => false,
 				)
 			)
@@ -90,8 +90,8 @@ class ListItemPropertyDefinitionTest extends ScrivoDatabaseTestCase {
 						self::LIST_ITEM_DEFINITION_SUBJECT_ID,
 					"type" => \Scrivo\ListItemPropertyDefinition::TYPE_IMAGE,
 					"typeData" => (object)array(),
-					"phpSelector" => new \Scrivo\String("IMAGE"),
-					"title" => new \Scrivo\String("an image"),
+					"phpSelector" => new \Scrivo\Str("IMAGE"),
+					"title" => new \Scrivo\Str("an image"),
 					"inList" => true,
 				),
 				"argument 2" => (object) array(
@@ -101,8 +101,8 @@ class ListItemPropertyDefinitionTest extends ScrivoDatabaseTestCase {
 						self::LIST_ITEM_DEFINITION_SUBJECT_ID,
 					"type" => \Scrivo\ListItemPropertyDefinition::TYPE_COLOR,
 					"typeData" => (object)array(),
-					"phpSelector" => new \Scrivo\String("COLOR"),
-					"title" => new \Scrivo\String("a color"),
+					"phpSelector" => new \Scrivo\Str("COLOR"),
+					"title" => new \Scrivo\Str("a color"),
 					"inList" => false,
 				)
 			)
@@ -395,7 +395,7 @@ class ListItemPropertyDefinitionTest extends ScrivoDatabaseTestCase {
 		$this->setListItemPropertyProperties($tmp, $d1);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, self::EDITOR_USER_ID);
 
 		// Creating/inserting a new \Scrivo\ListItemPropertyDefinition
@@ -450,7 +450,7 @@ class ListItemPropertyDefinitionTest extends ScrivoDatabaseTestCase {
 		$this->setListItemPropertyProperties($tmp, $d2);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, \Scrivo\User::ANONYMOUS_USER_ID);
 
 		// Creating/inserting a new \Scrivo\ListItemPropertyDefinition object

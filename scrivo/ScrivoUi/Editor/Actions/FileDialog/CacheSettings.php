@@ -34,7 +34,7 @@ namespace ScrivoUi\Editor\Actions\FileDialog;
 use \Scrivo\Action;
 use \Scrivo\Request;
 use \Scrivo\Folder;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The CacheSettings class implements an action for setting the cache settings
@@ -53,18 +53,18 @@ class CacheSettings extends Action {
 
 		$opt = Request::post("opt", Request::TYPE_STRING);
 
-		if ($opt->equals(new String("expire"))) {
+		if ($opt->equals(new Str("expire"))) {
 			$asset->cacheHeaderSettings = (object)array(
-				"setting" => new String("expires"),
+				"setting" => new Str("expires"),
 				"timePeriod" => Request::post("period", Request::TYPE_INTEGER),
 				"timeUnit" => Request::post("timeunit", Request::TYPE_STRING)
 			);
-		} else if ($opt->equals(new String("nocache"))) {
+		} else if ($opt->equals(new Str("nocache"))) {
 			$asset->cacheHeaderSettings = (object)array(
-				"setting" => new String("no-cache"));
+				"setting" => new Str("no-cache"));
 		} else {
 			$asset->cacheHeaderSettings = (object)array(
-				"setting" => new String("last-modified"));
+				"setting" => new Str("last-modified"));
 		}
 
 		$asset->update();

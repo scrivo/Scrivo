@@ -45,7 +45,7 @@ class AccessControllerTest extends ScrivoDatabaseTestCase {
 	 * Create a Scrivo context for each test user to use in the tests.
 	 */
 	private function setUpContexts() {
-		$cfg = new Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new Scrivo\Config(new \Scrivo\Str("test_config"));
 		self::$ctxs[Scrivo\User::ANONYMOUS_USER_ID] =
 			new \Scrivo\Context($cfg, Scrivo\User::ANONYMOUS_USER_ID);
 		self::$ctxs[self::MEMBER_USER_ID] =
@@ -331,7 +331,7 @@ class AccessControllerTest extends ScrivoDatabaseTestCase {
 	 * @expectedException \Scrivo\SystemException
 	 */
 	public function testInvalidUser() {
-		$cfg = new Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, 987655443);
 		$d = \Scrivo\AccessController::getPermission($context, self::PAGE_HOME_ID);
 	}
@@ -343,7 +343,7 @@ class AccessControllerTest extends ScrivoDatabaseTestCase {
 	public function testDbFailure() {
 
 		// Setup a context with the anonymous user as principal
-		$cfg = new Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, Scrivo\User::ANONYMOUS_USER_ID);
 
 		// Perform getPermission operation.

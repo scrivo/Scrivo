@@ -36,7 +36,7 @@
 use \Scrivo\File;
 use \Scrivo\Context;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \ScrivoUi\Editor\Lib\ImageUtilities;
 
 session_start();

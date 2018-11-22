@@ -76,44 +76,44 @@ class ApcCacheTest extends \PHPUnit_Framework_TestCase {
 	public function testApcCache() {
 
 		// Just som data
-		$str = new \Scrivo\String("Hatseflatse");
+		$str = new \Scrivo\Str("Hatseflatse");
 
 		// Create a cache
 		$cache = new \Scrivo\Cache\ApcCache();
 
 		// Store some values (the second with a ttl of 1 sec).
-		$cache->store(new \Scrivo\String("aString"), $str);
-		$cache->store(new \Scrivo\String("anInt"), 3, 1);
+		$cache->store(new \Scrivo\Str("aString"), $str);
+		$cache->store(new \Scrivo\Str("anInt"), 3, 1);
 
 		// Retrieve them and check the values.
 		$this->assertTrue($str->equals(
-			$cache->fetch(new \Scrivo\String("aString"))));
-		$this->assertEquals(3, $cache->fetch(new \Scrivo\String("anInt")));
+			$cache->fetch(new \Scrivo\Str("aString"))));
+		$this->assertEquals(3, $cache->fetch(new \Scrivo\Str("anInt")));
 
 		// Also the cache object count should be 2.
 		$this->assertCount(2, $cache->entryList());
 
 		// Test the ttl: the first fetch should succeed, the second not.
 		usleep(500000);
-		$this->assertEquals(3, $cache->fetch(new \Scrivo\String("anInt")));
+		$this->assertEquals(3, $cache->fetch(new \Scrivo\Str("anInt")));
 		usleep(1500000);
 		// APC issue: entry will not be dropped until the next request
-		//$this->assertNull($cache->fetch(new \Scrivo\String("anInt")));
+		//$this->assertNull($cache->fetch(new \Scrivo\Str("anInt")));
 
 		// Slam one of the entries and check the result.
 		$this->assertEquals($cache::CACHE_SLAM,
-			$cache->store(new \Scrivo\String("aString"),
-				new \Scrivo\String("new string")));
+			$cache->store(new \Scrivo\Str("aString"),
+				new \Scrivo\Str("new string")));
 
 		// Overwrite one of the entries and check the result.
-		$cache->overwrite(new \Scrivo\String("aString"),
-			new \Scrivo\String("new string"));
-		$this->assertTrue(\Scrivo\String::create("new string")->equals(
-			$cache->fetch(new \Scrivo\String("aString"))));
+		$cache->overwrite(new \Scrivo\Str("aString"),
+			new \Scrivo\Str("new string"));
+		$this->assertTrue(\Scrivo\Str::create("new string")->equals(
+			$cache->fetch(new \Scrivo\Str("aString"))));
 
 		// Delete the entry and check if it's gone.
-		$cache->delete(new \Scrivo\String("aString"));
-		$this->assertNull($cache->fetch(new \Scrivo\String("aString")));
+		$cache->delete(new \Scrivo\Str("aString"));
+		$this->assertNull($cache->fetch(new \Scrivo\Str("aString")));
 
 		// The cache object count should be 0.
 		// APC issue: entry will not be dropped until the next request
@@ -128,7 +128,7 @@ class ApcCacheTest extends \PHPUnit_Framework_TestCase {
 	public function testStoreNull() {
 
 		$cache = new \Scrivo\Cache\ApcCache();
-		$cache->store(new \Scrivo\String("null1"), null);
+		$cache->store(new \Scrivo\Str("null1"), null);
 
 	}
 
@@ -140,8 +140,8 @@ class ApcCacheTest extends \PHPUnit_Framework_TestCase {
 	public function testStoreNull2() {
 
 		$cache = new \Scrivo\Cache\ApcCache();
-		$cache->store(new \Scrivo\String("null2"), 3);
-		$cache->overwrite(new \Scrivo\String("null2"), null);
+		$cache->store(new \Scrivo\Str("null2"), 3);
+		$cache->overwrite(new \Scrivo\Str("null2"), null);
 	}
 
 

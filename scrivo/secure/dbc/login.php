@@ -38,8 +38,8 @@ if (get_magic_quotes_gpc()) {
 	$usercode = stripslashes($usercode);
 	$password = stripslashes($password);
 }
-$usercode = new \Scrivo\String($usercode);
-$password = new \Scrivo\String($password);
+$usercode = new \Scrivo\Str($usercode);
+$password = new \Scrivo\Str($password);
 
 $context = new \Scrivo\Context(
 		new \Scrivo\Config(), \Scrivo\User::ANONYMOUS_USER_ID);

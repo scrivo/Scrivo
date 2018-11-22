@@ -38,9 +38,9 @@ class ListItemPropertySelectListTest extends ListItemPropertyBaseTestCase {
 
 	function testProperty() {
 
-		$testData = array(3, new \Scrivo\String("val"));
+		$testData = array(3, new \Scrivo\Str("val"));
 
-		$lip = $this->createItemProperty(new \Scrivo\String(
+		$lip = $this->createItemProperty(new \Scrivo\Str(
 				\Scrivo\ListItemPropertyDefinition::TYPE_SELECT));
 
 		$lip->value = $testData;

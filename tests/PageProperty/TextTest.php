@@ -47,13 +47,13 @@ class PagePropertyTextTest extends ScrivoDatabaseTestCase {
 
 	function testProperty() {
 
-		$testData = new \Scrivo\String("Plain text data");
+		$testData = new \Scrivo\Str("Plain text data");
 
 		$h = \Scrivo\Page::fetch(self::$context, self::PAGE_HOME_ID);
 
 		$pd = new \Scrivo\PagePropertyDefinition(self::$context);
 		$pd->type = \Scrivo\PagePropertyDefinition::TYPE_TEXT;
-		$pd->phpSelector = new \Scrivo\String("anText");
+		$pd->phpSelector = new \Scrivo\Str("anText");
 		$pd->pageDefinitionId = $h->definition->id;
 		$pd->insert();
 

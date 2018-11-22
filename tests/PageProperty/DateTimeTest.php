@@ -53,7 +53,7 @@ class PagePropertyDateTimeTest extends ScrivoDatabaseTestCase {
 
 		$pd = new \Scrivo\PagePropertyDefinition(self::$context);
 		$pd->type = \Scrivo\PagePropertyDefinition::TYPE_DATE_TIME;
-		$pd->phpSelector = new \Scrivo\String("anDate");
+		$pd->phpSelector = new \Scrivo\Str("anDate");
 		$pd->pageDefinitionId = $h->definition->id;
 		$pd->insert();
 

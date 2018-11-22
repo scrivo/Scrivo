@@ -42,7 +42,7 @@ class I18nTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testI18n() {
 
-		$i18n = new \Scrivo\I18n(new \Scrivo\String("nl_NL"));
+		$i18n = new \Scrivo\I18n(new \Scrivo\Str("nl_NL"));
 
 		$this->assertEquals("Annuleer", $i18n["Cancel"]);
 	}
@@ -53,8 +53,8 @@ class I18nTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testI18n2() {
 
-		$i18n = new \Scrivo\I18n(new \Scrivo\String("nl_NL"),
-			new \Scrivo\String("invaliddir"));
+		$i18n = new \Scrivo\I18n(new \Scrivo\Str("nl_NL"),
+			new \Scrivo\Str("invaliddir"));
 
 		$this->assertEquals("Boeh", $i18n["Boeh"]);
 	}
@@ -66,7 +66,7 @@ class I18nTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testOffsetSet() {
 
-		$i18n = new \Scrivo\I18n(new \Scrivo\String("nl_NL"));
+		$i18n = new \Scrivo\I18n(new \Scrivo\Str("nl_NL"));
 
 		$i18n["Cancel"] = "Blah blah";
 	}
@@ -78,7 +78,7 @@ class I18nTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testIsset() {
 
-		$i18n = new \Scrivo\I18n(new \Scrivo\String("nl_NL"));
+		$i18n = new \Scrivo\I18n(new \Scrivo\Str("nl_NL"));
 
 		$tmp = isset($i18n["Cancel"]);
 	}
@@ -90,7 +90,7 @@ class I18nTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testUnset() {
 
-		$i18n = new \Scrivo\I18n(new \Scrivo\String("nl_NL"));
+		$i18n = new \Scrivo\I18n(new \Scrivo\Str("nl_NL"));
 
 		unset($i18n["Cancel"]);
 	}

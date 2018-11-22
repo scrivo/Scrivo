@@ -32,7 +32,7 @@
 
 namespace ScrivoUi\Editor\Actions\ContentTabs;
 
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\Action;
 use \Scrivo\Page;
 use \Scrivo\Request;
@@ -74,8 +74,8 @@ class GetPageContent extends Action {
 		$cssClass = (string)$td->css_selector;
 
 		$cssIds = array();
-		foreach ($td->css_id->split(new String(",")) as $id) {
-			if (!$id->trim()->equals(new String(""))) {
+		foreach ($td->css_id->split(new Str(",")) as $id) {
+			if (!$id->trim()->equals(new Str(""))) {
 				$cssIds[] = (string)$id->trim();
 			}
 		}
@@ -85,7 +85,7 @@ class GetPageContent extends Action {
 		}
 
 		$stylesheets = array();
-		if (!$td->page_css->equals(new String(""))) {
+		if (!$td->page_css->equals(new Str(""))) {
 			$stylesheets = array(
 				"{$this->context->config->WWW_ROOT}/{$td->page_css}?page_id=".
 				$page->id);
@@ -94,9 +94,9 @@ class GetPageContent extends Action {
 		// Set default content
 		// TODO spellcheck
 		$html = $htmlPrp->rawHtml;
-		if ($html->equals(new String(""))) {
+		if ($html->equals(new Str(""))) {
 			$html = $td->INITIAL_CONTENT->replace(
-				new String("<head>"), new String(
+				new Str("<head>"), new Str(
 				"<head><base href=\"{$this->context->config->WWW_ROOT}\">")
 			);
 		}

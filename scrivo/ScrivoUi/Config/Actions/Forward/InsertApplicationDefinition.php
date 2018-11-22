@@ -41,7 +41,7 @@ use \Scrivo\ApplicationDefinition;
 use \Scrivo\ApplicationException;
 use \Scrivo\I18n;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The InsertApplicationDefinition class implements the action of creating a

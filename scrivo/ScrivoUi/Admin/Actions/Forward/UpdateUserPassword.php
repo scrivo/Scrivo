@@ -40,7 +40,7 @@ use \Scrivo\Action;
 use \Scrivo\ApplicationException;
 use \Scrivo\Request;
 use \Scrivo\User;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The UpdateUserPassword class implements the action for updating a user.
@@ -60,9 +60,9 @@ class UpdateUserPassword extends Action {
 				Request::post("user_id", Request::TYPE_INTEGER));
 
 			$pwd1 = Request::post("pwd1",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 			$pwd2 = Request::post("pwd2",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 			if (!$pwd1->equals($pwd2)) {
 				throw new ApplicationException("Passwords differ");
 			}

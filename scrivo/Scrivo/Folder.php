@@ -41,7 +41,7 @@ class Folder extends Asset {
 
 	/**
 	 * The cache headers settings for the files in this folder.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $cacheHeaderSettings = null;
 
@@ -57,7 +57,7 @@ class Folder extends Asset {
 
 			parent::__construct($context);
 
-			$this->cacheHeaderSettings = new \Scrivo\String();
+			$this->cacheHeaderSettings = new \Scrivo\Str();
 		}
 	}
 
@@ -103,7 +103,7 @@ class Folder extends Asset {
 
 		parent::setFields($context, $rd);
 
-		$this->cacheHeaderSettings = new \Scrivo\String($rd["location"]);
+		$this->cacheHeaderSettings = new \Scrivo\Str($rd["location"]);
 	}
 
 	/**
@@ -113,16 +113,16 @@ class Folder extends Asset {
 	 */
 	private function getCacheHeaderSettings() {
 		$res = new \stdClass;
-		$res->setting = new \Scrivo\String("last-modified");
+		$res->setting = new \Scrivo\Str("last-modified");
 		if ($this->cacheHeaderSettings)
 			if ($this->cacheHeaderSettings->equals(
-					new \Scrivo\String("NOCACHE"))) {
-			$res->setting = new \Scrivo\String("no-cache");
+					new \Scrivo\Str("NOCACHE"))) {
+			$res->setting = new \Scrivo\Str("no-cache");
 		} else if ($this->cacheHeaderSettings->length >= 5 &&
 				$this->cacheHeaderSettings->substr(0,5)->equals(
-				new \Scrivo\String("CACHE"))) {
-			$dat = $this->cacheHeaderSettings->split(new \Scrivo\String(":"));
-			$res->setting = new \Scrivo\String("expires");
+				new \Scrivo\Str("CACHE"))) {
+			$dat = $this->cacheHeaderSettings->split(new \Scrivo\Str(":"));
+			$res->setting = new \Scrivo\Str("expires");
 			$res->timePeriod = intval((string)$dat[1]);
 			$res->timeUnit = $dat[2];
 		}
@@ -135,14 +135,14 @@ class Folder extends Asset {
 	 * @param \stdClass $settingData The cache header settings data.
 	 */
 	private function setCacheHeaderSettings(\stdClass $settingData) {
-		if ($settingData->setting->equals(new \Scrivo\String("expires"))) {
-			$this->cacheHeaderSettings = new \Scrivo\String(
+		if ($settingData->setting->equals(new \Scrivo\Str("expires"))) {
+			$this->cacheHeaderSettings = new \Scrivo\Str(
 				"CACHE:{$settingData->timePeriod}:{$settingData->timeUnit}");
 		} else if ($settingData->setting->equals(
-				new \Scrivo\String("no-cache"))) {
-			$this->cacheHeaderSettings = new \Scrivo\String("NOCACHE");
+				new \Scrivo\Str("no-cache"))) {
+			$this->cacheHeaderSettings = new \Scrivo\Str("NOCACHE");
 		} else {
-			$this->cacheHeaderSettings = new \Scrivo\String("");
+			$this->cacheHeaderSettings = new \Scrivo\Str("");
 		}
 	}
 

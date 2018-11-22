@@ -35,7 +35,7 @@ class InitConfig extends \Scrivo\Config {
 
 	public function __construct() {
 
-		$this->ini["SESSION_PREFIX"] = new \Scrivo\String("init_dbc");
+		$this->ini["SESSION_PREFIX"] = new \Scrivo\Str("init_dbc");
 
 	}
 

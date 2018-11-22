@@ -34,7 +34,7 @@ namespace ScrivoUi\Editor\Actions\FileDialog;
 use \Scrivo\Action;
 use \Scrivo\Request;
 use \Scrivo\I18n;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\Role;
 use \Scrivo\Asset;
 use \Scrivo\Folder;
@@ -88,7 +88,7 @@ class AssetDetails extends Action {
 					$img = "";
 				} else {
 					if ($asset->mimeType->substr(0, 5)->equals(
-							new String("image"))) {
+							new Str("image"))) {
 						$img = $link;
 					} else {
 						$img = $this->iconFunc($asset->mimeType);
@@ -189,12 +189,12 @@ class AssetDetails extends Action {
 	/**
 	 * Generate an icon url based on a file mime type.
 	 *
-	 * @param \Scrivo\String $mimeType The mime type to create the icon url for.
+	 * @param \Scrivo\Str $mimeType The mime type to create the icon url for.
 	 * @return string An url to an icon.
 	 */
-	private function iconFunc(String $mimeType) {
+	private function iconFunc(Str $mimeType) {
 
-		if ($mimeType->substr(0, 5)->equals(new String("audio"))) {
+		if ($mimeType->substr(0, 5)->equals(new Str("audio"))) {
 			return self::BUT_IMG_PATH."icon48_media.gif";
 		}
 

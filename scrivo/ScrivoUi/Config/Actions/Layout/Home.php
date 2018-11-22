@@ -36,7 +36,7 @@
 namespace ScrivoUi\Config\Actions\Layout;
 
 use \Scrivo\I18n;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\LayoutAction;
 
 /**
@@ -54,8 +54,8 @@ class Home extends LayoutAction {
 		$i18n = new I18n($this->context->config->UI_LANG);
 
 		$title = $this->context->config->WWW_ROOT->replace(
-			String::create(array("http://", "https://")),
-			new String(""));
+			Str::create(array("http://", "https://")),
+			new Str(""));
 
 		include "../ScrivoUi/Config/Templates/common.tpl.php";
 		include "../ScrivoUi/Config/Templates/home.tpl.php";

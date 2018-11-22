@@ -46,7 +46,7 @@ namespace Scrivo;
  * spl_autoload_register("\\Scrivo\\Autoloader::load");
  *
  * // Now use Scrivo classes:
- * $str = new \Scrivo\String("A new string");
+ * $str = new \Scrivo\Str("A new string");
  * $parts = $str->split(" ");
  * ...
  * ?>

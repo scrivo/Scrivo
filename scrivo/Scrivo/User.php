@@ -65,15 +65,15 @@ namespace Scrivo;
  * @property-read int $id The user's user id (DB key)
  * @property-read array[] $roles An array of role-ids representing the roles
  *    for the user.
- * @property \Scrivo\String $emailAddress The user's email address.
- * @property \Scrivo\String $familyName The user's family name.
- * @property \Scrivo\String $familyNamePrefix A prefix for the user's family
+ * @property \Scrivo\Str $emailAddress The user's email address.
+ * @property \Scrivo\Str $familyName The user's family name.
+ * @property \Scrivo\Str $familyNamePrefix A prefix for the user's family
  *    name.
- * @property \Scrivo\String $givenName The user's given name.
- * @property \Scrivo\String $password The user's password (encrypted).
+ * @property \Scrivo\Str $givenName The user's given name.
+ * @property \Scrivo\Str $password The user's password (encrypted).
  * @property int $status The user's status, one out of the constants
  *    self::STATUS_*
- * @property \Scrivo\String $userCode A more descriptive identification
+ * @property \Scrivo\Str $userCode A more descriptive identification
  * 	  for the user than the user id.*
  */
 class User {
@@ -117,37 +117,37 @@ class User {
 
 	/**
 	 * A more descriptive identification for the user than the user id.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $userCode = null;
 
 	/**
 	 * The user's password (encrypted).
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $password = null;
 
 	/**
 	 * The user's given name.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $givenName = null;
 
 	/**
 	 * A prefix for the user's family name.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $familyNamePrefix = null;
 
 	/**
 	 * The user's family name.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $familyName = null;
 
 	/**
 	 * The user's email address.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $emailAddress = null;
 
@@ -178,12 +178,12 @@ class User {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null), 0);
 
 		if ($context) {
-			$this->userCode = new \Scrivo\String();
-			$this->password = new \Scrivo\String();
-			$this->givenName = new \Scrivo\String();
-			$this->familyNamePrefix = new \Scrivo\String();
-			$this->familyName = new \Scrivo\String();
-			$this->emailAddress = new \Scrivo\String();
+			$this->userCode = new \Scrivo\Str();
+			$this->password = new \Scrivo\Str();
+			$this->givenName = new \Scrivo\Str();
+			$this->familyNamePrefix = new \Scrivo\Str();
+			$this->familyName = new \Scrivo\Str();
+			$this->emailAddress = new \Scrivo\Str();
 			$this->customData = new \stdClass;
 
 			$this->context = $context;
@@ -255,12 +255,12 @@ class User {
 
 		$this->id = $id;
 		$this->status = intval($rd["status"]);
-		$this->userCode = new \Scrivo\String($rd["user_code"]);
-		$this->password = new \Scrivo\String("- hidden -");
-		$this->givenName = new \Scrivo\String($rd["given_name"]);
-		$this->familyNamePrefix = new \Scrivo\String($rd["family_name_prefix"]);
-		$this->familyName = new \Scrivo\String($rd["family_name"]);
-		$this->emailAddress = new \Scrivo\String($rd["email_address"]);
+		$this->userCode = new \Scrivo\Str($rd["user_code"]);
+		$this->password = new \Scrivo\Str("- hidden -");
+		$this->givenName = new \Scrivo\Str($rd["given_name"]);
+		$this->familyNamePrefix = new \Scrivo\Str($rd["family_name_prefix"]);
+		$this->familyName = new \Scrivo\Str($rd["family_name"]);
+		$this->emailAddress = new \Scrivo\Str($rd["email_address"]);
 		$this->customData = unserialize($rd["custom_data"]);
 		if (is_array($this->customData)) {
 			$this->customData = (object)$this->customData;
@@ -313,55 +313,55 @@ class User {
 	/**
 	 * Set the user code.
 	 *
-	 * @param \Scrivo\String A more descriptive identification for the
+	 * @param \Scrivo\Str A more descriptive identification for the
 	 *   user than the user id.
 	 */
-	private function setUserCode(\Scrivo\String $userCode) {
+	private function setUserCode(\Scrivo\Str $userCode) {
 		$this->userCode = $userCode;
 	}
 
 	/**
 	 * Set the user's password (not encrypted).
 	 *
-	 * @param \Scrivo\String The user's password (not encrypted).
+	 * @param \Scrivo\Str The user's password (not encrypted).
 	 */
-	private function setPassword(\Scrivo\String $password) {
-		$this->password = new \Scrivo\String($this->encrypt($password));
+	private function setPassword(\Scrivo\Str $password) {
+		$this->password = new \Scrivo\Str($this->encrypt($password));
 	}
 
 	/**
 	 * Set the user's given name.
 	 *
-	 * @param \Scrivo\String The user's given name.
+	 * @param \Scrivo\Str The user's given name.
 	 */
-	private function setGivenName(\Scrivo\String $givenName) {
+	private function setGivenName(\Scrivo\Str $givenName) {
 		$this->givenName = $givenName;
 	}
 
 	/**
 	 * Set a prefix for the user's family name.
 	 *
-	 * @param \Scrivo\String A prefix for the user's family name.
+	 * @param \Scrivo\Str A prefix for the user's family name.
 	 */
-	private function setFamilyNamePrefix(\Scrivo\String $familyNamePrefix) {
+	private function setFamilyNamePrefix(\Scrivo\Str $familyNamePrefix) {
 		$this->familyNamePrefix = $familyNamePrefix;
 	}
 
 	/**
 	 * Set the user's family name.
 	 *
-	 * @param \Scrivo\String The user's family name.
+	 * @param \Scrivo\Str The user's family name.
 	 */
-	private function setFamilyName(\Scrivo\String $familyName) {
+	private function setFamilyName(\Scrivo\Str $familyName) {
 		$this->familyName = $familyName;
 	}
 
 	/**
 	 * Set the user's email address
 	 *
-	 * @param \Scrivo\String The user's email address
+	 * @param \Scrivo\Str The user's email address
 	 */
-	private function setEmailAddress(\Scrivo\String $emailAddress) {
+	private function setEmailAddress(\Scrivo\Str $emailAddress) {
 		$this->emailAddress = $emailAddress;
 	}
 
@@ -411,11 +411,11 @@ class User {
 	/**
 	 * Encrypt a password.
 	 *
-	 * @param \Scrivo\String $password
+	 * @param \Scrivo\Str $password
 	 *
 	 * @return string
 	 */
-	private function encrypt(\Scrivo\String $password) {
+	private function encrypt(\Scrivo\Str $password) {
 		$salt = base_convert(md5(mt_rand(0, 1000000)), 16, 36);
 		$c =  crypt($password, "\$2a\$07\$".$salt."\$");
 		return $c;
@@ -576,11 +576,11 @@ class User {
 	/**
 	 * Check if a given password matches with the one of this user.
 	 *
-	 * @param \Scrivo\String $toTest Password to test.
+	 * @param \Scrivo\Str $toTest Password to test.
 	 *
 	 * @return boolean True if given password matches the user's, false if not.
 	 */
-	public function checkPassword(\Scrivo\String $toTest) {
+	public function checkPassword(\Scrivo\Str $toTest) {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null));
 		try {
 
@@ -687,7 +687,7 @@ class User {
 	 * user code.
 	 *
 	 * @param \Scrivo\Context $context A Scrivo context.
-	 * @param int|\Scrivo\String $id a valid object id or user code.
+	 * @param int|\Scrivo\Str $id a valid object id or user code.
 	 *
 	 * @return \Scrivo\User The requested user object.
 	 *
@@ -697,11 +697,11 @@ class User {
 	public static function fetch(\Scrivo\Context $context, $id) {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(
 			null,
-			array(array(\Scrivo\ArgumentCheck::TYPE_INTEGER, "Scrivo\String"))
+			array(array(\Scrivo\ArgumentCheck::TYPE_INTEGER, "Scrivo\Str"))
 		));
 		try {
 
-			if ($id instanceof \Scrivo\String) {
+			if ($id instanceof \Scrivo\Str) {
 				$byUserCode = true;
 			} else if (is_int($id)) {
 				$byUserCode = false;

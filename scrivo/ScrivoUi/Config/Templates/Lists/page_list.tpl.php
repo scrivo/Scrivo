@@ -29,7 +29,7 @@
  * $Id: page_list.tpl.php 841 2013-08-19 22:19:47Z geert $
  */
 
-use \Scrivo\String;
+use \Scrivo\Str;
 
 foreach ($rows as $d) {
 
@@ -172,10 +172,10 @@ function openNode(id) {
 </script>
 
 	<p><?php echo
-		String::create(
+		Str::create(
 			$i18n["Create a new [L]page[/L]"])->replace(
-				String::create(array("[L]", "[/L]")),
-				String::create(array("<a href=\"index.php?a=page_form\">", "</a>"))
+				Str::create(array("[L]", "[/L]")),
+				Str::create(array("<a href=\"index.php?a=page_form\">", "</a>"))
 			);
 	?></p>
 

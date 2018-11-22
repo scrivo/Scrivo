@@ -40,7 +40,7 @@ class ListItemPropertyDateTimeTest extends ListItemPropertyBaseTestCase {
 
 		$v = new \DateTime("now");
 
-		$lip = $this->createItemProperty(new \Scrivo\String(
+		$lip = $this->createItemProperty(new \Scrivo\Str(
 				\Scrivo\ListItemPropertyDefinition::TYPE_DATE_TIME));
 
 		$lip->dateTime = $v;

@@ -46,11 +46,11 @@ namespace Scrivo;
  * in an iframe or a Javascript class constructor) for the application.
  *
  * @property-read int $id The application definition id (DB key)
- * @property \Scrivo\String $description An additional description for the
+ * @property \Scrivo\Str $description An additional description for the
  *    application.
- * @property \Scrivo\String $location The location of the application start
+ * @property \Scrivo\Str $location The location of the application start
  *    page.
- * @property \Scrivo\String $title A descriptive title for the application.
+ * @property \Scrivo\Str $title A descriptive title for the application.
  * @property int $type The application type: one out of the
  *    ApplicationDefinition::TYPE_* constants.
  */
@@ -90,19 +90,19 @@ class ApplicationDefinition {
 
 	/**
 	 * A descriptive title for the application.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $title = null;
 
 	/**
 	 * An additional description for the application.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $description = null;
 
 	/**
 	 * The location of the application start page.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $location = null;
 
@@ -128,9 +128,9 @@ class ApplicationDefinition {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null), 0);
 
 		if ($context) {
-			$this->title = new \Scrivo\String();
-			$this->description = new \Scrivo\String();
-			$this->location = new \Scrivo\String();
+			$this->title = new \Scrivo\Str();
+			$this->description = new \Scrivo\Str();
+			$this->location = new \Scrivo\Str();
 
 			$this->context = $context;
 		}
@@ -183,9 +183,9 @@ class ApplicationDefinition {
 	private function setFields(\Scrivo\Context $context, array $rd) {
 
 		$this->id = intval($rd["application_definition_id"]);
-		$this->title = new \Scrivo\String($rd["title"]);
-		$this->description = new \Scrivo\String($rd["description"]);
-		$this->location = new \Scrivo\String($rd["action"]);
+		$this->title = new \Scrivo\Str($rd["title"]);
+		$this->description = new \Scrivo\Str($rd["description"]);
+		$this->location = new \Scrivo\Str($rd["action"]);
 		$this->type = intval($rd["type"]);
 
 		$this->context = $context;
@@ -194,29 +194,29 @@ class ApplicationDefinition {
 	/**
 	 * Set the descriptive title for the application.
 	 *
-	 * @param \Scrivo\String $title A descriptive title for the application.
+	 * @param \Scrivo\Str $title A descriptive title for the application.
 	 */
-	private function setTitle(\Scrivo\String $title) {
+	private function setTitle(\Scrivo\Str $title) {
 		$this->title = $title;
 	}
 
 	/**
 	 * Set the additional description for the application.
 	 *
-	 * @param \Scrivo\String $description An additional description for the
+	 * @param \Scrivo\Str $description An additional description for the
 	 *    application.
 	 */
-	private function setDescription(\Scrivo\String $description) {
+	private function setDescription(\Scrivo\Str $description) {
 		$this->description = $description;
 	}
 
 	/**
 	 * Set the location of the application start page.
 	 *
-	 * @param \Scrivo\String $location The location of the application start
+	 * @param \Scrivo\Str $location The location of the application start
 	 *    page.
 	 */
-	private function setLocation(\Scrivo\String $location) {
+	private function setLocation(\Scrivo\Str $location) {
 		$this->location = $location;
 	}
 

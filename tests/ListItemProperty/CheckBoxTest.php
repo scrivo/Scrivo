@@ -38,7 +38,7 @@ class ListItemPropertyCheckBoxTest extends ListItemPropertyBaseTestCase {
 
 	function testProperty() {
 
-		$lip = $this->createItemProperty(new \Scrivo\String(
+		$lip = $this->createItemProperty(new \Scrivo\Str(
 				\Scrivo\ListItemPropertyDefinition::TYPE_CHECKBOX));
 
 		$lip->checked = true;

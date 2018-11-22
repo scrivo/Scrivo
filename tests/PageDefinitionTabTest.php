@@ -47,14 +47,14 @@ class PageDefinitionTabTest extends ScrivoDatabaseTestCase {
 			"test 1" => array(
 				"argument 1" => (object) array(
 					"pageDefinitionId" => self::PAGE_DEFINITION_FORUM_ID,
-					"title" => new \Scrivo\String("prop tab 1"),
+					"title" => new \Scrivo\Str("prop tab 1"),
 					"type" => \Scrivo\PageDefinitionTab::TYPE_PROPERTY_TAB
 				)
 			),
 			"test 2" => array(
 				"argument 1" => (object) array(
 					"pageDefinitionId" => self::PAGE_DEFINITION_FORUM_ID,
-					"title" => new \Scrivo\String("prop tab 2"),
+					"title" => new \Scrivo\Str("prop tab 2"),
 					"type" => \Scrivo\PageDefinitionTab::TYPE_PROPERTY_TAB
 				)
 			)
@@ -70,12 +70,12 @@ class PageDefinitionTabTest extends ScrivoDatabaseTestCase {
 			"test 1" => array(
 				"argument 1" => (object) array(
 					"pageDefinitionId" => self::PAGE_DEFINITION_FORUM_ID,
-					"title" => new \Scrivo\String("prop tab 1"),
+					"title" => new \Scrivo\Str("prop tab 1"),
 					"type" => \Scrivo\PageDefinitionTab::TYPE_PROPERTY_TAB
 				),
 				"argument 2" => (object) array(
 					"pageDefinitionId" => self::PAGE_DEFINITION_FORUM_ID,
-					"title" => new \Scrivo\String("prop tab 2"),
+					"title" => new \Scrivo\Str("prop tab 2"),
 					"type" => \Scrivo\PageDefinitionTab::TYPE_PROPERTY_TAB
 				)
 			)
@@ -331,7 +331,7 @@ class PageDefinitionTabTest extends ScrivoDatabaseTestCase {
 		$this->setTemplateTabProperties($tmp, $d1);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, self::EDITOR_USER_ID);
 
 		// Creating/inserting a new \Scrivo\PageDefinitionTab object as editor
@@ -385,7 +385,7 @@ class PageDefinitionTabTest extends ScrivoDatabaseTestCase {
 		$this->setTemplateTabProperties($tmp, $d2);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, \Scrivo\User::ANONYMOUS_USER_ID);
 
 		// Creating/inserting a new \Scrivo\PageDefinitionTab object as member

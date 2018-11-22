@@ -46,14 +46,14 @@ namespace Scrivo;
  * etPageDefinition_ELEMENT table.
  *
  * @property-read int $id The page property definition id (DB key).
- * @property \Scrivo\String $phpSelector A textual identification/key for this
+ * @property \Scrivo\Str $phpSelector A textual identification/key for this
  *    page property.
  * @property int $pageDefinitionId The id of the page definition to which this
  *    page property definition belongs.
  * @property int $pageDefinitionTabId An optional id of a page definition tab
  *    on which the page property is displayed.
- * @property \Scrivo\String $title A descriptive name for the page property.
- * @property \Scrivo\String $type The page property type, one out of
+ * @property \Scrivo\Str $title A descriptive name for the page property.
+ * @property \Scrivo\Str $type The page property type, one out of
  *    PagePropertyDefinition::TYPE_* constants.
  * @property \stdClass $typeData Optional data needed to for this specific
  *    page property.
@@ -135,20 +135,20 @@ class PagePropertyDefinition {
 
 	/**
 	 * A descriptive name for the page property.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $title = null;
 
 	/**
 	 * A textual identification/key for this page property.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $phpSelector = null;
 
 	/**
 	 * The page property type, one out of PagePropertyDefinition::TYPE_*
 	 * constants.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $type = "";
 
@@ -186,8 +186,8 @@ class PagePropertyDefinition {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null), 0);
 
 		if ($context) {
-			$this->title = new \Scrivo\String();
-			$this->phpSelector = new \Scrivo\String();
+			$this->title = new \Scrivo\Str();
+			$this->phpSelector = new \Scrivo\Str();
 			$this->typeData = new \stdClass;
 
 			$this->context = $context;
@@ -247,8 +247,8 @@ class PagePropertyDefinition {
 
 		$this->id = intval($rd["page_property_definition_id"]);
 		$this->pageDefinitionId = intval($rd["page_definition_id"]);
-		$this->title = new \Scrivo\String($rd["title"]);
-		$this->phpSelector = new \Scrivo\String($rd["php_key"]);
+		$this->title = new \Scrivo\Str($rd["title"]);
+		$this->phpSelector = new \Scrivo\Str($rd["php_key"]);
 		$this->type = (string)$rd["type"];
 		$this->setTypeDataFromRS($rd);
 		$this->pageDefinitionTabId = intval($rd["page_definition_tab_id"]);
@@ -259,7 +259,7 @@ class PagePropertyDefinition {
 	/**
 	 * Get an array of the possible property types.
 	 *
-	 * @return \Scrivo\String[] An array of all possible property types.
+	 * @return \Scrivo\Str[] An array of all possible property types.
 	 */
 	public static function getTypes() {
 		return array(
@@ -296,19 +296,19 @@ class PagePropertyDefinition {
 	/**
 	 * Set the descriptive name for the page property.
 	 *
-	 * @param \Scrivo\String $title A descriptive name for the page property.
+	 * @param \Scrivo\Str $title A descriptive name for the page property.
 	 */
-	private function setTitle(\Scrivo\String $title) {
+	private function setTitle(\Scrivo\Str $title) {
 		$this->title = $title;
 	}
 
 	/**
 	 * Set the textual identification/key for this page property.
 	 *
-	 * @param \Scrivo\String $phpSelector A textual identification/key for
+	 * @param \Scrivo\Str $phpSelector A textual identification/key for
 	 *    this page property.
 	 */
-	private function setPhpSelector(\Scrivo\String $phpSelector) {
+	private function setPhpSelector(\Scrivo\Str $phpSelector) {
 		$this->phpSelector = $phpSelector;
 	}
 
@@ -378,9 +378,9 @@ class PagePropertyDefinition {
 	 * Convert a string to its most likely type.
 	 *
 	 * @param string $val The value to convert to either an int, float or
-	 *    \Scrivo\String.
+	 *    \Scrivo\Str.
 	 *
-	 * @return int|float|\Scrivo\String The given value converted to its
+	 * @return int|float|\Scrivo\Str The given value converted to its
 	 *    most likely type.
 	 */
 	private function readStr($val) {
@@ -403,49 +403,49 @@ class PagePropertyDefinition {
 		$d = array();
 
 		if ($rs["type"] == self::TYPE_HTML_TEXT_TAB) {
-			$d["css_selector"] = new \Scrivo\String($rs["css_selector"]);
-			$d["INITIAL_CONTENT"] = new \Scrivo\String("");
-			$d["page_css"] = new \Scrivo\String($rs["page_css"]);
-			$d["stylesheet"] = new \Scrivo\String($rs["stylesheet"]);
-			$d["css_id"] = new \Scrivo\String($rs["css_id"]);
+			$d["css_selector"] = new \Scrivo\Str($rs["css_selector"]);
+			$d["INITIAL_CONTENT"] = new \Scrivo\Str("");
+			$d["page_css"] = new \Scrivo\Str($rs["page_css"]);
+			$d["stylesheet"] = new \Scrivo\Str($rs["stylesheet"]);
+			$d["css_id"] = new \Scrivo\Str($rs["css_id"]);
 			$this->typeData = (object)$d;
 		} else if ($rs["type"] == self::TYPE_APPLICATION_TAB) {
 			$d["APPLICATION_DEFINITION_ID"] = intval($rs["application_definition_id"]);
 			$this->typeData = (object)$d;
 		} else {
-			$this->setTypeDataAsString(new \Scrivo\String($rs["type_data"]));
+			$this->setTypeDataAsString(new \Scrivo\Str($rs["type_data"]));
 		}
 	}
 
 	/**
 	 * Create a string representation of the type data member.
 	 *
-	 * @return \Scrivo\String The type data as an string.
+	 * @return \Scrivo\Str The type data as an string.
 	 */
 	private function getTypeDataAsString() {
 		$d = array();
 		foreach($this->typeData as $k=>$v) {
 			$d[] = $k."=".$v;
 		};
-		return new \Scrivo\String(implode("\n", $d));
+		return new \Scrivo\Str(implode("\n", $d));
 	}
 
 	/**
 	 * Set the type data member form a string representation. The format of
 	 * the string should be NAME1=VALUE1\nNAME2=VALUE2\nNAME3...etc.
 	 *
-	 * @param \Scrivo\String $str The type data string.
+	 * @param \Scrivo\Str $str The type data string.
 	 */
-	private function setTypeDataAsString(\Scrivo\String $str) {
+	private function setTypeDataAsString(\Scrivo\Str $str) {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(
 			null,
 			array(\Scrivo\ArgumentCheck::TYPE_INTEGER)
 		), 1);
 
 		$d = array();
-		$parts = $str->split(new \Scrivo\String("\n"));
+		$parts = $str->split(new \Scrivo\Str("\n"));
 		foreach($parts as $line) {
-			$p = $line->split(new \Scrivo\String("="), 2);
+			$p = $line->split(new \Scrivo\Str("="), 2);
 			if (count($p) == 2) {
 				$d[(string)$p[0]->trim()] = $this->readStr($p[1]->trim());
 			}

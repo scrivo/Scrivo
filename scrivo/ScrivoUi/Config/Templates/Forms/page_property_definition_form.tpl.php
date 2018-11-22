@@ -30,7 +30,7 @@
  */
 
 use \Scrivo\PagePropertyDefinition;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 $this->beginSection("content", true);
 
@@ -103,7 +103,7 @@ function typeDataAsString($data) {
 	foreach($data as $k=>$v) {
 		$d[] = $k."=".$v;
 	};
-	return new String(implode("\n", $d));
+	return new Str(implode("\n", $d));
 }
 
 ?>

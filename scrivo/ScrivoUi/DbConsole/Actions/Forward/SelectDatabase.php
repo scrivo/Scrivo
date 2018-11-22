@@ -38,7 +38,7 @@ namespace ScrivoUi\DbConsole\Actions\Forward;
 
 use \Scrivo\I18n;
 use \Scrivo\Action;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\Request;
 use \ScrivoUi\DbConsole\Lib\DdlUtil;
 
@@ -58,7 +58,7 @@ class SelectDatabase extends Action {
 			if (isset($this->session->formData)) {
 				$fd = unserialize($this->session->formData);
 			} else {
-				$fd = String::create(array(
+				$fd = Str::create(array(
 					"db_host" => Request::post("db_host", Request::TYPE_STRING),
 					"db_name" => Request::post("db_name", Request::TYPE_STRING),
 					"db_user" => Request::post("db_user", Request::TYPE_STRING),

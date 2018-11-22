@@ -47,13 +47,13 @@ class PagePropertyColorTest extends ScrivoDatabaseTestCase {
 
 	function testProperty() {
 
-		$testColor = new \Scrivo\String("FF99AA");
+		$testColor = new \Scrivo\Str("FF99AA");
 
 		$h = \Scrivo\Page::fetch(self::$context, self::PAGE_HOME_ID);
 
 		$pd = new \Scrivo\PagePropertyDefinition(self::$context);
 		$pd->type = \Scrivo\PagePropertyDefinition::TYPE_COLOR;
-		$pd->phpSelector = new \Scrivo\String("anColor");
+		$pd->phpSelector = new \Scrivo\Str("anColor");
 		$pd->pageDefinitionId = $h->definition->id;
 		$pd->insert();
 

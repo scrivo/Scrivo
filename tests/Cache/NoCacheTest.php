@@ -43,38 +43,38 @@ class NoCacheTest extends \PHPUnit_Framework_TestCase {
 	public function testNoCache() {
 
 		// Just some data
-		$str = new \Scrivo\String("Hatseflatse");
+		$str = new \Scrivo\Str("Hatseflatse");
 
 		// Create a cache
 		$cache = new \Scrivo\Cache\NoCache();
 
 		// Store some values (the second with a ttl of 1 sec).
-		$cache->store(new \Scrivo\String("aString"), $str);
-		$cache->store(new \Scrivo\String("anInt"), 3, 1);
+		$cache->store(new \Scrivo\Str("aString"), $str);
+		$cache->store(new \Scrivo\Str("anInt"), 3, 1);
 
 		// Retrieve them and check the values.
-		$this->assertNull($cache->fetch(new \Scrivo\String("aString")));
-		$this->assertNull($cache->fetch(new \Scrivo\String("anInt")));
+		$this->assertNull($cache->fetch(new \Scrivo\Str("aString")));
+		$this->assertNull($cache->fetch(new \Scrivo\Str("anInt")));
 
 		// Also the cache object count should be 0.
 		$this->assertCount(0, $cache->entryList());
 
 		// Slam one of the entries and check the result.
 		$this->assertEquals($cache::DATA_STORED,
-			$cache->store(new \Scrivo\String("aString"),
-				new \Scrivo\String("new string")));
+			$cache->store(new \Scrivo\Str("aString"),
+				new \Scrivo\Str("new string")));
 
 		// Overwrite one of the entries and check the result.
 		$this->assertEquals($cache::DATA_STORED,
-			$cache->overwrite(new \Scrivo\String("aString"),
-				new \Scrivo\String("new string")));
+			$cache->overwrite(new \Scrivo\Str("aString"),
+				new \Scrivo\Str("new string")));
 
 		// The cache object count should be 0.
 		$this->assertCount(0, $cache->entryList());
 
 		// Delete the entry and check if it's gone.
-		$cache->delete(new \Scrivo\String("aString"));
-		$this->assertNull($cache->fetch(new \Scrivo\String("aString")));
+		$cache->delete(new \Scrivo\Str("aString"));
+		$this->assertNull($cache->fetch(new \Scrivo\Str("aString")));
 
 		// The cache object count should be 0.
 		$this->assertCount(0, $cache->entryList());
@@ -88,7 +88,7 @@ class NoCacheTest extends \PHPUnit_Framework_TestCase {
 	public function testStoreNull() {
 
 		$cache = new \Scrivo\Cache\NoCache();
-		$cache->store(new \Scrivo\String("null1"), null);
+		$cache->store(new \Scrivo\Str("null1"), null);
 
 	}
 
@@ -100,8 +100,8 @@ class NoCacheTest extends \PHPUnit_Framework_TestCase {
 	public function testStoreNull2() {
 
 		$cache = new \Scrivo\Cache\NoCache();
-		$cache->store(new \Scrivo\String("null2"), 3);
-		$cache->overwrite(new \Scrivo\String("null2"), null);
+		$cache->store(new \Scrivo\Str("null2"), 3);
+		$cache->overwrite(new \Scrivo\Str("null2"), null);
 	}
 
 

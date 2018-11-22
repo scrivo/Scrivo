@@ -47,15 +47,15 @@ class PagePropertyUrlTest extends ScrivoDatabaseTestCase {
 
 	function testProperty() {
 
-		$testHref = new \Scrivo\String("http:\\www.url.com\url.html");
-		$testTitle = new \Scrivo\String("a title");
-		$testTarget = new \Scrivo\String("_blank");
+		$testHref = new \Scrivo\Str("http:\\www.url.com\url.html");
+		$testTitle = new \Scrivo\Str("a title");
+		$testTarget = new \Scrivo\Str("_blank");
 
 		$h = \Scrivo\Page::fetch(self::$context, self::PAGE_HOME_ID);
 
 		$pd = new \Scrivo\PagePropertyDefinition(self::$context);
 		$pd->type = \Scrivo\PagePropertyDefinition::TYPE_URL;
-		$pd->phpSelector = new \Scrivo\String("anUrl");
+		$pd->phpSelector = new \Scrivo\Str("anUrl");
 		$pd->pageDefinitionId = $h->definition->id;
 		$pd->insert();
 
@@ -74,9 +74,9 @@ class PagePropertyUrlTest extends ScrivoDatabaseTestCase {
 		$this->assertTrue(
 			$h->properties->anUrl->href->equals($testHref));
 		$this->assertTrue(
-			$h->properties->anUrl->title->equals(new \Scrivo\String("")));
+			$h->properties->anUrl->title->equals(new \Scrivo\Str("")));
 		$this->assertTrue(
-			$h->properties->anUrl->target->equals(new \Scrivo\String("")));
+			$h->properties->anUrl->target->equals(new \Scrivo\Str("")));
 
 		/***********/
 
@@ -93,7 +93,7 @@ class PagePropertyUrlTest extends ScrivoDatabaseTestCase {
 		$this->assertTrue(
 				$h->properties->anUrl->title->equals($testTitle));
 		$this->assertTrue(
-				$h->properties->anUrl->target->equals(new \Scrivo\String("")));
+				$h->properties->anUrl->target->equals(new \Scrivo\Str("")));
 
 		/***********/
 

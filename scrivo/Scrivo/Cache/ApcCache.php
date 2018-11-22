@@ -58,7 +58,7 @@ class ApcCache implements \Scrivo\Cache {
 	 * possible to overwrite an existing entry (cache slam). Such an event
 	 * will not raise an error but the function will report it.
 	 *
-	 * @param \Scrivo\String $key A cache unique name for the key.
+	 * @param \Scrivo\Str $key A cache unique name for the key.
 	 * @param mixed $val The (serializable) variabele to strore.
 	 * @param int $ttl Time to live in seconds.
 	 *
@@ -67,7 +67,7 @@ class ApcCache implements \Scrivo\Cache {
 	 *
 	 * @throws \Scrivo\SystemException When trying to store a NULL value.
 	 */
-	public function store(\Scrivo\String $key, $val, $ttl=3600) {
+	public function store(\Scrivo\Str $key, $val, $ttl=3600) {
 		if ($val === null) {
 			throw new \Scrivo\SystemException(
 				"Can't store null values in the cache");
@@ -86,7 +86,7 @@ class ApcCache implements \Scrivo\Cache {
 	 * the data will be written. But note that it is not guaranteed that the
 	 * next fetch will retrieve this value.
 	 *
-	 * @param \Scrivo\String $key A cache unique name for the key.
+	 * @param \Scrivo\Str $key A cache unique name for the key.
 	 * @param mixed $val The (serializable) variabele to strore.
 	 * @param int $ttl Time to live in seconds.
 	 *
@@ -95,7 +95,7 @@ class ApcCache implements \Scrivo\Cache {
 	 * @throws \Scrivo\SystemException When trying to store a NULL value or
 	 *   when a file operation fails.
 	 */
-	public function overwrite(\Scrivo\String $key, $val, $ttl=3600) {
+	public function overwrite(\Scrivo\Str $key, $val, $ttl=3600) {
 		if ($val === null) {
 			throw new \Scrivo\SystemException(
 				"Can't store null values in the cache");
@@ -107,21 +107,21 @@ class ApcCache implements \Scrivo\Cache {
 	/**
 	 * Delete/remove a cache entry.
 	 *
-	 * @param \Scrivo\String $key A cache unique name for the key.
+	 * @param \Scrivo\Str $key A cache unique name for the key.
 	 */
-	public function delete(\Scrivo\String $key) {
+	public function delete(\Scrivo\Str $key) {
 		apc_delete((string)$key);
 	}
 
 	/**
 	 * Retrieve a value from the cache.
 	 *
-	 * @param \Scrivo\String $key The key for which to retrieve the value.
+	 * @param \Scrivo\Str $key The key for which to retrieve the value.
 	 *
 	 * @return mixed The value of the stored variable or NULL if the key
 	 *   does not exists or is expired.
 	 */
-	public function fetch(\Scrivo\String $key) {
+	public function fetch(\Scrivo\Str $key) {
 		$res = apc_fetch((string)$key);
 		return $res ? $res : null;
 	}

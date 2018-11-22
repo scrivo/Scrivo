@@ -35,7 +35,7 @@ use \Scrivo\Action;
 use \Scrivo\Request;
 use \Scrivo\Folder;
 use \Scrivo\I18n;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The FolerUpdate class implements an action for updating or creating
@@ -69,7 +69,7 @@ class FolderUpdate extends Action {
 			$folder = new Folder($this->context);
 
 			$folder->title = Request::post("title", Request::TYPE_STRING,
-				new String($i18n["New folder"]));
+				new Str($i18n["New folder"]));
 			$folder->parentId = Request::post("dirId", Request::TYPE_INTEGER);
 
 			$folder->insert();

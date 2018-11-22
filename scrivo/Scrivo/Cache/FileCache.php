@@ -70,7 +70,7 @@ class FileCache implements \Scrivo\Cache {
 	/**
 	 * The location of the cache directory.
 	 *
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $dir;
 
@@ -100,7 +100,7 @@ class FileCache implements \Scrivo\Cache {
 	/**
 	 * List of troublesome characters in file names.
 	 *
-	 * @var \Scrivo\String[]
+	 * @var \Scrivo\Str[]
 	 */
 	private $reservedCharacters;
 
@@ -108,14 +108,14 @@ class FileCache implements \Scrivo\Cache {
 	 * List of character sequences to escape troublesome characters in file
 	 * names.
 	 *
-	 * @var \Scrivo\String[]
+	 * @var \Scrivo\Str[]
 	 */
 	private $escapedCharacters;
 
 	/**
 	 * Create a file cache.
 	 *
-	 * @param \Scrivo\String $dir The location where the cache schould
+	 * @param \Scrivo\Str $dir The location where the cache schould
 	 *   store the files. The default is the 'ScrivoCache' folder in the
 	 *   system's temp directory.
 	 * @param int $gcInterval The interval at which to run the garbage
@@ -124,13 +124,13 @@ class FileCache implements \Scrivo\Cache {
 	 *   at least once that you want to keep after a cache purge due to
 	 *   storage shortage.
 	 */
-	public function __construct(\Scrivo\String $dir=null, $gcInterval=50,
+	public function __construct(\Scrivo\Str $dir=null, $gcInterval=50,
 			$pctToKeepAfterPurge=50) {
 		$this->gcInterval = $gcInterval;
 		$this->pctToKeepAfterPurge = $pctToKeepAfterPurge;
-		$this->reservedCharacters = \Scrivo\String::create(array(
+		$this->reservedCharacters = \Scrivo\Str::create(array(
 			"@","/","\\","?","%","*",":","|","\"","<",">","."));
-		$this->escapedCharacters = \Scrivo\String::create(array(
+		$this->escapedCharacters = \Scrivo\Str::create(array(
 			"@0","@1","@2","@3","@4","@5","@6","@7","@8","@9","@A","@B"));
 		if (!$dir) {
 			$dir = sys_get_temp_dir()."/ScrivoCache";
@@ -138,7 +138,7 @@ class FileCache implements \Scrivo\Cache {
 		if (!file_exists($dir)) {
 			mkdir($dir);
 		}
-		$this->dir = new \Scrivo\String($dir."/");
+		$this->dir = new \Scrivo\Str($dir."/");
 	}
 
 	/**
@@ -186,9 +186,9 @@ class FileCache implements \Scrivo\Cache {
 	 * Create a file name from a key, taking in account problematic characters
 	 * for a file name.
 	 *
-	 * @param \Scrivo\String $key Key name to create a file name for.
+	 * @param \Scrivo\Str $key Key name to create a file name for.
 	 */
-	private function getFile(\Scrivo\String $key) {
+	private function getFile(\Scrivo\Str $key) {
 		return $this->dir . $key->replace($this->reservedCharacters,
 			$this->escapedCharacters);
 	}
@@ -265,7 +265,7 @@ class FileCache implements \Scrivo\Cache {
 	 * possible to overwrite an existing entry (cache slam). Such an event
 	 * will not raise an error but the function will report it.
 	 *
-	 * @param \Scrivo\String $key A cache unique name for the key.
+	 * @param \Scrivo\Str $key A cache unique name for the key.
 	 * @param mixed $val The (serializable) variabele to strore.
 	 * @param int $ttl Time to live in seconds.
 	 *
@@ -276,7 +276,7 @@ class FileCache implements \Scrivo\Cache {
 	 * @throws \Scrivo\SystemException When trying to store a NULL value or
 	 *    when a file operation fails.
 	 */
-	public function store(\Scrivo\String $key, $val, $ttl=3600) {
+	public function store(\Scrivo\Str $key, $val, $ttl=3600) {
 		if ($val === null) {
 			throw new \Scrivo\SystemException(
 				"Can't store null values in the cache");
@@ -326,7 +326,7 @@ class FileCache implements \Scrivo\Cache {
 	 * the data will be written. But note that it is not guaranteed that the
 	 * next fetch will retrieve this value.
 	 *
-	 * @param \Scrivo\String $key A cache unique name for the key.
+	 * @param \Scrivo\Str $key A cache unique name for the key.
 	 * @param mixed $val The (serializable) variabele to strore.
 	 * @param int $ttl Time to live in seconds.
 	 *
@@ -336,7 +336,7 @@ class FileCache implements \Scrivo\Cache {
 	 * @throws \Scrivo\SystemException When trying to store a NULL value or
 	 *   when a file operation fails.
 	 */
-	public function overwrite(\Scrivo\String $key, $val, $ttl=3600) {
+	public function overwrite(\Scrivo\Str $key, $val, $ttl=3600) {
 		// Theoretically just after delete an other thread can store a value.
 		for ($tmp=self::CACHE_SLAM; $tmp==self::CACHE_SLAM;) {
 			$this->delete($key);
@@ -348,9 +348,9 @@ class FileCache implements \Scrivo\Cache {
 	/**
 	 * Delete/remove a cache entry.
 	 *
-	 * @param \Scrivo\String $key A cache unique name for the key.
+	 * @param \Scrivo\Str $key A cache unique name for the key.
 	 */
-	public function delete(\Scrivo\String $key) {
+	public function delete(\Scrivo\Str $key) {
 		$file = $this->getFile($key);
 		if (file_exists($file)) {
 			$this->unlink($file);
@@ -360,12 +360,12 @@ class FileCache implements \Scrivo\Cache {
 	/**
 	 * Retrieve a value from the cache.
 	 *
-	 * @param \Scrivo\String $key The key for which to retrieve the value.
+	 * @param \Scrivo\Str $key The key for which to retrieve the value.
 	 *
 	 * @return mixed The value of the stored variable or NULL if the key
 	 *   does not exists or is expired.
 	 */
-	public function fetch(\Scrivo\String $key) {
+	public function fetch(\Scrivo\Str $key) {
 		$file = $this->getFile($key);
 		$res = null;
 		// Suppressing the message is probably faster then calling file_exists
@@ -407,7 +407,7 @@ class FileCache implements \Scrivo\Cache {
 			while (($file = readdir($dh)) !== false) {
 				$s = stat($this->dir.$file);
 				if (!($s['mode'] & 040000)) {
-					$k = \Scrivo\String::create($file)->replace(
+					$k = \Scrivo\Str::create($file)->replace(
 						$this->escapedCharacters, $this->reservedCharacters);
 					$l[(string)$k] = (object)array(
 						"accessed" => $s["atime"],

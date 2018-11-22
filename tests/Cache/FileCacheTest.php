@@ -122,7 +122,7 @@ class FileCacheTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Location if the cache directory on the system.
 	 *
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private static $cacheDir = null;
 
@@ -145,7 +145,7 @@ class FileCacheTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public static function setUpBeforeClass() {
 		self::$cacheDir =
-			new \Scrivo\String(sys_get_temp_dir()."/TestCache");
+			new \Scrivo\Str(sys_get_temp_dir()."/TestCache");
 		self::deleteCache();
 	}
 
@@ -162,38 +162,38 @@ class FileCacheTest extends \PHPUnit_Framework_TestCase {
 	public function testFileCache() {
 
 		// Just soms data
-		$str = new \Scrivo\String("Hatseflatse");
+		$str = new \Scrivo\Str("Hatseflatse");
 
 		// Create a cache
 		$cache = new \Scrivo\Cache\FileCache(self::$cacheDir);
 
 		// Store some values (the second with a ttl of 1 sec).
-		$cache->store(new \Scrivo\String("aString"), $str);
-		$cache->store(new \Scrivo\String("anInt"), 3, 1);
+		$cache->store(new \Scrivo\Str("aString"), $str);
+		$cache->store(new \Scrivo\Str("anInt"), 3, 1);
 
 		// Retrieve them and check the values.
 		$this->assertTrue($str->equals(
-			$cache->fetch(new \Scrivo\String("aString"))));
-		$this->assertEquals(3, $cache->fetch(new \Scrivo\String("anInt")));
+			$cache->fetch(new \Scrivo\Str("aString"))));
+		$this->assertEquals(3, $cache->fetch(new \Scrivo\Str("anInt")));
 
 		// Also the cache object count should be 2.
 		$this->assertCount(2, $cache->entryList());
 
 		// Test the ttl: the first fetch should succeed, the second not.
 		usleep(500000);
-		$this->assertEquals(3, $cache->fetch(new \Scrivo\String("anInt")));
+		$this->assertEquals(3, $cache->fetch(new \Scrivo\Str("anInt")));
 		usleep(1500000);
-		$this->assertNull($cache->fetch(new \Scrivo\String("anInt")));
+		$this->assertNull($cache->fetch(new \Scrivo\Str("anInt")));
 
 		// Overwrite one of the entries and check the result.
-		$cache->overwrite(new \Scrivo\String("aString"),
-			new \Scrivo\String("new string"));
-		$this->assertTrue(\Scrivo\String::create("new string")->equals(
-			$cache->fetch(new \Scrivo\String("aString"))));
+		$cache->overwrite(new \Scrivo\Str("aString"),
+			new \Scrivo\Str("new string"));
+		$this->assertTrue(\Scrivo\Str::create("new string")->equals(
+			$cache->fetch(new \Scrivo\Str("aString"))));
 
 		// Delete the entry and check if it's gone.
-		$cache->delete(new \Scrivo\String("aString"));
-		$this->assertNull($cache->fetch(new \Scrivo\String("aString")));
+		$cache->delete(new \Scrivo\Str("aString"));
+		$this->assertNull($cache->fetch(new \Scrivo\Str("aString")));
 
 		// The cache object count should be 0.
 		$this->assertCount(0, $cache->entryList());
@@ -211,8 +211,8 @@ class FileCacheTest extends \PHPUnit_Framework_TestCase {
 		$mock_unlink = true;
 
 		$cache = new \Scrivo\Cache\FileCache();
-		$cache->store(new \Scrivo\String("unlink"), 3);
-		$cache->delete(new \Scrivo\String("unlink"));
+		$cache->store(new \Scrivo\Str("unlink"), 3);
+		$cache->delete(new \Scrivo\Str("unlink"));
 
 		$mock_unlink = false;
 	}
@@ -229,7 +229,7 @@ class FileCacheTest extends \PHPUnit_Framework_TestCase {
 		$mock_touch = true;
 
 		$cache = new \Scrivo\Cache\FileCache(self::$cacheDir);
-		$cache->store(new \Scrivo\String("touch"), 3);
+		$cache->store(new \Scrivo\Str("touch"), 3);
 
 		$mock_touch = false;
 	}
@@ -242,7 +242,7 @@ class FileCacheTest extends \PHPUnit_Framework_TestCase {
 	public function testStoreNull() {
 
 		$cache = new \Scrivo\Cache\FileCache(self::$cacheDir);
-		$cache->store(new \Scrivo\String("unlink"), null);
+		$cache->store(new \Scrivo\Str("unlink"), null);
 	}
 
 	/**
@@ -257,7 +257,7 @@ class FileCacheTest extends \PHPUnit_Framework_TestCase {
 		$mock_fopen = true;
 
 		$cache = new \Scrivo\Cache\FileCache(self::$cacheDir);
-		$cache->store(new \Scrivo\String("fopen"), 3);
+		$cache->store(new \Scrivo\Str("fopen"), 3);
 
 		$mock_fopen = false;
 	}
@@ -274,17 +274,17 @@ class FileCacheTest extends \PHPUnit_Framework_TestCase {
 		$cache = new \Scrivo\Cache\FileCache(self::$cacheDir);
 
 		// Insert some data (the first entry has a ttl of 0).
-		$cache->store(new \Scrivo\String("exp"), 3, 0);
-		$cache->store(new \Scrivo\String("data1"), 3);
-		$cache->store(new \Scrivo\String("data2"), 3);
-		$cache->store(new \Scrivo\String("data3"), 3);
+		$cache->store(new \Scrivo\Str("exp"), 3, 0);
+		$cache->store(new \Scrivo\Str("data1"), 3);
+		$cache->store(new \Scrivo\Str("data2"), 3);
+		$cache->store(new \Scrivo\Str("data3"), 3);
 
 		// There should be three items in the cache.
 		$this->assertCount(4, $cache->entryList());
 
 		// We access the "data2" and "data3" entry.
-		$tmp = $cache->fetch(new \Scrivo\String("data2"));
-		$tmp = $cache->fetch(new \Scrivo\String("data3"));
+		$tmp = $cache->fetch(new \Scrivo\Str("data2"));
+		$tmp = $cache->fetch(new \Scrivo\Str("data3"));
 
 		// We let fwrite fail from this point onward.
 		$mock_fwrite = true;
@@ -292,8 +292,8 @@ class FileCacheTest extends \PHPUnit_Framework_TestCase {
 		// Storing new values will not succeed but also will trigger the
 		// cache to be purged.
 		$this->assertEquals(\Scrivo\Cache::NO_SPACE,
-			$cache->store(new \Scrivo\String("nospace"),
-				new \Scrivo\String("Lots of data")));
+			$cache->store(new \Scrivo\Str("nospace"),
+				new \Scrivo\Str("Lots of data")));
 
 		// Expired and unaccessed items will be removed form the cache at
 		// this point.
@@ -317,11 +317,11 @@ class FileCacheTest extends \PHPUnit_Framework_TestCase {
 
 		// This store will write its data in two steps: one failed write then
 		// a cache purge will be triggered and another write will be executed.
-		$cache->store(new \Scrivo\String("nospace2"),
-			new \Scrivo\String("Lots of data"));
+		$cache->store(new \Scrivo\Str("nospace2"),
+			new \Scrivo\Str("Lots of data"));
 
-		$this->assertTrue(\Scrivo\String::create("Lots of data")->equals(
-			$cache->fetch(new \Scrivo\String("nospace2"))));
+		$this->assertTrue(\Scrivo\Str::create("Lots of data")->equals(
+			$cache->fetch(new \Scrivo\Str("nospace2"))));
 
 		$mock_fwrite_firstfails = false;
 
@@ -339,13 +339,13 @@ class FileCacheTest extends \PHPUnit_Framework_TestCase {
 		$cache = new \Scrivo\Cache\FileCache(self::$cacheDir, 1);
 
 		// Store some data.
-		$cache->store(new \Scrivo\String("exp"), 3, 0);
+		$cache->store(new \Scrivo\Str("exp"), 3, 0);
 
 		// Wait so the item in the cache will be expired.
 		usleep(1000000);
 
 		// Now a new call to store will trigger the garbage collector to run.
-		$cache->store(new \Scrivo\String("data1"), 3);
+		$cache->store(new \Scrivo\Str("data1"), 3);
 
 		// The cache should contain one item now.
 		$this->assertCount(1, $cache->entryList());

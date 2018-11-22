@@ -42,7 +42,7 @@ namespace Scrivo;
  *
  * Instances of this class are created through objects of the \Scrivo\ItemList
  * class. Either by retrieving them as items that were previously added to the
- * list or by using the \Scrivo\ItemList::newItem(\Scrivo\String $type) method.
+ * list or by using the \Scrivo\ItemList::newItem(\Scrivo\Str $type) method.
  *
  * @property-read \DateTime $dateCreated The date/time that this list item was created.
  * @property-read \DateTime $dateModified The last date/time that this list item was modified.
@@ -54,7 +54,7 @@ namespace Scrivo;
  * @property \DateTime $dateOffline The date/time this list item need to go offline.
  * @property \DateTime $dateOnline The date/time this list item need to go online.
  * @property int $parentId The id of the parent list item.
- * @property \Scrivo\String $title The list item title.
+ * @property \Scrivo\Str $title The list item title.
  */
 class ListItem {
 
@@ -102,7 +102,7 @@ class ListItem {
 
 	/**
 	 * The list item title.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	protected $title = null;
 
@@ -154,7 +154,7 @@ class ListItem {
 		$this->parentId = intval($rd["parent_id"]);
 		$this->definitionId = intval($rd["list_item_definition_id"]);
 		$this->linkedPageId = intval($rd["link_id"]);
-		$this->title = new \Scrivo\String($rd["title"]);
+		$this->title = new \Scrivo\Str($rd["title"]);
 		$this->dateCreated = new \DateTime($rd["date_created"]);
 		$this->dateModified = new \DateTime($rd["date_modified"]);
 		$this->dateOnline = new \DateTime($rd["date_online"]);
@@ -225,9 +225,9 @@ class ListItem {
 	/**
 	 * Set The page title (&lt;title&gt;).
 	 *
-	 * @param \Scrivo\String $title The page title (&lt;title&gt;).
+	 * @param \Scrivo\Str $title The page title (&lt;title&gt;).
 	 */
-	public function setTitle(\Scrivo\String $title) {
+	public function setTitle(\Scrivo\Str $title) {
 		$this->title = $title;
 	}
 

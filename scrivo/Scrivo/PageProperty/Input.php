@@ -38,7 +38,7 @@ namespace Scrivo\PageProperty;
 /**
  * Property to hold a line of text (INPUT type=text).
  *
- * @property \Scrivo\String $value The value of the input field.
+ * @property \Scrivo\Str $value The value of the input field.
  */
 class Input extends \Scrivo\PageProperty {
 

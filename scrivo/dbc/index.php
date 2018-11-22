@@ -72,10 +72,10 @@ if (!isset($session->authenticated)) {
 // If the current user is the admin user, ...
 if ($session->userId == \Scrivo\User::PRIMARY_ADMIN_ID) {
 	// ... check if the request came from one of the whitelisted IP adresses.
-	if (!$cfg->ADMIN_IP_ADDRESSES->equals(new \Scrivo\String("*"))
+	if (!$cfg->ADMIN_IP_ADDRESSES->equals(new \Scrivo\Str("*"))
 			&& !$cfg->ADMIN_IP_ADDRESSES->contains(
-				new \Scrivo\String($_SERVER["REMOTE_ADDR"]))
-			&& !$cfg->ADMIN_IP_ADDRESSES->contains(new \Scrivo\String(
+				new \Scrivo\Str($_SERVER["REMOTE_ADDR"]))
+			&& !$cfg->ADMIN_IP_ADDRESSES->contains(new \Scrivo\Str(
 				// replace last digit with an * in remote_address
 				preg_replace("/(\d+)$/i", "*", $_SERVER["REMOTE_ADDR"])))) {
 		die("Authorization Error");
@@ -84,7 +84,7 @@ if ($session->userId == \Scrivo\User::PRIMARY_ADMIN_ID) {
 
 // Get the action from the GET or POST variables, default to home ...
 $actionId = \Scrivo\Request::request("a", \Scrivo\Request::TYPE_STRING,
-	new \Scrivo\String("home"));
+	new \Scrivo\Str("home"));
 
 if ($cfg instanceof \ScrivoUi\DbConsole\Lib\InitConfig) {
 
@@ -92,16 +92,16 @@ if ($cfg instanceof \ScrivoUi\DbConsole\Lib\InitConfig) {
 	$ctx = new \ScrivoUi\DbConsole\Lib\InitContext();
 	$session->userId = \Scrivo\User::ANONYMOUS_USER_ID;
 	$session->authenticated = true;
-	if ($actionId->indexOf(new \Scrivo\String("initialize.")) == -1) {
-		$actionId = new \Scrivo\String("initialize.systemCheck");
+	if ($actionId->indexOf(new \Scrivo\Str("initialize.")) == -1) {
+		$actionId = new \Scrivo\Str("initialize.systemCheck");
 	}
 
 } else {
 
 	try {
 
-		if ($actionId->indexOf(new \Scrivo\String("initialize.")) >= 0) {
-			$actionId = new \Scrivo\String("home");
+		if ($actionId->indexOf(new \Scrivo\Str("initialize.")) >= 0) {
+			$actionId = new \Scrivo\Str("home");
 		}
 		$ctx = new \Scrivo\Context($cfg, $session->userId);
 
@@ -111,8 +111,8 @@ if ($cfg instanceof \ScrivoUi\DbConsole\Lib\InitConfig) {
 		$ctx = new \ScrivoUi\DbConsole\Lib\InitContext();
 		$session->userId = \Scrivo\User::ANONYMOUS_USER_ID;
 		$session->authenticated = true;
-		if ($actionId->indexOf(new \Scrivo\String("import.")) == -1) {
-			$actionId = new \Scrivo\String("import.importInstanceForm");
+		if ($actionId->indexOf(new \Scrivo\Str("import.")) == -1) {
+			$actionId = new \Scrivo\Str("import.importInstanceForm");
 		}
 
 	}

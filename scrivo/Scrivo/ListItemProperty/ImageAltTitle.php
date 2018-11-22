@@ -38,28 +38,28 @@ namespace Scrivo\ListItemProperty;
 /**
  * Property to hold an image source (src) url.
  *
- * @property \Scrivo\String $src The image source (src attribute).
- * @property \Scrivo\String $alt The alternative text for the image (alt
+ * @property \Scrivo\Str $src The image source (src attribute).
+ * @property \Scrivo\Str $alt The alternative text for the image (alt
  *    attribute).
- * @property \Scrivo\String $title The image title (title attribute).
+ * @property \Scrivo\Str $title The image title (title attribute).
  */
 class ImageAltTitle extends \Scrivo\ListItemProperty {
 
 	/**
 	 * The src property of the url.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $src;
 
 	/**
 	 * The alt property of the url.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $alt;
 
 	/**
 	 * The title property of the url.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $title;
 
@@ -103,18 +103,18 @@ class ImageAltTitle extends \Scrivo\ListItemProperty {
 	 * Convert the property data field to the image members.
 	 */
 	private function fromData() {
-		$t = parent::__get("data")->split(new \Scrivo\String("\t"));
+		$t = parent::__get("data")->split(new \Scrivo\Str("\t"));
 		$c = count($t);
-		$this->src = $c>0 ? $t[0] : new \Scrivo\String("");
-		$this->alt = $c>1 ? $t[1] : new \Scrivo\String("");
-		$this->title = $c>2 ? $t[2] : new \Scrivo\String("");
+		$this->src = $c>0 ? $t[0] : new \Scrivo\Str("");
+		$this->alt = $c>1 ? $t[1] : new \Scrivo\Str("");
+		$this->title = $c>2 ? $t[2] : new \Scrivo\Str("");
 	}
 
 	/**
 	 * Convert the property data field to the image members.
 	 */
 	private function toData() {
-		$this->data = new \Scrivo\String(
+		$this->data = new \Scrivo\Str(
 			(string)$this->src."\t".
 			(string)$this->alt."\t".
 			(string)$this->title

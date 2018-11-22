@@ -439,7 +439,7 @@ class ItemList {
 
 			$li = ListItemProperty::create($rd);
 
-			if ($li && !$li->phpSelector->equals(new \Scrivo\String(""))) {
+			if ($li && !$li->phpSelector->equals(new \Scrivo\Str(""))) {
 				$res[$id]->{$li->phpSelector} = $li;
 			}
 		}
@@ -496,12 +496,12 @@ class ItemList {
 	 * Get the list item definition id using the phpSelector of the list
 	 * item definition.
 	 *
-	 * @param \Scrivo\String $phpSelector The phpSelector of a list
+	 * @param \Scrivo\Str $phpSelector The phpSelector of a list
 	 *   item definition.
 	 *
 	 * @return int The list item definition id.
 	 */
-	private function getDefinitionId(\Scrivo\String $phpSelector) {
+	private function getDefinitionId(\Scrivo\Str $phpSelector) {
 
 		$sth = $this->context->connection->prepare(
 			"SELECT T.list_item_definition_id FROM list_item_definition T WHERE
@@ -546,7 +546,7 @@ class ItemList {
 
 			$li = ListItemProperty::create($rd);
 
-			if ($li && !$li->phpSelector->equals(new \Scrivo\String(""))) {
+			if ($li && !$li->phpSelector->equals(new \Scrivo\Str(""))) {
 				$res->{$li->phpSelector} = $li;
 			}
 		}
@@ -712,12 +712,12 @@ class ItemList {
 	/**
 	 * Create a new list item to insert in the database.
 	 *
-	 * @param \Scrivo\String $phpSelector The selector of the list item
+	 * @param \Scrivo\Str $phpSelector The selector of the list item
 	 *   definition of the list item to create.
 	 *
 	 * @return \Scrivo\ListItem
 	 */
-	public function newItem(\Scrivo\String $phpSelector) {
+	public function newItem(\Scrivo\Str $phpSelector) {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null));
 		try {
 			$defId = $this->getDefinitionId($phpSelector);
@@ -732,7 +732,7 @@ class ItemList {
 					"sequence_no" => 0,
 					"list_item_definition_id" => $defId,
 					"link_id" => 0,
-					"title" => new \Scrivo\String(""),
+					"title" => new \Scrivo\Str(""),
 					"date_created" => "now",
 					"date_modified" => "now",
 					"date_online" => "now",

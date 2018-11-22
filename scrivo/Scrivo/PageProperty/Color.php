@@ -38,7 +38,7 @@ namespace Scrivo\PageProperty;
 /**
  * Property to hold the color definition.
  *
- * @property \Scrivo\String $color A color value.
+ * @property \Scrivo\Str $color A color value.
  */
 class Color extends \Scrivo\PageProperty {
 

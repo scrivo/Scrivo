@@ -37,16 +37,16 @@ use Scrivo\I18n;
 use Scrivo\File;
 use Scrivo\Request;
 use Scrivo\Context;
-use Scrivo\String;
+use Scrivo\Str;
 
 session_start();
 
 function fix_mime($filename, $sugg_mime) {
 	$sugg_mime = str_replace("x-citrix-", "", $sugg_mime);
 	if (strtolower(substr($filename, -4)) == ".doc") {
-		return new String("application/msword");
+		return new Str("application/msword");
 	}
-	return new String($sugg_mime);
+	return new Str($sugg_mime);
 }
 
 require_once("../../../Scrivo/Autoloader.php");
@@ -90,8 +90,8 @@ if (!$overwriteId) {
 		if (is_uploaded_file($_FILES["userfile"]["tmp_name"][$i])) {
 			
 			$uf = new File($ctx);
-			$proposed = new String($_FILES["userfile"]["name"][$i]);
-			$uf->title = new String($_FILES["userfile"]["tmp_name"][$i]);
+			$proposed = new Str($_FILES["userfile"]["name"][$i]);
+			$uf->title = new Str($_FILES["userfile"]["tmp_name"][$i]);
 			$uf->mimeType =
 				fix_mime($uf->title, $_FILES["userfile"]["type"][$i]);
 			$uf->size = $_FILES["userfile"]["size"][$i];
@@ -102,7 +102,7 @@ if (!$overwriteId) {
 				
 				$uf->insert();
 				$uf->location = 
-					new String("{$ctx->config->UPLOAD_DIR}/asset_{$uf->id}");
+					new Str("{$ctx->config->UPLOAD_DIR}/asset_{$uf->id}");
 				if (!move_uploaded_file(
 						$_FILES["userfile"]["tmp_name"][$i], $uf->location)) {
 					File::delete($ctx, $uf->id);
@@ -135,7 +135,7 @@ if (!$overwriteId) {
 
 		$uf = File::fetch($ctx, $overwriteId);
 		//$old_mime_type = $uf->mimetype;
-		$proposed = new String($_FILES["userfile"]["name"][$i]);
+		$proposed = new Str($_FILES["userfile"]["name"][$i]);
 		$uf->title = $proposed;
 		$uf->mimeType =
 			fix_mime($uf->title, $_FILES["userfile"]["type"][$i]);
@@ -146,7 +146,7 @@ if (!$overwriteId) {
 		try {
 
 			$uf->location =
-				new String("{$ctx->config->UPLOAD_DIR}/asset_{$uf->id}");
+				new Str("{$ctx->config->UPLOAD_DIR}/asset_{$uf->id}");
 			if (!move_uploaded_file(
 					$_FILES["userfile"]["tmp_name"][$i], $uf->location)) {
 				throw new \Exception("Permission error");

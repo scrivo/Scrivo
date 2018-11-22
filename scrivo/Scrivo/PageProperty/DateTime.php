@@ -70,7 +70,7 @@ class DateTime extends \Scrivo\PageProperty {
 		switch($name) {
 			// Set the date property.
 			case "dateTime":
-				$this->data = new \Scrivo\String($value->format("Y-m-d H:i:s"));
+				$this->data = new \Scrivo\Str($value->format("Y-m-d H:i:s"));
 				return;
 		}
 		parent::__set($name, $value);

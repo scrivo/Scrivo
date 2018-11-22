@@ -63,9 +63,9 @@ namespace Scrivo;
  * You can add and delete values using the set member:
  *
  * // Set an id-label pair
- * $context->labels->set($context, 123, \Scrivo\String("CONTACT"));
+ * $context->labels->set($context, 123, \Scrivo\Str("CONTACT"));
  * // Update an id-label pair
- * $context->labels->set($context, 123, \Scrivo\String("CONTACT_B"));
+ * $context->labels->set($context, 123, \Scrivo\Str("CONTACT_B"));
  * // Delete an id-label pair
  * $context->labels->set($context, 123);
  */
@@ -154,12 +154,12 @@ class IdLabel implements \Iterator {
 	 *
 	 * @param \Scrivo\Context $context A valid Scrivo context.
 	 * @param int $id An object id.
-	 * @param \Scrivo\String $label A label for the object id.
+	 * @param \Scrivo\Str $label A label for the object id.
 	 *
 	 * @throws ApplicationException If the given label is not unique.
 	 */
 	static function set(
-			\Scrivo\Context $context, $id, \Scrivo\String $label=null) {
+			\Scrivo\Context $context, $id, \Scrivo\Str $label=null) {
 		try {
 			$context->checkPermission(\Scrivo\AccessController::WRITE_ACCESS);
 

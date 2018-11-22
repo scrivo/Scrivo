@@ -40,7 +40,7 @@ use \Scrivo\ApplicationException;
 use \Scrivo\Request;
 use \Scrivo\User;
 use \Scrivo\UserRole;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The UpdateUser class implements the action for updating a user.
@@ -63,15 +63,15 @@ class UpdateUser extends Action {
 			$user->status = Request::post(
 				"status", Request::TYPE_INTEGER, 0);
 			$user->userCode = Request::post(
-				"user_code", Request::TYPE_STRING, new String(""));
+				"user_code", Request::TYPE_STRING, new Str(""));
 			$user->givenName = Request::post(
-				"given_name", Request::TYPE_STRING, new String(""));
+				"given_name", Request::TYPE_STRING, new Str(""));
 			$user->familyNamePrefix = Request::post(
-				"family_name_prefix", Request::TYPE_STRING, new String(""));
+				"family_name_prefix", Request::TYPE_STRING, new Str(""));
 			$user->familyName = Request::post(
-				"family_name", Request::TYPE_STRING, new String(""));
+				"family_name", Request::TYPE_STRING, new Str(""));
 			$user->emailAddress = Request::post(
-				"email_address", Request::TYPE_STRING, new String(""));
+				"email_address", Request::TYPE_STRING, new Str(""));
 
 			// ... and update the user.
 			$user->update();

@@ -39,7 +39,7 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	 * byte width.
 	 */
 	public function testCount() {
-		$fancyUtf8 = new \Scrivo\String("ƕƺ░☺൩𢯊");
+		$fancyUtf8 = new \Scrivo\Str("ƕƺ░☺൩𢯊");
 		// byte width
 		$this->assertEquals(17, strlen($fancyUtf8));
 		// character width
@@ -52,10 +52,10 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testCreate() {
 		// Create an array with two Utf8Stings
-		$str = \Scrivo\String::create(array("string", "longer string"));
+		$str = \Scrivo\Str::create(array("string", "longer string"));
 		// Check what we've got
-		$this->assertInstanceOf("\Scrivo\String", $str[0]);
-		$this->assertInstanceOf("\Scrivo\String", $str[1]);
+		$this->assertInstanceOf("\Scrivo\Str", $str[0]);
+		$this->assertInstanceOf("\Scrivo\Str", $str[1]);
 		$this->assertTrue($str[0]->length < $str[1]->length);
 	}
 
@@ -93,23 +93,23 @@ class StringTest extends PHPUnit_Framework_TestCase {
 
 		// Two times the same test using ISO-8859-1 encoding:
 		$this->assertEquals($fixedIso8859_1,
-			(string)new \Scrivo\String($garbage,
-			\Scrivo\String::DECODE_UNRESERVED,
-			\Scrivo\String::ENC_ISO_8859_1));
-		$this->assertTrue(\Scrivo\String::create($fixedIso8859_1)->equals(
-			new \Scrivo\String($garbage,
-			\Scrivo\String::DECODE_UNRESERVED,
-			\Scrivo\String::ENC_ISO_8859_1)));
+			(string)new \Scrivo\Str($garbage,
+			\Scrivo\Str::DECODE_UNRESERVED,
+			\Scrivo\Str::ENC_ISO_8859_1));
+		$this->assertTrue(\Scrivo\Str::create($fixedIso8859_1)->equals(
+			new \Scrivo\Str($garbage,
+			\Scrivo\Str::DECODE_UNRESERVED,
+			\Scrivo\Str::ENC_ISO_8859_1)));
 
 		// Two times the same test using CP-1251 encoding:
 		$this->assertEquals($fixedCp1251,
-			(string)new \Scrivo\String($garbage,
-			\Scrivo\String::DECODE_UNRESERVED,
-			\Scrivo\String::ENC_CP_1251));
-		$this->assertTrue(\Scrivo\String::create($fixedCp1251)->equals(
-			new \Scrivo\String($garbage,
-			\Scrivo\String::DECODE_UNRESERVED,
-			\Scrivo\String::ENC_CP_1251)));
+			(string)new \Scrivo\Str($garbage,
+			\Scrivo\Str::DECODE_UNRESERVED,
+			\Scrivo\Str::ENC_CP_1251));
+		$this->assertTrue(\Scrivo\Str::create($fixedCp1251)->equals(
+			new \Scrivo\Str($garbage,
+			\Scrivo\Str::DECODE_UNRESERVED,
+			\Scrivo\Str::ENC_CP_1251)));
 	}
 
 	/**
@@ -117,9 +117,9 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testStringFixing2() {
 		$this->assertEquals("noting to fix",
-			new \Scrivo\String("noting to fix",
-			\Scrivo\String::DECODE_UNRESERVED,
-			\Scrivo\String::ENC_ISO_8859_1));
+			new \Scrivo\Str("noting to fix",
+			\Scrivo\Str::DECODE_UNRESERVED,
+			\Scrivo\Str::ENC_ISO_8859_1));
 	}
 	/**
 	 * Test string fixing capabilites using a bogus encoding.
@@ -128,17 +128,17 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testStringFixing3() {
 		$this->assertEquals("noting to fix",
-			new \Scrivo\String("noting to fix",
-			\Scrivo\String::DECODE_UNRESERVED, "Blah"));
+			new \Scrivo\Str("noting to fix",
+			\Scrivo\Str::DECODE_UNRESERVED, "Blah"));
 	}
 
 	/**
-	 * \Scrivo\String objects have a magic __get() so test invalid proterties.
+	 * \Scrivo\Str objects have a magic __get() so test invalid proterties.
 	 *
 	 * @expectedException \Scrivo\SystemException
 	 */
 	public function testInvalidProperty() {
-		$str = new \Scrivo\String("test");
+		$str = new \Scrivo\Str("test");
 		$tmp = $str->hatseFlatse;
 	}
 
@@ -147,14 +147,14 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testCollator() {
 
-		$str = new \Scrivo\String("test");
+		$str = new \Scrivo\Str("test");
 
 		// When not initialized it should return a collator with the default
 		// locale.
 		$this->assertEquals(\Locale::getDefault(),
 			$str->collator->getLocale(\Locale::VALID_LOCALE));
 
-		\Scrivo\String::setCollator(new \Collator("en_US"));
+		\Scrivo\Str::setCollator(new \Collator("en_US"));
 		$this->assertEquals("en_US",
 			$str->collator->getLocale(\Locale::VALID_LOCALE));
 	}
@@ -164,10 +164,10 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testIterator() {
 		$data = array("€", "©", "™", "☺", "ب", "щ", "¥", "Љ", "Ặ", "░", "♪");
-		$str = new \Scrivo\String(implode("", $data));
+		$str = new \Scrivo\Str(implode("", $data));
 		foreach ($str as $k=>$v) {
 			$this->assertEquals($data[$k], (string)$v);
-			$this->assertTrue($v->equals(new \Scrivo\String($data[$k])));
+			$this->assertTrue($v->equals(new \Scrivo\Str($data[$k])));
 		}
 	}
 
@@ -177,10 +177,10 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	public function testArrayAccess() {
 
 		$data = array("€", "©", "™", "☺", "ب", "щ", "¥", "Љ", "Ặ", "░", "♪");
-		$str = new \Scrivo\String(implode("", $data));
+		$str = new \Scrivo\Str(implode("", $data));
 		for ($i = 0; $i < count($str); $i++) {
 			$this->assertEquals($data[$i], (string)$str[$i]);
-			$this->assertTrue($str[$i]->equals(new \Scrivo\String($data[$i])));
+			$this->assertTrue($str[$i]->equals(new \Scrivo\Str($data[$i])));
 		}
 
 		$this->assertTrue(isset($str[count($data)-1]));
@@ -196,7 +196,7 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	 * @expectedException \Scrivo\SystemException
 	 */
 	public function testArrayAccessOutOfRange() {
-		$str = new \Scrivo\String("a€cdëf");
+		$str = new \Scrivo\Str("a€cdëf");
 		$a = $str[$str->length];
 	}
 
@@ -206,8 +206,8 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	 * @expectedException \Scrivo\SystemException
 	 */
 	public function testArrayAccessSetCharacter() {
-		$str = new \Scrivo\String("a€cdëf");
-		$str[1] = new \Scrivo\String("x");
+		$str = new \Scrivo\Str("a€cdëf");
+		$str[1] = new \Scrivo\Str("x");
 	}
 
 	/**
@@ -216,8 +216,8 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	 * @expectedException \Scrivo\SystemException
 	 */
 	public function testArrayAccessAddCharacter() {
-		$str = new \Scrivo\String("a€cdëf");
-		$str[] = new \Scrivo\String("s");
+		$str = new \Scrivo\Str("a€cdëf");
+		$str[] = new \Scrivo\Str("s");
 	}
 
 	/**
@@ -227,7 +227,7 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testArrayAccessUnsetCharacter() {
 		$this->setExpectedException("\Scrivo\SystemException");
-		$str = new \Scrivo\String("a€cdëf");
+		$str = new \Scrivo\Str("a€cdëf");
 		unset($str[1]);
 	}
 
@@ -236,22 +236,22 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testSubstr() {
 
-		$str = new \Scrivo\String("a€cdëf");
+		$str = new \Scrivo\Str("a€cdëf");
 
 		$this->assertTrue(
-			$str->substr(-1)->equals(new \Scrivo\String("f")));
+			$str->substr(-1)->equals(new \Scrivo\Str("f")));
 		$this->assertTrue(
-			$str->substr(-2)->equals(new \Scrivo\String("ëf")));
+			$str->substr(-2)->equals(new \Scrivo\Str("ëf")));
 		$this->assertTrue(
-			$str->substr(-3, 1)->equals(new \Scrivo\String("d")));
+			$str->substr(-3, 1)->equals(new \Scrivo\Str("d")));
 		$this->assertTrue(
-			$str->substr(0, -1)->equals(new \Scrivo\String("a€cdë")));
+			$str->substr(0, -1)->equals(new \Scrivo\Str("a€cdë")));
 		$this->assertTrue(
-			$str->substr(2, -1)->equals(new \Scrivo\String("cdë")));
+			$str->substr(2, -1)->equals(new \Scrivo\Str("cdë")));
 		$this->assertTrue(
-			$str->substr(4, -4)->equals(new \Scrivo\String("")));
+			$str->substr(4, -4)->equals(new \Scrivo\Str("")));
 		$this->assertTrue(
-			$str->substr(-3, -1)->equals(new \Scrivo\String("dë")));
+			$str->substr(-3, -1)->equals(new \Scrivo\Str("dë")));
 	}
 
 	/**
@@ -260,7 +260,7 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	 * @expectedException \Scrivo\SystemException
 	 */
 	public function testSubstrOutOfRange() {
-		$str = new \Scrivo\String("a€cdëf");
+		$str = new \Scrivo\Str("a€cdëf");
 		$tmp = $str->substr(6);
 	}
 
@@ -269,11 +269,11 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testSubstring() {
 		$this->assertTrue(
-			\Scrivo\String::create("hamburger")->substring(4, 8)->equals(
-				new \Scrivo\String("urge")));
+			\Scrivo\Str::create("hamburger")->substring(4, 8)->equals(
+				new \Scrivo\Str("urge")));
 		$this->assertTrue(
-			\Scrivo\String::create("smiles")->substring(1, 5)->equals(
-				new \Scrivo\String("mile")));
+			\Scrivo\Str::create("smiles")->substring(1, 5)->equals(
+				new \Scrivo\Str("mile")));
 	}
 
 	/**
@@ -289,7 +289,7 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider providerSubstringOutOfRange
 	 */
 	public function testSubstringOutOfRange($start, $end) {
-		$str = new \Scrivo\String("a€cdëf");
+		$str = new \Scrivo\Str("a€cdëf");
 		$this->setExpectedException("\Scrivo\SystemException");
 		$tmp = $str->substring($start, $end);
 	}
@@ -298,27 +298,27 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	 * Test string trimming.
 	 */
 	public function testTrim() {
-		$str = new \Scrivo\String("\r\n   \t Test\t\n" .
+		$str = new \Scrivo\Str("\r\n   \t Test\t\n" .
 			html_entity_decode("&nbsp;", ENT_QUOTES, "UTF-8"));
-		$this->assertTrue($str->trim()->equals(new \Scrivo\String("Test")));
+		$this->assertTrue($str->trim()->equals(new \Scrivo\Str("Test")));
 	}
 
 	/**
-	 * Test contains method of \Scrivo\String.
+	 * Test contains method of \Scrivo\Str.
 	 */
 	public function testContains() {
 
-		$str = new \Scrivo\String("a€cDëf");
+		$str = new \Scrivo\Str("a€cDëf");
 
-		$this->assertTrue($str->contains(new \Scrivo\String("€")));
-		$this->assertFalse($str->contains(new \Scrivo\String("€"), 2));
-		$this->assertTrue($str->contains(new \Scrivo\String("Ë"), 2, true));
-		$this->assertFalse($str->contains(new \Scrivo\String("Cd")));
-		$this->assertTrue($str->contains(new \Scrivo\String("Cd"), 0, true));
-		$this->assertTrue($str->contains(new \Scrivo\String("ëf")));
-		$this->assertFalse($str->contains(new \Scrivo\String("Ëf")));
-		$this->assertTrue($str->contains(new \Scrivo\String("Ëf"), 0, true));
-		$this->assertFalse($str->contains(new \Scrivo\String("q")));
+		$this->assertTrue($str->contains(new \Scrivo\Str("€")));
+		$this->assertFalse($str->contains(new \Scrivo\Str("€"), 2));
+		$this->assertTrue($str->contains(new \Scrivo\Str("Ë"), 2, true));
+		$this->assertFalse($str->contains(new \Scrivo\Str("Cd")));
+		$this->assertTrue($str->contains(new \Scrivo\Str("Cd"), 0, true));
+		$this->assertTrue($str->contains(new \Scrivo\Str("ëf")));
+		$this->assertFalse($str->contains(new \Scrivo\Str("Ëf")));
+		$this->assertTrue($str->contains(new \Scrivo\Str("Ëf"), 0, true));
+		$this->assertFalse($str->contains(new \Scrivo\Str("q")));
 	}
 
 	/**
@@ -328,62 +328,62 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	 * @expectedException \Scrivo\SystemException
 	 */
 	public function testContainsOutOfRange() {
-		$str = new \Scrivo\String("a€cDëf");
-		$tmp = $str->contains(new \Scrivo\String("€"), $str->length);
+		$str = new \Scrivo\Str("a€cDëf");
+		$tmp = $str->contains(new \Scrivo\Str("€"), $str->length);
 	}
 
 	/**
-	 * Test indexOf method of \Scrivo\String.
+	 * Test indexOf method of \Scrivo\Str.
 	 */
 	public function testIndexOf() {
 
-		$str = new \Scrivo\String("a€cDëfa€cDëf");
+		$str = new \Scrivo\Str("a€cDëfa€cDëf");
 
 		$this->assertEquals(
-			1, $str->indexOf(new \Scrivo\String("€")));
+			1, $str->indexOf(new \Scrivo\Str("€")));
 		$this->assertEquals(
-			7, $str->indexOf(new \Scrivo\String("€"), 2));
+			7, $str->indexOf(new \Scrivo\Str("€"), 2));
 		$this->assertEquals(
-			4, $str->indexOf(new \Scrivo\String("Ë"), 2, true));
+			4, $str->indexOf(new \Scrivo\Str("Ë"), 2, true));
 		$this->assertEquals(
-			-1, $str->indexOf(new \Scrivo\String("Cd")));
+			-1, $str->indexOf(new \Scrivo\Str("Cd")));
 		$this->assertEquals(
-			2, $str->indexOf(new \Scrivo\String("Cd"), 0, true));
+			2, $str->indexOf(new \Scrivo\Str("Cd"), 0, true));
 		$this->assertEquals(
-			4, $str->indexOf(new \Scrivo\String("ëf")));
+			4, $str->indexOf(new \Scrivo\Str("ëf")));
 		$this->assertEquals(
-			-1, $str->indexOf(new \Scrivo\String("Ëf")));
+			-1, $str->indexOf(new \Scrivo\Str("Ëf")));
 		$this->assertEquals(
-			4, $str->indexOf(new \Scrivo\String("Ëf"), 0, true));
+			4, $str->indexOf(new \Scrivo\Str("Ëf"), 0, true));
 		$this->assertEquals(
-			-1, $str->indexOf(new \Scrivo\String("q")));
+			-1, $str->indexOf(new \Scrivo\Str("q")));
 	}
 
 	/**
-	 * Test lastIndexOf method of \Scrivo\String.
+	 * Test lastIndexOf method of \Scrivo\Str.
 	 */
 	public function testLastIndexOf() {
-		$str = new \Scrivo\String("a€cDëfa€cDëf");
+		$str = new \Scrivo\Str("a€cDëfa€cDëf");
 		$this->assertEquals(
-			7, $str->lastIndexOf(new \Scrivo\String("€")));
+			7, $str->lastIndexOf(new \Scrivo\Str("€")));
 		$this->assertEquals(
-			1, $str->lastIndexOf(new \Scrivo\String("€"), -6));
+			1, $str->lastIndexOf(new \Scrivo\Str("€"), -6));
 		$this->assertEquals(
-			-1, $str->lastIndexOf(new \Scrivo\String("€"), 8));
+			-1, $str->lastIndexOf(new \Scrivo\Str("€"), 8));
 		$this->assertEquals(
-			10, $str->lastIndexOf(new \Scrivo\String("Ë"), 2, true));
+			10, $str->lastIndexOf(new \Scrivo\Str("Ë"), 2, true));
 		$this->assertEquals(
-			-1, $str->lastIndexOf(new \Scrivo\String("Cd")));
+			-1, $str->lastIndexOf(new \Scrivo\Str("Cd")));
 		$this->assertEquals(
-			8, $str->lastIndexOf(new \Scrivo\String("Cd"), 0, true));
+			8, $str->lastIndexOf(new \Scrivo\Str("Cd"), 0, true));
 		$this->assertEquals(
-			10, $str->lastIndexOf(new \Scrivo\String("ëf")));
+			10, $str->lastIndexOf(new \Scrivo\Str("ëf")));
 		$this->assertEquals(
-			-1, $str->lastIndexOf(new \Scrivo\String("Ëf")));
+			-1, $str->lastIndexOf(new \Scrivo\Str("Ëf")));
 		$this->assertEquals(
-			10, $str->lastIndexOf(new \Scrivo\String("Ëf"), 0, true));
+			10, $str->lastIndexOf(new \Scrivo\Str("Ëf"), 0, true));
 		$this->assertEquals(
-			-1, $str->lastIndexOf(new \Scrivo\String("q")));
+			-1, $str->lastIndexOf(new \Scrivo\Str("q")));
 	}
 
 	/**
@@ -394,124 +394,124 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Test index out of range for the indexOf method of \Scrivo\String.
+	 * Test index out of range for the indexOf method of \Scrivo\Str.
 	 *
 	 * @expectedException \Scrivo\SystemException
 	 * @dataProvider providerIndexOfOutOfRange
 	 */
 	public function testIndexOfOutOfRange($off) {
-		$str = new \Scrivo\String("a€cdëf");
-		$tmp = $str->indexOf(new \Scrivo\String("€"), $off);
+		$str = new \Scrivo\Str("a€cdëf");
+		$tmp = $str->indexOf(new \Scrivo\Str("€"), $off);
 	}
 
 	/**
-	 * Test index out of range for the lastIndexOf method of \Scrivo\String.
+	 * Test index out of range for the lastIndexOf method of \Scrivo\Str.
 	 *
 	 * @expectedException \Scrivo\SystemException
 	 * @dataProvider providerIndexOfOutOfRange
 	 */
 	public function testLastIndexOfOutOfRange($off) {
-		$str = new \Scrivo\String("a€cdëf");
-		$tmp = $str->lastIndexOf(new \Scrivo\String("€"), $off);
+		$str = new \Scrivo\Str("a€cdëf");
+		$tmp = $str->lastIndexOf(new \Scrivo\Str("€"), $off);
 	}
 
 	/**
-	 * Test firstOccurranceOf method of \Scrivo\String.
+	 * Test firstOccurranceOf method of \Scrivo\Str.
 	 */
 	public function testFirstOccurranceOf() {
 
-		$str = new \Scrivo\String("nä-a€cD-ëf");
+		$str = new \Scrivo\Str("nä-a€cD-ëf");
 
 		// Part after, case sensitive
 		$this->assertTrue(
-			$str->firstOccurranceOf(new \Scrivo\String("-"))->equals(
-				new \Scrivo\String("-a€cD-ëf")));
+			$str->firstOccurranceOf(new \Scrivo\Str("-"))->equals(
+				new \Scrivo\Str("-a€cD-ëf")));
 
 		// Part before, case sensitive
 		$this->assertTrue(
-			$str->firstOccurranceOf(new \Scrivo\String("-"), true)->equals(
-				new \Scrivo\String("nä")));
+			$str->firstOccurranceOf(new \Scrivo\Str("-"), true)->equals(
+				new \Scrivo\Str("nä")));
 
 		// No match
-		$this->assertNull($str->firstOccurranceOf(new \Scrivo\String("at")));
+		$this->assertNull($str->firstOccurranceOf(new \Scrivo\Str("at")));
 
 		// Part after, case insensitive
 		$this->assertTrue($str->firstOccurranceOf(
-			new \Scrivo\String("A€"), false, true)->equals(
-				new \Scrivo\String("a€cD-ëf")));
+			new \Scrivo\Str("A€"), false, true)->equals(
+				new \Scrivo\Str("a€cD-ëf")));
 
 		// Part before, case insensitive
 		$this->assertTrue($str->firstOccurranceOf(
-			new \Scrivo\String("€C"), true, true)->equals(
-				new \Scrivo\String("nä-a")));
+			new \Scrivo\Str("€C"), true, true)->equals(
+				new \Scrivo\Str("nä-a")));
 
 		// No match
-		$this->assertNull($str->firstOccurranceOf(new \Scrivo\String("A€")));
+		$this->assertNull($str->firstOccurranceOf(new \Scrivo\Str("A€")));
 	}
 
 	/**
-	 * Test exception thrown by firstOccurranceOf method of \Scrivo\String.
+	 * Test exception thrown by firstOccurranceOf method of \Scrivo\Str.
 	 *
 	 * @expectedException \Scrivo\SystemException
 	 */
 	public function testFirstOccurranceOfInvalidArgument() {
-		$str = new \Scrivo\String("nä-a€cD-ëf");
-		$str->firstOccurranceOf(new \Scrivo\String(""));
+		$str = new \Scrivo\Str("nä-a€cD-ëf");
+		$str->firstOccurranceOf(new \Scrivo\Str(""));
 	}
 
 	/**
-	 * Test lastOccurranceOf method of \Scrivo\String.
+	 * Test lastOccurranceOf method of \Scrivo\Str.
 	 */
 	public function testLastOccurranceOf() {
 
-		$str = new \Scrivo\String("nä-a€cD-ëf");
+		$str = new \Scrivo\Str("nä-a€cD-ëf");
 
 		// Part after, case sensitive
 		$this->assertTrue(
-			$str->lastOccurranceOf(new \Scrivo\String("-"))->equals(
-				new \Scrivo\String("-ëf")));
+			$str->lastOccurranceOf(new \Scrivo\Str("-"))->equals(
+				new \Scrivo\Str("-ëf")));
 
 		// Part before, case sensitive
 		$this->assertTrue(
-			$str->lastOccurranceOf(new \Scrivo\String("-"), true)->equals(
-				new \Scrivo\String("nä-a€cD")));
+			$str->lastOccurranceOf(new \Scrivo\Str("-"), true)->equals(
+				new \Scrivo\Str("nä-a€cD")));
 
 		// No match
-		$this->assertNull($str->lastOccurranceOf(new \Scrivo\String("t")));
+		$this->assertNull($str->lastOccurranceOf(new \Scrivo\Str("t")));
 
 		// Part after, case insensitive
 		$this->assertTrue(
 			$str->lastOccurranceOf(
-				new \Scrivo\String("A"), false, true)->equals(
-					new \Scrivo\String("a€cD-ëf")));
+				new \Scrivo\Str("A"), false, true)->equals(
+					new \Scrivo\Str("a€cD-ëf")));
 
 		// Part before, case insensitive
 		$this->assertTrue(
 			$str->lastOccurranceOf(
-				new \Scrivo\String("C"), true, true)->equals(
-					new \Scrivo\String("nä-a€")));
+				new \Scrivo\Str("C"), true, true)->equals(
+					new \Scrivo\Str("nä-a€")));
 
 		// No match
-		$this->assertNull($str->firstOccurranceOf(new \Scrivo\String("ö")));
+		$this->assertNull($str->firstOccurranceOf(new \Scrivo\Str("ö")));
 	}
 
 	/**
 	 * Data provider for exception tests for lastOccurranceOf method of
-	 * \Scrivo\String.
+	 * \Scrivo\Str.
 	 */
 	public function providerLastOccurranceOfInvalidArgument() {
-		return array(array(new \Scrivo\String("cD")),
-			array(new \Scrivo\String("")));
+		return array(array(new \Scrivo\Str("cD")),
+			array(new \Scrivo\Str("")));
 	}
 
 	/**
-	 * Exception tests for lastOccurranceOf method of \Scrivo\String.
+	 * Exception tests for lastOccurranceOf method of \Scrivo\Str.
 	 *
 	 * @expectedException \Scrivo\SystemException
 	 * @dataProvider providerLastOccurranceOfInvalidArgument
 	 */
 	public function testLastOccurranceOfInvalidArgument($delem) {
-		$str = new \Scrivo\String("nä-a€cD-ëf");
+		$str = new \Scrivo\Str("nä-a€cD-ëf");
 		$str->lastOccurranceOf($delem);
 	}
 
@@ -520,174 +520,174 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testReplace() {
 
-		$str = new \Scrivo\String("Lotje leerde Leentje lopen");
+		$str = new \Scrivo\Str("Lotje leerde Leentje lopen");
 
 		// Arguments: string, string
 		$str2 = $str->replace(
-			new \Scrivo\String("e"),
-			new \Scrivo\String("#")
+			new \Scrivo\Str("e"),
+			new \Scrivo\Str("#")
 		);
 		$this->assertTrue($str2->equals(
-			new \Scrivo\String("Lotj# l##rd# L##ntj# lop#n")));
+			new \Scrivo\Str("Lotj# l##rd# L##ntj# lop#n")));
 
 		// Arguments: array, array
 		$str2 = $str->replace(
 			array(
-				new \Scrivo\String("Lo"),
-				new \Scrivo\String("Le"),
-				new \Scrivo\String("e")
+				new \Scrivo\Str("Lo"),
+				new \Scrivo\Str("Le"),
+				new \Scrivo\Str("e")
 			),
 			array(
-				new \Scrivo\String("Ma"),
-				new \Scrivo\String("Mo"),
-				new \Scrivo\String("#")
+				new \Scrivo\Str("Ma"),
+				new \Scrivo\Str("Mo"),
+				new \Scrivo\Str("#")
 			)
 		);
 		$this->assertTrue($str2->equals(
-			new \Scrivo\String("Matj# l##rd# Mo#ntj# lop#n")));
+			new \Scrivo\Str("Matj# l##rd# Mo#ntj# lop#n")));
 
 		// Arguments: array, string
 		$str2 = $str->replace(
 			array(
-				new \Scrivo\String("Lo"),
-				new \Scrivo\String("Le"),
-				new \Scrivo\String("e")
+				new \Scrivo\Str("Lo"),
+				new \Scrivo\Str("Le"),
+				new \Scrivo\Str("e")
 			),
-			new \Scrivo\String("#")
+			new \Scrivo\Str("#")
 		);
 		$this->assertTrue($str2->equals(
-			new \Scrivo\String("#tj# l##rd# ##ntj# lop#n")));
+			new \Scrivo\Str("#tj# l##rd# ##ntj# lop#n")));
 	}
 
 	/**
-	 * Test invalid arguments for replace method of \Scrivo\String.
+	 * Test invalid arguments for replace method of \Scrivo\Str.
 	 * - two PHP strings.
 	 *
 	 * @expectedException \Scrivo\SystemException
 	 */
 	public function testReplaceArguments1() {
-		$str = new \Scrivo\String("Lotje leerde Leentje lopen");
+		$str = new \Scrivo\Str("Lotje leerde Leentje lopen");
 		$str2 = $str->replace("e", "#");
 	}
 
 	/**
-	 * Test invalid arguments for replace method of \Scrivo\String.
+	 * Test invalid arguments for replace method of \Scrivo\Str.
 	 * - Unequal size arrays.
 	 *
 	 * @expectedException \Scrivo\SystemException
 	 */
 	public function testReplaceArguments2() {
-		$str = new \Scrivo\String("Lotje leerde Leentje lopen");
+		$str = new \Scrivo\Str("Lotje leerde Leentje lopen");
 		$str2 = $str->replace(
 			array(
-				new \Scrivo\String("Lo"),
-				new \Scrivo\String("Le"),
-				new \Scrivo\String("e")),
+				new \Scrivo\Str("Lo"),
+				new \Scrivo\Str("Le"),
+				new \Scrivo\Str("e")),
 			array(
-				new \Scrivo\String("Ma"),
-				new \Scrivo\String("Mo")
+				new \Scrivo\Str("Ma"),
+				new \Scrivo\Str("Mo")
 			)
 		);
 	}
 
 	/**
-	 * Test invalid arguments for replace method of \Scrivo\String.
-	 * - An array with (al least) one entry that is not an \Scrivo\String when
+	 * Test invalid arguments for replace method of \Scrivo\Str.
+	 * - An array with (al least) one entry that is not an \Scrivo\Str when
 	 *   using two arrays as arguments.
 	 *
 	 * @expectedException \Scrivo\SystemException
 	 */
 	public function testReplaceArguments3() {
-		$str = new \Scrivo\String("Lotje leerde Leentje lopen");
+		$str = new \Scrivo\Str("Lotje leerde Leentje lopen");
 		$str2 = $str->replace(
 			array(
-				new \Scrivo\String("Lo"),
-				new \Scrivo\String("Le"),
-				new \Scrivo\String("e")),
+				new \Scrivo\Str("Lo"),
+				new \Scrivo\Str("Le"),
+				new \Scrivo\Str("e")),
 			array(
-				new \Scrivo\String("Ma"),
+				new \Scrivo\Str("Ma"),
 				"Mo",
-				new \Scrivo\String("#")
+				new \Scrivo\Str("#")
 			)
 		);
 	}
 
 	/**
-	 * Test invalid arguments for replace method of \Scrivo\String.
-	 * - An array with (al least) one entry that is not an \Scrivo\String when
-	 *   using an array and a \Scrivo\String as arguments.
+	 * Test invalid arguments for replace method of \Scrivo\Str.
+	 * - An array with (al least) one entry that is not an \Scrivo\Str when
+	 *   using an array and a \Scrivo\Str as arguments.
 	 *
 	 * @expectedException \Scrivo\SystemException
 	 */
 	public function testReplaceArguments4() {
-		$str = new \Scrivo\String("Lotje leerde Leentje lopen");
+		$str = new \Scrivo\Str("Lotje leerde Leentje lopen");
 		$str2 = $str->replace(
 			array(
-				new \Scrivo\String("Lo"),
+				new \Scrivo\Str("Lo"),
 				"Le",
-				new \Scrivo\String("e")
+				new \Scrivo\Str("e")
 			),
-			new \Scrivo\String("#"));
+			new \Scrivo\Str("#"));
 	}
 
 	/**
-	 * Test split method of \Scrivo\String.
+	 * Test split method of \Scrivo\Str.
 	 */
 	public function testSplit() {
-		$str = new \Scrivo\String("Lotje leerde Leentje lopen");
+		$str = new \Scrivo\Str("Lotje leerde Leentje lopen");
 
 		// Split with no limit.
-		$res = $str->split(new \Scrivo\String("ee"));
-		$this->assertTrue($res[0]->equals(new \Scrivo\String("Lotje l")));
-		$this->assertTrue($res[1]->equals(new \Scrivo\String("rde L")));
-		$this->assertTrue($res[2]->equals(new \Scrivo\String("ntje lopen")));
+		$res = $str->split(new \Scrivo\Str("ee"));
+		$this->assertTrue($res[0]->equals(new \Scrivo\Str("Lotje l")));
+		$this->assertTrue($res[1]->equals(new \Scrivo\Str("rde L")));
+		$this->assertTrue($res[2]->equals(new \Scrivo\Str("ntje lopen")));
 
 		// Split with limit 1.
-		$res = $str->split(new \Scrivo\String("ee"), 1);
+		$res = $str->split(new \Scrivo\Str("ee"), 1);
 		$this->assertTrue($res[0]->equals(
-			new \Scrivo\String("Lotje leerde Leentje lopen")));
+			new \Scrivo\Str("Lotje leerde Leentje lopen")));
 
 		// Split with limit 2.
-		$res = $str->split(new \Scrivo\String("ee"), 2);
-		$this->assertTrue($res[0]->equals(new \Scrivo\String("Lotje l")));
-		$this->assertTrue($res[1]->equals(new \Scrivo\String(
+		$res = $str->split(new \Scrivo\Str("ee"), 2);
+		$this->assertTrue($res[0]->equals(new \Scrivo\Str("Lotje l")));
+		$this->assertTrue($res[1]->equals(new \Scrivo\Str(
 			"rde Leentje lopen")));
 
 		// Split using a delimiter that does not occur in the string.
-		$res = $str->split(new \Scrivo\String("asdf"));
+		$res = $str->split(new \Scrivo\Str("asdf"));
 		$this->assertTrue($res[0]->equals(
-			new \Scrivo\String("Lotje leerde Leentje lopen")));
+			new \Scrivo\Str("Lotje leerde Leentje lopen")));
 	}
 
 	/**
-	 * Test exception thrown by split method of \Scrivo\String when using an
+	 * Test exception thrown by split method of \Scrivo\Str when using an
 	 * invalid argument.
 	 *
 	 * @expectedException \Scrivo\SystemException
 	 */
 	public function testSplitException() {
-		$str = new \Scrivo\String("Lotje leerde Leentje lopen");
-		$res = $str->split(new \Scrivo\String(""));
+		$str = new \Scrivo\Str("Lotje leerde Leentje lopen");
+		$res = $str->split(new \Scrivo\Str(""));
 	}
 
 	/**
-	 * Test toUpperCase method of \Scrivo\String.
+	 * Test toUpperCase method of \Scrivo\Str.
 	 */
 	public function testToUpperCase() {
-		$str = \Scrivo\String::create("nä-a€cD-ëf")->toUpperCase();
-		$this->assertTrue($str->equals(new \Scrivo\String("NÄ-A€CD-ËF")));
+		$str = \Scrivo\Str::create("nä-a€cD-ëf")->toUpperCase();
+		$this->assertTrue($str->equals(new \Scrivo\Str("NÄ-A€CD-ËF")));
 	}
 
 	/**
-	 * Test toLowerCase method of \Scrivo\String.
+	 * Test toLowerCase method of \Scrivo\Str.
 	 */
 	public function testToLowerCase() {
-		$str = \Scrivo\String::create("NÄ-A€Cd-ËF")->toLowerCase();
-		$this->assertTrue($str->equals(new \Scrivo\String("nä-a€cd-ëf")));
+		$str = \Scrivo\Str::create("NÄ-A€Cd-ËF")->toLowerCase();
+		$this->assertTrue($str->equals(new \Scrivo\Str("nä-a€cd-ëf")));
 	}
 
 	/**
-	 * Data provider for testing the compare method of \Scrivo\String. Just
+	 * Data provider for testing the compare method of \Scrivo\Str. Just
 	 * some ordering rules I found on the wikipedia page on alphabetical
 	 * ordering.
 	 */
@@ -707,21 +707,21 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Test the compare method of \Scrivo\String.
+	 * Test the compare method of \Scrivo\Str.
 	 *
 	 * @dataProvider providerCompare
 	 */
 	public function testCompare($locale, $data) {
 
 		// An array with the original data.
-		$orig = \Scrivo\String::create($data);
+		$orig = \Scrivo\Str::create($data);
 
 		// As shuffled array.
-		$shuffled = \Scrivo\String::create($data);
+		$shuffled = \Scrivo\Str::create($data);
 		shuffle($shuffled);
 
 		// Set the collator and sort the shuffled array.
-		\Scrivo\String::setCollator(new Collator($locale));
+		\Scrivo\Str::setCollator(new Collator($locale));
 		usort($shuffled, function($a, $b) { return $a->compareTo($b); });
 
 		// An assert the result.
@@ -731,11 +731,11 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Data provider for testing the inArray method of \Scrivo\String.
+	 * Data provider for testing the inArray method of \Scrivo\Str.
 	 */
 	public function providerInArray() {
 		return array(
-			\Scrivo\String::create(array(
+			\Scrivo\Str::create(array(
 				"Lotje",
 				"leerde",
 				"Leentje",
@@ -748,7 +748,7 @@ class StringTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Test the inArray function of \Scrivo\String.
+	 * Test the inArray function of \Scrivo\Str.
 	 *
 	 * @dataProvider providerInArray
 	 */
@@ -766,7 +766,7 @@ class StringTest extends PHPUnit_Framework_TestCase {
 		$this->assertFalse(null === $arrayData[$s]->inArray($arrayData));
 
 		$this->assertNull(
-			\Scrivo\String::create("blah")->inArray($arrayData));
+			\Scrivo\Str::create("blah")->inArray($arrayData));
 	}
 
 }

@@ -51,7 +51,7 @@ class PagePropertyCheckBoxTest extends ScrivoDatabaseTestCase {
 
 		$pd = new \Scrivo\PagePropertyDefinition(self::$context);
 		$pd->type = \Scrivo\PagePropertyDefinition::TYPE_CHECKBOX;
-		$pd->phpSelector = new \Scrivo\String("anCheckBox");
+		$pd->phpSelector = new \Scrivo\Str("anCheckBox");
 		$pd->pageDefinitionId = $h->definition->id;
 		$pd->insert();
 

@@ -42,7 +42,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase {
 
 	public static function setUpBeforeClass() {
 		// Create a temporary config file to hold configuration data.
-		self::$emptyCfgFile = new \Scrivo\String(
+		self::$emptyCfgFile = new \Scrivo\Str(
 			tempnam(sys_get_temp_dir(), "PHPUnit_Scrivo_ConfigTest"));
 	}
 
@@ -66,7 +66,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase {
 
 		// Create a config object based upon the local config file
 		$this->assertNotNull(
-			new \Scrivo\Config(new \Scrivo\String("test_config")));
+			new \Scrivo\Config(new \Scrivo\Str("test_config")));
 
 		// Create a config object using this tests config data
 		$this->assertNotNull(new \Scrivo\Config(self::$emptyCfgFile));
@@ -74,7 +74,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase {
 		// Force an exception for an invalid config file
 		$this->setExpectedException(
 			"\Scrivo\SystemException", "Invalid config file");
-		$cfg = new \Scrivo\Config(new \Scrivo\String("ConfigTest.php"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("ConfigTest.php"));
 
 		// Force an exception for a nonexistent config file
 		$this->setExpectedException(
@@ -93,31 +93,31 @@ class ConfigTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue($cfg->ROOT_PAGE_ID === 1);
 		$this->assertTrue($cfg->HTML_TIDY === 0);
 		$this->assertTrue($cfg->WEBSERVICE_TIDY->equals(
-			new \Scrivo\String("http://www.scrivo.nl/tidy/tidy.php")));
+			new \Scrivo\Str("http://www.scrivo.nl/tidy/tidy.php")));
 		$this->assertTrue($cfg->WEBSERVICE_SPELL->equals(
-			new \Scrivo\String("http://www.scrivo.nl/spell/spell.php")));
+			new \Scrivo\Str("http://www.scrivo.nl/spell/spell.php")));
 		$this->assertTrue($cfg->HTTP_PROTOCOL->equals(
-			new \Scrivo\String("http://")));
+			new \Scrivo\Str("http://")));
 		$this->assertTrue($cfg->ADMIN_IP_ADDRESSES->equals(
-			new \Scrivo\String("127.0.0.1")));
+			new \Scrivo\Str("127.0.0.1")));
 		$this->assertTrue($cfg->SESSION_PREFIX->equals(
-			new \Scrivo\String("__")));
+			new \Scrivo\Str("__")));
 		$this->assertTrue($cfg->KEY_PREFIX->equals(
-			new \Scrivo\String("_")));
+			new \Scrivo\Str("_")));
 		$this->assertTrue($cfg->JS_DEBUG === 0);
 		$this->assertTrue($cfg->UI_LANG->equals(
-			new \Scrivo\String("en_US")));
+			new \Scrivo\Str("en_US")));
 		$this->assertTrue($cfg->DB_API->equals(
-			new \Scrivo\String("mysql")));
+			new \Scrivo\Str("mysql")));
 		if (function_exists("apc_fetch")) {
 			$this->assertTrue($cfg->CACHE_TYPE->equals(
-				new \Scrivo\String("APC")));
+				new \Scrivo\Str("APC")));
 		} else {
 			$this->assertTrue($cfg->CACHE_TYPE->equals(
-				new \Scrivo\String("")));
+				new \Scrivo\Str("")));
 		}
 		$this->assertTrue($cfg->CACHE_DIR->equals(
-			new \Scrivo\String("")));
+			new \Scrivo\Str("")));
 		$this->assertTrue($cfg->CACHE_DIR_GC === 0);
 	}
 
@@ -135,7 +135,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase {
 		$cfg = new \Scrivo\Config(self::$emptyCfgFile);
 
 		$this->assertTrue($cfg->DB_API->equals(
-			new \Scrivo\String("SQLSERVER")));
+			new \Scrivo\Str("SQLSERVER")));
 	}
 
 	/**
@@ -155,7 +155,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertTrue($cfg->CUSTOM_MEMBER_INT === 1001);
 		$this->assertTrue($cfg->CUSTOM_MEMBER_STR->equals(
-			new \Scrivo\String("a string")));
+			new \Scrivo\Str("a string")));
 	}
 
 	/**

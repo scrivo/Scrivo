@@ -41,7 +41,7 @@ use \Scrivo\Action;
 use \Scrivo\ApplicationException;
 use \Scrivo\PagePropertyDefinition;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The UpdatePageDefinitionApplicationProperty class implements the action
@@ -63,14 +63,14 @@ class UpdatePageDefinitionContentProperty extends Action {
 
 			// ... set the members ...
 			$prop->phpSelector = Request::post(
-				"php_selector", Request::TYPE_STRING, new String(""));
+				"php_selector", Request::TYPE_STRING, new Str(""));
 			$prop->type = PagePropertyDefinition::TYPE_HTML_TEXT_TAB;
 			$prop->typeData->css_selector = Request::post(
-				"css_selector", Request::TYPE_STRING, new String(""));
+				"css_selector", Request::TYPE_STRING, new Str(""));
 			$prop->typeData->page_css = Request::post(
-				"document_css", Request::TYPE_STRING, new String(""));
+				"document_css", Request::TYPE_STRING, new Str(""));
 			$prop->typeData->stylesheet = Request::post(
-				"stylesheet", Request::TYPE_STRING, new String(""));
+				"stylesheet", Request::TYPE_STRING, new Str(""));
 
 			// ... and update it.
 			$prop->update();

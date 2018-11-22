@@ -36,7 +36,7 @@ use \Scrivo\ListItemDefinition;
 use \Scrivo\ListItemPropertyDefinition;
 use \Scrivo\Action;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\I18n;
 
 /**
@@ -122,7 +122,7 @@ class GetListItem extends Action {
 		}
 
 		$title = $i18n["Title"];
-		if (!$def->titleLabel->equals(new String(""))) {
+		if (!$def->titleLabel->equals(new Str(""))) {
 			$title = $def->titleLabel;
 		}
 		$tit = array (
@@ -177,7 +177,7 @@ class GetListItem extends Action {
 					$defDate = $dt->format($fmt);
 				} else if ($def->typeData->defaultValue &&
 						!$def->typeData->defaultValue->equals(
-							new String("NULL"))) {
+							new Str("NULL"))) {
 					$dt = new \DateTime();
 					$dt->setTimestamp(strtotime($def->typeData->defaultValue));
 					$defDate = $dt->format($fmt);

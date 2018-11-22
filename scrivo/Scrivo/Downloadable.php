@@ -59,14 +59,14 @@ class Downloadable {
 
 	/**
 	 * The file name to use in the download.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $action;
 
 	/**
 	 * The binary data to pass in case of type_data or the physical location
 	 * of the file in case of TYPE_FILE
-	 * @var string|\Scrivo\String
+	 * @var string|\Scrivo\Str
 	 */
 	private $data;
 
@@ -78,25 +78,25 @@ class Downloadable {
 	 * and pass the file name (TYPE_FILE).
 	 *
 	 * @param \Scrivo\Context $context A valid Scrivo context.
-	 * @param \Scrivo\String $action The file name to use in the
+	 * @param \Scrivo\Str $action The file name to use in the
 	 *   download headers, this will be prepended with a string representation
 	 *   of the WWW_ROOT variabele.
 	 * @param int $type the type of data to download, either type_data or
 	 *   TYPE_FILE.
-	 * @param string|\Scrivo\String $data The file data (type_data), or
+	 * @param string|\Scrivo\Str $data The file data (type_data), or
 	 *   file name (TYPE_FILE).
 	 */
 	public function __construct(\Scrivo\Context $context,
-			\Scrivo\String $action, $type, $data) {
+			\Scrivo\Str $action, $type, $data) {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(
 			null,
 			null,
 			array(\Scrivo\ArgumentCheck::TYPE_INTEGER,
 				array(self::type_data, self::TYPE_FILE)),
-			array(array(\Scrivo\ArgumentCheck::TYPE_STRING, "Scrivo\String"))
+			array(array(\Scrivo\ArgumentCheck::TYPE_STRING, "Scrivo\Str"))
 		));
 		if ($type == self::TYPE_FILE) {
-			if (!($data instanceof \Scrivo\String)) {
+			if (!($data instanceof \Scrivo\Str)) {
 				throw new \Scrivo\SystemException("Invalid argument type");
 			}
 		} else {
@@ -105,11 +105,11 @@ class Downloadable {
 		}
 		// Get a 'filename save' representation of the WWW_ROOT variable.
 		$wr = $context->config->WWW_ROOT->replace(
-			\Scrivo\String::create(array("http://", "https://")),
-			new \Scrivo\String(""))->replace(
-				new \Scrivo\String("/"), new \Scrivo\String("_"));
+			\Scrivo\Str::create(array("http://", "https://")),
+			new \Scrivo\Str(""))->replace(
+				new \Scrivo\Str("/"), new \Scrivo\Str("_"));
 
-		$this->action = new \Scrivo\String($wr . "_" . $action);
+		$this->action = new \Scrivo\Str($wr . "_" . $action);
 		$this->type = $type;
 		$this->data = $data;
 	}

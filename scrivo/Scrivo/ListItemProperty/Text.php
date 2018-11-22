@@ -38,7 +38,7 @@ namespace Scrivo\ListItemProperty;
 /**
  * Property to hold plain text data.
  *
- * @property \Scrivo\String $text The (plain text) data.
+ * @property \Scrivo\Str $text The (plain text) data.
  */
 class Text extends \Scrivo\ListItemProperty {
 

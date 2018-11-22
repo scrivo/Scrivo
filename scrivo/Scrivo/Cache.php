@@ -76,7 +76,7 @@ interface Cache {
 	 * cache disallowing a store request because an other thread is writing
 	 * is considered expected behavoir.
 	 *
-	 * @param \Scrivo\String $key A cache unique name for the key.
+	 * @param \Scrivo\Str $key A cache unique name for the key.
 	 * @param mixed $val The (serializable) variabele to strore.
 	 * @param int $ttl Time to live in seconds.
 	 *
@@ -86,7 +86,7 @@ interface Cache {
 	 *
 	 * @throws \Scrivo\SystemException When trying to store a NULL value.
 	 */
-	public function store(\Scrivo\String $key, $val, $ttl=3600);
+	public function store(\Scrivo\Str $key, $val, $ttl=3600);
 
 	/**
 	 * Store a variable in the cache, overwrite it if it already exists.
@@ -95,7 +95,7 @@ interface Cache {
 	 * the data will be written. But note that it is not guaranteed that the
 	 * next fetch will retrieve this value.
 	 *
-	 * @param \Scrivo\String $key A cache unique name for the key.
+	 * @param \Scrivo\Str $key A cache unique name for the key.
 	 * @param mixed $val The (serializable) variabele to strore.
 	 * @param int $ttl Time to live in seconds.
 	 *
@@ -104,24 +104,24 @@ interface Cache {
 	 *
 	 * @throws \Scrivo\SystemException When trying to store a NULL value.
 	 */
-	public function overwrite(\Scrivo\String $key, $val, $ttl=3600);
+	public function overwrite(\Scrivo\Str $key, $val, $ttl=3600);
 
 	/**
 	 * Delete/remove a cache entry.
 	 *
-	 * @param \Scrivo\String $key A cache unique name for the key.
+	 * @param \Scrivo\Str $key A cache unique name for the key.
 	 */
-	public function delete(\Scrivo\String $key);
+	public function delete(\Scrivo\Str $key);
 
 	/**
 	 * Retrieve a value from the cache.
 	 *
-	 * @param \Scrivo\String $key The key for which to retrieve the value.
+	 * @param \Scrivo\Str $key The key for which to retrieve the value.
 	 *
 	 * @return mixed The value of the stored variable or NULL if the key
 	 *   does not exists or is expired.
 	 */
-	public function fetch(\Scrivo\String $key);
+	public function fetch(\Scrivo\Str $key);
 
 	/**
 	 * List all entries in the cache.

@@ -40,7 +40,7 @@ use \Scrivo\LayoutAction;
 use \Scrivo\I18n;
 use \Scrivo\Request;
 use \Scrivo\Page;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \ScrivoUi\Config\Lib\SyncUtilPageDefinition;
 
 /**
@@ -148,7 +148,7 @@ class PageDefinitionSyncForm extends LayoutAction {
 	 * @param string $rw HTML code for a table row.
 	 */
 	private function pr($rw) {
-		foreach (String::create($rw)->split(new String("<t")) as $c) {
+		foreach (Str::create($rw)->split(new Str("<t")) as $c) {
 			if ($c->length) {
 				echo str_repeat("\t", "r" == $c[0] ? 6 : 7)."<t".$c."\n";
 			}

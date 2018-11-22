@@ -43,7 +43,7 @@ use \Scrivo\PageDefinition;
 use \Scrivo\PageDefinitionHints;
 use \Scrivo\PageDefinitionTab;
 use \Scrivo\PagePropertyDefinition;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The ImportPageDefinition class implements the action for importing a
@@ -77,9 +77,9 @@ class ImportPageDefinition extends Action {
 			// Create a new template using the import data.
 			$templ = new PageDefinition($this->context);
 
-			$templ->title = new String($data["title"]);
-			$templ->description = new String($data["description"]);
-			$templ->action = new String($data["action"]);
+			$templ->title = new Str($data["title"]);
+			$templ->description = new Str($data["description"]);
+			$templ->action = new Str($data["action"]);
 			$templ->configOnly = $data["configOnly"];
 			$templ->typeSet = $data["typeSet"];
 			$templ->defaultTabId = $data["defaultTabId"];
@@ -93,7 +93,7 @@ class ImportPageDefinition extends Action {
 
 				$tab->pageDefinitionId = $templ->id;
 
-				$tab->title = new String($tabdata["title"]);
+				$tab->title = new Str($tabdata["title"]);
 
 				$tab->insert();
 
@@ -118,9 +118,9 @@ class ImportPageDefinition extends Action {
 				// Use the map to get the tab ids.
 				$prop->pageDefinitionTabId =
 					$tabmap[$propdata["pageDefinitionTabId"]];
-				$prop->title = new String($propdata["title"]);
+				$prop->title = new Str($propdata["title"]);
 				$prop->phpSelector =
-					new String($propdata["phpSelector"]);
+					new Str($propdata["phpSelector"]);
 				$prop->type = $propdata["type"];
 				$prop->typeData = (object)$propdata["typeData"];
 

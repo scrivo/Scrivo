@@ -33,7 +33,7 @@
 
 namespace ScrivoUi\Editor\Lib;
 
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The ImageUtilities class implements some utility functions for working
@@ -49,11 +49,11 @@ class ImageUtilities {
 	 */
 	public static function imageCreateFromAsset($asset) {
 
-		$jpeg = new String("jpeg");
-		$jpg = new String("jpg");
-		$png = new String("png");
-		$gif = new String("gif");
-		$bmp = new String("bmp");
+		$jpeg = new Str("jpeg");
+		$jpg = new Str("jpg");
+		$png = new Str("png");
+		$gif = new Str("gif");
+		$bmp = new Str("bmp");
 
 		if ($asset->mimeType->substr(-4)->equals($jpeg)) {
 			return imagecreatefromjpeg($asset->location);

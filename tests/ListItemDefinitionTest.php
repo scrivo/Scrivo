@@ -47,11 +47,11 @@ class ListItemDefinitionTest extends ScrivoDatabaseTestCase {
 					"applicationDefinitionId" =>
 						self::APPLICATION_DEFINITION_ID,
 					"pageDefinitionId" => 0,
-					"title" => new \Scrivo\String(""),
-					"icon" => new \Scrivo\String(""),
-					"phpSelector" => new \Scrivo\String(""),
+					"title" => new \Scrivo\Str(""),
+					"icon" => new \Scrivo\Str(""),
+					"phpSelector" => new \Scrivo\Str(""),
 					"titleWidth" => 250,
-					"titleLabel" => new \Scrivo\String(""),
+					"titleLabel" => new \Scrivo\Str(""),
 				)
 			),
 			"test 2" => array(
@@ -59,11 +59,11 @@ class ListItemDefinitionTest extends ScrivoDatabaseTestCase {
 					"applicationDefinitionId" =>
 						self::APPLICATION_DEFINITION_ID,
 					"pageDefinitionId" => 0,
-					"title" => new \Scrivo\String(""),
-					"icon" => new \Scrivo\String(""),
-					"phpSelector" => new \Scrivo\String(""),
+					"title" => new \Scrivo\Str(""),
+					"icon" => new \Scrivo\Str(""),
+					"phpSelector" => new \Scrivo\Str(""),
 					"titleWidth" => 350,
-					"titleLabel" => new \Scrivo\String(""),
+					"titleLabel" => new \Scrivo\Str(""),
 				)
 			)
 		);
@@ -80,21 +80,21 @@ class ListItemDefinitionTest extends ScrivoDatabaseTestCase {
 					"applicationDefinitionId" =>
 						self::APPLICATION_DEFINITION_ID,
 					"pageDefinitionId" => 0,
-					"title" => new \Scrivo\String(""),
-					"icon" => new \Scrivo\String(""),
-					"phpSelector" => new \Scrivo\String(""),
+					"title" => new \Scrivo\Str(""),
+					"icon" => new \Scrivo\Str(""),
+					"phpSelector" => new \Scrivo\Str(""),
 					"titleWidth" => 250,
-					"titleLabel" => new \Scrivo\String(""),
+					"titleLabel" => new \Scrivo\Str(""),
 				),
 				"argument 2" => (object) array(
 					"applicationDefinitionId" =>
 						self::APPLICATION_DEFINITION_ID,
 					"pageDefinitionId" => 0,
-					"title" => new \Scrivo\String(""),
-					"icon" => new \Scrivo\String(""),
-					"phpSelector" => new \Scrivo\String(""),
+					"title" => new \Scrivo\Str(""),
+					"icon" => new \Scrivo\Str(""),
+					"phpSelector" => new \Scrivo\Str(""),
 					"titleWidth" => 350,
-					"titleLabel" => new \Scrivo\String(""),
+					"titleLabel" => new \Scrivo\Str(""),
 				)
 			)
 		);
@@ -448,7 +448,7 @@ class ListItemDefinitionTest extends ScrivoDatabaseTestCase {
 		$this->setListItemDefinitionProperties($tmp, $d1);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, self::EDITOR_USER_ID);
 
 		// Creating/inserting a new \Scrivo\ListItemDefinition object as
@@ -502,7 +502,7 @@ class ListItemDefinitionTest extends ScrivoDatabaseTestCase {
 		$this->setListItemDefinitionProperties($tmp, $d2);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, \Scrivo\User::ANONYMOUS_USER_ID);
 
 		// Creating/inserting a new \Scrivo\ListItemDefinition object as member

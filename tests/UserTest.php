@@ -44,30 +44,30 @@ class UserTest extends ScrivoDatabaseTestCase {
 			"test 1" => array(
 				"argument 1" => (object) array(
 					"status" => \Scrivo\User::STATUS_MEMBER,
-					"userCode" => new \Scrivo\String("testusercode"),
-					"password" => new \Scrivo\String("verysecret"),
-					"givenName" => new \Scrivo\String("A given name"),
+					"userCode" => new \Scrivo\Str("testusercode"),
+					"password" => new \Scrivo\Str("verysecret"),
+					"givenName" => new \Scrivo\Str("A given name"),
 					"familyNamePrefix" =>
-						new \Scrivo\String("A family name prefix"),
-					"familyName" => new \Scrivo\String("A family name"),
-					"emailAddress" => new \Scrivo\String("A mail address"),
-					"customData_tel" => new \Scrivo\String("0123456789"),
-					"customData_city" => new \Scrivo\String("Utrecht"),
+						new \Scrivo\Str("A family name prefix"),
+					"familyName" => new \Scrivo\Str("A family name"),
+					"emailAddress" => new \Scrivo\Str("A mail address"),
+					"customData_tel" => new \Scrivo\Str("0123456789"),
+					"customData_city" => new \Scrivo\Str("Utrecht"),
 				)
 			),
 			"test 2" => array(
 				"argument 1" => (object) array(
 					"status" => \Scrivo\User::STATUS_MEMBER,
-					"userCode" => new \Scrivo\String("testusercode2"),
-					"password" => new \Scrivo\String("verysecret2"),
-					"givenName" => new \Scrivo\String("A given name 2"),
+					"userCode" => new \Scrivo\Str("testusercode2"),
+					"password" => new \Scrivo\Str("verysecret2"),
+					"givenName" => new \Scrivo\Str("A given name 2"),
 					"familyNamePrefix" =>
-						new \Scrivo\String("A family name prefix 2"),
-					"familyName" => new \Scrivo\String("A family name 2"),
+						new \Scrivo\Str("A family name prefix 2"),
+					"familyName" => new \Scrivo\Str("A family name 2"),
 					"emailAddress" =>
-						new \Scrivo\String("A mail address 2"),
-					"customData_tel" => new \Scrivo\String("0123456789 2"),
-					"customData_city" => new \Scrivo\String("Utrecht 2"),
+						new \Scrivo\Str("A mail address 2"),
+					"customData_tel" => new \Scrivo\Str("0123456789 2"),
+					"customData_city" => new \Scrivo\Str("Utrecht 2"),
 				)
 			)
 		);
@@ -81,28 +81,28 @@ class UserTest extends ScrivoDatabaseTestCase {
 			"test 1" => array(
 				"argument 1" => (object) array(
 					"status" => \Scrivo\User::STATUS_MEMBER,
-					"userCode" => new \Scrivo\String("testusercode"),
-					"password" => new \Scrivo\String("verysecret"),
-					"givenName" => new \Scrivo\String("A given name"),
+					"userCode" => new \Scrivo\Str("testusercode"),
+					"password" => new \Scrivo\Str("verysecret"),
+					"givenName" => new \Scrivo\Str("A given name"),
 					"familyNamePrefix" =>
-						new \Scrivo\String("A family name prefix"),
-					"familyName" => new \Scrivo\String("A family name"),
-					"emailAddress" => new \Scrivo\String("A mail address"),
-					"customData_tel" => new \Scrivo\String("0123456789"),
-					"customData_city" => new \Scrivo\String("Utrecht"),
+						new \Scrivo\Str("A family name prefix"),
+					"familyName" => new \Scrivo\Str("A family name"),
+					"emailAddress" => new \Scrivo\Str("A mail address"),
+					"customData_tel" => new \Scrivo\Str("0123456789"),
+					"customData_city" => new \Scrivo\Str("Utrecht"),
 				),
 				"argument 2" => (object) array(
 					"status" => \Scrivo\User::STATUS_EDITOR,
-					"userCode" => new \Scrivo\String("testusercode2"),
-					"password" => new \Scrivo\String("verysecret2"),
-					"givenName" => new \Scrivo\String("A given name 2"),
+					"userCode" => new \Scrivo\Str("testusercode2"),
+					"password" => new \Scrivo\Str("verysecret2"),
+					"givenName" => new \Scrivo\Str("A given name 2"),
 					"familyNamePrefix" =>
-						new \Scrivo\String("A family name prefix 2"),
-					"familyName" => new \Scrivo\String("A family name 2"),
+						new \Scrivo\Str("A family name prefix 2"),
+					"familyName" => new \Scrivo\Str("A family name 2"),
 					"emailAddress" =>
-						new \Scrivo\String("A mail address 2"),
-					"customData_tel" => new \Scrivo\String("0123456789 2"),
-					"customData_city" => new \Scrivo\String("Utrecht 2"),
+						new \Scrivo\Str("A mail address 2"),
+					"customData_tel" => new \Scrivo\Str("0123456789 2"),
+					"customData_city" => new \Scrivo\Str("Utrecht 2"),
 				)
 			)
 		);
@@ -130,7 +130,7 @@ class UserTest extends ScrivoDatabaseTestCase {
 		$this->assertEquals($admin->id, Scrivo\User::PRIMARY_ADMIN_ID);
 
 		$this->assertTrue(
-			$admin->checkPassword(new \Scrivo\String("secret")));
+			$admin->checkPassword(new \Scrivo\Str("secret")));
 
 		$user = \Scrivo\User::fetch(
 			self::$context, Scrivo\User::ANONYMOUS_USER_ID);
@@ -170,7 +170,7 @@ class UserTest extends ScrivoDatabaseTestCase {
 	 * @expectedExceptionMessage Failed to load User
 	 */
 	function testLoadInvalidUserByUserCode() {
-		$usr = \Scrivo\User::fetch(self::$context, new \Scrivo\String("aa"));
+		$usr = \Scrivo\User::fetch(self::$context, new \Scrivo\Str("aa"));
 	}
 
 	/**
@@ -192,7 +192,7 @@ class UserTest extends ScrivoDatabaseTestCase {
 	 */
 	function testInvalidUserCode() {
 		$usr = new \Scrivo\User(self::$context);
-		$usr->userCode = new \Scrivo\String("aa");
+		$usr->userCode = new \Scrivo\Str("aa");
 		$usr->insert();
 	}
 
@@ -293,7 +293,7 @@ class UserTest extends ScrivoDatabaseTestCase {
 	 */
 	function testCreateDuplicateUsercode() {
 		$u = new \Scrivo\User(self::$context);
-		$u->userCode = new \Scrivo\String("admin");
+		$u->userCode = new \Scrivo\Str("admin");
 		$u->insert();
 	}
 
@@ -306,7 +306,7 @@ class UserTest extends ScrivoDatabaseTestCase {
 
 		$u = \Scrivo\User::fetch(self::$context, self::EDITOR_USER_ID);
 		\Scrivo\User::delete(self::$context, self::EDITOR_USER_ID);
-		$u->checkPassword(new \Scrivo\String("blahblah"));
+		$u->checkPassword(new \Scrivo\Str("blahblah"));
 	}
 
 	/**
@@ -454,7 +454,7 @@ class UserTest extends ScrivoDatabaseTestCase {
 		$tmp->insert();
 		$testUserId = $tmp->id;
 
-		$cfg = new Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, $editor->id);
 
 		// Creating/inseting a new user as editor should not succeed.
@@ -520,7 +520,7 @@ class UserTest extends ScrivoDatabaseTestCase {
 		$tmp->insert();
 		$testUserId = $tmp->id;
 
-		$cfg = new Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, $editor->id);
 
 		// Loading a user as editor should succeed.
@@ -563,7 +563,7 @@ class UserTest extends ScrivoDatabaseTestCase {
 		$test = "";
 		try {
 			$user = new \Scrivo\User($this->ctxDbFailureStub());
-			$user->userCode = new \Scrivo\String("12345");
+			$user->userCode = new \Scrivo\Str("12345");
 			$user->insert();
 		} catch (\Scrivo\ResourceException $e) {
 			$test = "Catch and release";
@@ -582,7 +582,7 @@ class UserTest extends ScrivoDatabaseTestCase {
 		// Perform update password operation.
 		$test = "";
 		try {
-			$user->checkPassword(new \Scrivo\String("Dumbo"));
+			$user->checkPassword(new \Scrivo\Str("Dumbo"));
 		} catch (\Scrivo\ResourceException $e) {
 			$test = "Catch and release";
 		}

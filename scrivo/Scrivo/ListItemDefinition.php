@@ -56,15 +56,15 @@ namespace Scrivo;
  * @property-read int $id The id of the list item definition (DB key).
  * @property int $applicationDefinitionId The id of the list/application
  *    where this list item definition belongs to.
- * @property \Scrivo\String $icon The location of an icon to identify the
+ * @property \Scrivo\Str $icon The location of an icon to identify the
  *    item definition in the user interface.
  * @property int $pageDefinitionId The id of the template to use for linked
  *    pages (optional).
- * @property \Scrivo\String $phpSelector A textual identification/key for
+ * @property \Scrivo\Str $phpSelector A textual identification/key for
  *    this list item definition.
- * @property \Scrivo\String $title A descriptive name for the list item
+ * @property \Scrivo\Str $title A descriptive name for the list item
  *    definition.
- * @property \Scrivo\String $titleLabel An alternative label for the title
+ * @property \Scrivo\Str $titleLabel An alternative label for the title
  *    property of a list item in the user interface.
  * @property int $titleWidth The width of the title property in the user
  *    interface for a list item (column width in list view mode).
@@ -96,20 +96,20 @@ class ListItemDefinition {
 
 	/**
 	 * A descriptive name for the list item definition.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $title = null;
 
 	/**
 	 * The location of an icon to identify the item definition in the user
 	 * interface.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $icon = null;
 
 	/**
 	 * A textual identification/key for this list item definition.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $phpSelector = null;
 
@@ -123,7 +123,7 @@ class ListItemDefinition {
 	/**
 	 * An alternative label for the title property of a list item in the user
 	 * interface.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $titleLabel = null;
 
@@ -156,10 +156,10 @@ class ListItemDefinition {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null));
 
 		if ($context) {
-			$this->title = new \Scrivo\String();
-			$this->icon = new \Scrivo\String();
-			$this->phpSelector = new \Scrivo\String();
-			$this->titleLabel = new \Scrivo\String();
+			$this->title = new \Scrivo\Str();
+			$this->icon = new \Scrivo\Str();
+			$this->phpSelector = new \Scrivo\Str();
+			$this->titleLabel = new \Scrivo\Str();
 
 			$this->context = $context;
 		}
@@ -226,11 +226,11 @@ class ListItemDefinition {
 		$this->id = intval($rd["list_item_definition_id"]);
 		$this->applicationDefinitionId = intval($rd["application_definition_id"]);
 		$this->pageDefinitionId = intval($rd["page_definition_id"]);
-		$this->title = new \Scrivo\String($rd["title"]);
-		$this->icon = new \Scrivo\String($rd["icon"]);
-		$this->phpSelector = new \Scrivo\String($rd["php_key"]);
+		$this->title = new \Scrivo\Str($rd["title"]);
+		$this->icon = new \Scrivo\Str($rd["icon"]);
+		$this->phpSelector = new \Scrivo\Str($rd["php_key"]);
 		$this->titleWidth = intval($rd["title_width"]);
-		$this->titleLabel = new \Scrivo\String($rd["title_label"]);
+		$this->titleLabel = new \Scrivo\Str($rd["title_label"]);
 
 		$this->context = $context;
 	}
@@ -302,10 +302,10 @@ class ListItemDefinition {
 	/**
 	 * Set A descriptive name for the list item definition.
 	 *
-	 * @param \Scrivo\String $title A descriptive name for the list item
+	 * @param \Scrivo\Str $title A descriptive name for the list item
 	 *    definition.
 	 */
-	private function setTitle(\Scrivo\String $title) {
+	private function setTitle(\Scrivo\Str $title) {
 		$this->title = $title;
 	}
 
@@ -313,20 +313,20 @@ class ListItemDefinition {
 	 * Set The location of an icon to identify the item definition in the user
 	 * interface.
 	 *
-	 * @param \Scrivo\String $icon The location of an icon to identify the
+	 * @param \Scrivo\Str $icon The location of an icon to identify the
 	 *    item definition in the user interface.
 	 */
-	private function setIcon(\Scrivo\String $icon) {
+	private function setIcon(\Scrivo\Str $icon) {
 		$this->icon = $icon;
 	}
 
 	/**
 	 * Set A textual identification/key for this list item definition.
 	 *
-	 * @param \Scrivo\String $phpSelector A textual identification/key for
+	 * @param \Scrivo\Str $phpSelector A textual identification/key for
 	 *    this list item definition.
 	 */
-	private function setPhpSelector(\Scrivo\String $phpSelector) {
+	private function setPhpSelector(\Scrivo\Str $phpSelector) {
 		$this->phpSelector = $phpSelector;
 	}
 
@@ -349,10 +349,10 @@ class ListItemDefinition {
 	 * Set An alternative label for the title property of a list item in the
 	 * user interface.
 	 *
-	 * @param \Scrivo\String $titleLabel An alternative label for the title
+	 * @param \Scrivo\Str $titleLabel An alternative label for the title
 	 *    property of a list item in the user interface.
 	 */
-	private function setTitleLabel(\Scrivo\String $titleLabel) {
+	private function setTitleLabel(\Scrivo\Str $titleLabel) {
 		$this->titleLabel = $titleLabel;
 	}
 

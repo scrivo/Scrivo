@@ -41,7 +41,7 @@ use \Scrivo\ApplicationException;
 use \Scrivo\I18n;
 use \Scrivo\ListItemDefinition;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The UpdateListItemDefinition class implements the action for updating a
@@ -67,15 +67,15 @@ class UpdateListItemDefinition extends Action {
 
 			// ... set the members ...
 			$liDef->title = Request::post(
-				"title", Request::TYPE_STRING, new String(""));
+				"title", Request::TYPE_STRING, new Str(""));
 			$liDef->phpSelector = Request::post(
-				"php_selector", Request::TYPE_STRING, new String(""));
+				"php_selector", Request::TYPE_STRING, new Str(""));
 			$liDef->titleWidth = Request::post(
 				"title_width", Request::TYPE_INTEGER, "");
 			$liDef->titleLabel = Request::post(
-				"title_label", Request::TYPE_STRING, new String(""));
+				"title_label", Request::TYPE_STRING, new Str(""));
 			$liDef->icon = Request::post(
-				"icon", Request::TYPE_STRING, new String(""));
+				"icon", Request::TYPE_STRING, new Str(""));
 			$liDef->pageDefinitionId = Request::post(
 				"page_definition_id", Request::TYPE_INTEGER, 0);
 

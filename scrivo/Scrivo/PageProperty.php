@@ -56,25 +56,25 @@ class PageProperty {
 
 	/**
 	 * The property type: one out of the TemplateProperty::TYPE_* constants.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $type;
 
 	/**
 	 * An textual identification/key for this property.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $phpSelector;
 
 	/**
 	 * The property data.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $data;
 
 	/**
 	 * A derived data of the property data.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $extData;
 
@@ -98,10 +98,10 @@ class PageProperty {
 	 */
 	protected function __construct(\Scrivo\Page $page, array $rd) {
 
-		$this->type = new \Scrivo\String($rd["type"]);
-		$this->phpSelector = new \Scrivo\String($rd["php_key"]);
-		$this->setData(new \Scrivo\String($rd["value"]));
-		$this->setExtData(new \Scrivo\String($rd["VALUE2"]));
+		$this->type = new \Scrivo\Str($rd["type"]);
+		$this->phpSelector = new \Scrivo\Str($rd["php_key"]);
+		$this->setData(new \Scrivo\Str($rd["value"]));
+		$this->setExtData(new \Scrivo\Str($rd["VALUE2"]));
 		$this->definitionId = intval($rd["ID_DEF"]);
 
 		$this->page = $page;
@@ -210,18 +210,18 @@ class PageProperty {
 	/**
 	 * Set the property data.
 	 *
-	 * @param \Scrivo\String $data The property data.
+	 * @param \Scrivo\Str $data The property data.
 	 */
-	protected function setData(\Scrivo\String $data) {
+	protected function setData(\Scrivo\Str $data) {
 		$this->data = $data;
 	}
 
 	/**
 	 * Set the property extended data.
 	 *
-	 * @param \Scrivo\String $extData A derived data of the property data.
+	 * @param \Scrivo\Str $extData A derived data of the property data.
 	 */
-	protected function setExtData(\Scrivo\String $extData) {
+	protected function setExtData(\Scrivo\Str $extData) {
 		$this->extData = $extData;
 	}
 

@@ -30,7 +30,7 @@
  */
 
 use \Scrivo\Role;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\User;
 
 $this->beginSection("editorRoles", true);
@@ -108,10 +108,10 @@ $this->beginSection("content", true);
 if ($this->session->userStatus == User::STATUS_ADMIN) {
 ?>
 	<p><?php echo
-		String::create(
+		Str::create(
 				$i18n["Create a new [L]editor role[/L]"])->replace(
-			String::create(array("[L]", "[/L]")),
-			String::create(array(
+			Str::create(array("[L]", "[/L]")),
+			Str::create(array(
 				"<a href=\"index.php?a=role_form&type=".Role::EDITOR_ROLE."\">", "</a>"))
 		);
 	?></p>
@@ -138,10 +138,10 @@ if ($this->session->userStatus == User::STATUS_ADMIN) {
 	if ($this->session->userStatus == User::STATUS_ADMIN) {
 ?>
 	<p><?php echo
-		String::create(
+		Str::create(
 				$i18n["Create a new [L]public role[/L]"])->replace(
-			String::create(array("[L]", "[/L]")),
-			String::create(array(
+			Str::create(array("[L]", "[/L]")),
+			Str::create(array(
 				"<a href=\"index.php?a=role_form&type=".Role::PUBLIC_ROLE."\">", "</a>"))
 		);
 	?></p>

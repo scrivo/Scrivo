@@ -41,7 +41,7 @@ use \Scrivo\ApplicationException;
 use \Scrivo\I18n;
 use \Scrivo\Language;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The InsertLanguage class implements the action of creating a new
@@ -66,13 +66,13 @@ class InsertLanguage extends Action {
 			$language->shortList =
 				Request::post("short_list", Request::TYPE_BOOLEAN);
 			$language->isoCode =
-				Request::post("code", Request::TYPE_STRING, new String(""));
+				Request::post("code", Request::TYPE_STRING, new Str(""));
 			$language->family =
-				Request::post("family", Request::TYPE_STRING, new String(""));
+				Request::post("family", Request::TYPE_STRING, new Str(""));
 			$language->nameEn =
-				Request::post("en", Request::TYPE_STRING, new String(""));
+				Request::post("en", Request::TYPE_STRING, new Str(""));
 			$language->nameNl =
-				Request::post("nl", Request::TYPE_STRING, new String(""));
+				Request::post("nl", Request::TYPE_STRING, new Str(""));
 
 			// ... and insert it.
 			$language->insert();

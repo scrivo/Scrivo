@@ -35,7 +35,7 @@ namespace ScrivoUi\Editor\Actions\ContentTabs;
 use \Scrivo\Action;
 use \Scrivo\Page;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The PagePath class implements the action of retrieving the path of
@@ -63,7 +63,7 @@ class SaveProperties extends Action {
 				if (is_array($v)) {
 					$v = serialize($v);
 				}
-				$prp->data = new String((string)$v);
+				$prp->data = new Str((string)$v);
 				$prp->update();
 			}
 		}

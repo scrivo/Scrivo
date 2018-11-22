@@ -54,14 +54,14 @@ class IdLabelTest extends ScrivoDatabaseTestCase {
 		$idLabel = \Scrivo\IdLabel::select(self::$context);
 
 		// Set an id-label pair
-		$idLabel->set(self::$context, 123, new \Scrivo\String("CONTACT"));
+		$idLabel->set(self::$context, 123, new \Scrivo\Str("CONTACT"));
 
 		// Reload labels and check
 		$idLabel = \Scrivo\IdLabel::select(self::$context);
 		$this->assertEquals($idLabel->CONTACT, 123);
 
 		// Update an id-label pair
-		$idLabel->set(self::$context, 123, new \Scrivo\String("CONTACT_B"));
+		$idLabel->set(self::$context, 123, new \Scrivo\Str("CONTACT_B"));
 
 		// Reload labels and check
 		$idLabel = \Scrivo\IdLabel::select(self::$context);
@@ -86,11 +86,11 @@ class IdLabelTest extends ScrivoDatabaseTestCase {
 
 		// Set an id-label pair
 		self::$context->labels->set(
-			self::$context, 123, new \Scrivo\String("CONTACT"));
+			self::$context, 123, new \Scrivo\Str("CONTACT"));
 
 		// Set another using the same label
 		self::$context->labels->set(
-			self::$context, 1234, new \Scrivo\String("CONTACT"));
+			self::$context, 1234, new \Scrivo\Str("CONTACT"));
 	}
 
 	/**
@@ -123,7 +123,7 @@ class IdLabelTest extends ScrivoDatabaseTestCase {
 
 		$idLabel1 = \Scrivo\IdLabel::select(self::$context);
 		// invalidate cache
-		$idLabel1->set(self::$context, 123, new \Scrivo\String("INV_CACHE"));
+		$idLabel1->set(self::$context, 123, new \Scrivo\Str("INV_CACHE"));
 
 		// Perform idLable construction.
 		$test = "";
@@ -138,7 +138,7 @@ class IdLabelTest extends ScrivoDatabaseTestCase {
 		$test = "";
 		try {
 			$idLabel1->set(
-				$this->ctxDbFailureStub(), 123, new \Scrivo\String("CONTACT"));
+				$this->ctxDbFailureStub(), 123, new \Scrivo\Str("CONTACT"));
 		} catch (\Scrivo\ResourceException $e) {
 			$test = "Catch and release";
 		}

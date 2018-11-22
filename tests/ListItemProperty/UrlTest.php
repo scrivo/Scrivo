@@ -38,13 +38,13 @@ class ListItemPropertyUrlTest extends ListItemPropertyBaseTestCase {
 
 	function testProperty() {
 
-		$href = new \Scrivo\String("href");
-		$title = new \Scrivo\String("title");
-		$target = new \Scrivo\String("target");
-		$empty = new \Scrivo\String("");
+		$href = new \Scrivo\Str("href");
+		$title = new \Scrivo\Str("title");
+		$target = new \Scrivo\Str("target");
+		$empty = new \Scrivo\Str("");
 
 		$lip = $this->createItemProperty(
-			new \Scrivo\String(\Scrivo\ListItemPropertyDefinition::TYPE_URL));
+			new \Scrivo\Str(\Scrivo\ListItemPropertyDefinition::TYPE_URL));
 
 		$this->assertTrue($empty->equals($lip->href));
 		$this->assertTrue($empty->equals($lip->title));

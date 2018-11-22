@@ -37,7 +37,7 @@ namespace ScrivoUi\DbConsole\Actions\Layout;
 
 use \Scrivo\I18n;
 use \Scrivo\LayoutAction;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\PdoConnection;
 
 /**
@@ -52,7 +52,7 @@ class ImportForm extends LayoutAction {
 	 */
 	function doAction() {
 
-		$i18n = new I18n(new \Scrivo\String("en_US"));
+		$i18n = new I18n(new \Scrivo\Str("en_US"));
 
 		$title = $i18n["Import instance data"];
 

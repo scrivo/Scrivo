@@ -45,8 +45,8 @@ class PagePropertyDefinitionTest extends ScrivoDatabaseTestCase {
 			"test 1" => array(
 				"argument 1" => (object) array(
 					"pageDefinitionId" => self::PAGE_DEFINITION_FORUM_ID,
-					"title" => new \Scrivo\String("Image"),
-					"phpSelector" => new \Scrivo\String("AN_IMAGE"),
+					"title" => new \Scrivo\Str("Image"),
+					"phpSelector" => new \Scrivo\Str("AN_IMAGE"),
 					"type" => \Scrivo\PagePropertyDefinition::TYPE_IMAGE,
 					"typeData" => (object)array(
 						"FLOAT" => 6.5,
@@ -58,8 +58,8 @@ class PagePropertyDefinitionTest extends ScrivoDatabaseTestCase {
 			"test 2" => array(
 				"argument 1" => (object) array(
 					"pageDefinitionId" => self::PAGE_DEFINITION_FORUM_ID,
-					"title" => new \Scrivo\String("Select list"),
-					"phpSelector" => new \Scrivo\String("A_SELECT_LIST"),
+					"title" => new \Scrivo\Str("Select list"),
+					"phpSelector" => new \Scrivo\Str("A_SELECT_LIST"),
 					"type" => \Scrivo\PagePropertyDefinition::TYPE_SELECT,
 					"typeData" => (object)array(
 						"location" => "0:yes;1:no"
@@ -80,16 +80,16 @@ class PagePropertyDefinitionTest extends ScrivoDatabaseTestCase {
 			"test 1" => array(
 				"argument 1" => (object) array(
 					"pageDefinitionId" => self::PAGE_DEFINITION_FORUM_ID,
-					"title" => new \Scrivo\String("Image"),
-					"phpSelector" => new \Scrivo\String("AN_IMAGE"),
+					"title" => new \Scrivo\Str("Image"),
+					"phpSelector" => new \Scrivo\Str("AN_IMAGE"),
 					"type" => \Scrivo\PagePropertyDefinition::TYPE_IMAGE,
 					"typeData" => (object)array(),
 					"pageDefinitionTabId" => 0,
 				),
 				"argument 2" => (object) array(
 					"pageDefinitionId" => self::PAGE_DEFINITION_FORUM_ID,
-					"title" => new \Scrivo\String("Color"),
-					"phpSelector" => new \Scrivo\String("A_COLOR"),
+					"title" => new \Scrivo\Str("Color"),
+					"phpSelector" => new \Scrivo\Str("A_COLOR"),
 					"type" => \Scrivo\PagePropertyDefinition::TYPE_COLOR,
 					"typeData" => (object)array(),
 					"pageDefinitionTabId" =>
@@ -108,31 +108,31 @@ class PagePropertyDefinitionTest extends ScrivoDatabaseTestCase {
 			"test 1" => array(
 				"argument 1" => (object) array(
 					"pageDefinitionId" => self::PAGE_DEFINITION_FORUM_ID,
-					"title" => new \Scrivo\String("Image"),
-					"phpSelector" => new \Scrivo\String("AN_IMAGE"),
+					"title" => new \Scrivo\Str("Image"),
+					"phpSelector" => new \Scrivo\Str("AN_IMAGE"),
 					"type" => \Scrivo\PagePropertyDefinition::TYPE_IMAGE,
 					"typeData" => (object)array(),
 					"pageDefinitionTabId" => 0,
 				),
 				"argument 2" => (object) array(
 					"pageDefinitionId" => self::PAGE_DEFINITION_FORUM_ID,
-					"title" => new \Scrivo\String("HTML tab"),
-					"phpSelector" => new \Scrivo\String("AN_HTML_TEXT_TAB"),
+					"title" => new \Scrivo\Str("HTML tab"),
+					"phpSelector" => new \Scrivo\Str("AN_HTML_TEXT_TAB"),
 					"type" =>
 						\Scrivo\PagePropertyDefinition::TYPE_HTML_TEXT_TAB,
 					"typeData" => (object)array(
-						"css_selector" => new \Scrivo\String(""),
-						"INITIAL_CONTENT" => new \Scrivo\String(""),
-						"page_css" => new \Scrivo\String(""),
-						"stylesheet" => new \Scrivo\String(""),
-						"css_id" => new \Scrivo\String(""),
+						"css_selector" => new \Scrivo\Str(""),
+						"INITIAL_CONTENT" => new \Scrivo\Str(""),
+						"page_css" => new \Scrivo\Str(""),
+						"stylesheet" => new \Scrivo\Str(""),
+						"css_id" => new \Scrivo\Str(""),
 					),
 				),
 				"argument 3" => (object) array(
 					"pageDefinitionId" => self::PAGE_DEFINITION_FORUM_ID,
-					"title" => new \Scrivo\String("Application tab"),
+					"title" => new \Scrivo\Str("Application tab"),
 					"phpSelector" =>
-						new \Scrivo\String("AN_APPLICATION_TAB"),
+						new \Scrivo\Str("AN_APPLICATION_TAB"),
 					"type" =>
 						\Scrivo\PagePropertyDefinition::TYPE_APPLICATION_TAB,
 					"typeData" => (object)array("APPLICATION_DEFINITION_ID" =>
@@ -323,7 +323,7 @@ class PagePropertyDefinitionTest extends ScrivoDatabaseTestCase {
 	 */
 	function testInvalidType() {
 		$o = new \Scrivo\PagePropertyDefinition(self::$context);
-		$o->type = new \Scrivo\String("Handy dandy type");
+		$o->type = new \Scrivo\Str("Handy dandy type");
 	}
 
 	/**
@@ -461,8 +461,8 @@ class PagePropertyDefinitionTest extends ScrivoDatabaseTestCase {
 		$this->checkTemplatePropertyProperties($o3, $d3, false);
 
 		// Set some new properity values.
-		$o2->phpSelector = new \Scrivo\String("ABCDEFG");
-		$o3->phpSelector = new \Scrivo\String("HILJKMN");
+		$o2->phpSelector = new \Scrivo\Str("ABCDEFG");
+		$o3->phpSelector = new \Scrivo\Str("HILJKMN");
 		$o2->update();
 		$o3->update();
 
@@ -471,9 +471,9 @@ class PagePropertyDefinitionTest extends ScrivoDatabaseTestCase {
 		$o2 = \Scrivo\PagePropertyDefinition::fetch(self::$context, $o2->id);
 		$o3 = \Scrivo\PagePropertyDefinition::fetch(self::$context, $o3->id);
 		$this->assertTrue($o2->phpSelector->equals(
-			new \Scrivo\String("ABCDEFG")));
+			new \Scrivo\Str("ABCDEFG")));
 		$this->assertTrue($o3->phpSelector->equals(
-			new \Scrivo\String("HILJKMN")));
+			new \Scrivo\Str("HILJKMN")));
 
 		// Setting the tab id should fail for HTML tab properties
 		$test = "";
@@ -671,7 +671,7 @@ class PagePropertyDefinitionTest extends ScrivoDatabaseTestCase {
 		$this->setTemplatePropertyProperties($tmp, $d1);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, self::EDITOR_USER_ID);
 
 		// Creating/inserting a new \Scrivo\PagePropertyDefinition object as
@@ -725,7 +725,7 @@ class PagePropertyDefinitionTest extends ScrivoDatabaseTestCase {
 		$this->setTemplatePropertyProperties($tmp, $d2);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, \Scrivo\User::ANONYMOUS_USER_ID);
 
 		// Creating/inserting a new \Scrivo\PagePropertyDefinition object as
@@ -759,7 +759,7 @@ class PagePropertyDefinitionTest extends ScrivoDatabaseTestCase {
 		$tmp->insert();
 
 		$tmpDel = new \Scrivo\PagePropertyDefinition(self::$context);
-		$tmpDel->phpSelector = new \Scrivo\String("TMP_DEL");
+		$tmpDel->phpSelector = new \Scrivo\Str("TMP_DEL");
 		$tmpDel->insert();
 		// Set "tmpDel" in the local cache.
 		$tmpDel = \Scrivo\PagePropertyDefinition::fetch(

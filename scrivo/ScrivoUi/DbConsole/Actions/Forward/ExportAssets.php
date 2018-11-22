@@ -37,7 +37,7 @@
 namespace ScrivoUi\DbConsole\Actions\Forward;
 
 use \Scrivo\Action;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \ScrivoUi\DbConsole\Lib\Util;
 
 /**
@@ -57,7 +57,7 @@ class ExportAssets extends Action {
 			$this->context->config->WWW_ROOT)."_dbc_assets.tgz";
 
 		$cmdend = $this->context->config->UPLOAD_DIR;
-		$i = $cmdend->lastIndexOf(new String("/"));
+		$i = $cmdend->lastIndexOf(new Str("/"));
 		$dir = $cmdend->substr(0, $i);
 		$fldr = $cmdend->substr($i+1);
 		$cmd = "tar -zcf {$outFile} -C {$dir} {$fldr}";

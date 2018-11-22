@@ -38,7 +38,7 @@ namespace ScrivoUi\DbConsole\Actions\Layout;
 
 use \Scrivo\I18n;
 use \Scrivo\LayoutAction;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The DatabaseParametersForm layout action class sets up the layout for
@@ -52,7 +52,7 @@ class DatabaseParametersForm extends LayoutAction {
 	 */
 	function doAction() {
 
-		$i18n = new I18n(new String("en_US"));
+		$i18n = new I18n(new Str("en_US"));
 
 		if ($this->parameters["action"] == "initializeDatabaseForm") {
 			$title = $i18n["Database installation options"];
@@ -64,7 +64,7 @@ class DatabaseParametersForm extends LayoutAction {
 			$next = "initialize.selectDatabase";
 		}
 
-		$fd = String::create(array(
+		$fd = Str::create(array(
 			"db_host" => "localhost", "db_name" => "scrivo",
 			"db_user" => "scrivo", "db_pwd" => "scrivo"));
 		if (isset($this->session->formData)) {

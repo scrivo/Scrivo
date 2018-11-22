@@ -66,10 +66,10 @@ if (!isset($session->authenticated)) {
 // If the current user is the admin user, ...
 if ($session->userId == \Scrivo\User::PRIMARY_ADMIN_ID) {
 	// ... check if the request came from one of the whitelisted IP adresses.
-	if (!$cfg->ADMIN_IP_ADDRESSES->equals(new \Scrivo\String("*"))
+	if (!$cfg->ADMIN_IP_ADDRESSES->equals(new \Scrivo\Str("*"))
 			&& !$cfg->ADMIN_IP_ADDRESSES->contains(
-				new \Scrivo\String($_SERVER["REMOTE_ADDR"]))
-			&& !$cfg->ADMIN_IP_ADDRESSES->contains(new \Scrivo\String(
+				new \Scrivo\Str($_SERVER["REMOTE_ADDR"]))
+			&& !$cfg->ADMIN_IP_ADDRESSES->contains(new \Scrivo\Str(
 				// replace last digit with an * in remote_address
 				preg_replace("/(\d+)$/i", "*", $_SERVER["REMOTE_ADDR"])))) {
 		die("Authorization Error");
@@ -78,7 +78,7 @@ if ($session->userId == \Scrivo\User::PRIMARY_ADMIN_ID) {
 
 // Get the action from the GET or POST variables, default to home ...
 $actionId = (string)\Scrivo\Request::request("a", \Scrivo\Request::TYPE_STRING,
-	new \Scrivo\String("home"));
+	new \Scrivo\Str("home"));
 
 // ... but reset it to login actions if not authenticated yet.
 if (!$session->authenticated) {

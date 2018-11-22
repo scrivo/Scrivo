@@ -54,7 +54,7 @@ class CheckBox extends \Scrivo\ListItemProperty {
 		switch($name) {
 			// Get the checkbox property.
 			case "checked":
-				return	$this->data->equals(new \Scrivo\String("checked"));
+				return	$this->data->equals(new \Scrivo\Str("checked"));
 		}
 		return parent::__get($name);
 	}
@@ -70,7 +70,7 @@ class CheckBox extends \Scrivo\ListItemProperty {
 		switch($name) {
 			// Set the checkbox property.
 			case "checked":
-				$this->data = new \Scrivo\String($value?"checked":"");
+				$this->data = new \Scrivo\Str($value?"checked":"");
 				return;
 		}
 		parent::__set($name, $value);

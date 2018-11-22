@@ -268,7 +268,7 @@ class ByteArray implements \Iterator, \ArrayAccess, \Countable {
 			$offset, \Scrivo\ArgumentCheck::TYPE_INTEGER);
 		if (!$this->offsetExists($offset)) {
 			throw new \Scrivo\SystemException(
-				"String index [$offset] out of bounds");
+				"Str index [$offset] out of bounds");
 		}
 		return $this->unsafeSubstr($offset, 1);
 	}
@@ -332,7 +332,7 @@ class ByteArray implements \Iterator, \ArrayAccess, \Countable {
 		$tmp = $start < 1 ? -$start : $start;
 		if (!$this->offsetExists($tmp)) {
 			throw new \Scrivo\SystemException(
-				"String index [$start] out of bounds");
+				"Str index [$start] out of bounds");
 		}
 		return $this->unsafeSubstr($start, $length);
 	}
@@ -359,7 +359,7 @@ class ByteArray implements \Iterator, \ArrayAccess, \Countable {
 		if (!$this->offsetExists($start) || !$this->offsetExists($end)
 				|| $start > $end) {
 			throw new \Scrivo\SystemException(
-				"String index [$start, $end] out of bounds");
+				"Str index [$start, $end] out of bounds");
 		}
 		return $this->unsafeSubstr($start, $end-$start);
 	}
@@ -398,7 +398,7 @@ class ByteArray implements \Iterator, \ArrayAccess, \Countable {
 			$ignoreCase, \Scrivo\ArgumentCheck::TYPE_BOOLEAN);
 		if ($offset && !$this->offsetExists($offset)) {
 			throw new \Scrivo\SystemException(
-				"String index [$offset] out of bounds");
+				"Str index [$offset] out of bounds");
 		}
 		if ($ignoreCase) {
 			return stripos(
@@ -433,7 +433,7 @@ class ByteArray implements \Iterator, \ArrayAccess, \Countable {
 			$ignoreCase, \Scrivo\ArgumentCheck::TYPE_BOOLEAN);
 		if ($offset && !$this->offsetExists($offset)) {
 			throw new \Scrivo\SystemException(
-				"String index [$offset] out of bounds");
+				"Str index [$offset] out of bounds");
 		}
 		$res = -1;
 		if ($ignoreCase) {
@@ -476,7 +476,7 @@ class ByteArray implements \Iterator, \ArrayAccess, \Countable {
 			$tmp = $offset < 1 ? -$offset : $offset;
 			if (!$this->offsetExists($tmp)) {
 				throw new \Scrivo\SystemException(
-					"String index [$offset] out of bounds");
+					"Str index [$offset] out of bounds");
 			}
 		}
 		$res = -1;

@@ -41,7 +41,7 @@ use \Scrivo\ApplicationException;
 use \Scrivo\I18n;
 use \Scrivo\PageDefinitionTab;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The UpdatePageDefinitionTab class implements the action for updating a
@@ -65,7 +65,7 @@ class UpdatePageDefinitionTab extends Action {
 
 			// ... set the members ...
 			$tab->title =
-				Request::post("tab_name", Request::TYPE_STRING, new String(""));
+				Request::post("tab_name", Request::TYPE_STRING, new Str(""));
 
 			// ... and update it.
 			$tab->update();

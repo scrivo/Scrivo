@@ -31,7 +31,7 @@
 
 use \Scrivo\Config;
 use \Scrivo\Session;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\Request;
 use \Scrivo\File;
 use \Scrivo\Folder;
@@ -51,9 +51,9 @@ $context = new \Scrivo\Context($cfg, $session->userId);
 $id = 0;
 // trick for flv files in jw player
 // file=187300.flv&streamer=http://test.intraxs.nl/nisb-portal/scrivo/asset.php
-$file = Request::get("file", Request::TYPE_STRING, new String(""));
-if (!$file->equals(new String(""))) {
-	if ($file->substr(-4)->equals(new String(".flv"))) {
+$file = Request::get("file", Request::TYPE_STRING, new Str(""));
+if (!$file->equals(new Str(""))) {
+	if ($file->substr(-4)->equals(new Str(".flv"))) {
 		$id = intval((string)$file->substr(5, -4));
 	}
 }
@@ -80,7 +80,7 @@ if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
 
 header("Pragma: "); // IE Problemen with downloading assets over https
 
-if ($d->cacheHeaderSettings->setting->equals(new String("expires"))) {
+if ($d->cacheHeaderSettings->setting->equals(new Str("expires"))) {
 
 	$secs = array("MINUTE" => 60, "HOUR" => 3600, "DAY" => 86400,
 		"WEEK" => 604800, "MONTH" => 2635200, "YEAR" => 31557600);
@@ -94,7 +94,7 @@ if ($d->cacheHeaderSettings->setting->equals(new String("expires"))) {
 	header("Last-Modified: ".$tmpMod);
 	header("Expires: ".$dt->format($dtFmt));
 
-} else if ($d->cacheHeaderSettings->setting->equals(new String("no-cache"))) {
+} else if ($d->cacheHeaderSettings->setting->equals(new Str("no-cache"))) {
 
 	$dt = new DateTime("now", $tzGmt);
 

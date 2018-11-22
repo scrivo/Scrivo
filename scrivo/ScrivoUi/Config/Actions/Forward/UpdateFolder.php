@@ -41,7 +41,7 @@ use \Scrivo\ApplicationException;
 use \Scrivo\Folder;
 use \Scrivo\IdLabel;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The UpdateFolder class implements the action for updating a folder.
@@ -63,14 +63,14 @@ class UpdateFolder extends Action {
 			$folder->parentId =
 				Request::post("folder_pid", Request::TYPE_INTEGER, 0);
 			$folder->title =
-				Request::post("title", Request::TYPE_STRING, new String(""));
+				Request::post("title", Request::TYPE_STRING, new Str(""));
 
 			// ... and update the folder.
 			$folder->update();
 
 			// Add the label if given.
 			IdLabel::set($this->context, $folder->id, Request::post("label",
-				Request::TYPE_STRING, new String("")));
+				Request::TYPE_STRING, new Str("")));
 
 			// Set action result.
 			$this->setResult(self::SUCCESS);

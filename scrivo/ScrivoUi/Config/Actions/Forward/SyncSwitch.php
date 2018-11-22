@@ -40,7 +40,7 @@ use \Scrivo\Action;
 use \Scrivo\ApplicationException;
 use \Scrivo\I18n;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 class SyncSwitch extends Action {
 	function doAction() {
@@ -52,8 +52,8 @@ class SyncSwitch extends Action {
 			if (!$site) {
 				$res = $i18n["No reference site given"];
 			} else {
-				if (!$site->substr(0, 4)->equals(new String("http"))) {
-					$site = new String("http://".$site);
+				if (!$site->substr(0, 4)->equals(new Str("http"))) {
+					$site = new Str("http://".$site);
 				}
 				$data = @file_get_contents(
 					"$site/scrivo/config/dump_page_definition_config.php");
@@ -70,7 +70,7 @@ class SyncSwitch extends Action {
 			}
 
 			$goto = Request::post("what", Request::TYPE_STRING)->equals(
-					new String("page_definition"))
+					new Str("page_definition"))
 				? "page_definition" : "list_definition";
 
 			$this->setResult($goto);

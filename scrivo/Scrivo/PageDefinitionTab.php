@@ -54,7 +54,7 @@ namespace Scrivo;
  * @property-read int $id The page definition tab id (DB key).
  * @property int $pageDefinitionId The page definition id of the page
  *    definition where this tab belongs to.
- * @property \Scrivo\String $title A descriptive title for the tab.
+ * @property \Scrivo\Str $title A descriptive title for the tab.
  * @property int $type The type of the tab: one out of the
  *    PageDefinitionTab::TYPE_* constant values.
  */
@@ -90,7 +90,7 @@ class PageDefinitionTab {
 
 	/**
 	 * A descriptive title for the tab.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $title = null;
 
@@ -116,7 +116,7 @@ class PageDefinitionTab {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null), 0);
 
 		if ($context) {
-			$this->title = new \Scrivo\String();
+			$this->title = new \Scrivo\Str();
 
 			$this->context = $context;
 		}
@@ -168,7 +168,7 @@ class PageDefinitionTab {
 
 		$this->id = intval($rd["page_definition_tab_id"]);
 		$this->pageDefinitionId = intval($rd["page_definition_id"]);
-		$this->title = new \Scrivo\String($rd["title"]);
+		$this->title = new \Scrivo\Str($rd["title"]);
 		$this->type = $this->toType($rd);
 
 		$this->context = $context;
@@ -193,9 +193,9 @@ class PageDefinitionTab {
 	/**
 	 * Set A descriptive title for the tab.
 	 *
-	 * @param \Scrivo\String $title A descriptive title for the tab.
+	 * @param \Scrivo\Str $title A descriptive title for the tab.
 	 */
-	private function setTitle(\Scrivo\String $title) {
+	private function setTitle(\Scrivo\Str $title) {
 		$this->title = $title;
 	}
 

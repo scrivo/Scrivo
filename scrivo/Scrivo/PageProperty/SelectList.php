@@ -72,7 +72,7 @@ class SelectList extends \Scrivo\PageProperty {
 		switch($name) {
 			// Set the value property.
 			case "value": $this->data = is_array($value)
-				? new \Scrivo\String(serialize($value))
+				? new \Scrivo\Str(serialize($value))
 				: $data;
 				return;
 		}

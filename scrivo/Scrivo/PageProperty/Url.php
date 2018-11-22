@@ -38,28 +38,28 @@ namespace Scrivo\PageProperty;
 /**
  * Property to hold html link data.
  *
- * @property \Scrivo\String $href The link url (href attribute).
- * @property \Scrivo\String $title A descriptive tilte for the link (title
+ * @property \Scrivo\Str $href The link url (href attribute).
+ * @property \Scrivo\Str $title A descriptive tilte for the link (title
  *    attribute).
- * @property \Scrivo\String $target A link target (target attribute).
+ * @property \Scrivo\Str $target A link target (target attribute).
  */
 class Url extends \Scrivo\PageProperty {
 
 	/**
 	 * The href property of the url.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $href;
 
 	/**
 	 * The title property of the url.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $title;
 
 	/**
 	 * The target property of the url.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $target;
 
@@ -103,18 +103,18 @@ class Url extends \Scrivo\PageProperty {
 	 * Convert the property data field to the link members.
 	 */
 	protected function fromData() {
-		$t = parent::__get("data")->split(new \Scrivo\String("\t"));
+		$t = parent::__get("data")->split(new \Scrivo\Str("\t"));
 		$c = count($t);
-		$this->href = $c>0 ? $t[0] : new \Scrivo\String("");
-		$this->title = $c>1 ? $t[1] : new \Scrivo\String("");
-		$this->target = $c>2 ? $t[2] : new \Scrivo\String("");
+		$this->href = $c>0 ? $t[0] : new \Scrivo\Str("");
+		$this->title = $c>1 ? $t[1] : new \Scrivo\Str("");
+		$this->target = $c>2 ? $t[2] : new \Scrivo\Str("");
 	}
 
 	/**
 	 * Convert the property data field to the link members.
 	 */
 	private function toData() {
-		$this->data = new \Scrivo\String(
+		$this->data = new \Scrivo\Str(
 			(string)$this->href."\t".
 			(string)$this->title."\t".
 			(string)$this->target

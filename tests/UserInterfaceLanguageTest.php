@@ -44,14 +44,14 @@ class UserInterfaceLanguageTest extends ScrivoDatabaseTestCase {
 		return array(
 			"test 1" => array(
 				"argument 1" => (object) array(
-					"isoCode" => new \Scrivo\String("name_nl"),
-					"description" => new \Scrivo\String("Nederlands"),
+					"isoCode" => new \Scrivo\Str("name_nl"),
+					"description" => new \Scrivo\Str("Nederlands"),
 				)
 			),
 			"test 2" => array(
 				"argument 1" => (object) array(
-					"isoCode" => new \Scrivo\String("name_en"),
-					"description" => new \Scrivo\String("English"),
+					"isoCode" => new \Scrivo\Str("name_en"),
+					"description" => new \Scrivo\Str("English"),
 				)
 			)
 		);
@@ -65,12 +65,12 @@ class UserInterfaceLanguageTest extends ScrivoDatabaseTestCase {
 		return array(
 			"test 1" => array(
 				"argument 1" => (object) array(
-					"isoCode" => new \Scrivo\String("name_nl"),
-					"description" => new \Scrivo\String("Nederlands"),
+					"isoCode" => new \Scrivo\Str("name_nl"),
+					"description" => new \Scrivo\Str("Nederlands"),
 				),
 				"argument 2" => (object) array(
-					"isoCode" => new \Scrivo\String("name_en"),
-					"description" => new \Scrivo\String("English"),
+					"isoCode" => new \Scrivo\Str("name_en"),
+					"description" => new \Scrivo\Str("English"),
 				)
 			)
 		);
@@ -166,7 +166,7 @@ class UserInterfaceLanguageTest extends ScrivoDatabaseTestCase {
 	 */
 	function testInvalidUserInterfaceLanguageCreation() {
 		$o = \Scrivo\UserInterfaceLanguage::fetch(
-			self::$context, new \Scrivo\String("12345"));
+			self::$context, new \Scrivo\Str("12345"));
 	}
 
 	/**
@@ -280,7 +280,7 @@ class UserInterfaceLanguageTest extends ScrivoDatabaseTestCase {
 		$this->setUserInterfaceLanguageProperties($tmp, $d1);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, self::EDITOR_USER_ID);
 
 		// Creating/inserting a new \Scrivo\UserInterfaceLanguage object as
@@ -333,7 +333,7 @@ class UserInterfaceLanguageTest extends ScrivoDatabaseTestCase {
 		$this->setUserInterfaceLanguageProperties($tmp, $d2);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, \Scrivo\User::ANONYMOUS_USER_ID);
 
 		// Loading a \Scrivo\UserInterfaceLanguage object as member should

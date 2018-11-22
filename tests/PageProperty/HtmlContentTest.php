@@ -47,14 +47,14 @@ class PagePropertyHtmlContentTest extends ScrivoDatabaseTestCase {
 
 	function testProperty() {
 
-		$raw = new \Scrivo\String("<P>some text");
-		$clean = new \Scrivo\String("<p>some text</p>");
+		$raw = new \Scrivo\Str("<P>some text");
+		$clean = new \Scrivo\Str("<p>some text</p>");
 
 		$h = \Scrivo\Page::fetch(self::$context, self::PAGE_HOME_ID);
 
 		$pd = new \Scrivo\PagePropertyDefinition(self::$context);
 		$pd->type = \Scrivo\PagePropertyDefinition::TYPE_HTML_TEXT_TAB;
-		$pd->phpSelector = new \Scrivo\String("anHtmlContent");
+		$pd->phpSelector = new \Scrivo\Str("anHtmlContent");
 		$pd->pageDefinitionId = $h->definition->id;
 		$pd->typeData = (object) array(
 			"css_selector" => "cssSelector",

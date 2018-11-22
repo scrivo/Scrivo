@@ -39,7 +39,7 @@ namespace ScrivoUi\Config\Actions\Layout;
 use \Scrivo\LayoutAction;
 use \Scrivo\I18n;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\UserInterfaceLanguage;
 
 /**
@@ -57,13 +57,13 @@ class UiLanguageForm extends LayoutAction {
 		$i18n = new I18n($this->context->config->UI_LANG);
 
 		$languageId =
-			Request::get("lang", Request::TYPE_STRING, new String(""));
+			Request::get("lang", Request::TYPE_STRING, new Str(""));
 
-		$language = !$languageId->equals(new String(""))
+		$language = !$languageId->equals(new Str(""))
 			? UserInterfaceLanguage::fetch($this->context, $languageId)
 			: new UserInterfaceLanguage($this->context);
 
-		$title = $language->isoCode->equals(new String(""))
+		$title = $language->isoCode->equals(new Str(""))
 			? $i18n["Edit user interface language"]
 			: $i18n["New user interface language"];
 

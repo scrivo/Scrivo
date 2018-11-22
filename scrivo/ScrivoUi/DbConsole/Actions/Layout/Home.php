@@ -37,7 +37,7 @@ namespace ScrivoUi\DbConsole\Actions\Layout;
 
 use \Scrivo\I18n;
 use \Scrivo\LayoutAction;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The Home layout action class sets up the layout for the Scrivo database
@@ -54,8 +54,8 @@ class Home extends LayoutAction {
 		$i18n = new I18n($this->context->config->UI_LANG);
 
 		$title = $this->context->config->WWW_ROOT->replace(
-			String::create(array("http://", "https://")),
-			new String(""));
+			Str::create(array("http://", "https://")),
+			new Str(""));
 
 		include "../ScrivoUi/DbConsole/Templates/common.tpl.php";
 		include "../ScrivoUi/DbConsole/Templates/home.tpl.php";

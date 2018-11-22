@@ -36,7 +36,7 @@ use \Scrivo\ListItemDefinition;
 use \Scrivo\ListItemPropertyDefinition;
 use \Scrivo\ItemList;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\Action;
 
 /**
@@ -91,7 +91,7 @@ class SaveListItem extends Action {
 			Request::post("prop_scrivo_li_online", Request::TYPE_DATE_TIME);
 		$item->title =
 			Request::post("prop_scrivo_li_title", Request::TYPE_STRING,
-				new String(""));
+				new Str(""));
 
 		$pDefs = ListItemPropertyDefinition::select($this->context,
 			$def->applicationDefinitionId);
@@ -110,7 +110,7 @@ class SaveListItem extends Action {
 					break;
 				case ListItemPropertyDefinition::TYPE_COLOR:
 					$prp->color = Request::post(
-						$name, Request::TYPE_STRING, new String(""));
+						$name, Request::TYPE_STRING, new Str(""));
 					break;
 				case ListItemPropertyDefinition::TYPE_DATE_TIME:
 					$prp->dateTime =
@@ -118,35 +118,35 @@ class SaveListItem extends Action {
 					break;
 				case ListItemPropertyDefinition::TYPE_IMAGE:
 					$val = Request::post($name, Request::TYPE_STRING,
-						new String(""))->split(new String("\t"));
+						new Str(""))->split(new Str("\t"));
 					$c = count($val);
-					$prp->src = $c>0 ? $val[0] : new String("");
-					$prp->alt = $c>1 ? $val[1] : new String("");
-					$prp->title =$c>2 ? $val[2] : new String("");
+					$prp->src = $c>0 ? $val[0] : new Str("");
+					$prp->alt = $c>1 ? $val[1] : new Str("");
+					$prp->title =$c>2 ? $val[2] : new Str("");
 					break;
 				case ListItemPropertyDefinition::TYPE_INPUT:
 					$prp->value = Request::post(
-						$name, Request::TYPE_STRING, new String(""));
+						$name, Request::TYPE_STRING, new Str(""));
 					break;
 				case ListItemPropertyDefinition::TYPE_SELECT:
 					$prp->value = Request::post(
-						$name, Request::TYPE_STRING, new String(""));
+						$name, Request::TYPE_STRING, new Str(""));
 					break;
 				case ListItemPropertyDefinition::TYPE_URL:
 					$val = Request::post($name, Request::TYPE_STRING,
-						new String(""))->split(new String("\t"));
+						new Str(""))->split(new Str("\t"));
 					$c = count($val);
-					$prp->href = $c>0 ? $val[0] : new String("");
-					$prp->title = $c>1 ? $val[1] : new String("");
-					$prp->target =$c>2 ? $val[2] : new String("");
+					$prp->href = $c>0 ? $val[0] : new Str("");
+					$prp->title = $c>1 ? $val[1] : new Str("");
+					$prp->target =$c>2 ? $val[2] : new Str("");
 					break;
 				case ListItemPropertyDefinition::TYPE_TEXT:
 					$prp->text = Request::post(
-						$name, Request::TYPE_STRING, new String(""));
+						$name, Request::TYPE_STRING, new Str(""));
 					break;
 				case ListItemPropertyDefinition::TYPE_HTML_TEXT:
 					$prp->html = Request::post(
-						$name, Request::TYPE_STRING, new String(""));
+						$name, Request::TYPE_STRING, new Str(""));
 					break;
 			}
 

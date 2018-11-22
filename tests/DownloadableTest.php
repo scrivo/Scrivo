@@ -43,11 +43,11 @@ class DownloadableTest extends PHPUnit_Framework_TestCase {
 	public function testDownloadable() {
 
 		// Set up a Scrivo context.
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, Scrivo\User::PRIMARY_ADMIN_ID);
 
 		// The output filename.
-		$filename = new \Scrivo\String("afile2.dat");
+		$filename = new \Scrivo\Str("afile2.dat");
 
 		// Create a downloadble based on a physical file.
 		$dwnl = new \Scrivo\Downloadable($context, $filename,
@@ -67,7 +67,7 @@ class DownloadableTest extends PHPUnit_Framework_TestCase {
 	public function testDownloadableFile() {
 
 		// Set up a Scrivo context.
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, Scrivo\User::PRIMARY_ADMIN_ID);
 
 		// Create a file to download/output.
@@ -75,11 +75,11 @@ class DownloadableTest extends PHPUnit_Framework_TestCase {
 		file_put_contents($file, "Muchos datos");
 
 		// The output filename.
-		$filename = new \Scrivo\String("afile2.dat");
+		$filename = new \Scrivo\Str("afile2.dat");
 
 		// Create a downloadble based on a physical file.
 		$dwnl = new \Scrivo\Downloadable($context, $filename,
-			\Scrivo\Downloadable::TYPE_FILE, new \Scrivo\String($file));
+			\Scrivo\Downloadable::TYPE_FILE, new \Scrivo\Str($file));
 
 		$this->assertTrue($dwnl->getFileName()->contains($filename));
 		$this->assertFalse($dwnl->getFileName()->equals($filename));
@@ -101,11 +101,11 @@ class DownloadableTest extends PHPUnit_Framework_TestCase {
 	public function testIllegalArgument() {
 
 		// Set up a Scrivo context.
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, Scrivo\User::PRIMARY_ADMIN_ID);
 
 		// The output filename.
-		$filename = new \Scrivo\String("afile2.dat");
+		$filename = new \Scrivo\Str("afile2.dat");
 
 		$dwnl = new \Scrivo\Downloadable($context, $filename,
 			\Scrivo\Downloadable::TYPE_FILE, "blahblah");

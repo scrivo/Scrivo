@@ -40,7 +40,7 @@ use \Scrivo\Action;
 use \Scrivo\ApplicationException;
 use \Scrivo\Language;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The UpdateLanguage class implements the action for updating a an
@@ -63,13 +63,13 @@ class UpdateLanguage extends Action {
 			$language->shortList =
 				Request::post("short_list", Request::TYPE_BOOLEAN);
 			$language->isoCode =
-				Request::post("code", Request::TYPE_STRING, new String(""));
+				Request::post("code", Request::TYPE_STRING, new Str(""));
 			$language->family =
-				Request::post("family", Request::TYPE_STRING, new String(""));
+				Request::post("family", Request::TYPE_STRING, new Str(""));
 			$language->nameEn =
-				Request::post("en", Request::TYPE_STRING, new String(""));
+				Request::post("en", Request::TYPE_STRING, new Str(""));
 			$language->nameNl =
-				Request::post("nl", Request::TYPE_STRING, new String(""));
+				Request::post("nl", Request::TYPE_STRING, new Str(""));
 
 			// ... and update the language.
 			$language->update();

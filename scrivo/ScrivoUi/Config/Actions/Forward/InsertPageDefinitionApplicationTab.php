@@ -43,7 +43,7 @@ use \Scrivo\I18n;
 use \Scrivo\PageDefinitionTab;
 use \Scrivo\PagePropertyDefinition;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The InsertPageDefinitionApplicationTab class implements the action for
@@ -82,7 +82,7 @@ class InsertPageDefinitionApplicationTab extends Action {
 			$prop->pageDefinitionTabId = $tab->id;
 			$prop->title = $tab->title;
 			$prop->phpSelector = Request::post(
-				"php_selector", Request::TYPE_STRING, new String(""));
+				"php_selector", Request::TYPE_STRING, new Str(""));
 			$prop->type = PagePropertyDefinition::TYPE_APPLICATION_TAB;
 			$prop->typeData->APPLICATION_DEFINITION_ID = Request::post(
 				"application_definition_id", Request::TYPE_INTEGER, "");

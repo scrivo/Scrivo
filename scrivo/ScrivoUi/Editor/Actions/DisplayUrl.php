@@ -37,7 +37,7 @@ namespace ScrivoUi\Editor\Actions;
 
 use \Scrivo\Action;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\Page;
 use \Scrivo\Asset;
 
@@ -63,10 +63,10 @@ class DisplayUrl extends \Scrivo\Action {
 	 */
 	function doAction() {
 
-		$url = Request::get("url", Request::TYPE_STRING, new String(""));
+		$url = Request::get("url", Request::TYPE_STRING, new Str(""));
 
 		$res = "";
-		if (!$url->equals(new String(""))) {
+		if (!$url->equals(new Str(""))) {
 			$res = $this->urlDisplay($url);
 		}
 
@@ -78,37 +78,37 @@ class DisplayUrl extends \Scrivo\Action {
 	 * only the host and last entry of the path.
 	 *
 	 * @param array $aUrl An array containing the url parts.
-	 * @return \Scrivo\String A human readable representation of the url.
+	 * @return \Scrivo\Str A human readable representation of the url.
 	 */
 	private function urlDisplayWww(array $aUrl) {
 
-		$end = new String("");
+		$end = new Str("");
 
-		if (!$aUrl["path"]->equals(new String(""))) {
+		if (!$aUrl["path"]->equals(new Str(""))) {
 
-			$dat = $aUrl["path"]->split(new String("/"));
+			$dat = $aUrl["path"]->split(new Str("/"));
 			$res = array();
 
 			foreach ($dat as $d) {
-				if (!$d->equals(new String(""))) {
+				if (!$d->equals(new Str(""))) {
 					array_unshift($res, $d);
 				}
 			}
 
 			if (count($res) == 1) {
-				$end = new String("/{$res[0]}");
+				$end = new Str("/{$res[0]}");
 			} else if (count($res) > 1)
-				$end = new String("/../{$res[0]}");
+				$end = new Str("/../{$res[0]}");
 		}
 
-		return new String("{$aUrl["host"]}{$end}");
+		return new Str("{$aUrl["host"]}{$end}");
 	}
 
 	/**
 	 * Get the page title for a given link to a Srivo page.
 	 *
 	 * @param array $aUrl An array containing the url parts of the Scrivo url.
-	 * @return \Scrivo\String The page title.
+	 * @return \Scrivo\Str The page title.
 	 */
 	private function urlDisplayIntern(array $aUrl) {
 
@@ -119,14 +119,14 @@ class DisplayUrl extends \Scrivo\Action {
 				return $page->title;
 			} catch (\Exception $e) {}
 		}
-		return new String("");
+		return new Str("");
 	}
 
 	/**
 	 * Get the asset title for a given link to a Srivo asset.
 	 *
 	 * @param array $aUrl An array containing the url parts of the Scrivo url.
-	 * @return \Scrivo\String The asset title.
+	 * @return \Scrivo\Str The asset title.
 	 */
 	private function urlDisplayAsset(array $aUrl) {
 
@@ -137,31 +137,31 @@ class DisplayUrl extends \Scrivo\Action {
 				return $asset->title;
 			} catch (\Exception $e) {}
 		}
-		return new String("");
+		return new Str("");
 	}
 
 	/**
 	 * Get a human readable string representation for the given url.
 	 *
-	 * @param String $url The url to get a short string representation for.
-	 * @return String A short string represenation of the url.
+	 * @param Str $url The url to get a short string representation for.
+	 * @return Str A short string represenation of the url.
 	 */
-	private function urlDisplay(String $url) {
+	private function urlDisplay(Str $url) {
 
-		if ($url->equals(new String(""))) {
+		if ($url->equals(new Str(""))) {
 			return "";
 		}
 
 		$scrivoUrl =
-			new String("{$this->context->config->WWW_ROOT}/index.php");
+			new Str("{$this->context->config->WWW_ROOT}/index.php");
 		$assetUrl =
-			new String("{$this->context->config->WWW_ROOT}/scrivo/asset.php");
+			new Str("{$this->context->config->WWW_ROOT}/scrivo/asset.php");
 
-		$aUrl = String::create((array)@parse_url($url) +
+		$aUrl = Str::create((array)@parse_url($url) +
 			array("host"=>"", "query"=>"", "path"=>""));
 
 		$intern = false;
-		if ($aUrl["host"]->equals(new String(""))) {
+		if ($aUrl["host"]->equals(new Str(""))) {
 			// Relative url, so intern.
 			$intern = true;
 		} else if ($url->contains($scrivoUrl) || $url->contains($assetUrl)) {
@@ -170,7 +170,7 @@ class DisplayUrl extends \Scrivo\Action {
 		}
 
 		if ($intern) {
-			return $aUrl["path"]->contains(new String("asset.php"))
+			return $aUrl["path"]->contains(new Str("asset.php"))
 				? $this->urlDisplayAsset($aUrl)
 				: $this->urlDisplayIntern($aUrl);
 		}

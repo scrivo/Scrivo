@@ -29,16 +29,16 @@
  * $Id: ui_language_list.tpl.php 841 2013-08-19 22:19:47Z geert $
  */
 
-use \Scrivo\String;
+use \Scrivo\Str;
 
 $this->beginSection("content", true);
 
 ?>
 	<p><?php echo
-		String::create(
+		Str::create(
 			$i18n["Enter a new [L]User interface language[/L]"])->replace(
-				String::create(array("[L]", "[/L]")),
-				String::create(array("<a href=\"index.php?a=ui_language_form\">", "</a>"
+				Str::create(array("[L]", "[/L]")),
+				Str::create(array("<a href=\"index.php?a=ui_language_form\">", "</a>"
 			))
 		);
 	?></p>

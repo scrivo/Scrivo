@@ -38,7 +38,7 @@ namespace ScrivoUi\DbConsole\Actions\Download;
 
 use \Scrivo\Action;
 use \Scrivo\Downloadable;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \ScrivoUi\DbConsole\Lib\Util;
 
 /**
@@ -59,17 +59,17 @@ class Download extends Action {
 			switch ($this->parameters["a"]) {
 
 				case "export_instance_download":
-					$file = new String(Util::cleanWwwRoot(
+					$file = new Str(Util::cleanWwwRoot(
 						$this->context->config->WWW_ROOT)."_dbc_data.sql.gz");
 					break;
 
 				case "export_assets_download":
-					$file = new String(Util::cleanWwwRoot(
+					$file = new Str(Util::cleanWwwRoot(
 						$this->context->config->WWW_ROOT)."_dbc_assets.tgz");
 					break;
 
 				case "copy_branch_download":
-					$file = new String(Util::cleanWwwRoot(
+					$file = new Str(Util::cleanWwwRoot(
 						$this->context->config->WWW_ROOT)."_dbc_branch.sql.gz");
 					break;
 
@@ -77,7 +77,7 @@ class Download extends Action {
 
 			$this->file = new Downloadable(
 				$this->context, $file, Downloadable::TYPE_FILE,
-				new String(sys_get_temp_dir()."/$file"));
+				new Str(sys_get_temp_dir()."/$file"));
 
 		} catch(ApplicationException $e) {
 

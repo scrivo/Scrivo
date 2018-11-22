@@ -152,7 +152,7 @@ class Action {
 			$p = $p + $this->parameters;
 		}
 		array_walk_recursive($p, function(&$a){
-			if ($a instanceof \Scrivo\String) {
+			if ($a instanceof \Scrivo\Str) {
 				$a = (string)$a;
 			}
 		});
@@ -190,7 +190,7 @@ class Action {
 			foreach ($data as $k=>$v) {
 				$data[$k] = $this->prepareXhr($v);
 			}
-		} else if ($data instanceof \Scrivo\String) {
+		} else if ($data instanceof \Scrivo\Str) {
 			$data = (string)$data;
 		}
 		return $data;

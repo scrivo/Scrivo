@@ -39,7 +39,7 @@ namespace ScrivoUi\Config\Actions\Forward;
 use \Scrivo\Action;
 use \Scrivo\ApplicationException;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\UserInterfaceLanguage;
 
 /**
@@ -58,13 +58,13 @@ class UpdateUserInterfaceLanguage extends Action {
 			// Load the language ...
 			$language = UserInterfaceLanguage::fetch(
 				$this->context, Request::post(
-					"origlang", Request::TYPE_STRING, new String("")));
+					"origlang", Request::TYPE_STRING, new Str("")));
 
 			// ... set the members ...
 			$language->isoCode = Request::post(
-				"lang", Request::TYPE_STRING, new String(""));
+				"lang", Request::TYPE_STRING, new Str(""));
 			$language->description = Request::post(
-				"comment", Request::TYPE_STRING, new String(""));
+				"comment", Request::TYPE_STRING, new Str(""));
 
 			// ... and update the language.
 			$language->update();

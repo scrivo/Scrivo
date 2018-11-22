@@ -80,14 +80,14 @@ namespace Scrivo;
  * @property int $parentId The id of the parent page.
  * @property int $type The page type: one out of the Page::TYPE_* constant
  *    values.
- * @property \Scrivo\String $title The page title (&lt;title&gt;).
- * @property \Scrivo\String $description The page description
+ * @property \Scrivo\Str $title The page title (&lt;title&gt;).
+ * @property \Scrivo\Str $description The page description
  *    (&lt;description&gt;).
- * @property \Scrivo\String $keywords The keywords for this page
+ * @property \Scrivo\Str $keywords The keywords for this page
  *    (&lt;keywords&gt;).
- * @property \Scrivo\String $javascript A javascript script for this page
+ * @property \Scrivo\Str $javascript A javascript script for this page
  *    (&lt;script&gt;).
- * @property \Scrivo\String $stylesheet Additional CSS syle rules for this
+ * @property \Scrivo\Str $stylesheet Additional CSS syle rules for this
  *    page (&lt;stylesheet&gt;).
  * @property \DateTime $dateOnline The date/time this page need to go online.
  * @property \DateTime $dateOffline The date/time this page need to go offline.
@@ -169,31 +169,31 @@ class Page {
 
 	/**
 	 * The page title (&lt;title&gt;).
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $title = null;
 
 	/**
 	 * The page description (&lt;description&gt;).
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $description = null;
 
 	/**
 	 * The keywords for this page (&lt;keywords&gt;).
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $keywords = null;
 
 	/**
 	 * A javascript script for this page (&lt;script&gt;).
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $javascript = null;
 
 	/**
 	 * Additional CSS syle rules for this page (&lt;stylesheet&gt;).
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $stylesheet = null;
 
@@ -268,11 +268,11 @@ class Page {
 			$this->type = 0;
 			$this->definitionId = 0;
 			$this->languageId = 0;
-			$this->title = new \Scrivo\String();
-			$this->description = new \Scrivo\String();
-			$this->keywords = new \Scrivo\String();
-			$this->javascript = new \Scrivo\String();
-			$this->stylesheet = new \Scrivo\String();
+			$this->title = new \Scrivo\Str();
+			$this->description = new \Scrivo\Str();
+			$this->keywords = new \Scrivo\Str();
+			$this->javascript = new \Scrivo\Str();
+			$this->stylesheet = new \Scrivo\Str();
 			$this->dateCreated = new \DateTime("now");
 			$this->dateModified = new \DateTime("now");
 			$this->dateOnline = new \DateTime("now");
@@ -369,11 +369,11 @@ class Page {
 		$this->type = intval($rd["type"]);
 		$this->definitionId = intval($rd["page_definition_id"]);
 		$this->languageId = intval($rd["language_id"]);
-		$this->title = new \Scrivo\String($rd["title"]);
-		$this->description = new \Scrivo\String($rd["description"]);
-		$this->keywords = new \Scrivo\String($rd["keywords"]);
-		$this->javascript = new \Scrivo\String($rd["javascript"]);
-		$this->stylesheet = new \Scrivo\String($rd["stylesheet"]);
+		$this->title = new \Scrivo\Str($rd["title"]);
+		$this->description = new \Scrivo\Str($rd["description"]);
+		$this->keywords = new \Scrivo\Str($rd["keywords"]);
+		$this->javascript = new \Scrivo\Str($rd["javascript"]);
+		$this->stylesheet = new \Scrivo\Str($rd["stylesheet"]);
 		$this->dateCreated = new \DateTime($rd["date_created"]);
 		$this->dateModified = new \DateTime($rd["date_modified"]);
 		$this->dateOnline = new \DateTime($rd["date_online"]);
@@ -530,49 +530,49 @@ class Page {
 	/**
 	 * Set The page title (&lt;title&gt;).
 	 *
-	 * @param \Scrivo\String $title The page title (&lt;title&gt;).
+	 * @param \Scrivo\Str $title The page title (&lt;title&gt;).
 	 */
-	private function setTitle(\Scrivo\String $title) {
+	private function setTitle(\Scrivo\Str $title) {
 		$this->title = $title;
 	}
 
 	/**
 	 * Set the page description (&lt;description&gt;).
 	 *
-	 * @param \Scrivo\String $description The page description
+	 * @param \Scrivo\Str $description The page description
 	 *   (&lt;description&gt;).
 	 */
-	private function setDescription(\Scrivo\String $description) {
+	private function setDescription(\Scrivo\Str $description) {
 		$this->description = $description;
 	}
 
 	/**
 	 * Set the keywords for this page (&lt;keywords&gt;).
 	 *
-	 * @param \Scrivo\String $keywords The keywords for this page
+	 * @param \Scrivo\Str $keywords The keywords for this page
 	 *   (&lt;keywords&gt;).
 	 */
-	private function setKeywords(\Scrivo\String $keywords) {
+	private function setKeywords(\Scrivo\Str $keywords) {
 		$this->keywords = $keywords;
 	}
 
 	/**
 	 * Set a javascript script for this page (&lt;script&gt;).
 	 *
-	 * @param \Scrivo\String $javascript A javascript script for this
+	 * @param \Scrivo\Str $javascript A javascript script for this
 	 *    page (&lt;script&gt;).
 	 */
-	private function setJavascript(\Scrivo\String $javascript) {
+	private function setJavascript(\Scrivo\Str $javascript) {
 		$this->javascript = $javascript;
 	}
 
 	/**
 	 * Set additional CSS syle rules for this page (&lt;stylesheet&gt;).
 	 *
-	 * @param \Scrivo\String $stylesheet Additional CSS syle rules for this
+	 * @param \Scrivo\Str $stylesheet Additional CSS syle rules for this
 	 *   page (&lt;stylesheet&gt;).
 	 */
-	private function setStylesheet(\Scrivo\String $stylesheet) {
+	private function setStylesheet(\Scrivo\Str $stylesheet) {
 		$this->stylesheet = $stylesheet;
 	}
 
@@ -665,7 +665,7 @@ class Page {
 
 			$li = PageProperty::create($pages[$pageId],	$rd);
 
-			if (!$li->phpSelector->equals(new \Scrivo\String(""))) {
+			if (!$li->phpSelector->equals(new \Scrivo\Str(""))) {
 				$pages[$pageId]->properties->{$li->phpSelector} = $li;
 			}
 

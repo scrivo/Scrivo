@@ -39,12 +39,12 @@ class ListItemTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Convenience function for creating a list item to use in the tests.
-	 * @param \Scrivo\String $tit A string to assign to the title field,
+	 * @param \Scrivo\Str $tit A string to assign to the title field,
 	 * @param \Scrivo\PropertySet $ps A property set to assign to this item's
 	 *     property set.
 	 * @return \Scrivo\ListItem a Scrivo list item.
 	 */
-	private function createItem(\Scrivo\String $tit, \Scrivo\PropertySet $ps) {
+	private function createItem(\Scrivo\Str $tit, \Scrivo\PropertySet $ps) {
 		return new \Scrivo\ListItem(
 			array(
 				"list_item_id" => 1,
@@ -70,7 +70,7 @@ class ListItemTest extends PHPUnit_Framework_TestCase {
 	public function testListItem() {
 
 		$ps = $this->getMock("\Scrivo\PropertySet");
-		$str = new \Scrivo\String("a");
+		$str = new \Scrivo\Str("a");
 		$item = $this->createItem($str, $ps);
 
 		$now = new \DateTime("now");
@@ -90,7 +90,7 @@ class ListItemTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals($ps, $item->properties);
 
-		$str2 = new \Scrivo\String("b");
+		$str2 = new \Scrivo\Str("b");
 
 		$item->parentId = 100;
 		$item->title = $str2;
@@ -112,7 +112,7 @@ class ListItemTest extends PHPUnit_Framework_TestCase {
 	function testInvalidPropertyGet() {
 
 		$ps = $this->getMock("\Scrivo\PropertySet");
-		$str = new \Scrivo\String("a");
+		$str = new \Scrivo\Str("a");
 		$item = $this->createItem($str, $ps);
 		$tmp = $item->hatseFlatse;
 	}
@@ -125,7 +125,7 @@ class ListItemTest extends PHPUnit_Framework_TestCase {
 	function testInvalidPropertySet() {
 
 		$ps = $this->getMock("\Scrivo\PropertySet");
-		$str = new \Scrivo\String("a");
+		$str = new \Scrivo\Str("a");
 		$item = $this->createItem($str, $ps);
 		$item->hatseFlatse = 2;
 	}

@@ -39,7 +39,7 @@ namespace ScrivoUi\Config\Actions\Forward;
 use \Scrivo\Action;
 use \ScrivoUi\Config\Lib\SyncUtilListDefinition;;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The SyncListDefinitions class implements the action for synchronizing
@@ -61,8 +61,8 @@ class SyncListDefinitions extends Action {
 		$common = array_intersect(array_keys($newcfg), array_keys($curcfg));
 
 		foreach ($_POST as $k => $p) {
-			$k = new String($k);
-			$tmp = $k->split(new String(":"));
+			$k = new Str($k);
+			$tmp = $k->split(new Str(":"));
 			array_walk($tmp, function(&$i){$i=(string)$i;});
 			switch ($tmp[0]) {
 			case "del_application_definition":

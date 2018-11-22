@@ -47,13 +47,13 @@ class PagePropertySelectListTest extends ScrivoDatabaseTestCase {
 
 	function testProperty() {
 
-		$testData = array(3, new \Scrivo\String("val"));
+		$testData = array(3, new \Scrivo\Str("val"));
 
 		$h = \Scrivo\Page::fetch(self::$context, self::PAGE_HOME_ID);
 
 		$pd = new \Scrivo\PagePropertyDefinition(self::$context);
 		$pd->type = \Scrivo\PagePropertyDefinition::TYPE_SELECT;
-		$pd->phpSelector = new \Scrivo\String("anSelectList");
+		$pd->phpSelector = new \Scrivo\Str("anSelectList");
 		$pd->pageDefinitionId = $h->definition->id;
 		$pd->insert();
 

@@ -56,28 +56,28 @@ namespace Scrivo;
  * when instantiating a configuration data object.
  *
  * Note that only string and numeric values can be specified. These will be
- * converted to a \Scrivo\String, int or float value. It is not possible
+ * converted to a \Scrivo\Str, int or float value. It is not possible
  * to specify boolean values due to limitations of the php function
  * parse_ini_file. So also note that specifing values like true, false, yes,
  * no, on and off without quotes might not give you the expected results.
  * When you need boolean values it is preferred to use the numeric values 0
  * or 1.
  *
- * @property-read \Scrivo\String $ADMIN_IP_ADDRESSES
- * @property-read \Scrivo\String $CACHE_DIR
+ * @property-read \Scrivo\Str $ADMIN_IP_ADDRESSES
+ * @property-read \Scrivo\Str $CACHE_DIR
  * @property-read int $CACHE_DIR_GC
- * @property-read \Scrivo\String $CACHE_TYPE
- * @property-read \Scrivo\String $DB_API
+ * @property-read \Scrivo\Str $CACHE_TYPE
+ * @property-read \Scrivo\Str $DB_API
  * @property-read int $HTML_TIDY
- * @property-read \Scrivo\String $HTTP_PROTOCOL
+ * @property-read \Scrivo\Str $HTTP_PROTOCOL
  * @property-read int $JS_DEBUG
- * @property-read \Scrivo\String $KEY_PREFIX
+ * @property-read \Scrivo\Str $KEY_PREFIX
  * @property-read int $ROOT_PAGE_ID
  * @property-read int $ROOT_FOLDER_ID
- * @property-read \Scrivo\String $SESSION_PREFIX
- * @property-read \Scrivo\String $UI_LANG
- * @property-read \Scrivo\String $WEBSERVICE_SPELL
- * @property-read \Scrivo\String $WEBSERVICE_TIDY
+ * @property-read \Scrivo\Str $SESSION_PREFIX
+ * @property-read \Scrivo\Str $UI_LANG
+ * @property-read \Scrivo\Str $WEBSERVICE_SPELL
+ * @property-read \Scrivo\Str $WEBSERVICE_TIDY
  */
 class Config {
 
@@ -92,7 +92,7 @@ class Config {
 	 *
 	 * @param string $val The value read from the ini file.
 	 *
-	 * @return int|float|\Scrivo\String The given value converted to its
+	 * @return int|float|\Scrivo\Str The given value converted to its
 	 *   most likely type.
 	 */
 	private function convertStr(&$val) {
@@ -103,7 +103,7 @@ class Config {
 				$val = floatval($val);
 			}
 		} else {
-			$val = new \Scrivo\String($val);
+			$val = new \Scrivo\Str($val);
 		}
 	}
 
@@ -115,8 +115,8 @@ class Config {
 	 * @return string A Scrivo configuration file name.
 	 */
 	private function findConfigFile($cfgFile) {
-		$parts = \Scrivo\String::create($_SERVER["SCRIPT_FILENAME"])->split(
-			new \Scrivo\String(DIRECTORY_SEPARATOR));
+		$parts = \Scrivo\Str::create($_SERVER["SCRIPT_FILENAME"])->split(
+			new \Scrivo\Str(DIRECTORY_SEPARATOR));
 		for ($i = count($parts)-2; $i >=0; $i--) {
 			array_pop($parts);
 			$file = implode("/", $parts)."/$cfgFile";
@@ -132,10 +132,10 @@ class Config {
 	 * look for an Scrivo config file at expected locations or at an
 	 * alternative location if provided.
 	 *
-	 * @param \Scrivo\String If you don't want/can't use the standard Scrivo
+	 * @param \Scrivo\Str If you don't want/can't use the standard Scrivo
 	 *   configuration file you can provide the location of an alternative file.
 	 */
-	public function __construct(\Scrivo\String $path=null) {
+	public function __construct(\Scrivo\Str $path=null) {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null), 0);
 
 		// Read the ini file.
@@ -208,7 +208,7 @@ class Config {
 	 * @param string $name The configuration property name to retrieve for
 	 *   which to retrieve it's value.
 	 *
-	 * @return \Scrivo\String|float|int The value of the property $name.
+	 * @return \Scrivo\Str|float|int The value of the property $name.
 	 */
 	public function __get($name) {
 		if (!$this->__isset($name)) {

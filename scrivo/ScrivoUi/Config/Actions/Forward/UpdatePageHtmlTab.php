@@ -39,7 +39,7 @@ namespace ScrivoUi\Config\Actions\Forward;
 use \Scrivo\Action;
 use \Scrivo\Page;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The UpdatePageHtmlTab class implements the action for updating the
@@ -58,7 +58,7 @@ class UpdatePageHtmlTab extends Action {
 
 		$page = Page::fetch($this->context, $pageId);
 		$page->properties->{$phpSelector}->rawHtml =
-			Request::post("raw_html", Request::TYPE_STRING, new String(""));
+			Request::post("raw_html", Request::TYPE_STRING, new Str(""));
 		$page->properties->{$phpSelector}->update();
 
 		$this->setResult(self::SUCCESS);

@@ -51,28 +51,28 @@ class UserRoleTest extends ScrivoDatabaseTestCase {
 			"test 1" => array(
 				"argument 1" => (object) array(
 					"status" => \Scrivo\User::STATUS_MEMBER,
-					"userCode" => new \Scrivo\String("testusercode"),
-					"password" => new \Scrivo\String("verysecret"),
-					"givenName" => new \Scrivo\String("A given name"),
+					"userCode" => new \Scrivo\Str("testusercode"),
+					"password" => new \Scrivo\Str("verysecret"),
+					"givenName" => new \Scrivo\Str("A given name"),
 					"familyNamePrefix" =>
-					new \Scrivo\String("A family name prefix"),
-					"familyName" => new \Scrivo\String("A family name"),
-					"emailAddress" => new \Scrivo\String("A mail address"),
-					"customData_tel" => new \Scrivo\String("0123456789"),
-					"customData_city" => new \Scrivo\String("Utrecht"),
+					new \Scrivo\Str("A family name prefix"),
+					"familyName" => new \Scrivo\Str("A family name"),
+					"emailAddress" => new \Scrivo\Str("A mail address"),
+					"customData_tel" => new \Scrivo\Str("0123456789"),
+					"customData_city" => new \Scrivo\Str("Utrecht"),
 				),
 				"argument 2" => (object) array(
 					"status" => \Scrivo\User::STATUS_EDITOR,
-					"userCode" => new \Scrivo\String("testusercode2"),
-					"password" => new \Scrivo\String("verysecret2"),
-					"givenName" => new \Scrivo\String("A given name 2"),
+					"userCode" => new \Scrivo\Str("testusercode2"),
+					"password" => new \Scrivo\Str("verysecret2"),
+					"givenName" => new \Scrivo\Str("A given name 2"),
 					"familyNamePrefix" =>
-					new \Scrivo\String("A family name prefix 2"),
-					"familyName" => new \Scrivo\String("A family name 2"),
+					new \Scrivo\Str("A family name prefix 2"),
+					"familyName" => new \Scrivo\Str("A family name 2"),
 					"emailAddress" =>
-					new \Scrivo\String("A mail address 2"),
-					"customData_tel" => new \Scrivo\String("0123456789 2"),
-					"customData_city" => new \Scrivo\String("Utrecht 2"),
+					new \Scrivo\Str("A mail address 2"),
+					"customData_tel" => new \Scrivo\Str("0123456789 2"),
+					"customData_city" => new \Scrivo\Str("Utrecht 2"),
 				)
 			)
 		);
@@ -151,15 +151,15 @@ class UserRoleTest extends ScrivoDatabaseTestCase {
 
 		// Create a user with the public role.
 		$u1 = new \Scrivo\User(self::$context);
-		$u1->userCode = new \Scrivo\String("userrole1");
-		$u1->password = new \Scrivo\String("");
+		$u1->userCode = new \Scrivo\Str("userrole1");
+		$u1->password = new \Scrivo\Str("");
 		$u1->insert();
 		$u1->assignRoles(array($pr));
 
 		// Create a user with the editor role.
 		$u2 = new \Scrivo\User(self::$context);
-		$u2->userCode = new \Scrivo\String("userrole2");
-		$u2->password = new \Scrivo\String("");
+		$u2->userCode = new \Scrivo\Str("userrole2");
+		$u2->password = new \Scrivo\Str("");
 		$u2->insert();
 		$u2->assignRoles(array($er, $pr));
 
@@ -189,8 +189,8 @@ class UserRoleTest extends ScrivoDatabaseTestCase {
 
 		// Create a user with the public role.
 		$u1 = new \Scrivo\User($this->ctxDbFailureStub());
-		$u1->userCode = new \Scrivo\String("userrole1");
-		$u1->password = new \Scrivo\String("");
+		$u1->userCode = new \Scrivo\Str("userrole1");
+		$u1->password = new \Scrivo\Str("");
 
 		$test = "";
 		try {

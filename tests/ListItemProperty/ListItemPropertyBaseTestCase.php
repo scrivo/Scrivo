@@ -40,10 +40,10 @@ class ListItemPropertyBaseTestCase extends PHPUnit_Framework_TestCase {
 	/**
 	 * Convenience function for creating a list item property to use in the
 	 * tests.
-	 * @param \Scrivo\String $type A string that identifies the property type.
+	 * @param \Scrivo\Str $type A string that identifies the property type.
 	 * @return \Scrivo\ListItemProperty a Scrivo list item property.
 	 */
-	protected function createItemProperty(\Scrivo\String $type) {
+	protected function createItemProperty(\Scrivo\Str $type) {
 		return \Scrivo\ListItemProperty::create(
 			array(
 				"type" => (string)$type,
@@ -58,7 +58,7 @@ class ListItemPropertyBaseTestCase extends PHPUnit_Framework_TestCase {
 
 	protected function dataTest(\Scrivo\ListItemProperty $lip) {
 
-		$v = new \Scrivo\String("A");
+		$v = new \Scrivo\Str("A");
 		$lip->data = $v;
 		$this->assertTrue($v->equals($lip->data));
 

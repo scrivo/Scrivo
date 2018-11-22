@@ -98,11 +98,11 @@ class ItemListTest extends ScrivoDatabaseTestCase {
 		$list = \Scrivo\ItemList::fetch(self::$context, self::PAGE_FORUM_ID,
 			self::PAGE_DEFINITION_APLLICATION_TAB_ID);
 
-		$subject = $list->newItem(new \Scrivo\String("SUBJECT"));
+		$subject = $list->newItem(new \Scrivo\Str("SUBJECT"));
 
-		$subject->title = new \Scrivo\String("A subject");
+		$subject->title = new \Scrivo\Str("A subject");
 		$subject->properties->SUBJECT_HTML_TEXT->html =
-			new \Scrivo\String("<p>A subject</p>");
+			new \Scrivo\Str("<p>A subject</p>");
 
 		$list->saveItem($subject);
 
@@ -118,7 +118,7 @@ class ItemListTest extends ScrivoDatabaseTestCase {
 				$subject->properties->SUBJECT_HTML_TEXT->html));
 
 		$lastItem->properties->SUBJECT_HTML_TEXT->html =
-			new \Scrivo\String("<p>A subject 2</p>");
+			new \Scrivo\Str("<p>A subject 2</p>");
 
 		$list->saveItem($lastItem);
 
@@ -148,7 +148,7 @@ class ItemListTest extends ScrivoDatabaseTestCase {
 	 */
 	function testFetchAsAnonymousUser() {
 
-		$cfg = new Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, \Scrivo\User::ANONYMOUS_USER_ID);
 
 		$list = \Scrivo\ItemList::fetch($context, self::PAGE_FORUM_ID,
@@ -159,7 +159,7 @@ class ItemListTest extends ScrivoDatabaseTestCase {
 	 */
 	function testFetchAsMemberEditorAndAdmin() {
 
-		$cfg = new Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new Scrivo\Config(new \Scrivo\Str("test_config"));
 
 		foreach(array(self::MEMBER_USER_ID, self::EDITOR_USER_ID,
 				self::PUBLISHER_USER_ID, self::ADMIN_USER_ID) as $u) {
@@ -212,7 +212,7 @@ class ItemListTest extends ScrivoDatabaseTestCase {
 		// Try to create a new item.
 		$test = "";
 		try {
-			$blah = $list->newItem(new \Scrivo\String("SUBJECT"));
+			$blah = $list->newItem(new \Scrivo\Str("SUBJECT"));
 
 		} catch (\Scrivo\ResourceException $e) {
 			$test = "Catch and release";
@@ -222,7 +222,7 @@ class ItemListTest extends ScrivoDatabaseTestCase {
 		// Perform insert item operation.
 		$test = "";
 		try {
-			$anItem->title = new \Scrivo\String("A subject");
+			$anItem->title = new \Scrivo\Str("A subject");
 			$list->saveItem($anItem);
 
 		} catch (\Scrivo\ResourceException $e) {

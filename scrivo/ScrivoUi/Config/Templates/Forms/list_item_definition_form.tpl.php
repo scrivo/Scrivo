@@ -29,7 +29,7 @@
  * $Id: list_item_definition_form.tpl.php 850 2013-08-20 23:16:37Z geert $
  */
 
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\PageDefinition;
 use \Scrivo\ListItemDefinition;
 
@@ -90,18 +90,18 @@ $this->beginSection("content", true);
 <?php
 $dir = "img/editor";
 $i=0;
-$val = $listItemDefinition->icon->equals(new String(""))
-	? new String("$dir/page.png") : $listItemDefinition->icon;
+$val = $listItemDefinition->icon->equals(new Str(""))
+	? new Str("$dir/page.png") : $listItemDefinition->icon;
 if ($handle = opendir("../".$dir)) {
 	while (false !== ($file = readdir($handle))) {
-		$file = new String($file);
-		if (!$file->equals(new String(".")) &&
-				!$file->equals(new String(".."))) {
+		$file = new Str($file);
+		if (!$file->equals(new Str(".")) &&
+				!$file->equals(new Str(".."))) {
 			$sel = "";
 			if ($val->contains($file)) {
 				$sel = " checked='true'";
 			}
-			if ($file->contains(new String(".png"))) {
+			if ($file->contains(new Str(".png"))) {
 				$s = getimagesize("../$dir/$file");
 				if ($s[0] == 16 && $s[1] == 16) {
 					echo "<span style='white-space:nowrap'>";

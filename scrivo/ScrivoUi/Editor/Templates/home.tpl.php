@@ -30,7 +30,7 @@
  */
 
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 header("Content-type: text/html; charset=utf-8");
 header("X-UA-Compatible: IE=edge");
@@ -39,7 +39,7 @@ header("X-UA-Compatible: IE=edge");
 <html>
 	<head>
 		<title>Scrivo: <?php echo $this->context->config->WWW_ROOT->replace(
-			String::create(array("http://", "https://")), new String(""))
+			Str::create(array("http://", "https://")), new Str(""))
 		?></title>
 		<link rel="stylesheet" type="text/css" href="css/sui.css">
 		<link rel="stylesheet" type="text/css" href="css/editor.css">
@@ -123,7 +123,7 @@ SUI.onStart = function() {
 		width: SUI.browser.viewportWidth,
 		height: SUI.browser.viewportHeight,
 		title: "<?php echo $this->context->config->WWW_ROOT->replace(
-			String::create(array("http://", "https://")), new String("")) ?>"
+			Str::create(array("http://", "https://")), new Str("")) ?>"
 	});
 	SUI.editor.scrivo.draw();
 

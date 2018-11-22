@@ -30,7 +30,7 @@
  */
 
 use \Scrivo\User;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 $this->beginSection("userList", true);
 
@@ -80,9 +80,9 @@ $this->beginSection("content", true);
 if ($this->session->userStatus == User::STATUS_ADMIN && $type != "requests") {
 ?>
 	<p><?php echo
-		String::create($userData[$type]->title3)->replace(
-			String::create(array("[L]", "[/L]")),
-			String::create(array("<a href=\"index.php?a={$type}_form\">", "</a>"))
+		Str::create($userData[$type]->title3)->replace(
+			Str::create(array("[L]", "[/L]")),
+			Str::create(array("<a href=\"index.php?a={$type}_form\">", "</a>"))
 		);
 	?></p>
 

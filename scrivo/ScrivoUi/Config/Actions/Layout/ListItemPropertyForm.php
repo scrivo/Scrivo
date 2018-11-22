@@ -40,7 +40,7 @@ use \Scrivo\LayoutAction;
 use \Scrivo\I18n;
 use \Scrivo\Request;
 use \Scrivo\ListItemPropertyDefinition;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The ListItemPropertyForm layout action class sets up the layout for a list
@@ -233,14 +233,14 @@ class ListItemPropertyForm extends LayoutAction {
 
 	private function formatHelp($text) {
 
-		$str = new String($text);
-		$txts = $str->split(new String("\n"));
+		$str = new Str($text);
+		$txts = $str->split(new Str("\n"));
 		if (count($txts)) {
-			if (!$txts[0]->equals(new String(""))) {
+			if (!$txts[0]->equals(new Str(""))) {
 				echo "<p>".$txts[0]."</p>";
 			}
 			for ($i=1; $i<count($txts); $i++) {
-				$items = $txts[$i]->split(new String("\t"));
+				$items = $txts[$i]->split(new Str("\t"));
 				echo "<dl>";
 				if (count($items)) {
 					echo "<dt>".$items[0]."</dt>";
@@ -260,7 +260,7 @@ class ListItemPropertyForm extends LayoutAction {
 		foreach($data as $k=>$v) {
 			$d[] = $k."=".$v;
 		};
-		return new String(implode("\n", $d));
+		return new Str(implode("\n", $d));
 	}
 
 

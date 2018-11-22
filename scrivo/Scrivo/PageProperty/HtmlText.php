@@ -38,7 +38,7 @@ namespace Scrivo\PageProperty;
 /**
  * Property to hold HTML data.
  *
- * @property \Scrivo\String $html The HTML text data.
+ * @property \Scrivo\Str $html The HTML text data.
  */
 class HtmlText extends \Scrivo\PageProperty {
 

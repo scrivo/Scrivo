@@ -38,7 +38,7 @@ namespace ScrivoUi\Admin\Actions\Layout;
 use \Scrivo\I18n;
 use \Scrivo\LayoutAction;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\User;
 
 /**
@@ -84,8 +84,8 @@ class UserForm extends LayoutAction {
 			$userId = $user->id;
 		} else {
 			$userId = Request::get("user_id",
-				Request::TYPE_STRING, new String(""));
-			if (!$userId->equals(new String(""))) {
+				Request::TYPE_STRING, new Str(""));
+			if (!$userId->equals(new Str(""))) {
 				$user = User::fetch($this->context, $userId);
 			} else {
 				$user = new User($this->context);

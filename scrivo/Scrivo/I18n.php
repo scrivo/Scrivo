@@ -54,12 +54,12 @@ namespace Scrivo;
  * advised to use the UTF-8 encoding for your internationalization files.
  *
  * Because we're dealing with hard coded data and it will be excessively
- * cumbersome to deal I18N keys if you'll have to use the \Scrivo\String wrappers,
+ * cumbersome to deal I18N keys if you'll have to use the \Scrivo\Str wrappers,
  * you can use plain strings as i18n keys.
  *
  * Typical usage:
  *
- * $i18n = new \Scrivo\I18n(new \Scrivo\String("nl_NL"));
+ * $i18n = new \Scrivo\I18n(new \Scrivo\Str("nl_NL"));
  * echo $i18n["Cancel"];
  */
 class I18n implements \ArrayAccess {
@@ -76,14 +76,14 @@ class I18n implements \ArrayAccess {
 	 * Create a set of internationalization key/value pairs for a given
 	 * language.
 	 *
-	 * @param \Scrivo\String $langCode The language code for which to create the
+	 * @param \Scrivo\Str $langCode The language code for which to create the
 	 *    set of resources for.
-	 * @param \Scrivo\String $dir An optional directory for an alternative
+	 * @param \Scrivo\Str $dir An optional directory for an alternative
 	 *    location for the i18n resource file.
 	 *
 	 * @throws \Exception If no 1i8n resource file was found.
 	 */
-	function __construct(\Scrivo\String $langCode, \Scrivo\String $dir=null) {
+	function __construct(\Scrivo\Str $langCode, \Scrivo\Str $dir=null) {
 		if (!$dir) {
 			// The location of Scrivo UI language keys.
 			$dir = dirname(__FILE__)."/I18n";

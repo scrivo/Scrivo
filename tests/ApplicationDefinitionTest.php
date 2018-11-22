@@ -44,22 +44,22 @@ class ApplicationDefinitionTest extends ScrivoDatabaseTestCase {
 		return array(
 			"test 1" => array(
 				"argument 1" => (object) array(
-					"title" => new \Scrivo\String(
+					"title" => new \Scrivo\Str(
 						"an external application"),
-					"description" => new \Scrivo\String(
+					"description" => new \Scrivo\Str(
 						"an external application description"),
-					"location" => new \Scrivo\String(
+					"location" => new \Scrivo\Str(
 						"http://www.scrivo.nl/scrivo_apps/index.php"),
 					"type" => \Scrivo\ApplicationDefinition::TYPE_URL,
 				)
 			),
 			"test 2" => array(
 				"argument 1" => (object) array(
-					"title" => new \Scrivo\String(
+					"title" => new \Scrivo\Str(
 						"an internal application"),
-					"description" => new \Scrivo\String(
+					"description" => new \Scrivo\Str(
 						"an internal application description"),
-					"location" => new \Scrivo\String(""),
+					"location" => new \Scrivo\Str(""),
 					"type" => \Scrivo\ApplicationDefinition::TYPE_LISTVIEW,
 				)
 			)
@@ -74,20 +74,20 @@ class ApplicationDefinitionTest extends ScrivoDatabaseTestCase {
 		return array(
 			"test 1" => array(
 				"argument 1" => (object) array(
-					"title" => new \Scrivo\String(
+					"title" => new \Scrivo\Str(
 						"an external application"),
-					"description" => new \Scrivo\String(
+					"description" => new \Scrivo\Str(
 						"an external application description"),
-					"location" => new \Scrivo\String(
+					"location" => new \Scrivo\Str(
 						"http://www.scrivo.nl/scrivo_apps/index.php"),
 					"type" => \Scrivo\ApplicationDefinition::TYPE_URL,
 				),
 				"argument 2" => (object) array(
-					"title" => new \Scrivo\String(
+					"title" => new \Scrivo\Str(
 						"an internal application"),
-					"description" => new \Scrivo\String(
+					"description" => new \Scrivo\Str(
 						"an internal application description"),
-					"location" => new \Scrivo\String(""),
+					"location" => new \Scrivo\Str(""),
 					"type" => \Scrivo\ApplicationDefinition::TYPE_LISTVIEW,
 				)
 			)
@@ -315,7 +315,7 @@ class ApplicationDefinitionTest extends ScrivoDatabaseTestCase {
 		$this->setApplicationDefinitionProperties($tmp, $d1);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, self::EDITOR_USER_ID);
 
 		// Creating/inserting a new \Scrivo\ApplicationDefinition object as
@@ -368,7 +368,7 @@ class ApplicationDefinitionTest extends ScrivoDatabaseTestCase {
 		$this->setApplicationDefinitionProperties($tmp, $d2);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, \Scrivo\User::ANONYMOUS_USER_ID);
 
 		// Creating/inserting a new \Scrivo\ApplicationDefinition object as

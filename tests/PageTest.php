@@ -49,11 +49,11 @@ class PageTest extends ScrivoDatabaseTestCase {
 					"type" => \Scrivo\Page::TYPE_NAVIGATION_ITEM,
 					"definitionId" => self::PAGE_DEFINITION_FORUM_ID,
 					"languageId" => self::LANGUAGE_NL_ID,
-					"title" => new \Scrivo\String(""),
-					"description" => new \Scrivo\String(""),
-					"keywords" => new \Scrivo\String(""),
-					"javascript" => new \Scrivo\String(""),
-					"stylesheet" => new \Scrivo\String(""),
+					"title" => new \Scrivo\Str(""),
+					"description" => new \Scrivo\Str(""),
+					"keywords" => new \Scrivo\Str(""),
+					"javascript" => new \Scrivo\Str(""),
+					"stylesheet" => new \Scrivo\Str(""),
 					"dateCreated" => new \DateTime("2013-05-27 00:36:35"),
 					"dateModified" => new \DateTime("2013-05-27 00:36:35"),
 					"dateOnline" => new \DateTime("2013-05-27 00:36:35"),
@@ -67,11 +67,11 @@ class PageTest extends ScrivoDatabaseTestCase {
 					"type" => \Scrivo\Page::TYPE_NAVIGATION_ITEM,
 					"definitionId" => self::PAGE_DEFINITION_FORUM_ID,
 					"languageId" => self::LANGUAGE_NL_ID,
-					"title" => new \Scrivo\String(""),
-					"description" => new \Scrivo\String(""),
-					"keywords" => new \Scrivo\String(""),
-					"javascript" => new \Scrivo\String(""),
-					"stylesheet" => new \Scrivo\String(""),
+					"title" => new \Scrivo\Str(""),
+					"description" => new \Scrivo\Str(""),
+					"keywords" => new \Scrivo\Str(""),
+					"javascript" => new \Scrivo\Str(""),
+					"stylesheet" => new \Scrivo\Str(""),
 					"dateCreated" => new \DateTime("2013-05-27 00:36:35"),
 					"dateModified" => new \DateTime("2013-05-27 00:36:35"),
 					"dateOnline" => new \DateTime("2013-05-27 00:36:35"),
@@ -94,11 +94,11 @@ class PageTest extends ScrivoDatabaseTestCase {
 					"type" => \Scrivo\Page::TYPE_NAVIGATION_ITEM,
 					"definitionId" => self::PAGE_DEFINITION_FORUM_ID,
 					"languageId" => self::LANGUAGE_NL_ID,
-					"title" => new \Scrivo\String(""),
-					"description" => new \Scrivo\String(""),
-					"keywords" => new \Scrivo\String(""),
-					"javascript" => new \Scrivo\String(""),
-					"stylesheet" => new \Scrivo\String(""),
+					"title" => new \Scrivo\Str(""),
+					"description" => new \Scrivo\Str(""),
+					"keywords" => new \Scrivo\Str(""),
+					"javascript" => new \Scrivo\Str(""),
+					"stylesheet" => new \Scrivo\Str(""),
 					"dateCreated" => new \DateTime("2013-05-27 00:36:35"),
 					"dateModified" => new \DateTime("2013-05-27 00:36:35"),
 					"dateOnline" => new \DateTime("2013-05-27 00:36:35"),
@@ -110,11 +110,11 @@ class PageTest extends ScrivoDatabaseTestCase {
 					"type" => \Scrivo\Page::TYPE_NAVIGATION_ITEM,
 					"definitionId" => self::PAGE_DEFINITION_FORUM_ID,
 					"languageId" => self::LANGUAGE_NL_ID,
-					"title" => new \Scrivo\String(""),
-					"description" => new \Scrivo\String(""),
-					"keywords" => new \Scrivo\String(""),
-					"javascript" => new \Scrivo\String(""),
-					"stylesheet" => new \Scrivo\String(""),
+					"title" => new \Scrivo\Str(""),
+					"description" => new \Scrivo\Str(""),
+					"keywords" => new \Scrivo\Str(""),
+					"javascript" => new \Scrivo\Str(""),
+					"stylesheet" => new \Scrivo\Str(""),
 					"dateCreated" => new \DateTime("2013-05-27 00:36:35"),
 					"dateModified" => new \DateTime("2013-05-27 00:36:35"),
 					"dateOnline" => new \DateTime("2013-05-27 00:36:35"),
@@ -566,7 +566,7 @@ class PageTest extends ScrivoDatabaseTestCase {
 		$this->setPageProperties($tmp, $d1);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, self::EDITOR_USER_ID);
 
 		// Creating/inserting a new \Scrivo\Page object as editor
@@ -616,7 +616,7 @@ class PageTest extends ScrivoDatabaseTestCase {
 		$this->setPageProperties($tmp, $d2);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, \Scrivo\User::ANONYMOUS_USER_ID);
 
 		// Creating/inserting a new \Scrivo\Page object as member

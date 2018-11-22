@@ -47,13 +47,13 @@ class PagePropertyImageTest extends ScrivoDatabaseTestCase {
 
 	function testProperty() {
 
-		$testData = new \Scrivo\String("http:\\www.image.com\img.gif");
+		$testData = new \Scrivo\Str("http:\\www.image.com\img.gif");
 
 		$h = \Scrivo\Page::fetch(self::$context, self::PAGE_HOME_ID);
 
 		$pd = new \Scrivo\PagePropertyDefinition(self::$context);
 		$pd->type = \Scrivo\PagePropertyDefinition::TYPE_IMAGE;
-		$pd->phpSelector = new \Scrivo\String("anImage");
+		$pd->phpSelector = new \Scrivo\Str("anImage");
 		$pd->pageDefinitionId = $h->definition->id;
 		$pd->insert();
 

@@ -34,7 +34,7 @@ namespace ScrivoUi\Editor\Actions\MenuTree;
 use \Scrivo\Action;
 use \Scrivo\I18n;
 use \Scrivo\Page;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\Request;
 use \Scrivo\PageDefinition;
 
@@ -86,7 +86,7 @@ class GetPageProperties extends Action {
 
 			// Create a new page if no id was given.
 			$page = new Page($this->context);
-			$page->title = new String($i18n["New Page"]);
+			$page->title = new Str($i18n["New Page"]);
 			$page->parentId =
 				Request::get("pagePid", Request::TYPE_INTEGER);
 

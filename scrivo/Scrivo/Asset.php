@@ -69,7 +69,7 @@ abstract class Asset {
 
 	/**
 	 * The asset title.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	protected $title = null;
 
@@ -121,7 +121,7 @@ abstract class Asset {
 			$this->id = 0;
 			$this->parentId = 0;
 			$this->type = 0;
-			$this->title = new \Scrivo\String();
+			$this->title = new \Scrivo\Str();
 			$this->dateCreated = new \DateTime("now");
 			$this->dateModified = new \DateTime("now");
 
@@ -185,7 +185,7 @@ abstract class Asset {
 		$this->id = intval($rd["asset_id"]);
 		$this->parentId = intval($rd["parent_id"]);
 		$this->type = intval($rd["type"]);
-		$this->title = new \Scrivo\String($rd["title"]);
+		$this->title = new \Scrivo\Str($rd["title"]);
 		$this->dateCreated = new \DateTime($rd["date_created"]);
 		$this->dateModified = new \DateTime($rd["date_modified"]);
 
@@ -247,9 +247,9 @@ abstract class Asset {
 	/**
 	 * Set The asset title (&lt;title&gt;).
 	 *
-	 * @param \Scrivo\String $title The asset title (&lt;title&gt;).
+	 * @param \Scrivo\Str $title The asset title (&lt;title&gt;).
 	 */
-	private function setTitle(\Scrivo\String $title) {
+	private function setTitle(\Scrivo\Str $title) {
 		$this->title = $title;
 	}
 

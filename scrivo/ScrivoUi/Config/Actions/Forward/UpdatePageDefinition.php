@@ -41,7 +41,7 @@ use \Scrivo\ApplicationException;
 use \Scrivo\PageDefinition;
 use \Scrivo\PageDefinitionHints;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The UpdatePageDefinition class implements the action for updating a page
@@ -63,11 +63,11 @@ class UpdatePageDefinition extends Action {
 
 			// ... set the members ...
 			$pageDefinition->title = Request::post(
-				"label", Request::TYPE_STRING, new String(""));
+				"label", Request::TYPE_STRING, new Str(""));
 			$pageDefinition->description = Request::post(
-				"description", Request::TYPE_STRING, new String(""));
+				"description", Request::TYPE_STRING, new Str(""));
 			$pageDefinition->action = Request::post(
-				"action", Request::TYPE_STRING, new String(""));
+				"action", Request::TYPE_STRING, new Str(""));
 			$pageDefinition->configOnly = Request::post(
 				"admin_only", Request::TYPE_BOOLEAN);
 			$pageDefinition->typeSet = Request::post(

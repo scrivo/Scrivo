@@ -29,7 +29,7 @@
  * $Id: asset_list.tpl.php 841 2013-08-19 22:19:47Z geert $
  */
 
-use \Scrivo\String;
+use \Scrivo\Str;
 
 foreach ($rows as $d) {
 
@@ -158,10 +158,10 @@ function openNode(id) {
 </script>
 
 	<p><?php echo
-		String::create(
+		Str::create(
 			$i18n["Create a new [L1]folder[/L1] or [L2]file[/L2]"])->replace(
-				String::create(array("[L1]","[/L1]","[L2]","[/L2]")),
-				String::create(array(
+				Str::create(array("[L1]","[/L1]","[L2]","[/L2]")),
+				Str::create(array(
 					"<a href=\"index.php?a=folder_form\">", "</a>",
 					"<a href=\"index.php?a=file_form\">", "</a>"
 				))

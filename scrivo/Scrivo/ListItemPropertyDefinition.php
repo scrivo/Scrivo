@@ -53,11 +53,11 @@ namespace Scrivo;
  *    definition where this list item property defintion belongs to.
  * @property boolean $inList Setting to show or hide this property in item
  *    lists in the user interface.
- * @property \Scrivo\String $phpSelector A textual identification/key for this
+ * @property \Scrivo\Str $phpSelector A textual identification/key for this
  *    list item property.
- * @property \Scrivo\String $title A descriptive name for the list item
+ * @property \Scrivo\Str $title A descriptive name for the list item
  *    property.
- * @property \Scrivo\String $type The list item property type, one out of
+ * @property \Scrivo\Str $type The list item property type, one out of
  *    ListItemProperty::TYPE_* constants.
  * @property \stdClass $typeData Optional data needed to for this specific
  *    property type.
@@ -148,7 +148,7 @@ class ListItemPropertyDefinition {
 	/**
 	 * The list item property type, one out of ListItemProperty::TYPE_*
 	 * constants.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $type = "";
 
@@ -160,13 +160,13 @@ class ListItemPropertyDefinition {
 
 	/**
 	 * A textual identification/key for this list item property.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $phpSelector = null;
 
 	/**
 	 * A descriptive name for the list item property.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $title = null;
 
@@ -192,8 +192,8 @@ class ListItemPropertyDefinition {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null), 0);
 
 		if ($context) {
-			$this->phpSelector = new \Scrivo\String();
-			$this->title = new \Scrivo\String();
+			$this->phpSelector = new \Scrivo\Str();
+			$this->title = new \Scrivo\Str();
 			$this->typeData = new \stdClass;
 
 			$this->context = $context;
@@ -260,8 +260,8 @@ class ListItemPropertyDefinition {
 		$this->listItemDefinitionId = intval($rd["list_item_definition_id"]);
 		$this->type = (string)$rd["type"];
 		$this->setTypeDataFromRS($rd);
-		$this->phpSelector = new \Scrivo\String($rd["php_key"]);
-		$this->title = new \Scrivo\String($rd["title"]);
+		$this->phpSelector = new \Scrivo\Str($rd["php_key"]);
+		$this->title = new \Scrivo\Str($rd["title"]);
 		$this->inList = intval($rd["in_list"]) == 1 ? true : false;
 
 		$this->context = $context;
@@ -270,7 +270,7 @@ class ListItemPropertyDefinition {
 	/**
 	 * Get an array of the possible property types.
 	 *
-	 * @return \Scrivo\String[] An array of all possible property types.
+	 * @return \Scrivo\Str[] An array of all possible property types.
 	 */
 	public static function getTypes() {
 		return array(
@@ -351,20 +351,20 @@ class ListItemPropertyDefinition {
 	/**
 	 * Set A textual identification/key for this list item property.
 	 *
-	 * @param \Scrivo\String $phpSelector A textual identification/key for
+	 * @param \Scrivo\Str $phpSelector A textual identification/key for
 	 *    this list item property.
 	 */
-	private function setPhpSelector(\Scrivo\String $phpSelector) {
+	private function setPhpSelector(\Scrivo\Str $phpSelector) {
 		$this->phpSelector = $phpSelector;
 	}
 
 	/**
 	 * Set A descriptive name for the list item property.
 	 *
-	 * @param \Scrivo\String $title A descriptive name for the list item
+	 * @param \Scrivo\Str $title A descriptive name for the list item
 	 *    property.
 	 */
-	private function setTitle(\Scrivo\String $title) {
+	private function setTitle(\Scrivo\Str $title) {
 		$this->title = $title;
 	}
 
@@ -387,9 +387,9 @@ class ListItemPropertyDefinition {
 	 * Convert a string to its most likely type.
 	 *
 	 * @param string $val The value to convert to either an int, float or
-	 *    \Scrivo\String.
+	 *    \Scrivo\Str.
 	 *
-	 * @return int|float|\Scrivo\String The given value converted to its
+	 * @return int|float|\Scrivo\Str The given value converted to its
 	 *    most likely type.
 	 */
 	private function readStr($val) {
@@ -410,35 +410,35 @@ class ListItemPropertyDefinition {
 	 *    row).
 	 */
 	private function setTypeDataFromRS(array $rs) {
-		$this->setTypeDataAsString(new \Scrivo\String($rs["type_data"]));
+		$this->setTypeDataAsString(new \Scrivo\Str($rs["type_data"]));
 	}
 
 	/**
 	 * Create a string representation of the type data member.
 	 *
-	 * @return \Scrivo\String The type data as an string.
+	 * @return \Scrivo\Str The type data as an string.
 	 */
 	private function getTypeDataAsString() {
 		$d = array();
 		foreach($this->typeData as $k=>$v) {
 			$d[] = $k."=".$v;
 		};
-		return new \Scrivo\String(implode("\n", $d));
+		return new \Scrivo\Str(implode("\n", $d));
 	}
 
 	/**
 	 * Set the type data member form a string representation. The format of
 	 * the string should be NAME1=VALUE1\nNAME2=VALUE2\nNAME3...etc.
 	 *
-	 * @param \Scrivo\String $str The type data string.
+	 * @param \Scrivo\Str $str The type data string.
 	 */
-	private function setTypeDataAsString(\Scrivo\String $str) {
+	private function setTypeDataAsString(\Scrivo\Str $str) {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null));
 
 		$d = array();
-		$parts = $str->split(new \Scrivo\String("\n"));
+		$parts = $str->split(new \Scrivo\Str("\n"));
 		foreach($parts as $line) {
-			$p = $line->split(new \Scrivo\String("="), 2);
+			$p = $line->split(new \Scrivo\Str("="), 2);
 			if (count($p) == 2) {
 				$d[(string)$p[0]->trim()] = $this->readStr($p[1]->trim());
 			}

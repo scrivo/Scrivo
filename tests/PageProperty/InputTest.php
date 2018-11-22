@@ -47,13 +47,13 @@ class PagePropertyInputTest extends ScrivoDatabaseTestCase {
 
 	function testProperty() {
 
-		$testData = new \Scrivo\String("Some cool stuff");
+		$testData = new \Scrivo\Str("Some cool stuff");
 
 		$h = \Scrivo\Page::fetch(self::$context, self::PAGE_HOME_ID);
 
 		$pd = new \Scrivo\PagePropertyDefinition(self::$context);
 		$pd->type = \Scrivo\PagePropertyDefinition::TYPE_INPUT;
-		$pd->phpSelector = new \Scrivo\String("anInput");
+		$pd->phpSelector = new \Scrivo\Str("anInput");
 		$pd->pageDefinitionId = $h->definition->id;
 		$pd->insert();
 

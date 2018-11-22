@@ -53,7 +53,7 @@ class NoCache implements \Scrivo\Cache {
 	/**
 	 * Pretend to store a variable in the cache.
 	 *
-	 * @param \Scrivo\String $key A cache unique name for the key.
+	 * @param \Scrivo\Str $key A cache unique name for the key.
 	 * @param mixed $val The (serializable) variabele to strore.
 	 * @param int $ttl Time to live in seconds.
 	 *
@@ -61,7 +61,7 @@ class NoCache implements \Scrivo\Cache {
 	 *
 	 * @throws \Scrivo\SystemException When trying to store a NULL value.
 	 */
-	public function store(\Scrivo\String $key, $val, $ttl=3600) {
+	public function store(\Scrivo\Str $key, $val, $ttl=3600) {
 		if ($val === null) {
 			throw new \Scrivo\SystemException(
 				"Can't store null values in the cache");
@@ -72,7 +72,7 @@ class NoCache implements \Scrivo\Cache {
 	/**
 	 * Pretend to overwrite a variable in the cache.
 	 *
-	 * @param \Scrivo\String $key A cache unique name for the key.
+	 * @param \Scrivo\Str $key A cache unique name for the key.
 	 * @param mixed $val The (serializable) variabele to strore.
 	 * @param int $ttl Time to live in seconds.
 	 *
@@ -80,7 +80,7 @@ class NoCache implements \Scrivo\Cache {
 	 *
 	 * @throws \Scrivo\SystemException When trying to store a NULL value.
 	 */
-	public function overwrite(\Scrivo\String $key, $val, $ttl=3600) {
+	public function overwrite(\Scrivo\Str $key, $val, $ttl=3600) {
 		if ($val === null) {
 			throw new \Scrivo\SystemException(
 				"Can't store null values in the cache");
@@ -91,20 +91,20 @@ class NoCache implements \Scrivo\Cache {
 	/**
 	 * Pretend to delete/remove a cache entry.
 	 *
-	 * @param \Scrivo\String $key A cache unique name for the key.
+	 * @param \Scrivo\Str $key A cache unique name for the key.
 	 */
-	public function delete(\Scrivo\String $key) {
+	public function delete(\Scrivo\Str $key) {
 	}
 
 	/**
 	 * Perform a failed fetch from the cache.
 	 *
-	 * @param \Scrivo\String $key The key for which to retrieve the value.
+	 * @param \Scrivo\Str $key The key for which to retrieve the value.
 	 *
 	 * @return mixed The value of the stored variable or NULL if the key
 	 *   does not exists or is expired.
 	 */
-	public function fetch(\Scrivo\String $key) {
+	public function fetch(\Scrivo\Str $key) {
 		null;
 	}
 

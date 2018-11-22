@@ -43,7 +43,7 @@ use \Scrivo\Downloadable;
 use \Scrivo\ListItemDefinition;
 use \Scrivo\ListItemPropertyDefinition;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The ExportApplicationDefinition class implements the action of exporting a
@@ -52,7 +52,7 @@ use \Scrivo\String;
 class ExportApplicationDefinition extends Action {
 
 	/**
-	 * Convert an object to an array (recursive). Convert String
+	 * Convert an object to an array (recursive). Convert Str
 	 * members to strings and throw out references to contexts. So we'll end
 	 * up with a PHP 4 like style array, just containing the bare data.
 	 *
@@ -70,7 +70,7 @@ class ExportApplicationDefinition extends Action {
 			}
 			if ($k == "context") {
 				continue;
-			} else if ($d instanceof String) {
+			} else if ($d instanceof Str) {
 				$d = (string)$d;
 			} else if (is_object($d) || is_array($d)) {
 				$d = $this->objToArr($d);
@@ -109,10 +109,10 @@ class ExportApplicationDefinition extends Action {
 			);
 
 			// Construct a name for the downloadable file.
-			$fname = new String(
+			$fname = new Str(
 				"application_definition_".$appDef->title.".dat");
-			$fname = $fname->replace(new String(" "),
-				new String("_"))->toLowerCase();
+			$fname = $fname->replace(new Str(" "),
+				new Str("_"))->toLowerCase();
 
 			// And create a downloadable with the file name and serialized data.
 			$this->file = new Downloadable($this->context, $fname,

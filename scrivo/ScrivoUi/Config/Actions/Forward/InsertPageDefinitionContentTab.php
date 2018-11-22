@@ -42,7 +42,7 @@ use \Scrivo\I18n;
 use \Scrivo\PageDefinitionTab;
 use \Scrivo\PagePropertyDefinition;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The InsertPageDefinitionContentTab class implements the action for creating
@@ -81,14 +81,14 @@ class InsertPageDefinitionContentTab extends Action {
 			$prop->pageDefinitionTabId = $tab->id;
 			$prop->title = $tab->title;
 			$prop->phpSelector = Request::post(
-				"php_selector", Request::TYPE_STRING, new String(""));
+				"php_selector", Request::TYPE_STRING, new Str(""));
 			$prop->type = PagePropertyDefinition::TYPE_HTML_TEXT_TAB;
 			$prop->typeData->css_selector = Request::post(
-				"css_selector", Request::TYPE_STRING, new String(""));
+				"css_selector", Request::TYPE_STRING, new Str(""));
 			$prop->typeData->page_css = Request::post(
-				"document_css", Request::TYPE_STRING, new String(""));
+				"document_css", Request::TYPE_STRING, new Str(""));
 			$prop->typeData->stylesheet = Request::post(
-				"stylesheet", Request::TYPE_STRING, new String(""));
+				"stylesheet", Request::TYPE_STRING, new Str(""));
 
 			// ... and insert it.
 			$prop->insert();

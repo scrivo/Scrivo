@@ -38,10 +38,10 @@ class ListItemPropertyColorTest extends ListItemPropertyBaseTestCase {
 
 	function testProperty() {
 
-		$testColor = new \Scrivo\String("FF99AA");
+		$testColor = new \Scrivo\Str("FF99AA");
 
 		$lip = $this->createItemProperty(
-			new \Scrivo\String(\Scrivo\ListItemPropertyDefinition::TYPE_COLOR));
+			new \Scrivo\Str(\Scrivo\ListItemPropertyDefinition::TYPE_COLOR));
 
 		$lip->color = $testColor;
 		$this->assertTrue($testColor->equals($lip->color));

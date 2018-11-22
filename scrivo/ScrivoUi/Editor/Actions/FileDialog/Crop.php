@@ -34,7 +34,7 @@ namespace ScrivoUi\Editor\Actions\FileDialog;
 use \Scrivo\Action;
 use \Scrivo\Request;
 use \Scrivo\File;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \ScrivoUi\Editor\Lib\ImageUtilities;
 
 /**
@@ -81,21 +81,21 @@ class Crop extends Action {
 		//create new image
 
 		$name = $file->title;
-		$pos = $name->indexOf(new String("."));
+		$pos = $name->indexOf(new Str("."));
 		if ($pos != -1) {
 			$name = $name->substr(0, $pos);
 		}
 
 		$dr = new File($this->context);
-		$dr->title = new String("{$name}_{$newwidth}x{$newheight}.jpg");
-		$dr->mimeType = new String("image/jpeg");
+		$dr->title = new Str("{$name}_{$newwidth}x{$newheight}.jpg");
+		$dr->mimeType = new Str("image/jpeg");
 		$dr->type = 1;
 		$dr->parentId = $file->parentId;
 
 		$dr->insert();
 
 		$dr->location =
-			new String("{$this->context->config->UPLOAD_DIR}/asset_{$dr->id}");
+			new Str("{$this->context->config->UPLOAD_DIR}/asset_{$dr->id}");
 		imagejpeg($thumb, $dr->location);
 		$dr->size = filesize($dr->location);
 

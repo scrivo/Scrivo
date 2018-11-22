@@ -38,7 +38,7 @@ namespace ScrivoUi\DbConsole\Actions\Layout;
 
 use \Scrivo\I18n;
 use \Scrivo\LayoutAction;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The PasteBrancheForm layout action class sets up the layout for a

@@ -38,7 +38,7 @@ namespace ScrivoUi\DbConsole\Actions\Layout;
 
 use \Scrivo\I18n;
 use \Scrivo\LayoutAction;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The DownloadDatabaseModel layout action class sets up the layout for
@@ -52,7 +52,7 @@ class DownloadDatabaseModel extends LayoutAction {
 	 */
 	function doAction() {
 
-		$i18n = new I18n(new String("en_US"));
+		$i18n = new I18n(new Str("en_US"));
 
 		$title = $i18n["Database installation options"];
 

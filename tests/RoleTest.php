@@ -45,17 +45,17 @@ class RoleTest extends ScrivoDatabaseTestCase {
 			"test 1" => array(
 				"argument 1" => (object) array(
 					"type" => \Scrivo\Role::PUBLIC_ROLE,
-					"title" => new \Scrivo\String("a public role"),
+					"title" => new \Scrivo\Str("a public role"),
 					"description" =>
-						new \Scrivo\String("a public role description"),
+						new \Scrivo\Str("a public role description"),
 				)
 			),
 			"test 2" => array(
 				"argument 1" => (object) array(
 					"type" => \Scrivo\Role::EDITOR_ROLE,
-					"title" => new \Scrivo\String("an editor role"),
+					"title" => new \Scrivo\Str("an editor role"),
 					"description" =>
-						new \Scrivo\String("an editor role description"),
+						new \Scrivo\Str("an editor role description"),
 				)
 			)
 		);
@@ -70,15 +70,15 @@ class RoleTest extends ScrivoDatabaseTestCase {
 			"test 1" => array(
 				"argument 1" => (object) array(
 					"type" => \Scrivo\Role::PUBLIC_ROLE,
-					"title" => new \Scrivo\String("a public role"),
+					"title" => new \Scrivo\Str("a public role"),
 					"description" =>
-						new \Scrivo\String("a public role description"),
+						new \Scrivo\Str("a public role description"),
 				),
 				"argument 2" => (object) array(
 					"type" => \Scrivo\Role::EDITOR_ROLE,
-					"title" => new \Scrivo\String("an editor role"),
+					"title" => new \Scrivo\Str("an editor role"),
 					"description" =>
-						new \Scrivo\String("an editor role description"),
+						new \Scrivo\Str("an editor role description"),
 				)
 			)
 		);
@@ -290,7 +290,7 @@ class RoleTest extends ScrivoDatabaseTestCase {
 		$this->setRoleProperties($tmp, $d1);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, self::EDITOR_USER_ID);
 
 		// Creating/inserting a new \Scrivo\Role object as editor should
@@ -342,7 +342,7 @@ class RoleTest extends ScrivoDatabaseTestCase {
 		$this->setRoleProperties($tmp, $d2);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, \Scrivo\User::ANONYMOUS_USER_ID);
 
 		// Creating/inserting a new \Scrivo\Role object as member should not

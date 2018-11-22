@@ -38,9 +38,9 @@ class ListItemPropertyInputTest extends ListItemPropertyBaseTestCase {
 
 	function testProperty() {
 
-		$v = new \Scrivo\String("Some data");
+		$v = new \Scrivo\Str("Some data");
 
-		$lip = $this->createItemProperty(new \Scrivo\String(
+		$lip = $this->createItemProperty(new \Scrivo\Str(
 				\Scrivo\ListItemPropertyDefinition::TYPE_INPUT));
 
 		$lip->value = $v;

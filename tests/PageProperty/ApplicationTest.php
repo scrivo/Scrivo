@@ -47,19 +47,19 @@ class PagePropertyApplicationTest extends ScrivoDatabaseTestCase {
 
 	function testProperty() {
 
-		$testData = new \Scrivo\String("<p>some text</p>");
+		$testData = new \Scrivo\Str("<p>some text</p>");
 
 		$h = \Scrivo\Page::fetch(self::$context, self::PAGE_HOME_ID);
 
 		$list = new \Scrivo\ApplicationDefinition(self::$context);
 		$list->type = \Scrivo\ApplicationDefinition::TYPE_LISTVIEW;
-		$list->title = new \Scrivo\String("Listview app");
-		$list->description = new \Scrivo\String("Listview descr");
+		$list->title = new \Scrivo\Str("Listview app");
+		$list->description = new \Scrivo\Str("Listview descr");
 		$list->insert();
 
 		$pd = new \Scrivo\PagePropertyDefinition(self::$context);
 		$pd->type = \Scrivo\PagePropertyDefinition::TYPE_APPLICATION_TAB;
-		$pd->phpSelector = new \Scrivo\String("aList");
+		$pd->phpSelector = new \Scrivo\Str("aList");
 		$pd->pageDefinitionId = $h->definition->id;
 		$pd->typeData = (object) array(
 			"APPLICATION_DEFINITION_ID" => $list->id
@@ -68,13 +68,13 @@ class PagePropertyApplicationTest extends ScrivoDatabaseTestCase {
 
 		$form = new \Scrivo\ApplicationDefinition(self::$context);
 		$form->type = \Scrivo\ApplicationDefinition::TYPE_FORM;
-		$form->title = new \Scrivo\String("Form app");
-		$form->description = new \Scrivo\String("Form descr");
+		$form->title = new \Scrivo\Str("Form app");
+		$form->description = new \Scrivo\Str("Form descr");
 		$form->insert();
 
 		$pd = new \Scrivo\PagePropertyDefinition(self::$context);
 		$pd->type = \Scrivo\PagePropertyDefinition::TYPE_APPLICATION_TAB;
-		$pd->phpSelector = new \Scrivo\String("aForm");
+		$pd->phpSelector = new \Scrivo\Str("aForm");
 		$pd->pageDefinitionId = $h->definition->id;
 		$pd->typeData = (object) array(
 			"APPLICATION_DEFINITION_ID" => $form->id
@@ -83,13 +83,13 @@ class PagePropertyApplicationTest extends ScrivoDatabaseTestCase {
 
 		$custom = new \Scrivo\ApplicationDefinition(self::$context);
 		$custom->type = \Scrivo\ApplicationDefinition::TYPE_URL;
-		$custom->title = new \Scrivo\String("Custom app");
-		$custom->description = new \Scrivo\String("Custom descr");
+		$custom->title = new \Scrivo\Str("Custom app");
+		$custom->description = new \Scrivo\Str("Custom descr");
 		$custom->insert();
 
 		$pd = new \Scrivo\PagePropertyDefinition(self::$context);
 		$pd->type = \Scrivo\PagePropertyDefinition::TYPE_APPLICATION_TAB;
-		$pd->phpSelector = new \Scrivo\String("aCustomApp");
+		$pd->phpSelector = new \Scrivo\Str("aCustomApp");
 		$pd->pageDefinitionId = $h->definition->id;
 		$pd->typeData = (object) array(
 			"APPLICATION_DEFINITION_ID" => $custom->id
@@ -118,12 +118,12 @@ class PagePropertyApplicationTest extends ScrivoDatabaseTestCase {
 			new \Scrivo\Page(), array(
 				"type" =>
 					\Scrivo\PagePropertyDefinition::TYPE_APPLICATION_TAB,
-				"php_key" =>  new \Scrivo\String("SEL"),
+				"php_key" =>  new \Scrivo\Str("SEL"),
 				"ID_DEF" => 3,
 				"value" => "",
 				"VALUE2" => ""
 			));
-		$ad->data = new \Scrivo\String("123");
+		$ad->data = new \Scrivo\Str("123");
 		$app = $ad->application;
 	}
 

@@ -77,8 +77,8 @@ class ObjectRole extends \Scrivo\Role {
 
 				$li->id = intval($rd["role_id"]);
 				$li->type = intval($rd["type"]);
-				$li->title = new \Scrivo\String($rd["title"]);
-				$li->description = new \Scrivo\String($rd["description"]);
+				$li->title = new \Scrivo\Str($rd["title"]);
+				$li->description = new \Scrivo\Str($rd["description"]);
 
 				$res[$li->id] = $li;
 			}

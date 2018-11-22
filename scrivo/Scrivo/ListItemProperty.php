@@ -44,19 +44,19 @@ class ListItemProperty {
 
 	/**
 	 * The property type: one out of the TemplateProperty::TYPE_* constants.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 //	protected $type;
 
 	/**
 	 * An textual identification/key for this property.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	protected $phpSelector;
 
 	/**
 	 * The property data.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	protected $data;
 
@@ -86,9 +86,9 @@ class ListItemProperty {
 	 */
 	protected function __construct(array $rd) {
 		$this->listItemId = intval($rd["list_item_id"]);
-//		$this->type = new \Scrivo\String($rd["type"]);
-		$this->phpSelector = new \Scrivo\String($rd["php_key"]);
-		$this->setData(new \Scrivo\String($rd["value"]));
+//		$this->type = new \Scrivo\Str($rd["type"]);
+		$this->phpSelector = new \Scrivo\Str($rd["php_key"]);
+		$this->setData(new \Scrivo\Str($rd["value"]));
 		$this->definitionId = intval($rd["ID_DEF"]);
 		$this->pageId = intval($rd["page_id"]);
 	}
@@ -178,9 +178,9 @@ class ListItemProperty {
 	/**
 	 * Set The property data.
 	 *
-	 * @param \Scrivo\String $data The property data.
+	 * @param \Scrivo\Str $data The property data.
 	 */
-	protected function setData(\Scrivo\String $data) {
+	protected function setData(\Scrivo\Str $data) {
 		$this->data = $data;
 	}
 

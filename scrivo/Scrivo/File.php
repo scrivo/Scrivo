@@ -47,13 +47,13 @@ class File extends Asset {
 
 	/**
 	 * The asset location.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $location = null;
 
 	/**
 	 * The asset mimeType.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $mimeType = null;
 
@@ -82,8 +82,8 @@ class File extends Asset {
 			parent::__construct($context);
 
 			$this->size = 0;
-			$this->location = new \Scrivo\String();
-			$this->mimeType = new \Scrivo\String();
+			$this->location = new \Scrivo\Str();
+			$this->mimeType = new \Scrivo\Str();
 			$this->dateOnline = new \DateTime("now");
 			$this->dateOffline = null;
 		}
@@ -139,8 +139,8 @@ class File extends Asset {
 		parent::setFields($context, $rd);
 
 		$this->size = intval($rd["size"]);
-		$this->location = new \Scrivo\String($rd["location"]);
-		$this->mimeType = new \Scrivo\String($rd["mime_type"]);
+		$this->location = new \Scrivo\Str($rd["location"]);
+		$this->mimeType = new \Scrivo\Str($rd["mime_type"]);
 		$this->dateOnline = new \DateTime($rd["date_online"]);
 		$this->dateOffline = $rd["date_offline"] == null
 			? null : new \DateTime($rd["date_offline"]);
@@ -161,20 +161,20 @@ class File extends Asset {
 	/**
 	 * Set the asset location (&lt;location&gt;).
 	 *
-	 * @param \Scrivo\String $location The asset location
+	 * @param \Scrivo\Str $location The asset location
 	 *   (&lt;location&gt;).
 	 */
-	private function setLocation(\Scrivo\String $location) {
+	private function setLocation(\Scrivo\Str $location) {
 		$this->location = $location;
 	}
 
 	/**
 	 * Set the mimeType for this asset (&lt;mimeType&gt;).
 	 *
-	 * @param \Scrivo\String $mimeType The mimeType for this asset
+	 * @param \Scrivo\Str $mimeType The mimeType for this asset
 	 *   (&lt;mimeType&gt;).
 	 */
-	private function setMimeType(\Scrivo\String $mimeType) {
+	private function setMimeType(\Scrivo\Str $mimeType) {
 		$this->mimeType = $mimeType;
 	}
 
@@ -203,11 +203,11 @@ class File extends Asset {
 	
 		$base = $this->title;
 		$ext = "";
-		$pos = $this->title->lastIndexOf(new String("."));
+		$pos = $this->title->lastIndexOf(new Str("."));
 		
 		if ($pos !== -1) {
 			$base = $this->title->substr(0, $pos);
-			if (!$base[$base->length - 1]->equals(new String("_"))) {
+			if (!$base[$base->length - 1]->equals(new Str("_"))) {
 				$base = "{$base}_";
 			}
 			$ext = $this->title->substr($pos);
@@ -215,7 +215,7 @@ class File extends Asset {
 		
 		$index = 1;
 		while (!$this->checkUnique()) {
-			$this->title = new String($base.$index.$ext);
+			$this->title = new Str($base.$index.$ext);
 			$index++;
 		}
 		

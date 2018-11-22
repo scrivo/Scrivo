@@ -42,7 +42,7 @@ use \Scrivo\I18n;
 use \Scrivo\PageDefinition;
 use \Scrivo\PageDefinitionHints;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 
 /**
@@ -69,9 +69,9 @@ class InsertPageDefinition extends Action {
 			$pageDefinition->title = Request::post("label",
 				Request::TYPE_STRING, $i18n["New page definition"]);
 			$pageDefinition->description = Request::post("description",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 			$pageDefinition->action = Request::post("action",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 			$pageDefinition->configOnly = Request::post("admin_only",
 				Request::TYPE_BOOLEAN);
 			$pageDefinition->typeSet = Request::post("type_set",

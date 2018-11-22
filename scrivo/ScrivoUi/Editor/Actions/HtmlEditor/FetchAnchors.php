@@ -33,7 +33,7 @@ namespace ScrivoUi\Editor\Actions\HtmlEditor;
 
 use \Scrivo\Action;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The FechAcnhors class implements an action for retrieving an anchor list
@@ -47,10 +47,10 @@ class FetchAnchors extends Action {
 	 */
 	function doAction() {
 
-		$url = Request::get("url", Request::TYPE_STRING, new String(""));
+		$url = Request::get("url", Request::TYPE_STRING, new Str(""));
 
 		$res = array();
-		if (!$url->equals(new String(""))) {
+		if (!$url->equals(new Str(""))) {
 			$res = 	strip_tags($this->open_url($url),"<A>");
 		}
 
@@ -60,7 +60,7 @@ class FetchAnchors extends Action {
 	/**
 	 * Try to read an HTML file from a network.
 	 *
-	 * @param \Scrivo\String $filename The HTML file to read.
+	 * @param \Scrivo\Str $filename The HTML file to read.
 	 * @return string The file data.
 	 */
 	function open_url($filename) {

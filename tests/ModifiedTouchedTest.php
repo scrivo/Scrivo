@@ -259,7 +259,7 @@ class ModifiedTouchedTest extends ScrivoDatabaseTestCase {
 		$this->setModifiedTouchedProperties($tmp, $d1);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, self::EDITOR_USER_ID);
 
 		// Creating/inserting a new \Scrivo\ModifiedTouched object as editor
@@ -305,7 +305,7 @@ class ModifiedTouchedTest extends ScrivoDatabaseTestCase {
 		$this->setModifiedTouchedProperties($tmp, $d2);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, \Scrivo\User::ANONYMOUS_USER_ID);
 
 		// Creating/inserting a new \Scrivo\ModifiedTouched object as member

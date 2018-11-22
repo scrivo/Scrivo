@@ -41,7 +41,7 @@ use \Scrivo\I18n;
 use \Scrivo\Request;
 use \Scrivo\User;
 use \Scrivo\UserRole;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The InsertUser class implements the action for creating a new user.
@@ -69,9 +69,9 @@ class InsertUser extends Action {
 			$user = new User($this->context);
 
 			$pwd1 = Request::post(
-				"pwd1", Request::TYPE_STRING. new String(""));
+				"pwd1", Request::TYPE_STRING. new Str(""));
 			$pwd2 = Request::post(
-				"pwd2", Request::TYPE_STRING, new String(""));
+				"pwd2", Request::TYPE_STRING, new Str(""));
 			if (!$pwd1->equals($pwd2)) {
 				throw new ApplicationException("Passwords differ");
 			}
@@ -79,16 +79,16 @@ class InsertUser extends Action {
 			// ... set the members ...
 			$user->status = $stt[$this->parameters["type"]];
 			$user->userCode =  Request::post(
-				"user_code", Request::TYPE_STRING, new String(""));
+				"user_code", Request::TYPE_STRING, new Str(""));
 			$user->password = $pwd1;
 			$user->givenName = Request::post(
-				"given_name", Request::TYPE_STRING, new String(""));
+				"given_name", Request::TYPE_STRING, new Str(""));
 			$user->familyNamePrefix = Request::post(
-				"family_name_prefix", Request::TYPE_STRING, new String(""));
+				"family_name_prefix", Request::TYPE_STRING, new Str(""));
 			$user->familyName = Request::post(
-				"family_name", Request::TYPE_STRING, new String(""));
+				"family_name", Request::TYPE_STRING, new Str(""));
 			$user->emailAddress = Request::post(
-				"email_address", Request::TYPE_STRING, new String(""));
+				"email_address", Request::TYPE_STRING, new Str(""));
 
 			// ... and insert the user.
 			$user->insert();

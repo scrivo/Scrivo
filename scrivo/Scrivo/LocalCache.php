@@ -91,7 +91,7 @@ class LocalCache implements \ArrayAccess {
 //error_log("Local cache hit $key");
 			return self::$cache[$key];
 		}
-		$res = self::$persistentCache->fetch(new \Scrivo\String($key));
+		$res = self::$persistentCache->fetch(new \Scrivo\Str($key));
 		if ($res) {
 //error_log("Persistent cache hit $key");
 			self::$cache[$key] = $res;
@@ -113,7 +113,7 @@ class LocalCache implements \ArrayAccess {
 	public function offsetSet($key, $value) {
 //error_log("cache set $key");
 		self::$cache[$key] = $value;
-		self::$persistentCache->overwrite(new \Scrivo\String($key), $value);
+		self::$persistentCache->overwrite(new \Scrivo\Str($key), $value);
 	}
 
 	/**
@@ -134,7 +134,7 @@ class LocalCache implements \ArrayAccess {
 //error_log("Local cache hit $key");
 			return true;
 		}
-		$t = self::$persistentCache->fetch(new \Scrivo\String($key));
+		$t = self::$persistentCache->fetch(new \Scrivo\Str($key));
 		if ($t) {
 //error_log("Persistent cache hit $key");
 			self::$cache[$key] = $t;
@@ -154,7 +154,7 @@ class LocalCache implements \ArrayAccess {
 	 */
 	public function offsetUnset($key) {
 		unset(self::$cache[$key]);
-		self::$persistentCache->delete(new \Scrivo\String($key));
+		self::$persistentCache->delete(new \Scrivo\Str($key));
 	}
 
 }

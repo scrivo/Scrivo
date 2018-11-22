@@ -41,7 +41,7 @@ use \Scrivo\ApplicationException;
 use \Scrivo\Downloadable;
 use \Scrivo\PageDefinition;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The ExportPageDefinition class implements the action of exporting a page
@@ -50,7 +50,7 @@ use \Scrivo\String;
 class ExportPageDefinition extends Action {
 
 	/**
-	 * Convert an object to an array (recursive). Convert String
+	 * Convert an object to an array (recursive). Convert Str
 	 * members to strings and throw out references to contexts. So we'll end
 	 * up with a PHP 4 like style array, just containing the bare data.
 	 *
@@ -68,7 +68,7 @@ class ExportPageDefinition extends Action {
 			}
 			if ($k == "context") {
 				continue;
-			} else if ($d instanceof String) {
+			} else if ($d instanceof Str) {
 				$d = (string)$d;
 			} else if (is_object($d) || is_array($d)) {
 				$d = $this->objToArr($d);
@@ -99,9 +99,9 @@ class ExportPageDefinition extends Action {
 
 			// Construct a name for the downloadable file.
 			$fname =
-				new String("page_definition_".$res["title"].".dat");
-			$fname = $fname->replace(new String(" "),
-				new String("_"))->toLowerCase();
+				new Str("page_definition_".$res["title"].".dat");
+			$fname = $fname->replace(new Str(" "),
+				new Str("_"))->toLowerCase();
 
 			// And create a downloadable with the file name and serialized data.
 			$this->file = new Downloadable($this->context, $fname,

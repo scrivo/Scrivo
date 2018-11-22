@@ -41,7 +41,7 @@ use \Scrivo\ApplicationException;
 use \Scrivo\IdLabel;
 use \Scrivo\Page;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The UpdatePage class implements the action for updating a page.
@@ -77,7 +77,7 @@ class UpdatePage extends Action {
 			}
 
 			if (!Request::post("remove_on_y",
-					Request::TYPE_STRING)->trim()->equals(new String(""))) {
+					Request::TYPE_STRING)->trim()->equals(new Str(""))) {
 				$date = new \DateTime();
 				$date->setDate(
 					Request::post("remove_on_y", Request::TYPE_INTEGER),
@@ -91,22 +91,22 @@ class UpdatePage extends Action {
 			}
 
 			$page->title = Request::post("title",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 			$page->description = Request::post("description",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 			$page->keywords = Request::post("keywords",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 			$page->stylesheet = Request::post("stylesheet",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 			$page->javascript = Request::post("javascript",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 
 			// ... and update the page.
 			$page->update();
 
 			// Update or delete the label.
 			IdLabel::set($this->context, $page->id,
-				Request::post("label", Request::TYPE_STRING, new String("")));
+				Request::post("label", Request::TYPE_STRING, new Str("")));
 
 			// Set action result.
 			$this->setResult(self::SUCCESS);

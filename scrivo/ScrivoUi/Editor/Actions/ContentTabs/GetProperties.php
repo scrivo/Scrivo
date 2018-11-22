@@ -34,7 +34,7 @@ namespace ScrivoUi\Editor\Actions\ContentTabs;
 
 use Scrivo\PagePropertyDefinition;
 
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\Action;
 use \Scrivo\Page;
 use \Scrivo\Request;
@@ -81,7 +81,7 @@ class GetProperties extends Action {
 			foreach ($prp->definition->typeData as $k=>$v) {
 				$k = preg_replace('/_([a-z])/e', "strtoupper('\\1')",
 						trim(strtolower($k)));
-				$typeData[$k] = ($v instanceof String)
+				$typeData[$k] = ($v instanceof Str)
 					? (string)$v->trim() : $v;
 			}
 

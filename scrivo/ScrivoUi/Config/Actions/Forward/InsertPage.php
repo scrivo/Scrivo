@@ -42,7 +42,7 @@ use \Scrivo\I18n;
 use \Scrivo\IdLabel;
 use \Scrivo\Page;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The InsertPage class implements the action for creating a new page.
@@ -80,7 +80,7 @@ class InsertPage extends Action {
 			}
 
 			if (!Request::post("remove_on_y",
-					Request::TYPE_STRING)->trim()->equals(new String(""))) {
+					Request::TYPE_STRING)->trim()->equals(new Str(""))) {
 				$date = new \DateTime();
 				$date->setDate(
 					Request::post("remove_on_y", Request::TYPE_INTEGER),
@@ -96,20 +96,20 @@ class InsertPage extends Action {
 			$page->title = Request::post("title",
 				Request::TYPE_STRING, $i18n["New page"]);
 			$page->description = Request::post("description",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 			$page->keywords = Request::post("keywords",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 			$page->stylesheet = Request::post("stylesheet",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 			$page->javascript = Request::post("javascript",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 
 			// ... and insert the page.
 			$page->insert();
 
 			// Add the label if given.
 			IdLabel::set($this->context, $page->id,
-				Request::post("label", Request::TYPE_STRING, new String("")));
+				Request::post("label", Request::TYPE_STRING, new Str("")));
 
 			// Set action result.
 			$this->setResult(self::SUCCESS);

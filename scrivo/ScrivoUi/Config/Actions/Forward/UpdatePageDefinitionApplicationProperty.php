@@ -41,7 +41,7 @@ use \Scrivo\Action;
 use \Scrivo\ApplicationException;
 use \Scrivo\PagePropertyDefinition;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The UpdatePageDefinitionApplicationProperty class implements the action
@@ -63,7 +63,7 @@ class UpdatePageDefinitionApplicationProperty extends Action {
 
 			// ... set the members ...
 			$prop->phpSelector = Request::post(
-				"php_selector", Request::TYPE_STRING, new String(""));
+				"php_selector", Request::TYPE_STRING, new Str(""));
 			$prop->type = PagePropertyDefinition::TYPE_APPLICATION_TAB;
 			$prop->typeData->APPLICATION_DEFINITION_ID = Request::post(
 				"application_definition_id", Request::TYPE_INTEGER, "");

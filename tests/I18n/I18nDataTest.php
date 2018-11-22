@@ -42,7 +42,7 @@ class I18nDataTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testnlNL() {
 
-		$i18n = new \Scrivo\I18n(new \Scrivo\String("nl_NL"));
+		$i18n = new \Scrivo\I18n(new \Scrivo\Str("nl_NL"));
 
 		$this->assertEquals("Annuleer", $i18n["Cancel"]);
 	}

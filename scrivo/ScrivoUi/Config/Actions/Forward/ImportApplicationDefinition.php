@@ -41,7 +41,7 @@ use \Scrivo\ApplicationDefinition;
 use \Scrivo\ApplicationException;
 use \Scrivo\ListItemDefinition;
 use \Scrivo\ListItemPropertyDefinition;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The ImportApplicationDefinition class implements the action for importing a
@@ -74,9 +74,9 @@ class ImportApplicationDefinition extends Action {
 			$appDef = new ApplicationDefinition($this->context);
 
 			$tmp = $data["ApplicationDefinition"];
-			$appDef->title = new String($tmp["title"]);
-			$appDef->description = new String($tmp["description"]);
-			$appDef->location = new String($tmp["location"]);
+			$appDef->title = new Str($tmp["title"]);
+			$appDef->description = new Str($tmp["description"]);
+			$appDef->location = new Str($tmp["location"]);
 			$appDef->type = $tmp["type"];
 
 			$appDef->insert();
@@ -88,11 +88,11 @@ class ImportApplicationDefinition extends Action {
 
 				$lid->applicationDefinitionId = $appDef->id;
 
-				$lid->icon = new String($liDef["icon"]);
+				$lid->icon = new Str($liDef["icon"]);
 				$lid->pageDefinitionId = $liDef["pageDefinitionId"];
-				$lid->phpSelector = new String($liDef["phpSelector"]);
-				$lid->title = new String($liDef["title"]);
-				$lid->titleLabel = new String($liDef["titleLabel"]);
+				$lid->phpSelector = new Str($liDef["phpSelector"]);
+				$lid->title = new Str($liDef["title"]);
+				$lid->titleLabel = new Str($liDef["titleLabel"]);
 				$lid->titleWidth = $liDef["titleWidth"];
 
 				$lid->insert();
@@ -123,8 +123,8 @@ class ImportApplicationDefinition extends Action {
 						$idmap[intval($liPropDef["listItemDefinitionId"])]->id;
 					$lipd->inList = $liPropDef["inList"];
 					$lipd->phpSelector =
-						new String($liPropDef["phpSelector"]);
-					$lipd->title = new String($liPropDef["title"]);
+						new Str($liPropDef["phpSelector"]);
+					$lipd->title = new Str($liPropDef["title"]);
 					$lipd->type = $liPropDef["type"];
 					$lipd->typeData = (object)$liPropDef["typeData"];
 

@@ -54,10 +54,10 @@ namespace Scrivo;
  * the storage of i18n data (the full language names) in the database.
  *
  * @property-read int $id The language id (DB key).
- * @property \Scrivo\String $family The language family (Germanic, Slavic).
- * @property \Scrivo\String $isoCode The language ISO code.
- * @property \Scrivo\String $nameEn The language name in English.
- * @property \Scrivo\String $nameNl The language name in Dutch.
+ * @property \Scrivo\Str $family The language family (Germanic, Slavic).
+ * @property \Scrivo\Str $isoCode The language ISO code.
+ * @property \Scrivo\Str $nameEn The language name in English.
+ * @property \Scrivo\Str $nameNl The language name in Dutch.
  * @property boolean $shortList Whether a language is on the short list or not.
  */
 class Language {
@@ -76,25 +76,25 @@ class Language {
 
 	/**
 	 * The language ISO code.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $isoCode = null;
 
 	/**
 	 * The language family (Germanic, Slavic).
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $family = null;
 
 	/**
 	 * The language name in English.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $nameEn = null;
 
 	/**
 	 * The language name in Dutch.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $nameNl = null;
 
@@ -113,10 +113,10 @@ class Language {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null));
 
 		if ($context) {
-			$this->isoCode = new\Scrivo\String();
-			$this->family = new\Scrivo\String();
-			$this->nameEn = new\Scrivo\String();
-			$this->nameNl = new\Scrivo\String();
+			$this->isoCode = new\Scrivo\Str();
+			$this->family = new\Scrivo\Str();
+			$this->nameEn = new\Scrivo\Str();
+			$this->nameNl = new\Scrivo\Str();
 
 			$this->context = $context;
 		}
@@ -172,10 +172,10 @@ class Language {
 
 		$this->id = intval($rd["language_id"]);
 		$this->shortList = intval($rd["short_list"]) == 1 ? true : false;
-		$this->isoCode = new \Scrivo\String($rd["iso_code"]);
-		$this->family = new \Scrivo\String($rd["family"]);
-		$this->nameEn = new \Scrivo\String($rd["name_en"]);
-		$this->nameNl = new \Scrivo\String($rd["name_nl"]);
+		$this->isoCode = new \Scrivo\Str($rd["iso_code"]);
+		$this->family = new \Scrivo\Str($rd["family"]);
+		$this->nameEn = new \Scrivo\Str($rd["name_en"]);
+		$this->nameNl = new \Scrivo\Str($rd["name_nl"]);
 
 		$this->context = $context;
 	}
@@ -194,36 +194,36 @@ class Language {
 	/**
 	 * Set the language ISO code.
 	 *
-	 * @param \Scrivo\String $isoCode The language ISO code.
+	 * @param \Scrivo\Str $isoCode The language ISO code.
 	 */
-	private function setIsoCode(\Scrivo\String $isoCode) {
+	private function setIsoCode(\Scrivo\Str $isoCode) {
 		$this->isoCode = $isoCode;
 	}
 
 	/**
 	 * Set the language family (Germanic, Slavic).
 	 *
-	 * @param \Scrivo\String $family The language family (Germanic, Slavic).
+	 * @param \Scrivo\Str $family The language family (Germanic, Slavic).
 	 */
-	private function setFamily(\Scrivo\String $family) {
+	private function setFamily(\Scrivo\Str $family) {
 		$this->family = $family;
 	}
 
 	/**
 	 * Set the language name in English.
 	 *
-	 * @param \Scrivo\String $nameEn The language name in English.
+	 * @param \Scrivo\Str $nameEn The language name in English.
 	 */
-	private function setNameEn(\Scrivo\String $nameEn) {
+	private function setNameEn(\Scrivo\Str $nameEn) {
 		$this->nameEn = $nameEn;
 	}
 
 	/**
 	 * Set the language name in Dutch.
 	 *
-	 * @param \Scrivo\String $nameNl The language name in Dutch.
+	 * @param \Scrivo\Str $nameNl The language name in Dutch.
 	 */
-	private function setNameNl(\Scrivo\String $nameNl) {
+	private function setNameNl(\Scrivo\Str $nameNl) {
 		$this->nameNl = $nameNl;
 	}
 

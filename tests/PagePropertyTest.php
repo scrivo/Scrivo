@@ -56,7 +56,7 @@ class PagePropertyTest extends ScrivoDatabaseTestCase {
 		$ad = \Scrivo\PageProperty::create(
 			new \Scrivo\Page(), array(
 				"type" => "Invalid_type",
-				"php_key" =>  new \Scrivo\String("SEL"),
+				"php_key" =>  new \Scrivo\Str("SEL"),
 				"ID_DEF" => 3,
 				"value" => "",
 				"VALUE2" => ""
@@ -72,7 +72,7 @@ class PagePropertyTest extends ScrivoDatabaseTestCase {
 		$ad = \Scrivo\PageProperty::create(
 			new \Scrivo\Page(), array(
 				"type" => \Scrivo\PagePropertyDefinition::TYPE_IMAGE,
-				"php_key" =>  new \Scrivo\String("SEL"),
+				"php_key" =>  new \Scrivo\Str("SEL"),
 				"ID_DEF" => 3,
 				"value" => "",
 				"VALUE2" => ""
@@ -90,7 +90,7 @@ class PagePropertyTest extends ScrivoDatabaseTestCase {
 		$ad = \Scrivo\PageProperty::create(
 			new \Scrivo\Page(), array(
 				"type" => \Scrivo\PagePropertyDefinition::TYPE_IMAGE,
-				"php_key" =>  new \Scrivo\String("SEL"),
+				"php_key" =>  new \Scrivo\Str("SEL"),
 				"ID_DEF" => 3,
 				"value" => "",
 				"VALUE2" => ""
@@ -114,7 +114,7 @@ class PagePropertyTest extends ScrivoDatabaseTestCase {
 			$ad = \Scrivo\PageProperty::create(
 				$object, array(
 					"type" => \Scrivo\PagePropertyDefinition::TYPE_IMAGE,
-					"php_key" =>  new \Scrivo\String("SEL"),
+					"php_key" =>  new \Scrivo\Str("SEL"),
 					"ID_DEF" => 3,
 					"value" => "",
 					"VALUE2" => ""

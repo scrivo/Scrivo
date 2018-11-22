@@ -48,7 +48,7 @@ class ContextTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testInstance() {
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, \Scrivo\User::PRIMARY_ADMIN_ID);
 
 		// Test principal
@@ -82,7 +82,7 @@ class ContextTest extends PHPUnit_Framework_TestCase {
 	 * @expectedException \Scrivo\SystemException
 	 */
 	function testInvalidPropertyGet() {
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new Scrivo\Context($cfg, Scrivo\User::ANONYMOUS_USER_ID);
 		$data = $context->sabicasElRey;
 	}
@@ -93,7 +93,7 @@ class ContextTest extends PHPUnit_Framework_TestCase {
 	 * @expectedException \Scrivo\ApplicationException
 	 */
 	public function testPermissionAnonymousUser() {
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new Scrivo\Context($cfg, Scrivo\User::ANONYMOUS_USER_ID);
 		$context->checkPermission(\Scrivo\AccessController::WRITE_ACCESS);
 	}
@@ -102,7 +102,7 @@ class ContextTest extends PHPUnit_Framework_TestCase {
 	 * Test serialize.
 	 */
 	public function testSerialize() {
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new Scrivo\Context($cfg, Scrivo\User::ANONYMOUS_USER_ID);
 		$test = unserialize(serialize($context));
 		$this->assertNull($test->config);

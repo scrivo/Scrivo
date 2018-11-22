@@ -37,7 +37,7 @@ namespace ScrivoUi\DbConsole\Actions\Layout;
 
 use \Scrivo\I18n;
 use \Scrivo\LayoutAction;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \ScrivoUi\DbConsole\Lib\SystemInfo;
 
 /**
@@ -52,7 +52,7 @@ class SystemCheck extends LayoutAction {
 	 */
 	function doAction() {
 
-		$i18n = new I18n(new String("en_US"));
+		$i18n = new I18n(new Str("en_US"));
 
 		$si = new SystemInfo();
 

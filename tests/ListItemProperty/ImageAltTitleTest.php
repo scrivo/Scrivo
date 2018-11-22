@@ -38,13 +38,13 @@ class ListItemPropertyAltImgTitleTest extends ListItemPropertyBaseTestCase {
 
 	function testProperty() {
 
-		$src = new \Scrivo\String("src");
-		$alt = new \Scrivo\String("alt");
-		$title = new \Scrivo\String("title");
-		$empty = new \Scrivo\String("");
+		$src = new \Scrivo\Str("src");
+		$alt = new \Scrivo\Str("alt");
+		$title = new \Scrivo\Str("title");
+		$empty = new \Scrivo\Str("");
 
 		$lip = $this->createItemProperty(
-			new \Scrivo\String(\Scrivo\ListItemPropertyDefinition::TYPE_IMAGE));
+			new \Scrivo\Str(\Scrivo\ListItemPropertyDefinition::TYPE_IMAGE));
 
 		$this->assertTrue($empty->equals($lip->src));
 		$this->assertTrue($empty->equals($lip->alt));

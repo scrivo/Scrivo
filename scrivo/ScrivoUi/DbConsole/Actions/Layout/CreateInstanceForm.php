@@ -38,7 +38,7 @@ namespace ScrivoUi\DbConsole\Actions\Layout;
 
 use \Scrivo\I18n;
 use \Scrivo\LayoutAction;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\Request;
 use \ScrivoUi\DbConsole\Lib\DdlUtil;
 
@@ -54,11 +54,11 @@ class CreateInstanceForm extends LayoutAction {
 	 */
 	function doAction() {
 
-		$i18n = new I18n(new String("en_US"));
+		$i18n = new I18n(new Str("en_US"));
 
 		$title = $i18n["Instance details"];
 
-		$fd = String::create(array(
+		$fd = Str::create(array(
 			"db_host" => "", "db_name" => "",
 			"db_user" => "", "db_pwd" => ""));
 		if (isset($this->session->formData)) {

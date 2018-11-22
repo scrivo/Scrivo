@@ -42,7 +42,7 @@ use \Scrivo\ApplicationException;
 use \Scrivo\I18n;
 use \Scrivo\ListItemPropertyDefinition;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The InsertListItemPropertyDefinition class implements the action for
@@ -75,9 +75,9 @@ class InsertListItemPropertyDefinition extends Action {
 			$prop->type = (string)Request::post(
 				"type", Request::TYPE_STRING);
 			$prop->typeData = $this->getTypeDataFromString(Request::post(
-				"type_data", Request::TYPE_STRING, new String("")));
+				"type_data", Request::TYPE_STRING, new Str("")));
 			$prop->phpSelector = Request::post(
-				"php_selector", Request::TYPE_STRING, new String(""));
+				"php_selector", Request::TYPE_STRING, new Str(""));
 			$prop->inList = Request::post("config", Request::TYPE_BOOLEAN);
 
 			// ... and insert it.
@@ -100,9 +100,9 @@ class InsertListItemPropertyDefinition extends Action {
 	 * TODO refactor
 	 *
 	 * @param string $val The value to convert to either an int, float or
-	 *    String.
+	 *    Str.
 	 *
-	 * @return int|float|String The given value converted to its
+	 * @return int|float|Str The given value converted to its
 	 *    most likely type.
 	 */
 	private function readStr($val) {
@@ -121,13 +121,13 @@ class InsertListItemPropertyDefinition extends Action {
 	 * the string should be NAME1=VALUE1\nNAME2=VALUE2\nNAME3...etc.
 	 * TODO refactor
 	 *
-	 * @param String $str The type data string.
+	 * @param Str $str The type data string.
 	 */
-	private function getTypeDataFromString(String $str) {
+	private function getTypeDataFromString(Str $str) {
 		$d = array();
-		$parts = $str->split(new String("\n"));
+		$parts = $str->split(new Str("\n"));
 		foreach($parts as $line) {
-			$p = $line->split(new String("="), 2);
+			$p = $line->split(new Str("="), 2);
 			if (count($p) == 2) {
 				$d[(string)$p[0]->trim()] = $this->readStr($p[1]->trim());
 			}

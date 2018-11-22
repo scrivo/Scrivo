@@ -40,7 +40,7 @@ use \Scrivo\Action;
 use \Scrivo\ApplicationDefinition;
 use \Scrivo\ApplicationException;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The UpdateApplicationDefinition class implements the action for updating a

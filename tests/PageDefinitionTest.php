@@ -44,9 +44,9 @@ class PageDefinitionTest extends ScrivoDatabaseTestCase {
 		return array(
 			"test 1" => array(
 				"argument 1" => (object) array(
-					"title" => new \Scrivo\String("A template"),
-					"description" => new \Scrivo\String("Blah 1"),
-					"action" => new \Scrivo\String("templates/a.php"),
+					"title" => new \Scrivo\Str("A template"),
+					"description" => new \Scrivo\Str("Blah 1"),
+					"action" => new \Scrivo\Str("templates/a.php"),
 					"configOnly" => true,
 					"typeSet" => array(3),
 					"defaultTabId" => 0,
@@ -54,9 +54,9 @@ class PageDefinitionTest extends ScrivoDatabaseTestCase {
 			),
 			"test 2" => array(
 				"argument 1" => (object) array(
-					"title" => new \Scrivo\String("Another template"),
-					"description" => new \Scrivo\String("Blah 2"),
-					"action" => new \Scrivo\String("templates/b.php"),
+					"title" => new \Scrivo\Str("Another template"),
+					"description" => new \Scrivo\Str("Blah 2"),
+					"action" => new \Scrivo\Str("templates/b.php"),
 					"configOnly" => false,
 					"typeSet" => array(1,2),
 					"defaultTabId" => 0,
@@ -73,17 +73,17 @@ class PageDefinitionTest extends ScrivoDatabaseTestCase {
 		return array(
 			"test 1" => array(
 				"argument 1" => (object) array(
-					"title" => new \Scrivo\String("A template"),
-					"description" => new \Scrivo\String("Blah 1"),
-					"action" => new \Scrivo\String("templates/a.php"),
+					"title" => new \Scrivo\Str("A template"),
+					"description" => new \Scrivo\Str("Blah 1"),
+					"action" => new \Scrivo\Str("templates/a.php"),
 					"configOnly" => true,
 					"typeSet" => array(3),
 					"defaultTabId" => 0,
 				),
 				"argument 2" => (object) array(
-					"title" => new \Scrivo\String("Another template"),
-					"description" => new \Scrivo\String("Blah 2"),
-					"action" => new \Scrivo\String("templates/b.php"),
+					"title" => new \Scrivo\Str("Another template"),
+					"description" => new \Scrivo\Str("Blah 2"),
+					"action" => new \Scrivo\Str("templates/b.php"),
 					"configOnly" => false,
 					"typeSet" => array(1, 2),
 					"defaultTabId" => 0,
@@ -336,7 +336,7 @@ class PageDefinitionTest extends ScrivoDatabaseTestCase {
 		$this->setTemplateProperties($tmp, $d1);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, self::EDITOR_USER_ID);
 
 		// Creating/inserting a new \Scrivo\PageDefinition object as editor
@@ -388,7 +388,7 @@ class PageDefinitionTest extends ScrivoDatabaseTestCase {
 		$this->setTemplateProperties($tmp, $d2);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, \Scrivo\User::ANONYMOUS_USER_ID);
 
 		// Creating/inserting a new \Scrivo\PageDefinition object as member

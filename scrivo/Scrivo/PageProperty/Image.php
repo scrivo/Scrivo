@@ -38,7 +38,7 @@ namespace Scrivo\PageProperty;
 /**
  * Property to hold an image source (src) url.
  *
- * @property \Scrivo\String $src The image source (src attribute).
+ * @property \Scrivo\Str $src The image source (src attribute).
  */
 class Image extends \Scrivo\PageProperty {
 

@@ -29,14 +29,14 @@
  * $Id: ui_language_form.tpl.php 841 2013-08-19 22:19:47Z geert $
  */
 
-use \Scrivo\String;
+use \Scrivo\Str;
 
 $this->beginSection("content", true);
 
 ?>
 <form action="index.php" method="post">
 <?php
-if (!$languageId->equals(new String(""))) {
+if (!$languageId->equals(new Str(""))) {
 ?>
 	<input type="hidden" name="a" value="ui_language_update">
 	<input type="hidden" name="origlang" value="<?php echo

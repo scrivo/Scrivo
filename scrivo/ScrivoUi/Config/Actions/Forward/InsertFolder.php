@@ -42,7 +42,7 @@ use \Scrivo\Folder;
 use \Scrivo\I18n;
 use \Scrivo\IdLabel;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The InsertFolder class implements the action for creating a new folder.
@@ -73,7 +73,7 @@ class InsertFolder extends Action {
 
 			// Add the label if given.
 			IdLabel::set($this->context, $folder->id,
-				Request::post("label", Request::TYPE_STRING, new String("")));
+				Request::post("label", Request::TYPE_STRING, new Str("")));
 
 			// Set action result.
 			$this->setResult(self::SUCCESS);

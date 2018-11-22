@@ -219,7 +219,7 @@ abstract class ScrivoDatabaseTestCase
 	 * Create a Scrivo context to use in the tests.
 	 */
 	public static function setUpBeforeClass() {
-		self::$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		self::$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		self::$pdo = new \Scrivo\PdoConnection(self::$cfg);
 		self::$pdo->exec("DELETE FROM user WHERE instance_id = ".
 			self::$pdo->getInstanceId());

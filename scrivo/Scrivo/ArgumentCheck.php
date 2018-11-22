@@ -67,9 +67,9 @@ class ArgumentCheck {
 	 * Check the argument count, types and values of all arguments passed
 	 * to a method or function.  See also ArgumentCheck::assert.
 	 *
-	 * function aFunc(\Scrivo\String $aStr, $anInt=0) {
+	 * function aFunc(\Scrivo\Str $aStr, $anInt=0) {
 	 *     \Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(
-	 *             // String already tested by type hint
+	 *             // Str already tested by type hint
 	 *             null
 	 *             // Test for integer type and in the set (1,4,9)
 	 * 	           array(\Scrivo\ArgumentCheck::TYPE_INTEGER, array(1,4,9)

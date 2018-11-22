@@ -69,7 +69,7 @@ class Request {
 
 			switch ($t) {
 				case self::TYPE_STRING:
-					return new \Scrivo\String($v);
+					return new \Scrivo\Str($v);
 				case self::TYPE_INTEGER:
 					return intval($v);
 				case self::TYPE_BOOLEAN:

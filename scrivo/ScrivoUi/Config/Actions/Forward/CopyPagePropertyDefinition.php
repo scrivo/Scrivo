@@ -41,7 +41,7 @@ use \Scrivo\Action;
 use \Scrivo\ApplicationException;
 use \Scrivo\PagePropertyDefinition;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The CopyPagePropertyDefinition class implements the action for copying a
@@ -61,7 +61,7 @@ class CopyPagePropertyDefinition extends Action {
 
 			foreach ($pageDefinitionIds as $tid) {
 
-				$tmp = $tid->split(new String("_"));
+				$tmp = $tid->split(new Str("_"));
 				$tid = intval($tmp[0]);
 				$tab = intval(@$tmp[1]);
 

@@ -36,7 +36,7 @@ use \Scrivo\ListItemDefinition;
 use \Scrivo\ListItemPropertyDefinition;
 use \Scrivo\Action;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\I18n;
 
 /**
@@ -234,9 +234,9 @@ class GetListView extends Action {
 						}
 					}
 				} else if (isset($def->typeData->location)) {
-					$opts = $def->typeData->location->split(new String(";"));
+					$opts = $def->typeData->location->split(new Str(";"));
 					foreach ($opts as $opt) {
-						$tv = $opt->split(new String(":"));
+						$tv = $opt->split(new Str(":"));
 						if (count($tv) > 1) {
 							$opts2[(string)$tv[0]] = $tv[1];
 						} else {

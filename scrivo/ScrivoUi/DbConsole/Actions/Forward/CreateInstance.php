@@ -38,7 +38,7 @@ namespace ScrivoUi\DbConsole\Actions\Forward;
 
 use \Scrivo\I18n;
 use \Scrivo\Action;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\Request;
 use \ScrivoUi\DbConsole\Lib\DdlUtil;
 
@@ -58,7 +58,7 @@ class CreateInstance extends Action {
 		try {
 
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				$fd = String::create(array(
+				$fd = Str::create(array(
 					"db_host" =>
 						Request::post("db_host", Request::TYPE_STRING),
 					"db_name" =>

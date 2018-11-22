@@ -35,8 +35,8 @@ spl_autoload_register("\\Scrivo\\Autoloader::load");
 $cfg = new \Scrivo\Config();
 
 $title = $cfg->WWW_ROOT->replace(
-		\Scrivo\String::create(array("http://", "https://")),
-		new \Scrivo\String(""));
+		\Scrivo\Str::create(array("http://", "https://")),
+		new \Scrivo\Str(""));
 
 $i18n = new \Scrivo\I18n($cfg->UI_LANG);
 

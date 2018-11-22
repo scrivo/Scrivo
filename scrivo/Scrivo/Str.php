@@ -26,11 +26,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id: String.php 841 2013-08-19 22:19:47Z geert $
+ * $Id: Str.php 841 2013-08-19 22:19:47Z geert $
  */
 
 /**
- * Implementation of the \Scrivo\String class.
+ * Implementation of the \Scrivo\Str class.
  */
 
 namespace Scrivo;
@@ -39,40 +39,40 @@ namespace Scrivo;
  * Wrapper class for PHP strings to enforce consistent and safe multi-byte
  * (UTF-8) string handling.
  *
- * \Scrivo\String is a primitive wrapper class for PHP strings to make sure that
+ * \Scrivo\Str is a primitive wrapper class for PHP strings to make sure that
  * all operations performed on the string are UTF-8 safe. As PHP does not
  * enforce a consistent way to deal with multibyte strings we do it
  * ourselves. In the Scrivo code base UTF-8 is the only encoding that is
  * supported for operations on data and these operations should be done
- * through instances of the \Scrivo\String class. If strings are used as byte
+ * through instances of the \Scrivo\Str class. If strings are used as byte
  * arrays, use the ByteArray class.
  *
- * \Scrivo\String objects are imutable: once created you can't change them. All
- * operations on a \Scrivo\String object will return a new \Scrivo\String object.
+ * \Scrivo\Str objects are imutable: once created you can't change them. All
+ * operations on a \Scrivo\Str object will return a new \Scrivo\Str object.
  *
  * Although we'll be working with UTF-8 exclusively it is possible to create
- * \Scrivo\String objects that contain characters from 8 byte encoding schemes.
+ * \Scrivo\Str objects that contain characters from 8 byte encoding schemes.
  * Also a note on HTML entities, we work with UTF-8 so you don't need them:
  * they are evil. Except entities for the reserved HTML characters (<>&'")
  * there is really no use for them in UTF-8 strings. And when stored in a
  * database only cause sorting and lookup errors. Therefore when construction
- * \Scrivo\String objects you can opt to convert existing HTML entities to their
+ * \Scrivo\Str objects you can opt to convert existing HTML entities to their
  * corresonding UTF-8 characters.
  *
  * The current locale setting for LC_COLLATE is important.
- * \Scrivo\String::compareTo() will use this setting when comparing strings.
+ * \Scrivo\Str::compareTo() will use this setting when comparing strings.
  *
  * Please note: you might be tempted to do string comparison using
  * equality operators (==). Although this works in most cases don't do this:
  * you'll do PHP object comparison (i.e. comparing a
- * \Scrivo\String object) and that is not what you want: use \Scrivo\String::equals()
- * or \Scrivo\String::compareTo() to compare strings.
+ * \Scrivo\Str object) and that is not what you want: use \Scrivo\Str::equals()
+ * or \Scrivo\Str::compareTo() to compare strings.
  */
-class String implements \Iterator, \ArrayAccess, \Countable {
+class Str implements \Iterator, \ArrayAccess, \Countable {
 
 	/**
 	 * Constant to denote ISO-8859-1 encoding. This is the default encoding
-	 * for \Scrivo\String uses for fixing and comparing.
+	 * for \Scrivo\Str uses for fixing and comparing.
 	 */
 	const ENC_ISO_8859_1 = "ISO-8859-1";
 
@@ -342,16 +342,16 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 *   to use an offset from the end of the string.
 	 * @param int $length The length of the substring.
 	 *
-	 * @return \Scrivo\String The requested portion of this string.
+	 * @return \Scrivo\Str The requested portion of this string.
 	 */
 	private function unsafeSubstr($start, $length) {
-		return new \Scrivo\String(mb_substr($this->str, $start, $length, "UTF-8"));
+		return new \Scrivo\Str(mb_substr($this->str, $start, $length, "UTF-8"));
 	}
 
 	/**
-	 * Construct an \Scrivo\String.
+	 * Construct an \Scrivo\Str.
 	 *
-	 * You can either construct an \Scrivo\String object from a valid UTF-8 string,
+	 * You can either construct an \Scrivo\Str object from a valid UTF-8 string,
 	 * or from a string that you expect not to contain valid UTF-8 data. In the
 	 * latter case use the $toDecode and/or $encoding parameters.
 	 *
@@ -391,9 +391,9 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	}
 
 	/**
-	 * Factory method to construct an \Scrivo\String.
+	 * Factory method to construct an \Scrivo\Str.
 	 *
-	 * @see \Scrivo\String::__construct()
+	 * @see \Scrivo\Str::__construct()
 	 *
 	 * @param string $str The string to create the wrapper for. It is assumed
 	 *   that this will be a valid UTF-8 string. If this is not the case,
@@ -401,7 +401,7 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 * @param int $toDecode Which entities
 	 * @param string $encoding The encoding to use when converting 8 byte code
 	 *
-	 * @return \Scrivo\String|\Scrivo\String An \Scrivo\String wrapper object.
+	 * @return \Scrivo\Str|\Scrivo\Str An \Scrivo\Str wrapper object.
 	 */
 	public static function create($str="", $toDecode=self::DECODE_NONE,
 			$encoding="UTF-8") {
@@ -411,13 +411,13 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 			}
 			return $str;
 		}
-		return new \Scrivo\String($str, $toDecode, $encoding);
+		return new \Scrivo\Str($str, $toDecode, $encoding);
 	}
 
 	/**
 	 * Get the collator for sorting strings.
 	 *
-	 * @return \Collator The currently set collator for the \Scrivo\String
+	 * @return \Collator The currently set collator for the \Scrivo\Str
 	 *    class.
 	 */
 	public static function getCollator() {
@@ -462,19 +462,19 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	}
 
 	/**
-	 * Test if this string equals another \Scrivo\String object.
+	 * Test if this string equals another \Scrivo\Str object.
 	 *
-	 * When you want test \Scrivo\String object for equality, use this method
+	 * When you want test \Scrivo\Str object for equality, use this method
 	 * and never the equality operator (==) because then you'll compare
-	 * objects and therefore all data members of \Scrivo\String and this can
-	 * give you other results (or cast the \Scrivo\String strings to PHP strings
+	 * objects and therefore all data members of \Scrivo\Str and this can
+	 * give you other results (or cast the \Scrivo\Str strings to PHP strings
 	 * before comparing).
 	 *
-	 * @param \Scrivo\String $str The string to compare this string to.
+	 * @param \Scrivo\Str $str The string to compare this string to.
 	 *
 	 * @return boolean True if the given string equals this string.
 	 */
-	public function equals(\Scrivo\String $str) {
+	public function equals(\Scrivo\Str $str) {
 		return (string)$this->str == (string)$str;
 	}
 
@@ -577,7 +577,7 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 */
 	public function offsetSet($offset, $value) {
 		throw new \Scrivo\SystemException(
-			"offsetSet can't be called on \Scrivo\String objects");
+			"offsetSet can't be called on \Scrivo\Str objects");
 	}
 
 	/**
@@ -593,7 +593,7 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	public function offsetGet($offset) {
 		if (!$this->offsetExists($offset)) {
 			throw new \Scrivo\SystemException(
-				"String index [$offset] out of bounds");
+				"Str index [$offset] out of bounds");
 		}
 		return $this->unsafeSubstr($offset, 1);
 	}
@@ -626,7 +626,7 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 */
 	public function offsetUnset($offset) {
 		throw new \Scrivo\SystemException(
-			"offsetUnset can't be called on \Scrivo\String objects");
+			"offsetUnset can't be called on \Scrivo\Str objects");
 	}
 
 	/**
@@ -640,7 +640,7 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 *   to use an offset from the end of the string.
 	 * @param int $length The length of the substring.
 	 *
-	 * @return \Scrivo\String The portion of this string specified by the $start
+	 * @return \Scrivo\Str The portion of this string specified by the $start
 	 *   and $length parameter.
 	 *
 	 * @throws \Scrivo\SystemException if the requested offset was out of range.
@@ -649,7 +649,7 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 		$tmp = $start < 1 ? -$start : $start;
 		if (!$this->offsetExists($tmp)) {
 			throw new \Scrivo\SystemException(
-				"String index [$start] out of bounds");
+				"Str index [$start] out of bounds");
 		}
 		return $this->unsafeSubstr($start, $length);
 	}
@@ -663,7 +663,7 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 * @param int $start Start offset for the substring.
 	 * @param int $end The end offset for the substring.
 	 *
-	 * @return \Scrivo\String The portion of this string specified by the $start
+	 * @return \Scrivo\Str The portion of this string specified by the $start
 	 *   and $end parameter.
 	 *
 	 * @throws \Scrivo\SystemException if the requested offset was out of range.
@@ -672,7 +672,7 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 		if (!$this->offsetExists($start) || !$this->offsetExists($end)
 				|| $start > $end) {
 			throw new \Scrivo\SystemException(
-				"String index [$start, $end] out of bounds");
+				"Str index [$start, $end] out of bounds");
 		}
 		return $this->unsafeSubstr($start, $end-$start);
 	}
@@ -684,11 +684,11 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 * removed. Whitespace characters are: ' ', \t, \r, \n, the character
 	 * for a non breaking space.
 	 *
-	 * @return \Scrivo\String A copy of this string with leading and trailing
+	 * @return \Scrivo\Str A copy of this string with leading and trailing
 	 *   white space removed.
 	 */
 	public function trim() {
-		return new \Scrivo\String(
+		return new \Scrivo\Str(
 			preg_replace("/(^[\s ]+)|([\s ]+$)/us", "", $this->str));
 	}
 
@@ -697,7 +697,7 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 *
 	 * This is the test you normally use strpos(...) !== false for.
 	 *
-	 * @param \Scrivo\String $str The string to search for.
+	 * @param \Scrivo\Str $str The string to search for.
 	 * @param int $offset An offset from where to start the search.
 	 * @param boolean $ignoreCase Set to perform an case insensitive lookup.
 	 *
@@ -705,10 +705,10 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 *
 	 * @throws \Scrivo\SystemException If the $offset is out of range.
 	 */
-	public function contains(\Scrivo\String $str, $offset=0, $ignoreCase=false) {
+	public function contains(\Scrivo\Str $str, $offset=0, $ignoreCase=false) {
 		if ($offset && !$this->offsetExists($offset)) {
 			throw new \Scrivo\SystemException(
-				"String index [$offset] out of bounds");
+				"Str index [$offset] out of bounds");
 		}
 		if ($ignoreCase) {
 			return mb_stripos(
@@ -728,7 +728,7 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 * not found, and this method will raise an exception if the given
 	 * offset was out of range.
 	 *
-	 * @param \Scrivo\String $str The string to search for.
+	 * @param \Scrivo\Str $str The string to search for.
 	 * @param int $offset An offset from where to start the search.
 	 * @param boolean $ignoreCase Set to perform an case insensitive lookup.
 	 *
@@ -737,10 +737,10 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 *
 	 * @throws \Scrivo\SystemException If the $offset is out of range.
 	 */
-	public function indexOf(\Scrivo\String $str, $offset=0, $ignoreCase=false) {
+	public function indexOf(\Scrivo\Str $str, $offset=0, $ignoreCase=false) {
 		if ($offset && !$this->offsetExists($offset)) {
 			throw new \Scrivo\SystemException(
-				"String index [$offset] out of bounds");
+				"Str index [$offset] out of bounds");
 		}
 		$res = -1;
 		if ($ignoreCase) {
@@ -764,7 +764,7 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 * this method returns -1 if the substring was not found, and this method
 	 * will raise an exception if the given offset was out of range.
 	 *
-	 * @param \Scrivo\String $str The string to search for.
+	 * @param \Scrivo\Str $str The string to search for.
 	 * @param int $offset An offset from where to start the search. A positive
 	 *   value indicates an offset measured from the start of the string, a
 	 *   negative value from the end of the string.
@@ -774,12 +774,12 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 *   $offset.
 	 * @throws \Scrivo\SystemException If the $offset is out of range.
 	 */
-	public function lastIndexOf(\Scrivo\String $str, $offset=0, $ignoreCase=false) {
+	public function lastIndexOf(\Scrivo\Str $str, $offset=0, $ignoreCase=false) {
 		if ($offset) {
 			$tmp = $offset < 1 ? -$offset : $offset;
 			if (!$this->offsetExists($tmp)) {
 				throw new \Scrivo\SystemException(
-					"String index [$offset] out of bounds");
+					"Str index [$offset] out of bounds");
 			}
 		}
 		$res = -1;
@@ -800,20 +800,20 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 * an exception if an empty string was given as search string and not
 	 * a warning as strstr does.
 	 *
-	 * @param \Scrivo\String $str The string to search for.
+	 * @param \Scrivo\Str $str The string to search for.
 	 * @param int $part Flag to indicate to return the part of the string
 	 *   before the first occurance of the given substring i.o. the part
 	 *   after the substring.
 	 * @param boolean $ignoreCase Perform an case insensitive lookup.
 	 *
-	 * @return \Scrivo\String The substring plus the part of the string after the
+	 * @return \Scrivo\Str The substring plus the part of the string after the
 	 *   the first occurance of the substring, or the part of the string before
 	 *   the first occurance of the substring (excluding the substring) or NULL
 	 *   if not found.
 	 *
 	 * @throws \Scrivo\SystemException If an empty search string was given.
 	 */
-	public function firstOccurranceOf(\Scrivo\String $str, $part=false,
+	public function firstOccurranceOf(\Scrivo\Str $str, $part=false,
 			$ignoreCase=false) {
 		if (!$str->getLength()) {
 			throw new \Scrivo\SystemException(
@@ -825,7 +825,7 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 		} else {
 			$res = mb_strstr($this->str, $str, $part, "UTF-8");
 		}
-		return $res !== false ? new \Scrivo\String($res) : NULL;
+		return $res !== false ? new \Scrivo\Str($res) : NULL;
 	}
 
 	/**
@@ -837,13 +837,13 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 * an exception if an empty string was given as search string and not
 	 * a warning as strstr does.
 	 *
-	 * @param \Scrivo\String $str The character to search for.
+	 * @param \Scrivo\Str $str The character to search for.
 	 * @param int $part Flag to indicate to return part of the string before
 	 *   the last occurance of the given character i.o. the part after the
 	 *   character.
 	 * @param boolean $ignoreCase Perform an case insensitive lookup.
 	 *
-	 * @return \Scrivo\String The substring plus the part of the string after the
+	 * @return \Scrivo\Str The substring plus the part of the string after the
 	 *   the last occurance of the character, or the part of the string before
 	 *   the last occurance of the character (excluding the character) or NULL
 	 *   if not found.
@@ -851,7 +851,7 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 * @throws \Scrivo\SystemException If a search string of not exactly one
 	 *   character in length was given.
 	 */
-	public function lastOccurranceOf(\Scrivo\String $str, $part=false,
+	public function lastOccurranceOf(\Scrivo\Str $str, $part=false,
 			$ignoreCase=false) {
 		if ($str->getLength() != 1) {
 			throw new \Scrivo\SystemException(
@@ -863,7 +863,7 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 		} else {
 			$res = mb_strrchr($this->str, $str, $part, "UTF-8");
 		}
-		return $res !== false ? new \Scrivo\String($res) : NULL;
+		return $res !== false ? new \Scrivo\Str($res) : NULL;
 	}
 
 	/**
@@ -872,41 +872,41 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 * You can use this method in favour of PHP's native str_replace and strtr
 	 * functions. This method will do proper type checking for you.
 	 *
-	 * @param \Scrivo\String|\Scrivo\String[] $from A (set of) string(s) to replace
+	 * @param \Scrivo\Str|\Scrivo\Str[] $from A (set of) string(s) to replace
 	 *   in this string.
-	 * @param \Scrivo\String|\Scrivo\String[] $to A (set of) replacement string(s) to
+	 * @param \Scrivo\Str|\Scrivo\Str[] $to A (set of) replacement string(s) to
 	 *   replace the found string(s).
 	 *
-	 * @return \Scrivo\String A string with the replaced values.
+	 * @return \Scrivo\Str A string with the replaced values.
 	 *
 	 * @throws \Scrivo\SystemException If the input data is not of type
-	 *	 \Scrivo\String or \Scrivo\String[], of if the $to parameter is an array
+	 *	 \Scrivo\Str or \Scrivo\Str[], of if the $to parameter is an array
 	 *	 and $from isn't or hasn't the same number of elements.
 	 */
 	public function replace($from, $to) {
-		if ($from instanceof \Scrivo\String && $to instanceof \Scrivo\String) {
-			return new \Scrivo\String(str_replace($from, $to, $this->str));
-		} else if (is_array($from) && $to instanceof \Scrivo\String) {
+		if ($from instanceof \Scrivo\Str && $to instanceof \Scrivo\Str) {
+			return new \Scrivo\Str(str_replace($from, $to, $this->str));
+		} else if (is_array($from) && $to instanceof \Scrivo\Str) {
 			foreach ($from as $k=>$v) {
-				if (!($v instanceof \Scrivo\String)) {
+				if (!($v instanceof \Scrivo\Str)) {
 					throw new \Scrivo\SystemException("From element is"
-						. " not an \Scrivo\String as array position [$k]");
+						. " not an \Scrivo\Str as array position [$k]");
 				}
 			}
-			return new \Scrivo\String(str_replace($from, $to, $this->str));
+			return new \Scrivo\Str(str_replace($from, $to, $this->str));
 		} else if (is_array($from) && is_array($to)) {
 			if (count($from) != count($to)) {
 				throw new \Scrivo\SystemException(
 					"Input arrays are not the same size");
 			}
 			foreach ($from as $k=>$v) {
-				if (!($v instanceof \Scrivo\String)
-						|| !($to[$k] instanceof \Scrivo\String)) {
+				if (!($v instanceof \Scrivo\Str)
+						|| !($to[$k] instanceof \Scrivo\Str)) {
 					throw new \Scrivo\SystemException("To or from element is"
-						. " not an \Scrivo\String as array position [$k]");
+						. " not an \Scrivo\Str as array position [$k]");
 				}
 			}
-			return new \Scrivo\String(str_replace($from, $to, $this->str));
+			return new \Scrivo\Str(str_replace($from, $to, $this->str));
 		}
 		throw new \Scrivo\SystemException("Invalid argument types");
 	}
@@ -919,14 +919,14 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 * of the limit parameter is a little bit different and that this method
 	 * will throw an exception if an empty string is passed as a delimiter.
 	 *
-	 * @param \Scrivo\String $delimiter The boundary string.
+	 * @param \Scrivo\Str $delimiter The boundary string.
 	 * @param int $limit If limit is set and positive, the returned array
 	 *	 will contain a maximum of limit elements with the last element
 	 *	 containing the rest of string. If the limit parameter is negative,
 	 *	 all components except the last -limit are returned. If the limit is
 	 *	 not set or 0 no limit wil be used.
 	 *
-	 * @return \Scrivo\String[] An array of strings created by splitting the
+	 * @return \Scrivo\Str[] An array of strings created by splitting the
 	 *	 string parameter on boundaries formed by the delimiter. If the
 	 *	 delimiter was not found and array containing a copy of this string
 	 *	 will be returned except if limit was negative, in that case an
@@ -934,7 +934,7 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 *
 	 * @throws \Scrivo\SystemException If an empty search string was given.
 	 */
-	public function split(\Scrivo\String $delimiter, $limit=0) {
+	public function split(\Scrivo\Str $delimiter, $limit=0) {
 		if ($delimiter == "") {
 			throw new \Scrivo\SystemException(
 					"split cannot use an empty \"\" delimiter.");
@@ -942,7 +942,7 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 		$r = $limit ? explode($delimiter, $this->str, $limit)
 			: explode($delimiter, $this->str);
 		foreach ($r as $k=>$v) {
-			$r[$k] = new \Scrivo\String($v);
+			$r[$k] = new \Scrivo\Str($v);
 		}
 		return $r;
 	}
@@ -951,43 +951,43 @@ class String implements \Iterator, \ArrayAccess, \Countable {
 	 * Get a copy of this string with all of its characters converted to lower
 	 * case.
 	 *
-	 * @return \Scrivo\String A string containing only lower case characters.
+	 * @return \Scrivo\Str A string containing only lower case characters.
 	 */
 	public function toLowerCase() {
-		return new \Scrivo\String(mb_strtolower($this->str, "UTF-8"));
+		return new \Scrivo\Str(mb_strtolower($this->str, "UTF-8"));
 	}
 
 	/**
 	 * Get a copy of this string with all of its characters converted to upper
 	 * case.
 	 *
-	 * @return \Scrivo\String A string containing only upper case characters.
+	 * @return \Scrivo\Str A string containing only upper case characters.
 	 */
 	public function toUpperCase() {
-		return new \Scrivo\String(mb_strtoupper($this->str, "UTF-8"));
+		return new \Scrivo\Str(mb_strtoupper($this->str, "UTF-8"));
 	}
 
 	/**
-	 * Compare this string to another \Scrivo\String object.
+	 * Compare this string to another \Scrivo\Str object.
 	 *
-	 * Note that this method requires the \Scrivo\String collator to be set,
+	 * Note that this method requires the \Scrivo\Str collator to be set,
 	 * else the method falls back to the default locale for creating a
 	 * collator and generates a warning.
 	 *
-	 * @param \Scrivo\String $str The string to compare this string to.
+	 * @param \Scrivo\Str $str The string to compare this string to.
 	 *
 	 * @return int Less than 0 if this string is less than the given
 	 *   string $str; more than 0 if this string is greater than $str, and
 	 *   0 if they are equal.
 	 */
-	public function compareTo(\Scrivo\String $str) {
+	public function compareTo(\Scrivo\Str $str) {
 		return self::getCollator()->compare($this->str, $str);
 	}
 
 	/**
-	 * Check if this string exists an array of \Scrivo\String-s.
+	 * Check if this string exists an array of \Scrivo\Str-s.
 	 *
-	 * @param \Scrivo\String $arr The array to search.
+	 * @param \Scrivo\Str $arr The array to search.
 	 *
 	 * @return mixed If found the key of the first occurance of the string
 	 *    in the array, else null.

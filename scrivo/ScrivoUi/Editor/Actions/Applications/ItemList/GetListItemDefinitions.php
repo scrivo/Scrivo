@@ -34,7 +34,7 @@ namespace ScrivoUi\Editor\Actions\Applications\ItemList;
 use \Scrivo\ListItemDefinition;
 use \Scrivo\Action;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\I18n;
 
 /**

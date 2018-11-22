@@ -40,10 +40,10 @@ class ListItemPropertyTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * Convenience function for creating a list item property to use in the
 	 * tests.
-	 * @param \Scrivo\String $type A string that identifies the property type.
+	 * @param \Scrivo\Str $type A string that identifies the property type.
 	 * @return \Scrivo\ListItemProperty a Scrivo list item property.
 	 */
-	private function createItemProperty(\Scrivo\String $type) {
+	private function createItemProperty(\Scrivo\Str $type) {
 		return \Scrivo\ListItemProperty::create(
 			array(
 				"type" => (string)$type,
@@ -63,7 +63,7 @@ class ListItemPropertyTest extends PHPUnit_Framework_TestCase {
 	 */
 	function testInvalidPropertyType() {
 
-		$item = $this->createItemProperty(new \Scrivo\String("hatseFlatse"));
+		$item = $this->createItemProperty(new \Scrivo\Str("hatseFlatse"));
 	}
 
 	/**
@@ -74,7 +74,7 @@ class ListItemPropertyTest extends PHPUnit_Framework_TestCase {
 	function testInvalidPropertyGet() {
 
 		$item = $this->createItemProperty(
-			new \Scrivo\String(\Scrivo\ListItemPropertyDefinition::TYPE_IMAGE));
+			new \Scrivo\Str(\Scrivo\ListItemPropertyDefinition::TYPE_IMAGE));
 		$tmp = $item->hatseFlatse;
 	}
 
@@ -86,7 +86,7 @@ class ListItemPropertyTest extends PHPUnit_Framework_TestCase {
 	function testInvalidPropertySet() {
 
 		$item = $this->createItemProperty(
-			new \Scrivo\String(\Scrivo\ListItemPropertyDefinition::TYPE_IMAGE));
+			new \Scrivo\Str(\Scrivo\ListItemPropertyDefinition::TYPE_IMAGE));
 		$item->hatseFlatse = 2;
 	}
 

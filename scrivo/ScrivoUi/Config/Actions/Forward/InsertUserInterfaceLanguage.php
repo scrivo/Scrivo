@@ -40,7 +40,7 @@ use \Scrivo\Action;
 use \Scrivo\ApplicationException;
 use \Scrivo\I18n;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\UserInterfaceLanguage;
 
 /**
@@ -64,9 +64,9 @@ class InsertUserInterfaceLanguage extends Action {
 
 			// ... set the members ...
 			$language->isoCode = Request::post(
-				"lang", Request::TYPE_STRING, new String(""));
+				"lang", Request::TYPE_STRING, new Str(""));
 			$language->description = Request::post(
-				"comment", Request::TYPE_STRING, new String(""));
+				"comment", Request::TYPE_STRING, new Str(""));
 
 			// ... and insert it.
 			$language->insert();

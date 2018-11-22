@@ -41,7 +41,7 @@ use \Scrivo\ApplicationException;
 use \Scrivo\File;
 use \Scrivo\IdLabel;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The UpdateFile class implements the action for updating a file.
@@ -73,7 +73,7 @@ class UpdateFile extends Action {
 			}
 
 			if (!Request::post("remove_on_y",
-					Request::TYPE_STRING)->trim()->equals(new String(""))) {
+					Request::TYPE_STRING)->trim()->equals(new Str(""))) {
 				$date = new \DateTime();
 				$date->setDate(
 					Request::post("remove_on_y", Request::TYPE_INTEGER),
@@ -87,18 +87,18 @@ class UpdateFile extends Action {
 			}
 
 			$file->title = Request::post("title",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 			$file->mimeType = Request::post("mime_type",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 			$file->location = Request::post("location",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 
 			// ... and update the file.
 			$file->update();
 
 			// Add the label if given.
 			IdLabel::set($this->context, $file->id, Request::post("label",
-				Request::TYPE_STRING, new String("")));
+				Request::TYPE_STRING, new Str("")));
 
 			// Set action result.
 			$this->setResult(self::SUCCESS);

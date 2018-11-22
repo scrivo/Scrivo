@@ -39,20 +39,20 @@ namespace Scrivo;
  * The user interface languate class is a simple class to list the current
  * implemented language sets for the Scrivo user interface.
  *
- * @property \Scrivo\String $description A description for the language.
- * @property \Scrivo\String $isoCode The language ISO code.
+ * @property \Scrivo\Str $description A description for the language.
+ * @property \Scrivo\Str $isoCode The language ISO code.
  */
 class UserInterfaceLanguage {
 
 	/**
 	 * The language ISO code.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $isoCode = null;
 
 	/**
 	 * A description for the language.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $description = null;
 
@@ -71,8 +71,8 @@ class UserInterfaceLanguage {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null), 0);
 
 		if ($context) {
-			$this->isoCode = new \Scrivo\String();
-			$this->description = new \Scrivo\String();
+			$this->isoCode = new \Scrivo\Str();
+			$this->description = new \Scrivo\Str();
 
 			$this->context = $context;
 		}
@@ -120,8 +120,8 @@ class UserInterfaceLanguage {
 	 */
 	private function setFields(\Scrivo\Context $context, array $rd) {
 
-		$this->isoCode = new \Scrivo\String($rd["iso_code"]);
-		$this->description = new \Scrivo\String($rd["description"]);
+		$this->isoCode = new \Scrivo\Str($rd["iso_code"]);
+		$this->description = new \Scrivo\Str($rd["description"]);
 
 		$this->context = $context;
 	}
@@ -129,18 +129,18 @@ class UserInterfaceLanguage {
 	/**
 	 * Set The language ISO code.
 	 *
-	 * @param \Scrivo\String $isoCode The language ISO code.
+	 * @param \Scrivo\Str $isoCode The language ISO code.
 	 */
-	private function setIsoCode(\Scrivo\String $isoCode) {
+	private function setIsoCode(\Scrivo\Str $isoCode) {
 		$this->isoCode = $isoCode;
 	}
 
 	/**
 	 * Set A description for the language.
 	 *
-	 * @param \Scrivo\String $description A description for the language.
+	 * @param \Scrivo\Str $description A description for the language.
 	 */
-	private function setDescription(\Scrivo\String $description) {
+	private function setDescription(\Scrivo\Str $description) {
 		$this->description = $description;
 	}
 
@@ -236,14 +236,14 @@ class UserInterfaceLanguage {
 	 * violate any business rules.
 	 *
 	 * @param \Scrivo\Context $context A Scrivo context.
-	 * @param \Scrivo\String $isoCode The object id of the user interface
+	 * @param \Scrivo\Str $isoCode The object id of the user interface
 	 *    language to select.
 	 *
 	 * @throws \Scrivo\ApplicationException If the data is not accessible or
 	 *   if it is not possible to delete the language data.
 	 */
 	private static function validateDelete(
-			\Scrivo\Context $context, \Scrivo\String $isoCode) {
+			\Scrivo\Context $context, \Scrivo\Str $isoCode) {
 		$context->checkPermission(\Scrivo\AccessController::WRITE_ACCESS);
 	}
 
@@ -255,14 +255,14 @@ class UserInterfaceLanguage {
 	 * dependecies is deleted from the database.
 	 *
 	 * @param \Scrivo\Context $context A Scrivo context.
-	 * @param \Scrivo\String $isoCode $isoCode The object id of the user
+	 * @param \Scrivo\Str $isoCode $isoCode The object id of the user
 	 *   interface language to select.
 	 *
 	 * @throws \Scrivo\ApplicationException If the data is not accessible or
 	 *   if it is not possible to delete the user interface language data.
 	 */
 	public static function delete(
-			\Scrivo\Context $context, \Scrivo\String $isoCode) {
+			\Scrivo\Context $context, \Scrivo\Str $isoCode) {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null, null));
 		try {
 			self::validateDelete($context, $isoCode);
@@ -286,13 +286,13 @@ class UserInterfaceLanguage {
 	 * object id.
 	 *
 	 * @param \Scrivo\Context $context A Scrivo context.
-	 * @param \Scrivo\String $isoCode The ISO code of the language to select.
+	 * @param \Scrivo\Str $isoCode The ISO code of the language to select.
 	 *
 	 * @return \Scrivo\UserInterfaceLanguage The requested user interface
 	 *    language object.
 	 */
 	public static function fetch(
-			\Scrivo\Context $context, \Scrivo\String $isoCode) {
+			\Scrivo\Context $context, \Scrivo\Str $isoCode) {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null, null));
 		try {
 			$sth = $context->connection->prepare(

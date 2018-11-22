@@ -54,8 +54,8 @@ namespace Scrivo;
  * in line with the policy for object ids.
  *
  * @property-read int $id The role id (DB key).
- * @property \Scrivo\String $description A descriptive name for this role.
- * @property \Scrivo\String $title The role title.
+ * @property \Scrivo\Str $description A descriptive name for this role.
+ * @property \Scrivo\Str $title The role title.
  * @property int $type The role type, \Scrivo\Role::EDITOR_ROLE or
  *    \Scrivo\Role::PUBLIC_ROLE
  */
@@ -85,13 +85,13 @@ class Role {
 
 	/**
 	 * The role title.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $title = null;
 
 	/**
 	 * A descriptive name for this role.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $description = null;
 
@@ -110,8 +110,8 @@ class Role {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null), 0);
 
 		if ($context) {
-			$this->title = new \Scrivo\String();
-			$this->description = new \Scrivo\String();
+			$this->title = new \Scrivo\Str();
+			$this->description = new \Scrivo\Str();
 
 			$this->context = $context;
 		}
@@ -163,8 +163,8 @@ class Role {
 
 		$this->id = intval($rd["role_id"]);
 		$this->type = intval($rd["type"]);
-		$this->title = new \Scrivo\String($rd["title"]);
-		$this->description = new \Scrivo\String($rd["description"]);
+		$this->title = new \Scrivo\Str($rd["title"]);
+		$this->description = new \Scrivo\Str($rd["description"]);
 
 		$this->context = $context;
 	}
@@ -188,18 +188,18 @@ class Role {
 	/**
 	 * Set the role title.
 	 *
-	 * @param \Scrivo\String $title The role's title.
+	 * @param \Scrivo\Str $title The role's title.
 	 */
-	private function setTitle(\Scrivo\String $title) {
+	private function setTitle(\Scrivo\Str $title) {
 		$this->title = $title;
 	}
 
 	/**
 	 * Set the descriptive name for this role.
 	 *
-	 * @param \Scrivo\String $description A descriptive name for this role.
+	 * @param \Scrivo\Str $description A descriptive name for this role.
 	 */
-	private function setDescription(\Scrivo\String $description) {
+	private function setDescription(\Scrivo\Str $description) {
 		$this->description = $description;
 	}
 

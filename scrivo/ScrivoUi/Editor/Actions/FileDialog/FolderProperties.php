@@ -34,7 +34,7 @@ namespace ScrivoUi\Editor\Actions\FileDialog;
 use \Scrivo\Action;
 use \Scrivo\Request;
 use \Scrivo\Folder;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The FolderProperties class implements an action for retrieving the properties
@@ -61,14 +61,14 @@ class FolderProperties extends Action {
 		$timeunit = "";
 
 		if ($folder->cacheHeaderSettings->setting->equals(
-				new String("expires"))) {
+				new Str("expires"))) {
 
 			$opt = "expire";
 			$period = $folder->cacheHeaderSettings->timePeriod;
 			$timeunit = (string)$folder->cacheHeaderSettings->timeUnit;
 
 		} else if ($folder->cacheHeaderSettings->setting->equals(
-				new String("no-cache"))) {
+				new Str("no-cache"))) {
 
 			$opt = "nocache";
 

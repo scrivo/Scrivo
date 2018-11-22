@@ -42,7 +42,7 @@ use \Scrivo\File;
 use \Scrivo\I18n;
 use \Scrivo\IdLabel;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The InsertFile class implements the action for creating a new file.
@@ -76,7 +76,7 @@ class InsertFile extends Action {
 			}
 
 			if (!Request::post("remove_on_y",
-					Request::TYPE_STRING)->trim()->equals(new String(""))) {
+					Request::TYPE_STRING)->trim()->equals(new Str(""))) {
 				$date = new \DateTime();
 				$date->setDate(
 					Request::post("remove_on_y", Request::TYPE_INTEGER),
@@ -92,16 +92,16 @@ class InsertFile extends Action {
 			$file->title = Request::post("title",
 				Request::TYPE_STRING, $i18n["New file"]);
 			$file->mimeType = Request::post("mime_type",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 			$file->location = Request::post("location",
-				Request::TYPE_STRING, new String(""));
+				Request::TYPE_STRING, new Str(""));
 
 			// ... and insert the file.
 			$file->insert();
 
 			// Add the label if given.
 			IdLabel::set($this->context, $file->id,
-				Request::post("label", Request::TYPE_STRING, new String("")));
+				Request::post("label", Request::TYPE_STRING, new Str("")));
 
 			// Set action result.
 			$this->setResult(self::SUCCESS);

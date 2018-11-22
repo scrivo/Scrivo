@@ -38,9 +38,9 @@ class ListItemPropertyHtmlTextTest extends ListItemPropertyBaseTestCase {
 
 	function testProperty() {
 
-		$testHtmlText = new \Scrivo\String("<body></body>");
+		$testHtmlText = new \Scrivo\Str("<body></body>");
 
-		$lip = $this->createItemProperty(new \Scrivo\String(
+		$lip = $this->createItemProperty(new \Scrivo\Str(
 				\Scrivo\ListItemPropertyDefinition::TYPE_HTML_TEXT));
 
 		$lip->html = $testHtmlText;

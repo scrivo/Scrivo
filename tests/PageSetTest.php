@@ -55,7 +55,7 @@ class PageSetTest extends ScrivoDatabaseTestCase {
 	 * @return array:array:\Scrivo\Context,int
 	 */
 	function dataProviderCounts() {
-		$cfg = new Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new Scrivo\Config(new \Scrivo\Str("test_config"));
 		return array(
 			"test 1" => array(
 				"argument 1" =>	new \Scrivo\Context($cfg,

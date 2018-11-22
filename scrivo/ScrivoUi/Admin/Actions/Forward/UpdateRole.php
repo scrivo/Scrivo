@@ -39,7 +39,7 @@ use \Scrivo\Action;
 use \Scrivo\ApplicationException;
 use \Scrivo\Request;
 use \Scrivo\Role;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * The UpdateRole class implements the action for updating a role.
@@ -60,9 +60,9 @@ class UpdateRole extends Action {
 
 			// ... set the members ...
 			$role->description = Request::post(
-				"description", Request::TYPE_STRING, new String(""));
+				"description", Request::TYPE_STRING, new Str(""));
 			$role->title = Request::post(
-				"title", Request::TYPE_STRING, new String(""));
+				"title", Request::TYPE_STRING, new Str(""));
 
 			// ... and update the role.
 			$role->update();

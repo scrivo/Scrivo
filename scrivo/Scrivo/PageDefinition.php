@@ -68,11 +68,11 @@ namespace Scrivo;
  * @property int $defaultTabId The id of the tab that should be shown in the
  *   user interface as the active tab when the editor selects a page using this
  *   page definition for editing.
- * @property \Scrivo\String $description An additional description for the
+ * @property \Scrivo\Str $description An additional description for the
  *   page definition.
- * @property \Scrivo\String $action The location of the PHP script to
+ * @property \Scrivo\Str $action The location of the PHP script to
  *   execute when rendering pages using this page definition.
- * @property \Scrivo\String $title A descriptive title for the page definition.
+ * @property \Scrivo\Str $title A descriptive title for the page definition.
  * @property int[] $typeSet The set of page types that the user can select
  *   in the user interface  when creating/modifing pages using this page
  *   definition.
@@ -87,20 +87,20 @@ class PageDefinition {
 
 	/**
 	 * A descriptive title for the page definition.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $title = null;
 
 	/**
 	 * An additional description for the page definition.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $description = null;
 
 	/**
 	 * The location of the PHP script to execute when rendering pages using
 	 * this page definition.
-	 * @var \Scrivo\String
+	 * @var \Scrivo\Str
 	 */
 	private $action = null;
 
@@ -153,9 +153,9 @@ class PageDefinition {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null), 0);
 
 		if ($context) {
-			$this->title = new \Scrivo\String();
-			$this->description = new \Scrivo\String();
-			$this->action = new \Scrivo\String();
+			$this->title = new \Scrivo\Str();
+			$this->description = new \Scrivo\Str();
+			$this->action = new \Scrivo\Str();
 
 			$this->context = $context;
 		}
@@ -214,12 +214,12 @@ class PageDefinition {
 	private function setFields(\Scrivo\Context $context, array $rd) {
 
 		$this->id = intval($rd["page_definition_id"]);
-		$this->title = new \Scrivo\String($rd["title"]);
-		$this->description = new \Scrivo\String($rd["description"]);
-		$this->action = new \Scrivo\String($rd["action"]);
+		$this->title = new \Scrivo\Str($rd["title"]);
+		$this->description = new \Scrivo\Str($rd["description"]);
+		$this->action = new \Scrivo\Str($rd["action"]);
 		$this->configOnly = intval($rd["config_only"]) == 1 ? true : false;
 		$this->typeSet =
-			$this->convertTypeSet(new \Scrivo\String($rd["type_set"]));
+			$this->convertTypeSet(new \Scrivo\Str($rd["type_set"]));
 		$this->defaultTabId = intval($rd["default_tab_id"]);
 
 		$this->context = $context;
@@ -254,20 +254,20 @@ class PageDefinition {
 	/**
 	 * Set A descriptive title for the page definition.
 	 *
-	 * @param \Scrivo\String $title A descriptive title for the page
+	 * @param \Scrivo\Str $title A descriptive title for the page
 	 *    definition.
 	 */
-	private function setTitle(\Scrivo\String $title) {
+	private function setTitle(\Scrivo\Str $title) {
 		$this->title = $title;
 	}
 
 	/**
 	 * Set the additional description for the page definition.
 	 *
-	 * @param \Scrivo\String $description An additional description for the
+	 * @param \Scrivo\Str $description An additional description for the
 	 *    page definition.
 	 */
-	private function setDescription(\Scrivo\String $description) {
+	private function setDescription(\Scrivo\Str $description) {
 		$this->description = $description;
 	}
 
@@ -275,10 +275,10 @@ class PageDefinition {
 	 * Set the location of the PHP script to execute when rendering pages
 	 * using this page definition.
 	 *
-	 * @param \Scrivo\String $action The location of the PHP script to
+	 * @param \Scrivo\Str $action The location of the PHP script to
 	 *    execute when rendering pages using this page definition.
 	 */
-	private function setFileName(\Scrivo\String $action) {
+	private function setFileName(\Scrivo\Str $action) {
 		$this->action = $action;
 	}
 
@@ -328,11 +328,11 @@ class PageDefinition {
 	/**
 	 * Convert the semicolon seperated value from the database to an array.
 	 *
-	 * @param \Scrivo\String typeSetString An semicolon seperated string.
+	 * @param \Scrivo\Str typeSetString An semicolon seperated string.
 	 * @return int[] The type set as an array of integers.
 	 */
-	private function convertTypeSet(\Scrivo\String $typeSetString) {
-		$ts = $typeSetString->split(new \Scrivo\String(";"));
+	private function convertTypeSet(\Scrivo\Str $typeSetString) {
+		$ts = $typeSetString->split(new \Scrivo\Str(";"));
 		$ts2 = array();
 		foreach ($ts as $pageId) {
 			$ts2[] = intval((string)$pageId);
@@ -385,7 +385,7 @@ class PageDefinition {
 			$sth->bindValue(":action", $this->action, \PDO::PARAM_STR);
 			$sth->bindValue(":configOnly",
 				$this->configOnly ? 1 : 0, \PDO::PARAM_INT);
-			$sth->bindValue(":typeSet", new \Scrivo\String(
+			$sth->bindValue(":typeSet", new \Scrivo\Str(
 				implode(";", $this->typeSet)), \PDO::PARAM_INT);
 			$sth->bindValue(
 				":defaultTabId", $this->defaultTabId, \PDO::PARAM_INT);
@@ -436,7 +436,7 @@ class PageDefinition {
 			$sth->bindValue(":action", $this->action, \PDO::PARAM_STR);
 			$sth->bindValue(":configOnly",
 				$this->configOnly ? 1 : 0, \PDO::PARAM_INT);
-			$sth->bindValue(":typeSet", new \Scrivo\String(
+			$sth->bindValue(":typeSet", new \Scrivo\Str(
 				implode(";", $this->typeSet)), \PDO::PARAM_INT);
 			$sth->bindValue(
 				":defaultTabId", $this->defaultTabId, \PDO::PARAM_INT);

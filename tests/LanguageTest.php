@@ -45,26 +45,26 @@ class LanguageTest extends ScrivoDatabaseTestCase {
 			"test 1" => array(
 				"argument 1" => (object) array(
 					"shortList" => true,
-					"isoCode" => new \Scrivo\String(
+					"isoCode" => new \Scrivo\Str(
 						""),
-					"family" => new \Scrivo\String(
+					"family" => new \Scrivo\Str(
 						""),
-					"nameEn" => new \Scrivo\String(
+					"nameEn" => new \Scrivo\Str(
 						""),
-					"nameNl" => new \Scrivo\String(
+					"nameNl" => new \Scrivo\Str(
 						""),
 				)
 			),
 			"test 2" => array(
 				"argument 1" => (object) array(
 					"shortList" => false,
-					"isoCode" => new \Scrivo\String(
+					"isoCode" => new \Scrivo\Str(
 						""),
-					"family" => new \Scrivo\String(
+					"family" => new \Scrivo\Str(
 						""),
-					"nameEn" => new \Scrivo\String(
+					"nameEn" => new \Scrivo\Str(
 						""),
-					"nameNl" => new \Scrivo\String(
+					"nameNl" => new \Scrivo\Str(
 						""),
 				)
 			)
@@ -80,24 +80,24 @@ class LanguageTest extends ScrivoDatabaseTestCase {
 			"test 1" => array(
 				"argument 1" => (object) array(
 					"shortList" => true,
-					"isoCode" => new \Scrivo\String(
+					"isoCode" => new \Scrivo\Str(
 						""),
-					"family" => new \Scrivo\String(
+					"family" => new \Scrivo\Str(
 						""),
-					"nameEn" => new \Scrivo\String(
+					"nameEn" => new \Scrivo\Str(
 						""),
-					"nameNl" => new \Scrivo\String(
+					"nameNl" => new \Scrivo\Str(
 						""),
 				),
 				"argument 2" => (object) array(
 					"shortList" => false,
-					"isoCode" => new \Scrivo\String(
+					"isoCode" => new \Scrivo\Str(
 						""),
-					"family" => new \Scrivo\String(
+					"family" => new \Scrivo\Str(
 						""),
-					"nameEn" => new \Scrivo\String(
+					"nameEn" => new \Scrivo\Str(
 						""),
-					"nameNl" => new \Scrivo\String(
+					"nameNl" => new \Scrivo\Str(
 						""),
 				)
 			)
@@ -311,7 +311,7 @@ class LanguageTest extends ScrivoDatabaseTestCase {
 		$this->setLanguageProperties($tmp, $d1);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, self::EDITOR_USER_ID);
 
 		// Creating/inserting a new \Scrivo\Language object as editor
@@ -363,7 +363,7 @@ class LanguageTest extends ScrivoDatabaseTestCase {
 		$this->setLanguageProperties($tmp, $d2);
 		$tmp->insert();
 
-		$cfg = new \Scrivo\Config(new \Scrivo\String("test_config"));
+		$cfg = new \Scrivo\Config(new \Scrivo\Str("test_config"));
 		$context = new \Scrivo\Context($cfg, \Scrivo\User::ANONYMOUS_USER_ID);
 
 		// Creating/inserting a new \Scrivo\Language object as member

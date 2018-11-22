@@ -36,7 +36,7 @@ use \Scrivo\ListItemDefinition;
 use \Scrivo\ListItemPropertyDefinition;
 use \Scrivo\Action;
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 use \Scrivo\I18n;
 
 /**
@@ -64,7 +64,7 @@ class GetBlockList extends Action {
 		$first = true;
 		$last = true;
 
-		if (!$search->trim()->equals(new String(""))) {
+		if (!$search->trim()->equals(new Str(""))) {
 
 			$the_list->load_items($parent_id);
 			$newlist = array();
@@ -111,7 +111,7 @@ class GetBlockList extends Action {
 				"label" => $i18n["Titel"],
 				"type" => "text",
 				"data" => (string)($li->title->length ?
-					$li->title->substr(0, 100) : new String(""))
+					$li->title->substr(0, 100) : new Str(""))
 			);
 
 			$row[] = array(
@@ -216,9 +216,9 @@ class GetBlockList extends Action {
 						}
 					}
 				} else if (isset($def->typeData->location)) {
-					$opts = $def->typeData->location->split(new String(";"));
+					$opts = $def->typeData->location->split(new Str(";"));
 					foreach ($opts as $opt) {
-						$tv = $opt->split(new String(":"));
+						$tv = $opt->split(new Str(":"));
 						if (count($tv) > 1) {
 							$opts2[(string)$tv[0]] = $tv[1];
 						} else {

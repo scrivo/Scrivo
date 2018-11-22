@@ -30,7 +30,7 @@
  */
 
 use \Scrivo\Request;
-use \Scrivo\String;
+use \Scrivo\Str;
 
 /**
  * Section to use as HTML head content.
@@ -125,9 +125,9 @@ if ($this->session->authenticated) {
 
 	} else {
 
-		$base1 = String::create(
+		$base1 = Str::create(
 			str_replace(array("http://", "https://"), "",
-			$this->context->config->WWW_ROOT))->split(new String("/"));
+			$this->context->config->WWW_ROOT))->split(new Str("/"));
 		$login_url = "{$this->context->config->WWW_ROOT}/scrivo/secure/admin/index.php";
 		$use_secure = false;
 		if (defined("SECURE_LOGIN")) {
