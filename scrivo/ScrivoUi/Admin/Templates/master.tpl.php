@@ -35,14 +35,17 @@ use \Scrivo\Action;
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//name_en">
 <html>
 	<head>
+		<?php //echo $this->sections->head ?>
 		<?php echo $this->getSection("head") ?>
 	</head>
 	<body>
 		<div id="header" style="">
 			<?php echo $this->getSection("header") ?>
+			<?php //echo $this->sections->header ?>
 		</div>
 		<div id="menu">
 			<?php echo $this->getSection("menu") ?>
+			<?php //echo $this->sections->menu ?>
 		</div>
 		<div id="maindiv">
 			<table cellspacing="0" id="centercontent"><tbody><tr><td>
@@ -66,6 +69,7 @@ use \Scrivo\Action;
 	}
 ?>
 			<?php echo $this->getSection("content") ?>
+			<?php //echo $this->sections->content ?>
 			</div>
 			</td></tr></tbody></table>
 		</div>

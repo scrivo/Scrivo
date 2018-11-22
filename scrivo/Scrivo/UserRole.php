@@ -121,8 +121,7 @@ class UserRole extends \Scrivo\Role {
 					AND R.role_id = UR.role_id AND UR.user_id = :userId");
 
 			$context->connection->bindInstance($sth);
-			$sth->bindValue(":userId",
-				\Scrivo\User::patchId($user->id), \PDO::PARAM_INT);
+			$sth->bindValue(":userId", $user->id, \PDO::PARAM_INT);
 
 			$res = array();
 			$sth->execute();

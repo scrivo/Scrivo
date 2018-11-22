@@ -1,5 +1,4 @@
 <?php
-
 /* Copyright (c) 2011, Geert Bergman (geert@scrivo.nl)
  * All rights reserved.
  *
@@ -27,54 +26,61 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id: GetDefaultProperties.php 841 2013-08-19 22:19:47Z geert $
+ * $Id: GetListItem.php 866 2013-08-25 16:22:35Z geert $
  */
 
-namespace ScrivoUi\Editor\Actions\ContentTabs;
+namespace ScrivoUi\Editor\Actions\Applications\Form;
 
+use \Scrivo\ItemList;
+use \Scrivo\ListItemDefinition;
 use \Scrivo\Action;
-use \Scrivo\Page;
 use \Scrivo\Request;
+use \Scrivo\Str;
+use \Scrivo\I18n;
 
 /**
- * The PagePath class implements the action of retrieving the path of
- * a page.
+ * The GetFormProperties class implements the action of retrieving form
+ * properties.
  */
-class GetDefaultProperties extends Action {
+class GetFormElement extends Action {
 
 	/**
-	 * In this action the page with the given id is retrieved and the
-	 * page ids of its path are returned.
+	 * In this action the page the list representing the form is retieved 
+	 * and its custom data field is used for the form properties. 
 	 */
+	
 	function doAction() {
 
-		$page = Page::fetch(
-			$this->context, Request::get("pageId", Request::TYPE_INTEGER));
-
-		$lang = array();
-		foreach ($this->context->config->LANGUAGES as $iso => $name) {
-			$lang[] = array("value" => $iso,
-				"text" => "{$iso}: {$name}");
+		$pageId = Request::get("pageId", Request::TYPE_INTEGER);
+		$itemId = Request::get("listItemId", Request::TYPE_INTEGER);
+		$pagePropertyDefinitionId =
+			Request::get("pagePropertyDefinitionId", Request::TYPE_INTEGER);
+		$copy = Request::get("copy", Request::TYPE_BOOLEAN);
+		
+		$list = ItemList::fetch(
+			$this->context, $pageId, $pagePropertyDefinitionId);
+		
+		if ($itemId) {
+			$item = $list->items[$itemId];
+		} else {
+			$def = ListItemDefinition::fetch($this->context, 40076);
+			$item = $list->newItem($def->phpSelector);
 		}
-
-		$res = array(
-			"title" => (string)$page->title,
-			"template" => (string)$page->definition->title,
-			"dateCreated" => $page->dateCreated->format("Y-m-d h:i:s"),
-			"dateModified" => $page->dateModified->format("Y-m-d h:i:s"),
-			"dateOnline" => $page->dateOnline->format("Y-m-d h:i:s"),
-			"dateOffline" => $page->dateOffline
-				? $page->dateOffline->format("Y-m-d h:i:s") : "",
-			"language" => $page->language,
-			"description" => (string)$page->description,
-			"keywords" => (string)$page->keywords,
-			"javascript" => (string)$page->javascript,
-			"stylesheet" => (string)$page->stylesheet,
-			"languages" => $lang
-		);
-
-		$this->setResult(self::SUCCESS, array("properties" => $res));
+		
+		if ($itemId) {
+			$res["listItemId"] = $itemId;
+			$res["type"] = Request::get("type", Request::TYPE_STRING);
+			$res["typeData"] = 
+				@unserialize((string)$item->properties->typeData->text);
+		} else { 
+			$res["listItemId"] = 0;
+			$res["type"] = Request::get("type", Request::TYPE_STRING);
+			$res["typeData"] = array();
+		}
+				
+		$this->setResult(self::SUCCESS, $res);
 	}
+
 }
 
 ?>

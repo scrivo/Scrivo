@@ -36,7 +36,7 @@ SUI.editor.apps.form.InputElementDialog = SUI.defineClass({
 
 	initializer: function(arg) {
 
-		this.elementType = arg.elementType || "input";
+		this.type = arg.type || "input";
 
 		SUI.editor.apps.form.InputElementDialog.initializeBase(this, arg);
 
@@ -47,7 +47,7 @@ SUI.editor.apps.form.InputElementDialog = SUI.defineClass({
 		var ctlTop = SUI.editor.apps.form.InputElementDialog.parentMethod(this,
 			"populatePropertiesTab");
 
-		if (this.elementType == "textarea") {
+		if (this.type == "textarea") {
 
 			this.inpRows = new SUI.form.Input({
 				top: ctlTop,
@@ -114,7 +114,7 @@ SUI.editor.apps.form.InputElementDialog = SUI.defineClass({
 
 		ctlTop += this.CTRL_HEIGHT + this.MARGIN;
 
-		if (this.elementType != "file") {
+		if (this.type != "file") {
 
 			this.inpDefaultValue = new SUI.form.Input({
 				top: ctlTop,
@@ -133,7 +133,7 @@ SUI.editor.apps.form.InputElementDialog = SUI.defineClass({
 			ctlTop += this.CTRL_HEIGHT + this.MARGIN;
 		}
 
-		if (this.elementType == "email") {
+		if (this.type == "email") {
 
 			this.chkReplyTo = new SUI.form.CheckBox({
 				top: ctlTop,
@@ -168,7 +168,7 @@ SUI.editor.apps.form.InputElementDialog = SUI.defineClass({
 
 		ctlTop += this.CTRL_HEIGHT + this.MARGIN;
 
-		if (this.elementType == "textarea") {
+		if (this.type == "textarea") {
 			this.tabPanel.add(this.lblRows, 0);
 			this.tabPanel.add(this.inpRows, 0);
 		}
@@ -177,11 +177,11 @@ SUI.editor.apps.form.InputElementDialog = SUI.defineClass({
 		this.tabPanel.add(this.lblFullWidth, 0);
 		this.tabPanel.add(this.rdoFixedWidth, 0);
 		this.tabPanel.add(this.lblFixedWidth, 0);
-		if (this.elementType != "file") {
+		if (this.type != "file") {
 			this.tabPanel.add(this.lblDefaultValue, 0);
 			this.tabPanel.add(this.inpDefaultValue, 0);
 		}
-		if (this.elementType == "email") {
+		if (this.type == "email") {
 			this.tabPanel.add(this.lblReplyTo, 0);
 			this.tabPanel.add(this.chkReplyTo, 0);
 		}
@@ -198,7 +198,7 @@ SUI.editor.apps.form.InputElementDialog = SUI.defineClass({
 		var ctlTop = SUI.editor.apps.form.InputElementDialog.parentMethod(this,
 			"populateAdvancedTab");
 
-		if (this.elementType == "input" || this.elementType == "email") {
+		if (this.type == "input" || this.type == "email") {
 
 			this.inpMaxLength = new SUI.form.Input({
 				top: ctlTop,
@@ -227,24 +227,24 @@ SUI.editor.apps.form.InputElementDialog = SUI.defineClass({
 		var res = SUI.editor.apps.form.InputElementDialog.parentMethod(
 				this, "formToData");
 
-		if (this.elementType == "textarea") {
+		if (this.type == "textarea") {
 			res.itemInfo_ROWS = this.inpRows.el().value;
 		}
 
 		res.itemInfo_WIDTH = this.rdoFullWidth.el().checked ?
 			"" : this.inpChars.el().value;
 
-		if (this.elementType != "file") {
+		if (this.type != "file") {
 			res.itemInfo_DEFAULT_VALUE = this.inpDefaultValue.el().value;
 		}
 
-		if (this.elementType == "email") {
-			res.itemInfo_REPLYTO = this.chkReplyTo.el().checked ? 1 : 0;
+		if (this.type == "email") {
+			res.itemInfo_REPLYTO = this.chkReplyTo.el().checked;
 		}
 
-		res.itemInfo_REQUIRED = this.chkRequired.el().checked ? 1 : 0;
+		res.itemInfo_REQUIRED = this.chkRequired.el().checked;
 
-		if (this.elementType == "input" || this.elementType == "email") {
+		if (this.type == "input" || this.type == "email") {
 			res.itemInfo_MAXLENGTH = this.inpMaxLength.el().value;
 		}
 
@@ -256,25 +256,25 @@ SUI.editor.apps.form.InputElementDialog = SUI.defineClass({
 		SUI.editor.apps.form.InputElementDialog.parentMethod(
 			this, "dataToForm", a);
 
-		if (this.elementType == "textarea") {
-			this.inpRows.el().value = a.itemInfo.ROWS || "";
+		if (this.type == "textarea") {
+			this.inpRows.el().value = a.typeData.rows || "";
 		}
 
-		var w = (a.itemInfo.WIDTH || "");
+		var w = (a.typeData.width || "");
 		this.rdoFullWidth.el().checked = w == "";
 		this.rdoFixedWidth.el().checked = w != "";
 		this.inpChars.el().value = w;
 
-		if (this.elementType != "file") {
-			this.inpDefaultValue.el().value = a.itemInfo.DEFAULT_VALUE || "";
+		if (this.type != "file") {
+			this.inpDefaultValue.el().value = a.typeData.defaultValue || "";
 		}
-		if (this.elementType == "email") {
-			this.chkReplyTo.el().checked = (a.itemInfo.REPLYTO || "0") == "1";
+		if (this.type == "email") {
+			this.chkReplyTo.el().checked = a.typeData.replyTo;
 		}
-		this.chkRequired.el().checked = (a.itemInfo.REQUIRED || "0") == "1";
+		this.chkRequired.el().checked = a.typeData.required;
 
-		if (this.elementType == "input" || this.elementType == "email") {
-			this.inpMaxLength.el().value = a.itemInfo.MAXLENGTH || "";
+		if (this.type == "input" || this.type == "email") {
+			this.inpMaxLength.el().value = a.typeData.maxLength || "";
 		}
 	}
 

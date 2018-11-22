@@ -33,6 +33,7 @@
  * Home view: cleary show the location of the site.
  */
 $this->beginSection("content", true);
+//$this->sections->content->start();
 
 ?>
 
@@ -47,5 +48,6 @@ $this->beginSection("content", true);
 <?php
 
 $this->endSection();
+//$this->sections->content->end();
 
 ?>

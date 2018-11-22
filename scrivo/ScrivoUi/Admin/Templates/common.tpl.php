@@ -36,6 +36,7 @@ use \Scrivo\Str;
  * Section to use as HTML head content.
  */
 $this->beginSection("head", true);
+//$this->sections->head->start();
 
 ?>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -70,12 +71,14 @@ SUI.imgDir = "../img/editor";
 <?php
 
 $this->endSection();
+//$this->sections->head->end();
 
 
 /**
  * Logo bar with title.
  */
 $this->beginSection("header", true);
+//$this->sections->header->start();
 
 ?>
 <div>
@@ -88,11 +91,13 @@ $this->beginSection("header", true);
 <?php
 
 $this->endSection();
+//$this->sections->header->end();
 
 /**
  * The admin menu.
  */
 $this->beginSection("menu", true);
+//$this->sections->menu->start();
 
 if ($this->session->authenticated) {
 
@@ -143,5 +148,6 @@ if ($this->session->authenticated) {
 }
 
 $this->endSection();
+//$this->sections->menu->end();
 
 ?>

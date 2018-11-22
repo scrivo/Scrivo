@@ -247,6 +247,8 @@ CREATE TABLE seq (
   PRIMARY KEY  (seq)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
+INSERT INTO seq VALUES(10000);
+
 CREATE TABLE page_definition (
   instance_id INT(11) NOT NULL DEFAULT '0',
   page_definition_id INT(11) NOT NULL DEFAULT '0',

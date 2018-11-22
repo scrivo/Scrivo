@@ -109,6 +109,7 @@ class Request {
 		
 		// The request headers
 		$hdrs = $additionalHeaders + $this->headers;
+		$prms = array("http" => array("method" => $method));
 		
 		if ($data) {
 			
@@ -130,7 +131,7 @@ class Request {
 			
 			if ($method === "GET") {
 				// Append the data to the URL. 
-				$url .= (strpos("?", $url) !== false ? "?" : "&") . $data;
+				$url .= (strpos("?", $url) !== false ? "&" : "?") . $data;
 			} else if ($method === "POST") {
 				// Send data in the request body. 
 				$prms["http"]["content"] = $data;
@@ -148,7 +149,7 @@ class Request {
 		$resp = new \stdClass;
 		
 		// Execute the request ...
-		$prms = array("http" => array("method" => $method, "header" => $hd));
+		$prms["http"]["header"] = $hd;
 		$fp = @fopen($url, "rb", false, stream_context_create($prms));
 		if ($fp) {
 			// ... if it was succesfull get the data ...

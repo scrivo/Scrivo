@@ -67,8 +67,8 @@ class InsertPage extends Action {
 				Request::post("page_pid", Request::TYPE_INTEGER, 0);
 			$page->type =
 				Request::post("type", Request::TYPE_INTEGER, 0);
-			$page->languageId =
-				Request::post("language_id", Request::TYPE_INTEGER);
+			$page->language =
+				Request::post("language_id", Request::TYPE_STRING);
 
 			$date = new \DateTime();
 			$date->setDate(

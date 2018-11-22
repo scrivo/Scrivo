@@ -66,6 +66,7 @@ class GetBlockList extends Action {
 
 		if (!$search->trim()->equals(new Str(""))) {
 
+			// TODO
 			$the_list->load_items($parent_id);
 			$newlist = array();
 			while(list($k, $v) = each($the_list->items)) {

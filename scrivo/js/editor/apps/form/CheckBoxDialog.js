@@ -44,7 +44,7 @@ SUI.editor.apps.form.CheckBoxDialog = SUI.defineClass({
 		var res = SUI.editor.apps.form.CheckBoxDialog.parentMethod(
 				this, "formToData");
 
-		res.itemInfo_CHECKED = this.chkCheckedByDefault.el().checked ? 1 : 0;
+		res.itemInfo_CHECKED = this.chkCheckedByDefault.el().checked;
 
 		return res;
 	},
@@ -53,8 +53,7 @@ SUI.editor.apps.form.CheckBoxDialog = SUI.defineClass({
 		SUI.editor.apps.form.InputElementDialog.parentMethod(
 				this, "dataToForm", a);
 
-		this.chkCheckedByDefault.el().checked =
-			(a.itemInfo.CHECKED || "0") == "1";
+		this.chkCheckedByDefault.el().checked = a.typeData.checked;
 	},
 
 	populatePropertiesTab: function() {

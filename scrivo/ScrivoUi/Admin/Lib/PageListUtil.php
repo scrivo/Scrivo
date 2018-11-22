@@ -74,10 +74,10 @@ class PageListUtil {
 			"\" target=\"viewwin\">{$p->title}</a>"
 			: (string)$p->title;
 
-		$r->language = $p->language->isoCode;
+		$r->language = $p->language;
 		if ($session->userStatus == User::STATUS_ADMIN) {
 			$r->language = "<a href=\"index.php?a=language_form&page_id={$p->id}\">".
-					"{$p->language->isoCode}</a>";
+					"{$p->language}</a>";
 		}
 
 		$r->icon = self::icon($p->type, $i18n);

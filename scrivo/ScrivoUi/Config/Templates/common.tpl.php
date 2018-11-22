@@ -110,16 +110,8 @@ if ($this->session->authenticated) {
 					echo $i18n["Configuration synchronization"]?></a></li>
 				<li><a href="index.php?a=modified_touched_form"><?php
 					echo $i18n["Modification date dependencies"]?></a></li>
-				<li>
-					<span><?php
-						echo $i18n["Languages"]?></span>
-					<ul>
-						<li><a href="index.php?a=language_list"><?php
-							echo $i18n["Page languages"]?></a></li>
-						<li><a href="index.php?a=ui_language_list"><?php
-							echo $i18n["User interface languages"]?></a></li>
-					</ul>
-				</li>
+				<li><a href="index.php?a=ui_language_list"><?php
+					echo $i18n["User interface languages"]?></a></li>
 			</ul>
 		</li>
 		<li>

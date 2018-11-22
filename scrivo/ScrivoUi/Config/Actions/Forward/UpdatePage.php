@@ -64,9 +64,13 @@ class UpdatePage extends Action {
 				Request::post("page_pid", Request::TYPE_INTEGER, 0);
 			$page->type =
 				Request::post("type", Request::TYPE_INTEGER);
-			$page->languageId =
-				Request::post("language_id", Request::TYPE_INTEGER);
-
+			$page->language =
+				Request::post("language_id", Request::TYPE_STRING);
+			if (!$page->definition || $page->definition->id == 0) {
+				$page->definitionId =
+					Request::post("page_definition_id", Request::TYPE_INTEGER);
+			}
+				
 			$date = new \DateTime();
 			$date->setDate(
 				Request::post("online_on_y", Request::TYPE_INTEGER),

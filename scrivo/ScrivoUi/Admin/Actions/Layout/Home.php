@@ -59,9 +59,9 @@ class Home extends LayoutAction {
 
 		include "../ScrivoUi/Admin/Templates/common.tpl.php";
 		include "../ScrivoUi/Admin/Templates/home.tpl.php";
-		$this->useLayout("../ScrivoUi/Admin/Templates/master.tpl.php");
 
-		$this->setResult(self::SUCCESS);
+		$this->useLayout("../ScrivoUi/Config/Templates/master.tpl.php");
+		//$this->setResult(self::SUCCESS, "../ScrivoUi/Admin/Templates/master.tpl.php");
 
 	}
 }

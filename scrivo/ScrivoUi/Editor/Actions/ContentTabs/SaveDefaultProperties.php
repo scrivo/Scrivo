@@ -51,7 +51,7 @@ class SaveDefaultProperties extends Action {
 		$page = Page::fetch(
 			$this->context, Request::post("pageId", Request::TYPE_INTEGER));
 
-		$page->languageId = Request::post("languageId", Request::TYPE_INTEGER);
+		$page->language = Request::post("language", Request::TYPE_STRING);
 		$page->description = Request::post("description", Request::TYPE_STRING);
 		$page->keywords = Request::post("keywords", Request::TYPE_STRING);
 		$page->javascript = Request::post("javascript", Request::TYPE_STRING);

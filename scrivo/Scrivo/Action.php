@@ -60,7 +60,7 @@ class Action {
 	private $action = null;
 	private $forward = array();
 	private $result = self::FAIL;
-	private $resultData = null;
+	protected $resultData = null;
 
 	public static function create($context, $action, $userStatus, $session) {
 		if (isset($action[self::ACTION])) {
@@ -160,13 +160,14 @@ class Action {
 		header($loc);
 	}
 
+        /* scrap this? */
 	function getView() {
-		ob_start();
-		include $this->getLayout();
-		$output = ob_get_contents();
-		ob_end_clean();
-		return $output;
-	}
+                ob_start();
+                include $this->getLayout();
+                $output = ob_get_contents();
+                ob_end_clean();
+                return $output;
+        }
 
 	function getXhr() {
 		$res = array();

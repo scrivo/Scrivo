@@ -29,8 +29,6 @@
  * $Id: language_form.tpl.php 846 2013-08-20 12:34:06Z geert $
  */
 
-use \Scrivo\Language;
-
 $this->beginSection("content", true);
 
 ?>
@@ -44,17 +42,17 @@ $this->beginSection("content", true);
 			</tr>
 			<tr>
 				<td class="label">
-					<label for="language_id">
+					<label for="language">
 						<?php echo $i18n["Language:"]?>
 					</label>
 				</td>
 				<td>
-					<select id="language_id" name="language_id">
+					<select id="language" name="language">
 <?php
-foreach (Language::select($this->context) as $lang) {
+foreach ($this->context->config->LANGUAGES as $iso => $name) {
 	echo "<option ".
-		($lang->id == $page->language->id?"selected ":"").
-		"value=\"{$lang->id}\">{$lang->isoCode}: {$lang->nameEn}</option>\n";
+		($iso == (string)$page->language?"selected ":"").
+		"value=\"{$iso}\">{$iso}: {$name}</option>\n";
 }
 ?>
 					</select>

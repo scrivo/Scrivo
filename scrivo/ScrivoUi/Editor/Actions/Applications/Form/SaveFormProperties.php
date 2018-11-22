@@ -1,5 +1,4 @@
 <?php
-
 /* Copyright (c) 2011, Geert Bergman (geert@scrivo.nl)
  * All rights reserved.
  *
@@ -27,54 +26,50 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id: GetDefaultProperties.php 841 2013-08-19 22:19:47Z geert $
+ * $Id: SaveListItem.php 866 2013-08-25 16:22:35Z geert $
  */
 
-namespace ScrivoUi\Editor\Actions\ContentTabs;
+namespace ScrivoUi\Editor\Actions\Applications\Form;
 
-use \Scrivo\Action;
-use \Scrivo\Page;
+use \Scrivo\I18n;
+use \Scrivo\ListItemDefinition;
+use \Scrivo\ListItemPropertyDefinition;
+use \Scrivo\ItemList;
 use \Scrivo\Request;
+use \Scrivo\Str;
+use \Scrivo\Action;
 
 /**
- * The PagePath class implements the action of retrieving the path of
- * a page.
+ * The PagePath class implements the action
  */
-class GetDefaultProperties extends Action {
+class SaveFormProperties extends Action {
 
 	/**
-	 * In this action the page with the given id is retrieved and the
-	 * page ids of its path are returned.
+	 * In this action the page
 	 */
 	function doAction() {
 
-		$page = Page::fetch(
-			$this->context, Request::get("pageId", Request::TYPE_INTEGER));
+		$pageId = Request::post("pageId", Request::TYPE_INTEGER);
+		$pagePropertyDefinitionId =
+			Request::post("pagePropertyDefinitionId", Request::TYPE_INTEGER);
+		
+		$form = ItemList::fetch(
+			$this->context, $pageId, $pagePropertyDefinitionId);
 
-		$lang = array();
-		foreach ($this->context->config->LANGUAGES as $iso => $name) {
-			$lang[] = array("value" => $iso,
-				"text" => "{$iso}: {$name}");
-		}
+		$form->customData->subject = 
+			Request::post("emailSubject", Request::TYPE_STRING);
+		$form->customData->mailTo = 
+			Request::post("mailTo", Request::TYPE_STRING);
+		$form->customData->captcha = 
+			Request::post("captcha", Request::TYPE_BOOLEAN);
+		$form->customData->captchaText = 
+			Request::post("captchaText", Request::TYPE_STRING);
+		
+		$form->update();
 
-		$res = array(
-			"title" => (string)$page->title,
-			"template" => (string)$page->definition->title,
-			"dateCreated" => $page->dateCreated->format("Y-m-d h:i:s"),
-			"dateModified" => $page->dateModified->format("Y-m-d h:i:s"),
-			"dateOnline" => $page->dateOnline->format("Y-m-d h:i:s"),
-			"dateOffline" => $page->dateOffline
-				? $page->dateOffline->format("Y-m-d h:i:s") : "",
-			"language" => $page->language,
-			"description" => (string)$page->description,
-			"keywords" => (string)$page->keywords,
-			"javascript" => (string)$page->javascript,
-			"stylesheet" => (string)$page->stylesheet,
-			"languages" => $lang
-		);
-
-		$this->setResult(self::SUCCESS, array("properties" => $res));
+		$this->setResult(self::SUCCESS);
 	}
+
 }
 
 ?>

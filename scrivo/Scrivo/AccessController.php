@@ -183,8 +183,8 @@ class AccessController {
 					  AND UR.user_id = :userId AND DR.page_id = :objectId");
 
 				$context->connection->bindInstance($sth);
-				$sth->bindValue(":userId", \Scrivo\User::patchId(
-					$context->principal->id), \PDO::PARAM_INT);
+				$sth->bindValue(
+					":userId", $context->principal->id, \PDO::PARAM_INT);
 				$sth->bindValue(":type", $us == User::STATUS_MEMBER ?
 					Role::PUBLIC_ROLE : Role::EDITOR_ROLE, \PDO::PARAM_INT);
 				$sth->bindValue(":objectId", $objectId, \PDO::PARAM_INT);
@@ -277,8 +277,8 @@ class AccessController {
 						" GROUP BY id");
 
 				$context->connection->bindInstance($sth);
-				$sth->bindValue(":userId", \Scrivo\User::patchId(
-					$context->principal->id), \PDO::PARAM_INT);
+				$sth->bindValue(
+					":userId", $context->principal->id, \PDO::PARAM_INT);
 				$sth->bindValue(":type", $us == User::STATUS_MEMBER ?
 					Role::PUBLIC_ROLE : Role::EDITOR_ROLE, \PDO::PARAM_INT);
 				if ($parentId != -1) {

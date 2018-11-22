@@ -70,6 +70,8 @@ class ApplicationDefinitionForm extends LayoutAction {
 			ApplicationDefinition::TYPE_LIST => $i18n["List"],
 			ApplicationDefinition::TYPE_LISTVIEW => $i18n["Listview"],
 			ApplicationDefinition::TYPE_FORM => $i18n["Form"],
+			ApplicationDefinition::TYPE_DISTRIBUTED_LIST => 
+				$i18n["Distributed list"],
 		);
 
 		$tr = "../ScrivoUi/Config/Templates";

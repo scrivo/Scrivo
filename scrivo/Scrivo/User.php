@@ -245,15 +245,7 @@ class User {
 	 */
 	private function setFields(\Scrivo\Context $context, array $rd) {
 
-		$id = intval($rd["user_id"]);
-		if ($id === 1) {
-			$id = self::ANONYMOUS_USER_ID;
-		}
-		if ($id === 2) {
-			$id = self::PRIMARY_ADMIN_ID;
-		}
-
-		$this->id = $id;
+		$this->id = intval($rd["user_id"]);
 		$this->status = intval($rd["status"]);
 		$this->userCode = new \Scrivo\Str($rd["user_code"]);
 		$this->password = new \Scrivo\Str("- hidden -");
@@ -267,21 +259,6 @@ class User {
 		}
 
 		$this->context = $context;
-	}
-
-	/**
-	 * Utility to patch legacy ids 1 and 2.
-	 * @param int $id The id to patch.
-	 * @return int The patched id.
-	 */
-	public static function patchId($id) {
-		if ($id === self::ANONYMOUS_USER_ID) {
-			return 1;
-		}
-		if ($id === self::PRIMARY_ADMIN_ID) {
-			return 2;
-		}
-		return $id;
 	}
 
 	/**
@@ -395,7 +372,7 @@ class User {
 			  AND user_id <> :id");
 
 		$this->context->connection->bindInstance($sth);
-		$sth->bindValue(":id", self::patchId($this->id), \PDO::PARAM_INT);
+		$sth->bindValue(":id", $this->id, \PDO::PARAM_INT);
 		$sth->bindValue(":userCode", $this->userCode, \PDO::PARAM_STR);
 		$sth->execute();
 
@@ -519,7 +496,7 @@ class User {
 				WHERE instance_id = :instId AND user_id = :id");
 
 			$this->context->connection->bindInstance($sth);
-			$sth->bindValue(":id", self::patchId($this->id), \PDO::PARAM_INT);
+			$sth->bindValue(":id", $this->id, \PDO::PARAM_INT);
 
 			$sth->bindValue(":status", $this->status, \PDO::PARAM_INT);
 			$sth->bindValue(":userCode", $this->userCode, \PDO::PARAM_STR);
@@ -561,7 +538,7 @@ class User {
 				WHERE instance_id = :instId AND user_id = :id");
 
 			$this->context->connection->bindInstance($sth);
-			$sth->bindValue(":id", self::patchId($this->id), \PDO::PARAM_INT);
+			$sth->bindValue(":id", $this->id, \PDO::PARAM_INT);
 
 			$sth->bindValue(
 				":password", $this->password, \PDO::PARAM_STR);
@@ -589,7 +566,7 @@ class User {
 				WHERE instance_id = :instId AND user_id = :id");
 
 			$this->context->connection->bindInstance($sth);
-			$sth->bindValue(":id", self::patchId($this->id), \PDO::PARAM_INT);
+			$sth->bindValue(":id", $this->id, \PDO::PARAM_INT);
 
 			$sth->execute();
 
@@ -729,8 +706,7 @@ class User {
 				if ($byUserCode) {
 					$sth->bindValue(":id", $id, \PDO::PARAM_STR);
 				} else {
-					$sth->bindValue(
-						":id", $user->patchId($id), \PDO::PARAM_INT);
+					$sth->bindValue(":id", $id, \PDO::PARAM_INT);
 				}
 
 				$sth->execute();

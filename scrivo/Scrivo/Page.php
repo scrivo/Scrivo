@@ -62,8 +62,6 @@ namespace Scrivo;
  * @property-read \Scrivo\PageDefinition $definition The page definition of
  *    this page.
  * @property-read booleand $isOnline If this page is online or not.
- * @property-read \Scrivo\Language $language The main language for the
- *    page (&lt;html lang&gt;).
  * @property-read \Scrivo\PropertySet $properties The page properties as a
  *    PHP object in which the members correspond with the PHP selector names.
  * @property-read \Scrivo\RoleSet $roles The attached roles.
@@ -80,6 +78,8 @@ namespace Scrivo;
  * @property int $parentId The id of the parent page.
  * @property int $type The page type: one out of the Page::TYPE_* constant
  *    values.
+ * @property \Scrivo\Str $language The main language for the
+ *    page (&lt;html lang&gt;).
  * @property \Scrivo\Str $title The page title (&lt;title&gt;).
  * @property \Scrivo\Str $description The page description
  *    (&lt;description&gt;).
@@ -92,8 +92,6 @@ namespace Scrivo;
  * @property \DateTime $dateOnline The date/time this page need to go online.
  * @property \DateTime $dateOffline The date/time this page need to go offline.
  * @property-write int $definitionId The id of the page template.
- * @property-write int $languageId The id of the main language for the page
- *    (&lt;html lang&gt;).
  */
 class Page {
 
@@ -163,9 +161,9 @@ class Page {
 
 	/**
 	 * The id the main language for the page (&lt;html lang&gt;).
-	 * @var int
+	 * @var \Scrivo\Str
 	 */
-	private $languageId = 0;
+	private $language = null;
 
 	/**
 	 * The page title (&lt;title&gt;).
@@ -267,7 +265,7 @@ class Page {
 			$this->parentId = 0;
 			$this->type = 0;
 			$this->definitionId = 0;
-			$this->languageId = 0;
+			$this->language = new \Scrivo\Str();
 			$this->title = new \Scrivo\Str();
 			$this->description = new \Scrivo\Str();
 			$this->keywords = new \Scrivo\Str();
@@ -303,9 +301,7 @@ class Page {
 			case "definition": return $this->definitionId ?
 				\Scrivo\PageDefinition::fetch($this->context, $this->definitionId)
 				: new \Scrivo\PageDefinition($this->context);
-			case "language": return $this->languageId ?
-				\Scrivo\Language::fetch($this->context, $this->languageId)
-				: new \Scrivo\Language($this->context);
+			case "language": return $this->language;
 			case "title": return $this->title;
 			case "description": return $this->description;
 			case "keywords": return $this->keywords;
@@ -339,7 +335,7 @@ class Page {
 			case "parentId": $this->setParentPageId($value); return;
 			case "type": $this->setType($value); return;
 			case "definitionId": $this->setDefinitionId($value); return;
-			case "languageId": $this->setLanguageId($value); return;
+			case "language": $this->setLanguage($value); return;
 			case "title": $this->setTitle($value); return;
 			case "description": $this->setDescription($value); return;
 			case "keywords": $this->setKeywords($value); return;
@@ -368,7 +364,7 @@ class Page {
 		$this->parentId = intval($rd["parent_id"]);
 		$this->type = intval($rd["type"]);
 		$this->definitionId = intval($rd["page_definition_id"]);
-		$this->languageId = intval($rd["language_id"]);
+		$this->language = new \Scrivo\Str($rd["language"]);
 		$this->title = new \Scrivo\Str($rd["title"]);
 		$this->description = new \Scrivo\Str($rd["description"]);
 		$this->keywords = new \Scrivo\Str($rd["keywords"]);
@@ -517,16 +513,13 @@ class Page {
 	/**
 	 * Set the id the main language for the page (&lt;html lang&gt;).
 	 *
-	 * @param int $languageId The id the main language for the page
+	 * @param int $language The id the main language for the page
 	 *    (&lt;html lang&gt;).
 	 */
-	private function setLanguageId($languageId) {
-		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(
-			array(\Scrivo\ArgumentCheck::TYPE_INTEGER)
-		));
-		$this->languageId = $languageId;
+	private function setLanguage(\Scrivo\Str $language) {
+		$this->language = $language;
 	}
-
+	
 	/**
 	 * Set The page title (&lt;title&gt;).
 	 *
@@ -719,8 +712,8 @@ class Page {
 			$this->context->checkPermission(
 				\Scrivo\AccessController::WRITE_ACCESS, $this->parentId);
 
-			if ($this->languageId === 0) {
-				$this->languageId = $parent->languageId;
+			if ($this->language->equals(new \Scrivo\Str(""))) {
+				$this->language = $parent->language;
 			}
 
 			$this->hasStaging == $parent->hasStaging;
@@ -769,12 +762,12 @@ class Page {
 			$sth = $this->context->connection->prepare(
 				"INSERT INTO page (
 					instance_id, page_id, version, has_staging, parent_id,
-					sequence_no, type, page_definition_id, language_id, title,
+					sequence_no, type, page_definition_id, language, title,
 					description, keywords, javascript, stylesheet,
 					date_created, date_modified, date_online, date_offline
 				) VALUES (
 					:instId, :id, :version, :hasStaging, :parentId,
-					0, :type, :definitionId, :languageId, :title,
+					0, :type, :definitionId, :language, :title,
 					:description, :keywords, :javascript, :stylesheet,
 					now(), now(), :dateOnline, :dateOffline
 				)");
@@ -788,7 +781,7 @@ class Page {
 			$sth->bindValue(":type", $this->type, \PDO::PARAM_INT);
 			$sth->bindValue(
 				":definitionId", $this->definitionId, \PDO::PARAM_INT);
-			$sth->bindValue(":languageId", $this->languageId, \PDO::PARAM_INT);
+			$sth->bindValue(":language", $this->language, \PDO::PARAM_STR);
 			$sth->bindValue(":title", $this->title, \PDO::PARAM_STR);
 			$sth->bindValue(
 				":description", $this->description, \PDO::PARAM_STR);
@@ -871,7 +864,7 @@ class Page {
 					version = :version, has_staging = :hasStaging,
 					parent_id = :parentId,
 					type = :type, page_definition_id = :definitionId,
-					language_id = :languageId, title = :title,
+					language = :language, title = :title,
 					description = :description, keywords = :keywords,
 					javascript = :javascript, stylesheet = :stylesheet,
 					date_online = :dateOnline, date_offline = :dateOffline
@@ -887,7 +880,7 @@ class Page {
 			$sth->bindValue(":type", $this->type, \PDO::PARAM_INT);
 			$sth->bindValue(
 				":definitionId", $this->definitionId, \PDO::PARAM_INT);
-			$sth->bindValue(":languageId", $this->languageId, \PDO::PARAM_INT);
+			$sth->bindValue(":language", $this->language, \PDO::PARAM_STR);
 			$sth->bindValue(":title", $this->title, \PDO::PARAM_STR);
 			$sth->bindValue(
 				":description", $this->description, \PDO::PARAM_STR);
@@ -1100,7 +1093,7 @@ class Page {
 				$sth = $context->connection->prepare(
 					"SELECT page_id, version, has_staging,
 						parent_id, sequence_no, type,
-						page_definition_id, language_id, title, description, keywords,
+						page_definition_id, language, title, description, keywords,
 						javascript, stylesheet,	date_created, date_modified, date_online,
 						date_offline
 					FROM page
@@ -1147,7 +1140,7 @@ class Page {
 		try {
 			$sth = $page->context->connection->prepare(
 				"SELECT D.page_id, D.version, D.has_staging, D.parent_id,
-					D.sequence_no, D.type, D.page_definition_id, D.language_id,
+					D.sequence_no, D.type, D.page_definition_id, D.language,
 					D.title, D.description, D.keywords, D.javascript,
 					D.stylesheet, D.date_created, D.date_modified, D.date_online,
 					D.date_offline, R.role_id
@@ -1230,7 +1223,7 @@ class Page {
 					$sth = $page->context->connection->prepare(
 						"SELECT D.page_id, D.version, D.has_staging,
 							D.parent_id,	D.sequence_no, D.type,
-							D.page_definition_id, D.language_id,
+							D.page_definition_id, D.language,
 							D.title, D.description, D.keywords, D.javascript,
 							D.stylesheet, D.date_created, D.date_modified, 
 							D.date_online, D.date_offline, R.role_id

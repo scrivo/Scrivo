@@ -74,10 +74,10 @@ SUI.editor.apps.form.InfoDialog = SUI.defineClass({
 		});
 
 		this.pageId = arg.pageId;
-		this.pageDefinitionTabId = arg.pageDefinitionTabId;
-		this.elementType = arg.elementType;
+		this.pagePropertyDefinitionId = arg.pagePropertyDefinitionId;
+		this.type = arg.type;
 		this.copy = arg.copy;
-		this.formElementId = arg.formElementId;
+		this.listItemId = arg.listItemId;
 
 		// Add the textarea to the client panel
 		this.clientPanel.add(this.infoText);
@@ -106,7 +106,9 @@ SUI.editor.apps.form.InfoDialog = SUI.defineClass({
 		SUI.editor.xhr.doGet(
 			SUI.editor.resource.ajaxURL, {
 				a: "apps.form.getFormElement",
-				formElementId: this.formElementId,
+				pageId: this.pageId,
+				pagePropertyDefinitionId: this.pagePropertyDefinitionId,
+				listItemId: this.listItemId,
 				type: this.type
 			},
 			function(res) {
@@ -123,16 +125,16 @@ SUI.editor.apps.form.InfoDialog = SUI.defineClass({
 	formToData: function() {
 		return {
 			pageId: this.pageId,
-			pageDefinitionTabId: this.pageDefinitionTabId,
+			pagePropertyDefinitionId: this.pagePropertyDefinitionId,
 			copy: this.copy,
-			elementType: this.elementType,
-			formElementId: this.formElementId,
+			type: this.type,
+			listItemId: this.listItemId,
 			itemInfo_INFOTEXT: this.infoText.getValue()
 		};
 	},
 
 	dataToForm: function(a) {
-		this.infoText.setValue(a.itemInfo.INFOTEXT);
+		this.infoText.setValue(a.typeData.infoText);
 	},
 
 	/**

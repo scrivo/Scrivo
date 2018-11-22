@@ -73,6 +73,12 @@ class ItemList {
 	private $folderId = 0;
 
 	/**
+	 * A facility for 'free' storage.
+	 * @var object
+	 */
+	private $customData = null;
+	
+	/**
 	 * A list of list item pids.
 	 * @var array[]
 	 */
@@ -114,7 +120,7 @@ class ItemList {
 			// Check if the list was create before (the list record exists).
 			$sth = $context->connection->prepare(
 				"SELECT L.item_list_id, L.page_definition_tab_id, L.page_id,
-					L.folder_id, T.application_definition_id
+					L.folder_id, L.custom_data, T.application_definition_id
 				FROM item_list L, page_definition_tab T, page D
 				WHERE L.instance_id = :instId AND D.instance_id = :instId AND
 					T.instance_id = :instId AND D.page_definition_id = T.page_definition_id AND
@@ -149,9 +155,15 @@ class ItemList {
 					intval($rd["page_definition_tab_id"]);
 				$this->pageId = intval($rd["page_id"]);
 				$this->folderId = intval($rd["folder_id"]);
-				$this->applicationDefinitionId = intval($rd["application_definition_id"]);
+				$this->customData = @unserialize($rd["custom_data"]);
+				$this->applicationDefinitionId = 
+					intval($rd["application_definition_id"]);
 			}
-
+			
+			if (!$this->customData) {
+				$this->customData = new \stdClass;
+			}
+			
 			// Select it
 
 			// TODO: when the list definition chances and a sub-folder is
@@ -194,6 +206,7 @@ class ItemList {
 	public function __get($name) {
 		switch($name) {
 			case "items": return $this->getItems(0);
+			case "customData": return $this->customData;
 		}
 		throw new \Scrivo\SystemException("No such get-property '$name'.");
 	}
@@ -212,10 +225,10 @@ class ItemList {
 		$sth = $this->context->connection->prepare(
 			"INSERT INTO item_list (
 				instance_id, item_list_id, page_definition_tab_id, page_id,
-				version, folder_id
+				version, folder_id, custom_data
 			) VALUES (
 				:instId, :id, :pagePropDefId, :pageId,
-				0, :folderId
+				0, :folderId, :customData
 			)");
 
 		$this->context->connection->bindInstance($sth);
@@ -224,7 +237,9 @@ class ItemList {
 			":pagePropDefId", $this->pagePropertyDefinitionId, \PDO::PARAM_INT);
 		$sth->bindValue(":pageId", $this->pageId, \PDO::PARAM_INT);
 		$sth->bindValue(":folderId", $this->folderId, \PDO::PARAM_INT);
-
+		$sth->bindValue(
+			":customData", serialize($this->customData), \PDO::PARAM_STR);
+				
 		$sth->execute();
 
 	}
@@ -236,16 +251,19 @@ class ItemList {
 	 * @throws \Scrivo\ApplicationException If the data is not accessible or
 	 *   one or more of the fields contain invalid data.
 	 */
-	private function update() {
+	public function update() {
 
 		$sth = $this->context->connection->prepare(
-			"UPDATE item_list SET folder_id = :folderId
+			"UPDATE item_list SET 
+				folder_id = :folderId, custom_data = :customData
 				WHERE instance_id = :instId AND item_list_id = :listId");
 
 		$this->context->connection->bindInstance($sth);
 		$sth->bindValue(":folderId", $this->folderId, \PDO::PARAM_INT);
 		$sth->bindValue(":listId", $this->id, \PDO::PARAM_INT);
-
+		$sth->bindValue(
+			":customData", serialize($this->customData), \PDO::PARAM_STR);
+		
 		$sth->execute();
 
 	}
@@ -430,20 +448,19 @@ class ItemList {
 
 		while ($rd = $sth->fetch(\PDO::FETCH_ASSOC)) {
 
-			$lid = intval($rd["list_item_id"]);
+			$id = intval($rd["list_item_id"]);
 
-			if ($lid != $id) {
-				$id = $lid;
+			if (!isset($res[$id])) {
 				$res[$id] = new \Scrivo\PropertySet();
 			}
 
 			$li = ListItemProperty::create($rd);
-
+				
 			if ($li && !$li->phpSelector->equals(new \Scrivo\Str(""))) {
 				$res[$id]->{$li->phpSelector} = $li;
 			}
 		}
-
+		
 		return $res;
 	}
 

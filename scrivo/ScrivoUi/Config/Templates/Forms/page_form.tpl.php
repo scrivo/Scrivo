@@ -31,7 +31,6 @@
 
 use \Scrivo\Page;
 use \Scrivo\PageDefinition;
-use \Scrivo\Language;
 
 $this->beginSection("content", true);
 
@@ -168,12 +167,10 @@ function selectPage(e) {
 			</td>
 			<td><select name="language_id">
 			<?php
-				$list = Language::select($this->context, false);
-				foreach($list as $v) {
+				foreach ($this->context->config->LANGUAGES as $iso => $name) {
 					echo "<option ".
-						($v->id == $page->language->id ? "selected " : "").
-						"value=\"".$v->id."\">".$v->isoCode.
-						"</option>\n";
+						($iso == $page->language ? "selected " : "").
+						"value=\"{$iso}\">{$iso}: {$name}</option>\n";
 				}
 			?>
 			</select>

@@ -41,7 +41,7 @@ SUI.editor.apps.form.PropertiesDialog = SUI.defineClass({
 		SUI.editor.apps.form.PropertiesDialog.initializeBase(this, arg);
 
 		this.pageId = arg.pageId;
-		this.pageDefinitionTabId = arg.pageDefinitionTabId;
+		this.pagePropertyDefinitionId = arg.pagePropertyDefinitionId;
 
 		this.caption(SUI.editor.i18n.apps.form.cptFormProperties);
 
@@ -77,7 +77,7 @@ SUI.editor.apps.form.PropertiesDialog = SUI.defineClass({
 			SUI.editor.resource.ajaxURL, {
 				a: "apps.form.getFormProperties",
 				pageId: this.pageId,
-				pageDefinitionTabId: this.pageDefinitionTabId
+				pagePropertyDefinitionId: this.pagePropertyDefinitionId
 			},
 			function(res) {
 				that.dataToForm(res.data);
@@ -93,7 +93,7 @@ SUI.editor.apps.form.PropertiesDialog = SUI.defineClass({
 	formToData: function() {
 		return {
 			pageId: this.pageId,
-			pageDefinitionTabId: this.pageDefinitionTabId,
+			pagePropertyDefinitionId: this.pagePropertyDefinitionId,
 			emailSubject: this.inpEmailSubject.el().value,
 			mailTo: this.inpMailtTo.el().value,
 			captcha: this.chkCaptcha.el().checked ? 1 : 0,

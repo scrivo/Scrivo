@@ -57,16 +57,16 @@ SUI.editor.apps.form.FormElementDialog = SUI.defineClass(
 	 *
 	 * @param {int} arg.pageId
 	 *    The id of the page that contains this element's form.
-	 * @param {int} arg.pageDefinitionTabId
+	 * @param {int} arg.pagePropertyDefinitionId
 	 *    The id of the tab that contains the user interface of the form
 	 *    application in the editor.
-	 * @param {String} arg.elementType
+	 * @param {String} arg.type
 	 *    The elements type: 'input', 'textarea', 'email', 'file', 'select',
 	 *    'radiogroup', 'checkgroup' or 'checkbox'.
 	 * @param {boolen} arg.copy
 	 *    Setting to indicate that the form element should be copied instead
 	 *    of modified.
-	 * @param {int} arg.formElementId
+	 * @param {int} arg.listItemId
 	 *    The id of the form element to edit or copy.
 	 *
 	 * @protected
@@ -87,14 +87,14 @@ SUI.editor.apps.form.FormElementDialog = SUI.defineClass(
 
 		// Store the passed parameters in the dialog object.
 		this.pageId = arg.pageId;
-		this.pageDefinitionTabId = arg.pageDefinitionTabId;
-		this.elementType = arg.elementType;
+		this.pagePropertyDefinitionId = arg.pagePropertyDefinitionId;
+		this.type = arg.type;
 		this.copy = arg.copy || false;
-		this.formElementId = arg.formElementId || 0;
+		this.listItemId = arg.listItemId || 0;
 
 		// Create a set this dialog's caption.
 		var capt = "";
-		switch (this.elementType) {
+		switch (this.type) {
 			case "input": capt = this.i18n.cptInput; break;
 			case "textarea": capt = this.i18n.cptTextArea; break;
 			case "email": capt = this.i18n.cptEmail; break;
@@ -134,6 +134,7 @@ SUI.editor.apps.form.FormElementDialog = SUI.defineClass(
 			function(res) {
 				// Add the action to the result and post the data.
 				res.a = "apps.form.saveFormElement";
+				res.listItemId = this.copy ? 0 : this.listItemId;
 				SUI.editor.xhr.doPost(
 					SUI.editor.resource.ajaxURL,
 					res,
@@ -207,8 +208,10 @@ SUI.editor.apps.form.FormElementDialog = SUI.defineClass(
 			// ... using the following action and parameters...
 			SUI.editor.resource.ajaxURL, {
 				a: "apps.form.getFormElement",
-				formElementId: this.formElementId,
-				elementType: this.elementType
+				pageId: this.pageId,
+				listItemId: this.listItemId,
+				pagePropertyDefinitionId: this.pagePropertyDefinitionId,
+				type: this.type
 			},
 			// ... and used the retrieved data to show the form.
 			function(res) {
@@ -233,10 +236,10 @@ SUI.editor.apps.form.FormElementDialog = SUI.defineClass(
 	formToData: function() {
 		return {
 			pageId: this.pageId,
-			pageDefinitionTabId: this.pageDefinitionTabId,
+			pagePropertyDefinitionId: this.pagePropertyDefinitionId,
 			copy: this.copy,
-			elementType: this.elementType,
-			formElementId: this.formElementId,
+			type: this.type,
+			listItemId: this.listItemId,
 			itemInfo_LABEL: this.inpLabelAttribute.el().value,
 			itemInfo_ID: this.inpIdAttribute.el().value,
 			itemInfo_NAME: this.inpNameAttribute.el().value,
@@ -250,10 +253,10 @@ SUI.editor.apps.form.FormElementDialog = SUI.defineClass(
 	 * @param {Object} a An object cotaining the form data.
 	 */
 	dataToForm: function(a) {
-		this.inpLabelAttribute.el().value = a.itemInfo.LABEL || "";
-		this.inpIdAttribute.el().value = a.itemInfo.ID || "";
-		this.inpNameAttribute.el().value = a.itemInfo.NAME || "";
-		this.inpExtraInfo.el().value = a.itemInfo.ITEMINFO || "";
+		this.inpLabelAttribute.el().value = a.typeData.label || "";
+		this.inpIdAttribute.el().value = a.typeData.id || "";
+		this.inpNameAttribute.el().value = a.typeData.name || "";
+		this.inpExtraInfo.el().value = a.typeData.info || "";
 	},
 
 	/**
@@ -359,4 +362,3 @@ SUI.editor.apps.form.FormElementDialog = SUI.defineClass(
 	}
 
 });
-

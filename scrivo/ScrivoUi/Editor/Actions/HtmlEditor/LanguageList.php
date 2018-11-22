@@ -33,7 +33,6 @@ namespace ScrivoUi\Editor\Actions\HtmlEditor;
 
 use \Scrivo\Action;
 use \Scrivo\Request;
-use \Scrivo\Language;
 
 /**
  * The LanguageList class implements an action for retrieving the language list.
@@ -48,10 +47,10 @@ class LanguageList extends Action {
 
 		$res = array("languages" => array());
 
-		foreach (Language::select($this->context, true) as $l) {
+		foreach ($this->context->config->LANGUAGES as $iso => $name) {
 			$res["languages"][] = array(
-				"value" => (string)$l->isoCode->toLowerCase(),
-				"text" => "{$l->isoCode}: {$l->nameEn}"
+				"value" => $iso,
+				"text" => "{$iso}: {$name}"
 			);
 		}
 

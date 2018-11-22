@@ -48,7 +48,7 @@ SUI.editor.apps.form.Form = SUI.defineClass(
 	 * @constructs
 	 *
 	 * @param {int} arg.pageId The id of the page that contains the form.
-	 * @param {int} arg.pageDefinitionTabId The id of the tab that contains the
+	 * @param {int} arg.pagePropertyDefinitionId The id of the tab that contains the
 	 *    user interface of the form application in the editor.
 	 */
 	initializer: function(arg) {
@@ -59,7 +59,7 @@ SUI.editor.apps.form.Form = SUI.defineClass(
 
 		// Get the standard application parameters.
 		this.pageId = arg.pageId;
-		this.pageDefinitionTabId = arg.pageDefinitionTabId;
+		this.pagePropertyDefinitionId = arg.pagePropertyDefinitionId;
 
 		// An application anchors to all four sides.
 		this.anchor = { left: true, right: true, top: true, bottom: true };
@@ -107,7 +107,7 @@ SUI.editor.apps.form.Form = SUI.defineClass(
 			SUI.editor.resource.ajaxURL, {
 				a: "apps.form.getFormElements",
 				pageId: this.pageId,
-				pageDefinitionTabId: this.pageDefinitionTabId
+				pagePropertyDefinitionId: this.pagePropertyDefinitionId
 			},
 			// ... and execute the following upon retrieval.
 			function(res) {
@@ -158,15 +158,15 @@ SUI.editor.apps.form.Form = SUI.defineClass(
 		var that = this;
 
 		// Get the scroll top to restore the scroll offset after saving.
-		var st = this.scrollBox.getScrollTop();
+		var st = this.scrollBox ? this.scrollBox.getScrollTop() : 0;
 
 		// Construct the argument object that we'll use when calling the
 		// proper dialog.
 		var args = {
-			elementType: type,
+			type: type,
 			pageId: that.pageId,
-			pageDefinitionTabId: that.pageDefinitionTabId,
-			formElementId: elementId || 0,
+			pagePropertyDefinitionId: that.pagePropertyDefinitionId,
+			listItemId: elementId || 0,
 			copy: copy ? true : false,
 			onDataSaved: function() {
 				// If the data was saved reload the list and set the scrollTop.
@@ -198,14 +198,16 @@ SUI.editor.apps.form.Form = SUI.defineClass(
 		var that = this;
 
 		// Get the scroll top to be able to restore it after saving.
-		var st = this.scrollBox.getScrollTop();
+		var st = this.scrollBox ? this.scrollBox.getScrollTop() : 0;
 
 		// Update the form element position ...
 		SUI.editor.xhr.doGet(
 			// ... by using the following action and parameters ...
 			SUI.editor.resource.ajaxURL, {
-				a: "apps.form.moveUp",
-				formElementId: id
+				a: "apps.list.moveUp",
+				pageId: this.pageId,
+				pagePropertyDefinitionId: this.pagePropertyDefinitionId,
+				listItemId: id
 			},
 			// ... and reload the list after updating.
 			function(res) {
@@ -224,14 +226,16 @@ SUI.editor.apps.form.Form = SUI.defineClass(
 		var that = this;
 
 		// Get the scroll top to be able to restore it after saving.
-		var st = this.scrollBox.getScrollTop();
+		var st = this.scrollBox ? this.scrollBox.getScrollTop() : 0;
 
 		// Update the form element position ...
 		SUI.editor.xhr.doGet(
 			// ... by using the following action and parameters ...
 			SUI.editor.resource.ajaxURL, {
-				a: "apps.form.moveDown",
-				formElementId: id
+				a: "apps.list.moveDown",
+				pageId: this.pageId,
+				pagePropertyDefinitionId: this.pagePropertyDefinitionId,
+				listItemId: id
 			},
 			// ... and reload the list after updating.
 			function(res) {
@@ -251,17 +255,17 @@ SUI.editor.apps.form.Form = SUI.defineClass(
 		var that = this;
 
 		// Get the scroll top to be able to restore it after saving.
-		var st = this.scrollBox.getScrollTop();
+		var st = this.scrollBox ? this.scrollBox.getScrollTop() : 0;
 
 		// Open the postion dialog.
-		new SUI.editor.apps.form.PositionDialog({
+		new SUI.editor.apps.list.PositionDialog({
 			pageId: this.pageId,
-			pageDefinitionTabId: this.pageDefinitionTabId,
-			formElementId: id,
+			pagePropertyDefinitionId: this.pagePropertyDefinitionId,
+			listItemId: id,
 			onOK: function(data) {
 				// On OK save the data using the passed data and following
 				// action ...
-				data.a = "apps.form.moveToPosition";
+				data.a = "apps.list.moveToPosition";
 				SUI.editor.xhr.doGet(SUI.editor.resource.ajaxURL,
 					data,
 					function(res) {
@@ -281,7 +285,7 @@ SUI.editor.apps.form.Form = SUI.defineClass(
 	actFormProperties: function() {
 		new SUI.editor.apps.form.PropertiesDialog({
 			pageId: this.pageId,
-			pageDefinitionTabId: this.pageDefinitionTabId
+			pagePropertyDefinitionId: this.pagePropertyDefinitionId
 		}).show();
 	},
 
@@ -292,10 +296,12 @@ SUI.editor.apps.form.Form = SUI.defineClass(
 	 * @private
 	 */
 	actDelete: function(id) {
+		var ids = [];
 		var that = this;
+		ids.push(id);
 
 		// Get the scroll top to be able to restore it after saving.
-		var st = this.scrollBox.getScrollTop();
+		var st = this.scrollBox ? this.scrollBox.getScrollTop() : 0;
 
 		// Open the confirm dialog.
 		new SUI.dialog.Confirm({
@@ -306,8 +312,10 @@ SUI.editor.apps.form.Form = SUI.defineClass(
 				SUI.editor.xhr.doGet(
 					// ... by using the following action and parameters ...
 					SUI.editor.resource.ajaxURL, {
-						a: "apps.form.deleteFormElement",
-						formElementId: id
+						a: "apps.list.deleteListItems",
+						pageId: this.pageId,
+						pagePropertyDefinitionId: this.pagePropertyDefinitionId,
+						listItemIds: ids
 					},
 					function(res) {
 						// ... and reload the list after updating.
@@ -327,7 +335,7 @@ SUI.editor.apps.form.Form = SUI.defineClass(
 	 */
 	actExportHtml: function() {
 		var loc = "ajax/apps/form/exp_html.php?pageId="+ this.pageId;
-		loc += "&pageDefinitionTabId="+ this.pageDefinitionTabId;
+		loc += "&pagePropertyDefinitionId="+ this.pagePropertyDefinitionId;
 		var w = window.open(loc, "report");
 	},
 
@@ -339,7 +347,7 @@ SUI.editor.apps.form.Form = SUI.defineClass(
 	 */
 	actExportExcel: function() {
 		var loc = "ajax/apps/form/exp_excel.php?pageId="+ this.pageId;
-		loc += "&pageDefinitionTabId="+ this.pageDefinitionTabId;
+		loc += "&pagePropertyDefinitionId="+ this.pagePropertyDefinitionId;
 		var w = window.open(loc, "report");
 	},
 
@@ -438,9 +446,9 @@ SUI.editor.apps.form.Form = SUI.defineClass(
 				new SUI.ToolbarButton({actionId: "form.newElemInfo"}),
 				new SUI.ToolbarSeparator({}),
 				new SUI.ToolbarButton({actionId: "form.edtProperties"}),
-				new SUI.ToolbarSeparator({}),
-				new SUI.ToolbarButton({actionId: "form.expHtml"}),
-				new SUI.ToolbarButton({actionId: "form.expExcel"})
+				//new SUI.ToolbarSeparator({}),
+				//new SUI.ToolbarButton({actionId: "form.expHtml"}),
+				//new SUI.ToolbarButton({actionId: "form.expExcel"})
 			]
 		});
 	}

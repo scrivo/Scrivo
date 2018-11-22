@@ -75,6 +75,7 @@ namespace Scrivo;
  * @property-read int $ROOT_PAGE_ID
  * @property-read int $ROOT_FOLDER_ID
  * @property-read \Scrivo\Str $SESSION_PREFIX
+ * @property-read \Scrivo\Str $LANGUAGES
  * @property-read \Scrivo\Str $UI_LANG
  * @property-read \Scrivo\Str $WEBSERVICE_SPELL
  * @property-read \Scrivo\Str $WEBSERVICE_TIDY
@@ -96,7 +97,11 @@ class Config {
 	 *   most likely type.
 	 */
 	private function convertStr(&$val) {
-		if (is_numeric($val)) {
+		if (is_array($val)) {
+			foreach($val as &$v) {
+				$this->convertStr($v);
+			}
+		} else if (is_numeric($val)) {
 			if ((string)$val === (string)(int)$val) {
 				$val = intval($val);
 			} else {
@@ -138,6 +143,45 @@ class Config {
 	public function __construct(\Scrivo\Str $path=null) {
 		\Scrivo\ArgumentCheck::assertArgs(func_get_args(), array(null), 0);
 
+		$languages = array(
+			"ar" => "العربية;",
+			"bg" => "Български",
+			"cs" => "Čeština",
+			"da" => "Dansk",
+			"de" => "Deutsch",
+			"el" => "Ελληνικά",
+			"en" => "English",
+			"en-GB" => "British English",
+			"en-US" => "American English",
+			"es" => "Español",
+			"es-419" => "Español (Latinoamérica)",
+			"fi" => "Suomi",
+			"fr" => "Français",
+			"he" => "עברית",
+			"hi" => "हिंदी",
+			"hu" => "Magyar",
+			"id" => "Bahasa Indonesia",
+			"it" => "Italiano",
+			"ja" => "日本語",
+			"ko" => "한국어",
+			"ms" => "Bahasa Melayu",
+			"nl" => "Nederlands",
+			"no" => "Norsk (bokmål)",
+			"pl" => "Polski",
+			"pt" => "Português",
+			"pt-BR" => "Português (Brasil)",
+			"ru" => "Русский",
+			"sk" => "Slovenčina",
+			"sv" => "Svenska",
+			"th" => "ไทย",
+			"tl" => "Filipino",
+			"tr" => "Türkçe",
+			"uk" => "Українська",
+			"vi" => "Tiếng Việt",
+			"zh-CN" => "中文（中国）",
+			"zh-TW" => "中文（台灣）",
+		);
+
 		// Read the ini file.
 		if (!$path) {
 			$path = $this->findConfigFile(".htscrivo");
@@ -167,7 +211,8 @@ class Config {
 				(isset($this->ini["DB_NAME"])?$this->ini["DB_NAME"]:"")."_".
 				(isset($this->ini["INSTANCE_ID"])?$this->ini["INSTANCE_ID"]:"").
 				"_",
-			"UI_LANG" => "en_US",
+			"LANGUAGES" => array(),
+			"UI_LANG" => "en-US",
 			"WEBSERVICE_SPELL" => "http://www.scrivo.nl/spell/spell.php",
 			"WEBSERVICE_TIDY" => "http://www.scrivo.nl/tidy/tidy.php",
 		);
@@ -178,6 +223,7 @@ class Config {
 				$this->ini[$d] = $v;
 			}
 		}
+		$this->ini["LANGUAGES"] = $this->ini["LANGUAGES"] + $languages; 
 
 		// Rename legacy key names
 		if (!isset($this->ini["DB_HOST"]) && isset($this->ini["DB_SERVER"])) {

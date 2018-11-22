@@ -306,7 +306,7 @@ SUI.editor.contenttabs.DefaultPanel = SUI.defineClass({
 				var data = {
 					a: "contenttabs.saveDefaultProperties",
 					pageId: arg.pageId,
-					languageId: that.selLanguage.el().value,
+					language: that.selLanguage.el().value,
 					keywords: that.txaKeywords.el().value,
 					description: that.txaDescription.el().value,
 					stylesheet: that.stylesheet,
@@ -334,7 +334,7 @@ SUI.editor.contenttabs.DefaultPanel = SUI.defineClass({
 			},
 			function(res) {
 				that.selLanguage.options(res.data.properties.languages);
-				that.selLanguage.el().value = res.data.properties.languageId;
+				that.selLanguage.el().value = res.data.properties.language;
 				that.txaDescription.el().value = res.data.properties.description;
 				that.txaKeywords.el().value = res.data.properties.keywords;
 				that.stylesheet = res.data.properties.stylesheet;
@@ -425,7 +425,7 @@ SUI.editor.contenttabs.DefaultPanel = SUI.defineClass({
 	dataModified: function() {
 
 		if (this.saveButton.enabled) {
-			if (this.selLanguage.el().value != this.origdata.languageId
+			if (this.selLanguage.el().value != this.origdata.language
 				|| this.txaDescription.el().value != this.origdata.description
 				|| this.txaKeywords.el().value != this.origdata.keywords
 				|| this.stylesheet != this.origdata.stylesheet

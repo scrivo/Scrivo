@@ -92,11 +92,11 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 				height: this.CTRL_HEIGHT,
 				width: this.LABEL_WIDTH,
 				anchor: { left: true },
-				title: arg.data.elements[i].itemdata.LABEL
+				title: arg.data.elements[i].label
 			});
 			// ... and add it to the panel (not for info boxes and check boxes).
-			if (arg.data.elements[i].type_id != 5 &&
-					arg.data.elements[i].type_id != 7) {
+			if (arg.data.elements[i].type != "checkbox" &&
+					arg.data.elements[i].type != "infotext") {
 				elemBox.add(lbl);
 			}
 
@@ -174,15 +174,6 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 	 */
 	typeConvert: function(id) {
 		switch(parseInt(id, 10)) {
-		case 1: return "input";
-		case 2: return "textarea";
-		case 3: return "radiogroup";
-		case 4: return "select";
-		case 5: return "checkbox";
-		case 6: return "checkgroup";
-		case 7: return "infotext";
-		case 8: return "file";
-		case 9: return "email";
 		}
 	},
 
@@ -205,10 +196,10 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 			title: SUI.editor.i18n.apps.form.deleteItem,
 			icon: SUI.editor.resource.apps.form.icnDelete,
 			handler: function() {
-				that.frame.actDelete(this.extraInfo.formElementId);
+				that.frame.actDelete(this.extraInfo.listItemId);
 			}
 		});
-		deleteButton.extraInfo = { formElementId: element.form_element_id };
+		deleteButton.extraInfo = { listItemId: element.listItemId };
 
 		// Create a button to move the form element one postion down.
 		var downButton = new SUI.ToolbarButton({
@@ -219,10 +210,10 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 			title: SUI.editor.i18n.apps.form.moveElementDown,
 			icon: SUI.editor.resource.apps.form.icnDown,
 			handler: function() {
-				that.frame.actMoveDown(this.extraInfo.formElementId);
+				that.frame.actMoveDown(this.extraInfo.listItemId);
 			}
 		});
-		downButton.extraInfo = { formElementId: element.form_element_id };
+		downButton.extraInfo = { listItemId: element.listItemId };
 
 		// Create a button to move the form element to an arbitrary postion.
 		var moveButton = new SUI.ToolbarButton({
@@ -233,10 +224,10 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 			title: SUI.editor.i18n.apps.form.moveElement,
 			icon: SUI.editor.resource.apps.form.icnMove,
 			handler: function() {
-				that.frame.actMoveItem(this.extraInfo.formElementId);
+				that.frame.actMoveItem(this.extraInfo.listItemId);
 			}
 		});
-		moveButton.extraInfo = { formElementId: element.form_element_id };
+		moveButton.extraInfo = { listItemId: element.listItemId };
 
 		// Create a button to move the form element one postion up.
 		var upButton = new SUI.ToolbarButton({
@@ -247,10 +238,10 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 			title: SUI.editor.i18n.apps.form.moveElementUp,
 			icon: SUI.editor.resource.apps.form.icnUp,
 			handler: function() {
-				that.frame.actMoveUp(this.extraInfo.formElementId);
+				that.frame.actMoveUp(this.extraInfo.listItemId);
 			}
 		});
-		upButton.extraInfo = { formElementId: element.form_element_id };
+		upButton.extraInfo = { listItemId: element.listItemId };
 
 		// Create a button to copy the form element.
 		var copyButton = new SUI.ToolbarButton({
@@ -262,12 +253,12 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 			icon: SUI.editor.resource.apps.form.icnCopyItem,
 			handler: function() {
 				that.frame.actFormElement(this.extraInfo.type,
-					this.extraInfo.formElementId, true);
+					this.extraInfo.listItemId, true);
 			}
 		});
 		copyButton.extraInfo = {
-			formElementId: element.form_element_id,
-			type: this.typeConvert(element.type_id)
+			listItemId: element.listItemId,
+			type: element.type
 		};
 
 		// Create a button to modify the form element.
@@ -280,12 +271,12 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 			icon: SUI.editor.resource.apps.form.icnEditItem,
 			handler: function() {
 				that.frame.actFormElement(this.extraInfo.type,
-					this.extraInfo.formElementId);
+					this.extraInfo.listItemId);
 			}
 		});
 		editButton.extraInfo = {
-			formElementId: element.form_element_id,
-			type: this.typeConvert(element.type_id)
+			listItemId: element.listItemId,
+			type: element.type
 		};
 
 		// Add the buttons to the panel.
@@ -307,16 +298,16 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 	 * @private
 	 */
 	getFormElement: function(data) {
-		switch (parseInt(data.type_id, 10)) {
-			case 1: return this.buildInputElement(data);
-			case 2: return this.buildTextAreaElement(data);
-			case 3: return this.buildRadioGroup(data);
-			case 4: return this.buildSelectList(data);
-			case 5: return this.buildCheckBox(data);
-			case 6: return this.buildCheckBoxGroup(data);
-			case 7: return this.buildInfoText(data);
-			case 8: return this.buildFileUploadField(data);
-			case 9: return this.buildInputElement(data);
+		switch (data.type) {
+			case "input": return this.buildInputElement(data);
+			case "textarea": return this.buildTextAreaElement(data);
+			case "radiogroup": return this.buildRadioGroup(data);
+			case "select": return this.buildSelectList(data);
+			case "checkbox": return this.buildCheckBox(data);
+			case "checkgroup": return this.buildCheckBoxGroup(data);
+			case "infotext": return this.buildInfoText(data);
+			case "file": return this.buildFileUploadField(data);
+			case "email": return this.buildInputElement(data);
 		}
 		return null;
 	},
@@ -335,14 +326,14 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 			right: this.MARGIN,
 			anchor: { right: true, left: true }
 		});
-		if (data.itemdata.MAXLENGTH) {
-			e.el().maxLength = data.itemdata.MAXLENGTH;
+		if (data.maxLength) {
+			e.el().maxLength = data.maxLength;
 		}
-		if (data.itemdata.WIDTH != 0) {
-			e.el().size = data.itemdata.WIDTH;
+		if (data.width != 0) {
+			e.el().size = data.width;
 			e.anchor = { left: true };
 		}
-		e.el().value = data.itemdata.DEFAULT_VALUE;
+		e.el().value = data.defaultValue;
 		return e;
 	},
 
@@ -358,14 +349,14 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 			top: this.TOP_MARGIN,
 			left: 2*this.MARGIN + this.LABEL_WIDTH,
 			right: this.MARGIN,
-			height: this.CTRL_HEIGHT * data.itemdata.ROWS,
+			height: this.CTRL_HEIGHT * data.ROWS,
 			anchor: { right: true, left: true }
 		});
-		if (data.itemdata.WIDTH != 0) {
-			e.el().rows = data.itemdata.WIDTH;
+		if (data.width != 0) {
+			e.el().rows = data.width;
 			e.anchor = { left: true };
 		}
-		e.el().value = data.itemdata.DEFAULT_VALUE;
+		e.el().value = data.defaultValue;
 		return e;
 	},
 
@@ -378,7 +369,7 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 	 */
 	buildRadioGroup: function(data) {
 		// Get the number of items in the group.
-		var n = data.itemdata.ITEMS.length;
+		var n = data.items.length;
 		// Create an anchor layout to host the radio buttons.
 		var e = new SUI.AnchorLayout({
 			top: this.TOP_MARGIN,
@@ -388,7 +379,7 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 			anchor: { right: true, left: true }
 		});
 		// Is the group unchecked or checked by default.
-		var chk = (data.itemdata.UNCHECKED || "0") != "1";
+		var chk = data.unchecked;
 		// Loop to create the controls.
 		for (var i=0; i<n; i++) {
 			// Create radio button.
@@ -397,7 +388,7 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 				height: this.CTRL_HEIGHT,
 				anchor: { right: true, left: true },
 				checked: chk,
-				name: "name_"+data.form_element_id
+				name: "name_"+data.listItemId
 			});
 			// Create the label.
 			var label = new SUI.form.Label({
@@ -406,7 +397,7 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 				left: this.CTRL_HEIGHT,
 				anchor: { right: true, left: true },
 				forBox: rb,
-				title: data.itemdata.ITEMS[i]
+				title: data.items[i]
 			});
 			// Add them to the anchor layout.
 			e.add(rb);
@@ -427,7 +418,7 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 	 */
 	buildCheckBoxGroup: function(data) {
 		// Get the number of items in the group.
-		var n = data.itemdata.ITEMS.length;
+		var n = data.items.length;
 		// Create an anchor layout to host the check boxes.
 		var e = new SUI.AnchorLayout({
 			top: this.TOP_MARGIN,
@@ -451,7 +442,7 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 				left: this.CTRL_HEIGHT,
 				anchor: { right: true, left: true },
 				forBox: cb,
-				title: data.itemdata.ITEMS[i]
+				title: data.items[i]
 			});
 			// Add them to the anchor layout.
 			e.add(cb);
@@ -470,11 +461,11 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 	 */
 	buildSelectList: function(data) {
 		// Get the number of items in the list.
-		var n = data.itemdata.ITEMS.length;
+		var n = data.items.length;
 		// And create data for a select list.
 		var opts = [];
 		for (var i=0; i<n; i++) {
-			opts.push({text: data.itemdata.ITEMS[i]});
+			opts.push({text: data.items[i]});
 		}
 		// Create an anchor layout to host the check boxes.
 		var e = new SUI.form.SelectList({
@@ -504,7 +495,7 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 			anchor: { right: true, left: true }
 		});
 		// Is check box checked by default.
-		var chk = (data.itemdata.CHECKED || "0") == "1"
+		var chk = data.checked;
 		// Create a check box.
 		var cb = new SUI.form.CheckBox({
 			top: 0,
@@ -519,7 +510,7 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 			left: this.CTRL_HEIGHT,
 			anchor: { right: true, left: true },
 			forBox: cb,
-			title: data.itemdata.LABEL
+			title: data.label
 		});
 		// Add them to the anchor layout.
 		e.add(cb);
@@ -542,13 +533,13 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 			right: this.MARGIN,
 			anchor: { right: true, left: true }
 		});
-		if (data.itemdata.WIDTH != 0) {
-			e.el().size = data.itemdata.WIDTH;
+		if (data.width != 0) {
+			e.el().size = data.width;
 			e.anchor = { left: true };
 		}
-		e.el().value = data.itemdata.DEFAULT_VALUE;
+		e.el().value = data.defaultValue;
 		e.el().type = "file";
-		e.el().name = "userfile"+data.form_element_id+"[]";
+		e.el().name = "userfile"+data.listItemId+"[]";
 		return e;
 	},
 
@@ -567,7 +558,7 @@ SUI.editor.apps.form.FormElements = SUI.defineClass(
 			height: 60,
 			anchor: { right: true, left: true }
 		});
-		e.el().innerHTML = data.itemdata.INFOTEXT;
+		e.el().innerHTML = data.infoText;
 		return e;
 	}
 

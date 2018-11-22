@@ -36,7 +36,7 @@ SUI.editor.apps.form.GroupElementDialog = SUI.defineClass({
 
 	initializer: function(arg) {
 
-		this.elementType = arg.elementType || "select";
+		this.type = arg.type || "select";
 
 		SUI.editor.apps.form.GroupElementDialog.initializeBase(this, arg);
 
@@ -50,9 +50,9 @@ SUI.editor.apps.form.GroupElementDialog = SUI.defineClass({
 		var res = SUI.editor.apps.form.GroupElementDialog.parentMethod(
 			this, "formToData");
 
-		if (this.elementType == "radiogroup") {
+		if (this.type == "radiogroup") {
 			res.itemInfo_UNCHECKED =
-				this.chkUncheckedByDefault.el().checked ? 1 : 0;
+				this.chkUncheckedByDefault.el().checked;
 		}
 
 		var txt = [];
@@ -70,7 +70,7 @@ SUI.editor.apps.form.GroupElementDialog = SUI.defineClass({
 	dataToForm: function(a) {
 		SUI.editor.apps.form.InputElementDialog.parentMethod(
 			this, "dataToForm", a);
-		var ii = a.itemInfo.ITEMS || [];
+		var ii = a.typeData.items || [];
 		if (!ii.length) {
 			this.doAddButton();
 		} else {
@@ -78,9 +78,8 @@ SUI.editor.apps.form.GroupElementDialog = SUI.defineClass({
 				this.doAddButton(ii[i]);
 			}
 		}
-		if (this.elementType == "radiogroup") {
-			this.chkUncheckedByDefault.el().checked =
-				(a.itemInfo.UNCHECKED || "0") == "1";
+		if (this.type == "radiogroup") {
+			this.chkUncheckedByDefault.el().checked = a.typeData.unchecked;
 		}
 		this.doDrawButtons();
 	},
@@ -103,7 +102,7 @@ SUI.editor.apps.form.GroupElementDialog = SUI.defineClass({
 			that.doDrawButtons();
 		});
 
-		if (this.elementType == "radiogroup") {
+		if (this.type == "radiogroup") {
 
 			this.chkUncheckedByDefault = new SUI.form.CheckBox({
 				top: ctlTop,
@@ -141,7 +140,7 @@ SUI.editor.apps.form.GroupElementDialog = SUI.defineClass({
 		});
 
 		this.tabPanel.add(this.addButton, 0);
-		if (this.elementType == "radiogroup") {
+		if (this.type == "radiogroup") {
 			this.tabPanel.add(this.lblUncheckedByDefault, 0);
 			this.tabPanel.add(this.chkUncheckedByDefault, 0);
 		}

@@ -54,11 +54,11 @@ class UpdateLanguage extends Action {
 	 * @param PageSet $ps The child pages.
 	 * @param int $langId A language id.
 	 */
-	private function recurse(PageSet $ps, $langId) {
+	private function recurse(PageSet $ps, $lang) {
 		foreach ($ps as $p) {
-			$p->languageId = $langId;
+			$p->language = $lang;
 			$p->update();
-			$this->recurse($p->children, $langId);
+			$this->recurse($p->children, $lang);
 		}
 	}
 
@@ -74,15 +74,15 @@ class UpdateLanguage extends Action {
 			$page = Page::fetch($this->context,
 				Request::post("page_id", Request::TYPE_INTEGER));
 			// ... set the language ...
-			$page->languageId =
-				Request::post("language_id", Request::TYPE_INTEGER);
+			$page->language =
+				Request::post("language", Request::TYPE_STRING);
 			// ... and update the page.
 			$page->update();
 
 			// Also set the language of all children recursively if required.
 			if (Request::post("rec", Request::TYPE_BOOLEAN)) {
 				$this->recurse($page->children,
-					Request::post("language_id", Request::TYPE_INTEGER));
+					Request::post("language", Request::TYPE_STRING));
 			}
 
 			// Set action result.

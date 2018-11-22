@@ -279,6 +279,28 @@ $actions = array(
 		Action::ACTION =>
 			__NAMESPACE__."\Applications\ItemList\MoveToPosition"),
 
+	"apps.form.getFormElements" => array(
+		Action::AUTH => User::STATUS_EDITOR,
+		Action::TYPE => Action::XHR,
+		Action::ACTION => __NAMESPACE__."\Applications\Form\GetFormElements"),
+	"apps.form.getFormElement" => array(
+		Action::AUTH => User::STATUS_EDITOR,
+		Action::TYPE => Action::XHR,
+		Action::ACTION => __NAMESPACE__."\Applications\Form\GetFormElement"),
+	"apps.form.saveFormElement" => array(
+		Action::AUTH => User::STATUS_EDITOR,
+		Action::TYPE => Action::XHR,
+		Action::ACTION => __NAMESPACE__."\Applications\Form\SaveFormElement"),
+	"apps.form.getFormProperties" => array(
+		Action::AUTH => User::STATUS_EDITOR,
+		Action::TYPE => Action::XHR,
+		Action::ACTION => __NAMESPACE__."\Applications\Form\GetFormProperties"),
+	"apps.form.updateFormProperties" => array(
+		Action::AUTH => User::STATUS_EDITOR,
+		Action::TYPE => Action::XHR,
+		Action::ACTION => 
+			__NAMESPACE__."\Applications\Form\SaveFormProperties"),
+
 );
 
 

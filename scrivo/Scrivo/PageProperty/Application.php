@@ -67,10 +67,9 @@ class Application extends \Scrivo\PageProperty {
 			case \Scrivo\ApplicationDefinition::TYPE_LIST:
 			case \Scrivo\ApplicationDefinition::TYPE_DISTRIBUTED_LIST:
 			case \Scrivo\ApplicationDefinition::TYPE_LISTVIEW:
+			case \Scrivo\ApplicationDefinition::TYPE_FORM:
 				return \Scrivo\ItemList::fetch($this->page->context,
 					$this->page->id, $this->definition->id);
-			case \Scrivo\ApplicationDefinition::TYPE_FORM:
-				return NULL;
 			case \Scrivo\ApplicationDefinition::TYPE_URL:
 				return NULL;
 		}

@@ -61,7 +61,7 @@ if (!$languageId->equals(new Str(""))) {
 			</td>
 			<td>
 				<input type="text" id="lang" name="lang"
-					maxlength="2" size="2" value="<?php echo
+					maxlength="8" size="2" value="<?php echo
 						htmlspecialchars($language->isoCode)
 					?>">
 			</td>
